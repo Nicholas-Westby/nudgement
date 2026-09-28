@@ -1,0 +1,552 @@
+[
+ {
+  "id": "swift-field-notes-finder",
+  "file": "files/swift-field-notes-finder.swift",
+  "language": "swift",
+  "pair": null,
+  "source": "anonymised",
+  "severity": "justified",
+  "expect": {
+   "verdict": "lean",
+   "problems": []
+  },
+  "note": "Real false alarm (read 0.45): an NSTextFinderClient over a document and its notes. The protocol dictates most members, and the lock and snapshot answer a measured background-thread read."
+ },
+ {
+  "id": "swift-show-duplicates-command",
+  "file": "files/swift-show-duplicates-command.swift",
+  "language": "swift",
+  "pair": null,
+  "source": "anonymised",
+  "severity": "lean",
+  "expect": {
+   "verdict": "lean",
+   "problems": []
+  },
+  "note": "Real false alarm (read 0.48): 60 lines of menu plumbing, a command target and a Toggle, following the app's existing FieldNotesCommandTarget pattern."
+ },
+ {
+  "id": "swift-spotter-filter-strip",
+  "file": "files/swift-spotter-filter-strip.swift",
+  "language": "swift",
+  "pair": null,
+  "source": "anonymised",
+  "severity": "lean",
+  "expect": {
+   "verdict": "lean",
+   "problems": []
+  },
+  "note": "Real SwiftUI view: one line of text and a button, plus a four-line summary function whose doc comment gives the ordering and unknown-id rules."
+ },
+ {
+  "id": "swift-gallery-status-bar-a",
+  "file": "files/swift-gallery-status-bar-a.swift",
+  "language": "swift",
+  "pair": "swift-gallery-status-bar",
+  "source": "anonymised",
+  "severity": "lean",
+  "expect": {
+   "verdict": "lean",
+   "problems": []
+  },
+  "note": "Real SwiftUI view: a count, a slider between two icons, and a separator, in one body with no options."
+ },
+ {
+  "id": "swift-gallery-status-bar-b",
+  "file": "files/swift-gallery-status-bar-b.swift",
+  "language": "swift",
+  "pair": "swift-gallery-status-bar",
+  "source": "anonymised",
+  "severity": "moderate",
+  "expect": {
+   "verdict": "bloated",
+   "problems": [
+    "premature_abstraction",
+    "speculative_generality",
+    "defensive_excess",
+    "thin_wrappers"
+   ]
+  },
+  "units": [
+   {
+    "name": "GalleryStatusBarStyling",
+    "problems": [
+     "premature_abstraction",
+     "speculative_generality"
+    ]
+   },
+   {
+    "name": "DefaultGalleryStatusBarStyle",
+    "problems": [
+     "premature_abstraction",
+     "speculative_generality"
+    ]
+   },
+   {
+    "name": "displayedCountLine",
+    "problems": [
+     "defensive_excess"
+    ]
+   },
+   {
+    "name": "clampedPhotoSize",
+    "problems": [
+     "defensive_excess"
+    ]
+   },
+   {
+    "name": "sliderRange",
+    "problems": [
+     "thin_wrappers"
+    ]
+   }
+  ],
+  "note": "The same bar grows a styling protocol with one conformer and six switches nobody flips, a clamp and NaN check on a value the slider already bounds, and a string fallback that returns the same string."
+ },
+ {
+  "id": "swift-link-sheet",
+  "file": "files/swift-link-sheet.swift",
+  "language": "swift",
+  "pair": null,
+  "source": "anonymised",
+  "severity": "lean",
+  "expect": {
+   "verdict": "lean",
+   "problems": []
+  },
+  "note": "Real SwiftUI sheet: @State and @FocusState, an init that seeds the field, and add, edit and remove in one body."
+ },
+ {
+  "id": "swift-update-progress-sheet",
+  "file": "files/swift-update-progress-sheet.swift",
+  "language": "swift",
+  "pair": null,
+  "source": "anonymised",
+  "severity": "lean",
+  "expect": {
+   "verdict": "lean",
+   "problems": []
+  },
+  "note": "Real SwiftUI sheet: a working state and a failure state as two small subviews; the comments give reasons (a name clash, when there is nothing to download)."
+ },
+ {
+  "id": "swift-add-spotter-sheet-a",
+  "file": "files/swift-add-spotter-sheet-a.swift",
+  "language": "swift",
+  "pair": "swift-add-spotter-sheet",
+  "source": "anonymised",
+  "severity": "lean",
+  "expect": {
+   "verdict": "lean",
+   "problems": []
+  },
+  "note": "Real SwiftUI sheet: one name field, Cancel and Add, and a submit that ignores a blank name."
+ },
+ {
+  "id": "swift-add-spotter-sheet-b",
+  "file": "files/swift-add-spotter-sheet-b.swift",
+  "language": "swift",
+  "pair": "swift-add-spotter-sheet",
+  "source": "anonymised",
+  "severity": "moderate",
+  "expect": {
+   "verdict": "bloated",
+   "problems": [
+    "premature_abstraction",
+    "speculative_generality",
+    "type_bloat",
+    "defensive_excess",
+    "duplication",
+    "thin_wrappers"
+   ]
+  },
+  "units": [
+   {
+    "name": "SpotterNameValidating",
+    "problems": [
+     "premature_abstraction"
+    ]
+   },
+   {
+    "name": "DefaultSpotterNameValidator",
+    "problems": [
+     "premature_abstraction",
+     "speculative_generality"
+    ]
+   },
+   {
+    "name": "SpotterNameValidationResult",
+    "problems": [
+     "type_bloat"
+    ]
+   },
+   {
+    "name": "submit",
+    "problems": [
+     "defensive_excess",
+     "duplication"
+    ]
+   },
+   {
+    "name": "cancel",
+    "problems": [
+     "thin_wrappers"
+    ]
+   }
+  ],
+  "note": "A blank-name check becomes a validator protocol with one conformer, length limits nobody set, a four-case result enum, trimming done three times, and cancel and dismiss methods that only set a flag."
+ },
+ {
+  "id": "swift-site-category",
+  "file": "files/swift-site-category.swift",
+  "language": "swift",
+  "pair": null,
+  "source": "anonymised",
+  "severity": "lean",
+  "expect": {
+   "verdict": "lean",
+   "problems": []
+  },
+  "note": "Real model: a String-backed Codable enum with a title and an SF Symbol per case; the length is the sixteen categories."
+ },
+ {
+  "id": "swift-update-phase",
+  "file": "files/swift-update-phase.swift",
+  "language": "swift",
+  "pair": null,
+  "source": "anonymised",
+  "severity": "lean",
+  "expect": {
+   "verdict": "lean",
+   "problems": []
+  },
+  "note": "Real model: an update's phases as an enum with a few computed properties and the sheet's words; the comments record why relaunching hides the sheet and why bytes are spelt out."
+ },
+ {
+  "id": "swift-join-sheet-model-a",
+  "file": "files/swift-join-sheet-model-a.swift",
+  "language": "swift",
+  "pair": "swift-join-sheet-model",
+  "source": "anonymised",
+  "severity": "lean",
+  "expect": {
+   "verdict": "lean",
+   "problems": []
+  },
+  "note": "Real @Observable model: a code, a name, one async join, and a reset, with doc comments that give reasons."
+ },
+ {
+  "id": "swift-join-sheet-model-b",
+  "file": "files/swift-join-sheet-model-b.swift",
+  "language": "swift",
+  "pair": "swift-join-sheet-model",
+  "source": "anonymised",
+  "severity": "heavy",
+  "expect": {
+   "verdict": "bloated",
+   "problems": [
+    "premature_abstraction",
+    "thin_wrappers",
+    "defensive_excess",
+    "excess_logging",
+    "speculative_generality"
+   ]
+  },
+  "units": [
+   {
+    "name": "JoinPerforming",
+    "problems": [
+     "premature_abstraction"
+    ]
+   },
+   {
+    "name": "RegistryJoinPerformer",
+    "problems": [
+     "premature_abstraction",
+     "thin_wrappers"
+    ]
+   },
+   {
+    "name": "join",
+    "problems": [
+     "defensive_excess",
+     "excess_logging"
+    ]
+   },
+   {
+    "name": "joiningName",
+    "problems": [
+     "defensive_excess",
+     "excess_logging"
+    ]
+   },
+   {
+    "name": "clearError",
+    "problems": [
+     "speculative_generality"
+    ]
+   },
+   {
+    "name": "clearOutcome",
+    "problems": [
+     "speculative_generality"
+    ]
+   }
+  ],
+  "note": "The registry call moves behind a protocol with one pass-through conformer, join re-checks what canJoin already checked, every step logs, and two clear methods nothing calls are added."
+ },
+ {
+  "id": "swift-outing-run-clock",
+  "file": "files/swift-outing-run-clock.swift",
+  "language": "swift",
+  "pair": null,
+  "source": "anonymised",
+  "severity": "lean",
+  "expect": {
+   "verdict": "lean",
+   "problems": []
+  },
+  "note": "Real @Observable model: start, stop and one read, with test seams for time and sleep. Comment-heavy, but each comment gives a measured reason."
+ },
+ {
+  "id": "swift-update-feed",
+  "file": "files/swift-update-feed.swift",
+  "language": "swift",
+  "pair": null,
+  "source": "anonymised",
+  "severity": "lean",
+  "expect": {
+   "verdict": "lean",
+   "problems": []
+  },
+  "note": "Real service: one GET that refuses a non-2xx or oversized answer, for the captive-portal case the doc comment names."
+ },
+ {
+  "id": "swift-geocode-tool",
+  "file": "files/swift-geocode-tool.swift",
+  "language": "swift",
+  "pair": null,
+  "source": "anonymised",
+  "severity": "lean",
+  "expect": {
+   "verdict": "lean",
+   "problems": []
+  },
+  "note": "Real AgentTool conformance: a spec and one run method that looks up, ranks, records and answers."
+ },
+ {
+  "id": "swift-search-web-tool-a",
+  "file": "files/swift-search-web-tool-a.swift",
+  "language": "swift",
+  "pair": "swift-search-web-tool",
+  "source": "anonymised",
+  "severity": "lean",
+  "expect": {
+   "verdict": "lean",
+   "problems": []
+  },
+  "note": "Real AgentTool conformance: a spec, a query and an optional limit, and one search call."
+ },
+ {
+  "id": "swift-search-web-tool-b",
+  "file": "files/swift-search-web-tool-b.swift",
+  "language": "swift",
+  "pair": "swift-search-web-tool",
+  "source": "anonymised",
+  "severity": "moderate",
+  "expect": {
+   "verdict": "bloated",
+   "problems": [
+    "speculative_generality",
+    "defensive_excess",
+    "thin_wrappers"
+   ]
+  },
+  "units": [
+   {
+    "name": "SearchWebToolOptions",
+    "problems": [
+     "speculative_generality"
+    ]
+   },
+   {
+    "name": "performSearch",
+    "problems": [
+     "thin_wrappers"
+    ]
+   },
+   {
+    "name": "resolvedLimit",
+    "problems": [
+     "defensive_excess"
+    ]
+   },
+   {
+    "name": "format",
+    "problems": [
+     "speculative_generality",
+     "defensive_excess"
+    ]
+   },
+   {
+    "name": "snippet",
+    "problems": [
+     "speculative_generality"
+    ]
+   }
+  ],
+  "note": "The tool gains a five-option struct nobody configures (snippet cuts, dedupe, a maximum), a re-clamp of what ToolJSON.limit already clamps, empty checks on non-optional URL and title, and a one-line pass-through search method."
+ },
+ {
+  "id": "swift-image-downscale",
+  "file": "files/swift-image-downscale.swift",
+  "language": "swift",
+  "pair": null,
+  "source": "anonymised",
+  "severity": "lean",
+  "expect": {
+   "verdict": "lean",
+   "problems": []
+  },
+  "note": "Real service: ImageIO thumbnailing to JPEG with no upscaling; the comments carry measured token costs."
+ },
+ {
+  "id": "swift-update-downloader",
+  "file": "files/swift-update-downloader.swift",
+  "language": "swift",
+  "pair": null,
+  "source": "anonymised",
+  "severity": "justified",
+  "expect": {
+   "verdict": "lean",
+   "problems": []
+  },
+  "note": "Real service: a download protocol that tests fake, and a URLSessionDownloadDelegate bridged to async with cancellation; the delegate methods are what the protocol requires."
+ },
+ {
+  "id": "swift-site-filter",
+  "file": "files/swift-site-filter.swift",
+  "language": "swift",
+  "pair": null,
+  "source": "anonymised",
+  "severity": "heavy",
+  "expect": {
+   "verdict": "bloated",
+   "problems": [
+    "speculative_generality",
+    "duplication",
+    "verbose_logic",
+    "type_bloat"
+   ]
+  },
+  "units": [
+   {
+    "name": "SiteFilterMatchMode",
+    "problems": [
+     "speculative_generality",
+     "type_bloat"
+    ]
+   },
+   {
+    "name": "SiteSearchFields",
+    "problems": [
+     "speculative_generality",
+     "type_bloat"
+    ]
+   },
+   {
+    "name": "sites",
+    "problems": [
+     "speculative_generality",
+     "duplication",
+     "verbose_logic"
+    ]
+   },
+   {
+    "name": "matches",
+    "problems": [
+     "speculative_generality",
+     "duplication"
+    ]
+   }
+  ],
+  "note": "A substring filter gains match modes, a field OptionSet and a case-sensitivity switch nobody passes, and the field-gathering loop is written out twice with a manual found flag instead of filter and contains."
+ },
+ {
+  "id": "swift-image-sniffer",
+  "file": "files/swift-image-sniffer.swift",
+  "language": "swift",
+  "pair": null,
+  "source": "anonymised",
+  "severity": "heavy",
+  "expect": {
+   "verdict": "bloated",
+   "problems": [
+    "premature_abstraction",
+    "speculative_generality",
+    "type_bloat",
+    "defensive_excess"
+   ]
+  },
+  "units": [
+   {
+    "name": "ImageFormatDetecting",
+    "problems": [
+     "premature_abstraction"
+    ]
+   },
+   {
+    "name": "AnySignatureDetector",
+    "problems": [
+     "premature_abstraction",
+     "type_bloat"
+    ]
+   },
+   {
+    "name": "ImageFormatDetectorRegistry",
+    "problems": [
+     "premature_abstraction",
+     "speculative_generality"
+    ]
+   },
+   {
+    "name": "SignatureDetector",
+    "problems": [
+     "defensive_excess"
+    ]
+   },
+   {
+    "name": "format",
+    "problems": [
+     "defensive_excess"
+    ]
+   }
+  ],
+  "note": "A yes-or-no magic-byte check becomes a detector protocol, three detector types, a registry with register() nobody calls, and guards on offsets and emptiness the fixed signatures rule out; WebP still needs a special case."
+ },
+ {
+  "id": "swift-watering-schedule",
+  "file": "files/swift-watering-schedule.swift",
+  "language": "swift",
+  "pair": null,
+  "source": "invented",
+  "severity": "moderate",
+  "expect": {
+   "verdict": "bloated",
+   "problems": [
+    "excess_logging",
+    "comment_bloat"
+   ]
+  },
+  "units": [
+   {
+    "name": "WateringSchedule",
+    "problems": [
+     "excess_logging",
+     "comment_bloat"
+    ]
+   }
+  ],
+  "note": "A small watering schedule whose logic is fine, but which logs every step of every loop at debug level and narrates each line with a comment that restates it."
+ }
+]

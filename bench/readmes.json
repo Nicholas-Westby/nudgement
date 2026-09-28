@@ -1,0 +1,475 @@
+[
+  {
+    "id": "real-evaluator",
+    "file": "readmes/real-evaluator.md",
+    "pair": "evaluator",
+    "source": "anonymised",
+    "severity": "good",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "problems": []
+    },
+    "note": "Opens with the four things it judges, then commands, a flags table and exit codes; specific throughout and no longer than the tool needs."
+  },
+  {
+    "id": "real-dirmirror",
+    "file": "readmes/real-dirmirror.md",
+    "pair": "dirmirror",
+    "source": "anonymised",
+    "severity": "good",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "problems": []
+    },
+    "note": "Long because the tool does a lot, but it says what it is and why in two paragraphs and every paragraph after that carries a specific fact; the Use section is dense, not padded."
+  },
+  {
+    "id": "real-robin-agents",
+    "file": "readmes/real-robin-agents.md",
+    "pair": "robin-agents",
+    "source": "anonymised",
+    "severity": "good",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "problems": []
+    },
+    "note": "Says what it is and how to set it up on the first screen, then explains the linking, the reply footer, adding skills and the tests in plain, specific terms."
+  },
+  {
+    "id": "real-pr-review-picker",
+    "file": "readmes/real-pr-review-picker.md",
+    "pair": "pr-review-picker",
+    "source": "anonymised",
+    "severity": "good",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "problems": []
+    },
+    "note": "Says what the repo is and its status up front, shows the idea with an example and lists four concrete findings; heavy bold and one stock phrase ('the things that will bite you') are minor tics."
+  },
+  {
+    "id": "real-pr-review-prototype",
+    "file": "readmes/real-pr-review-prototype.md",
+    "pair": "pr-review-prototype",
+    "source": "anonymised",
+    "severity": "good",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "problems": []
+    },
+    "note": "Short and specific: what the folder proves, the commands, a table of files, the four test layers and the two gaps before real use."
+  },
+  {
+    "id": "real-jev-fixtures",
+    "file": "readmes/real-jev-fixtures.md",
+    "pair": null,
+    "source": "anonymised",
+    "severity": "good",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "problems": []
+    },
+    "note": "A fixtures README that says what the recordings are for, how the files are laid out and how to regenerate them; dense, but nothing a maintainer would cut."
+  },
+  {
+    "id": "real-utilities",
+    "file": "readmes/real-utilities.md",
+    "pair": "utilities",
+    "source": "anonymised",
+    "severity": "structure",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "problems": [
+        "disorganized",
+        "redundancy"
+      ]
+    },
+    "note": "Plain and specific, but the me command, most of the text, is missing from the Utilities list, installing a utility sits four sections below that list, and the Layout block repeats the intro; a reorder fixes it."
+  },
+  {
+    "id": "real-archive-screenshots",
+    "file": "readmes/real-archive-screenshots.md",
+    "pair": "archive-screenshots",
+    "source": "anonymised",
+    "severity": "structure",
+    "expect": {
+      "verdict": "fail",
+      "human": true,
+      "problems": [
+        "padding",
+        "redundancy"
+      ]
+    },
+    "note": "Human but padded: the two folder paths appear in four places, each path gets its own sentence and code block, id -u is explained at length, and some steps read as a spec ('the setup script should')."
+  },
+  {
+    "id": "real-fieldmark",
+    "file": "readmes/real-fieldmark.md",
+    "pair": "fieldmark",
+    "source": "anonymised",
+    "severity": "structure",
+    "expect": {
+      "verdict": "fail",
+      "human": true,
+      "problems": [
+        "padding",
+        "redundancy",
+        "disorganized"
+      ]
+    },
+    "note": "Over 8,000 words: feature bullets carry design history, the import and planning stories are told twice, and Install only starts around line 410, after the architecture and on-disk format."
+  },
+  {
+    "id": "ai-dirmirror",
+    "file": "readmes/ai-dirmirror.md",
+    "pair": "dirmirror",
+    "source": "anonymised",
+    "severity": "heavy",
+    "expect": {
+      "verdict": "fail",
+      "human": false,
+      "problems": [
+        "ai_voice",
+        "marketing",
+        "padding",
+        "over_structured",
+        "boilerplate",
+        "redundancy"
+      ]
+    },
+    "note": "Template AI README: badges, emoji headings and a table of contents, 'blazing-fast' claims, Overview, Why and Features repeating each other, clone steps and Node explained, and generic Contributing, License and Acknowledgements."
+  },
+  {
+    "id": "ai-pr-review-picker",
+    "file": "readmes/ai-pr-review-picker.md",
+    "pair": "pr-review-picker",
+    "source": "anonymised",
+    "severity": "heavy",
+    "expect": {
+      "verdict": "fail",
+      "human": false,
+      "problems": [
+        "ai_voice",
+        "marketing",
+        "missing_what_it_is",
+        "missing_usage",
+        "over_structured",
+        "boilerplate"
+      ]
+    },
+    "note": "Sells 'smarter, fairer code reviews' without saying it is research notes and a prototype for a Slack bot you mention with a Jira link, never shows how to run or trigger it, and adds a heading per feature plus generic Roadmap, Contributing and License."
+  },
+  {
+    "id": "ai-fieldmark",
+    "file": "readmes/ai-fieldmark.md",
+    "pair": "fieldmark",
+    "source": "anonymised",
+    "severity": "heavy",
+    "expect": {
+      "verdict": "fail",
+      "human": false,
+      "problems": [
+        "ai_voice",
+        "marketing",
+        "over_structured",
+        "redundancy",
+        "boilerplate",
+        "missing_usage"
+      ]
+    },
+    "note": "Emoji-heavy pitch whose Welcome, Why, Features and 'What Makes Fieldmark Different' repeat each other, with an invented Roadmap, generic Support and License, and no way to install or run the app."
+  },
+  {
+    "id": "ai-evaluator",
+    "file": "readmes/ai-evaluator.md",
+    "pair": "evaluator",
+    "source": "anonymised",
+    "severity": "moderate",
+    "expect": {
+      "verdict": "fail",
+      "human": false,
+      "problems": [
+        "ai_voice",
+        "redundancy",
+        "padding"
+      ]
+    },
+    "note": "The commands are right, but the prose is comprehensive/robust/leveraging filler, Overview, Key Features and Summary say the same thing, and it explains why commit messages matter and what Bun and Git are."
+  },
+  {
+    "id": "ai-robin-agents",
+    "file": "readmes/ai-robin-agents.md",
+    "pair": "robin-agents",
+    "source": "anonymised",
+    "severity": "moderate",
+    "expect": {
+      "verdict": "fail",
+      "human": false,
+      "problems": [
+        "ai_voice",
+        "over_structured",
+        "boilerplate"
+      ]
+    },
+    "note": "A nested table of contents and a heading per command in a short file, 'comprehensive ... streamline and enhance' filler, and Contributing and License sections a personal skills repo does not have."
+  },
+  {
+    "id": "ai-utilities",
+    "file": "readmes/ai-utilities.md",
+    "pair": "utilities",
+    "source": "anonymised",
+    "severity": "subtle",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "problems": [
+        "boilerplate"
+      ]
+    },
+    "note": "Plain, well ordered and specific; the only problem is generic Contributing, License and Support sections at the end, which a reviewer would simply delete."
+  },
+  {
+    "id": "ai-archive-screenshots",
+    "file": "readmes/ai-archive-screenshots.md",
+    "pair": "archive-screenshots",
+    "source": "anonymised",
+    "severity": "subtle",
+    "expect": {
+      "verdict": "fail",
+      "human": false,
+      "problems": [
+        "ai_voice"
+      ]
+    },
+    "note": "Tighter and better organized than the original, but the wording throughout is AI filler: 'lightweight yet robust', 'seamlessly', 'effortlessly runs', 'leverages rsync', 'intelligently collapses'."
+  },
+  {
+    "id": "ai-pr-review-prototype",
+    "file": "readmes/ai-pr-review-prototype.md",
+    "pair": "pr-review-prototype",
+    "source": "anonymised",
+    "severity": "subtle",
+    "expect": {
+      "verdict": "fail",
+      "human": true,
+      "problems": [
+        "padding"
+      ]
+    },
+    "note": "The original's facts in a plain voice, padded with explanations of npm, cloning, tests, environment variables and npx that nearly double its length."
+  },
+  {
+    "id": "good-pgsnap",
+    "file": "readmes/good-pgsnap.md",
+    "pair": null,
+    "source": "written for the bench",
+    "severity": "good",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "problems": []
+    },
+    "note": "Long because the CLI has seven commands, a connection rule and a config file, but it opens with what a snapshot is and why it is fast, and every section is specific."
+  },
+  {
+    "id": "good-span-ms",
+    "file": "readmes/good-span-ms.md",
+    "pair": null,
+    "source": "written for the bench",
+    "severity": "good",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "problems": []
+    },
+    "note": "Library README: one sentence on what it does, install, a usage block with results, the units, the API and a plain comparison with the obvious alternative."
+  },
+  {
+    "id": "good-potluck",
+    "file": "readmes/good-potluck.md",
+    "pair": "potluck",
+    "source": "written for the bench",
+    "severity": "good",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "problems": []
+    },
+    "note": "Web app README that says what it is for, how to run it with Docker or from source, every setting in one table, and the one privacy point that matters."
+  },
+  {
+    "id": "good-rename-by-date",
+    "file": "readmes/good-rename-by-date.md",
+    "pair": "rename-by-date",
+    "source": "written for the bench",
+    "severity": "good",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "problems": []
+    },
+    "note": "Script README: an example of the renaming, the one dependency, dry run and apply, the edge cases and undo, in under 200 words."
+  },
+  {
+    "id": "good-feedwatch",
+    "file": "readmes/good-feedwatch.md",
+    "pair": null,
+    "source": "written for the bench",
+    "severity": "good",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "problems": []
+    },
+    "note": "Long but earned: a service with six commands, two config tables and templates, where each section adds facts a user needs."
+  },
+  {
+    "id": "terse-potluck",
+    "file": "readmes/terse-potluck.md",
+    "pair": "potluck",
+    "source": "written for the bench",
+    "severity": "terse",
+    "expect": {
+      "verdict": "fail",
+      "human": true,
+      "problems": [
+        "too_terse",
+        "missing_what_it_is"
+      ]
+    },
+    "note": "Three commands under a name, with nothing on what the app is, what it needs, or where it serves once started."
+  },
+  {
+    "id": "terse-ledger-tools",
+    "file": "readmes/terse-ledger-tools.md",
+    "pair": null,
+    "source": "written for the bench",
+    "severity": "terse",
+    "expect": {
+      "verdict": "fail",
+      "human": true,
+      "problems": [
+        "too_terse",
+        "missing_what_it_is",
+        "missing_usage"
+      ]
+    },
+    "note": "A title and 'Scripts for the ledger stuff. WIP.' tell a newcomer nothing."
+  },
+  {
+    "id": "terse-fx-cache",
+    "file": "readmes/terse-fx-cache.md",
+    "pair": null,
+    "source": "written for the bench",
+    "severity": "terse",
+    "expect": {
+      "verdict": "fail",
+      "human": true,
+      "problems": [
+        "too_terse",
+        "missing_usage"
+      ]
+    },
+    "note": "One clear sentence on what it does, but nothing on how to run or deploy it, what it needs, or where the checkout service reads the rates."
+  },
+  {
+    "id": "structure-clippings",
+    "file": "readmes/structure-clippings.md",
+    "pair": null,
+    "source": "written for the bench",
+    "severity": "structure",
+    "expect": {
+      "verdict": "fail",
+      "human": true,
+      "problems": [
+        "disorganized"
+      ]
+    },
+    "note": "Plain and specific, but it opens with a changelog and troubleshooting, puts usage under 'Notes', and only says what the tool is in the last section."
+  },
+  {
+    "id": "structure-rename-by-date",
+    "file": "readmes/structure-rename-by-date.md",
+    "pair": "rename-by-date",
+    "source": "written for the bench",
+    "severity": "structure",
+    "expect": {
+      "verdict": "fail",
+      "human": true,
+      "problems": [
+        "over_structured"
+      ]
+    },
+    "note": "The facts of good-rename-by-date split into a table of contents, 21 headings and nested bullets for one-line facts."
+  },
+  {
+    "id": "structure-sweep-branches",
+    "file": "readmes/structure-sweep-branches.md",
+    "pair": null,
+    "source": "written for the bench",
+    "severity": "structure",
+    "expect": {
+      "verdict": "fail",
+      "human": true,
+      "problems": [
+        "redundancy"
+      ]
+    },
+    "note": "Each sentence is plain, but what it does is said six times across the intro, About, What it does, Features, Usage and How it works, and the install step appears twice."
+  },
+  {
+    "id": "terse-scoby",
+    "file": "readmes/terse-scoby.md",
+    "pair": null,
+    "source": "invented",
+    "severity": "terse",
+    "expect": {
+      "verdict": "fail",
+      "human": true,
+      "problems": [
+        "too_terse",
+        "missing_what_it_is",
+        "missing_usage"
+      ]
+    },
+    "note": "Two words and a license: nothing says what batches it tracks, how to install it or how to run it."
+  },
+  {
+    "id": "marketing-tidewise",
+    "file": "readmes/marketing-tidewise.md",
+    "pair": null,
+    "source": "invented",
+    "severity": "heavy",
+    "expect": {
+      "verdict": "fail",
+      "human": false,
+      "problems": [
+        "marketing",
+        "ai_voice",
+        "missing_what_it_is",
+        "boilerplate"
+      ]
+    },
+    "note": "A tide tool sold in slogans and emoji bullets; the reader learns it is fast and made with love, never that it prints tide times for a harbour, and it closes with a community call to action."
+  },
+  {
+    "id": "good-partbook",
+    "file": "readmes/good-partbook.md",
+    "pair": null,
+    "source": "invented",
+    "severity": "good",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "problems": []
+    },
+    "note": "A choir library catalogue: one paragraph on what it is and the question it answers, install, five real commands with sample output, the CSV format, license."
+  }
+]

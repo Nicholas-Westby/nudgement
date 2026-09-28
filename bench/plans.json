@@ -1,0 +1,172 @@
+[
+  {
+    "id": "field-notes-1",
+    "file": "plans/fieldmark-field-notes-1-model.md",
+    "note": "Real, approved and executed.",
+    "expect": {
+      "verdict": "pass"
+    },
+    "tasks": {}
+  },
+  {
+    "id": "field-notes-2",
+    "file": "plans/fieldmark-field-notes-2-editor.md",
+    "note": "Real, approved. Dense prose tasks that list the tests by name.",
+    "expect": {
+      "verdict": "pass"
+    },
+    "tasks": {}
+  },
+  {
+    "id": "field-notes-3",
+    "file": "plans/fieldmark-field-notes-3-sharing.md",
+    "note": "Real, approved.",
+    "expect": {
+      "verdict": "pass"
+    },
+    "tasks": {}
+  },
+  {
+    "id": "mutation-quick-wins",
+    "file": "plans/fieldmark-mutation-quick-wins.md",
+    "note": "Real, executed, with deviation notes.",
+    "expect": {
+      "verdict": "pass"
+    },
+    "tasks": {}
+  },
+  {
+    "id": "mutant-switching",
+    "file": "plans/fieldmark-mutant-switching.md",
+    "note": "Real, executed. Tasks 6, 7, 8 and 11 say why they have no unit test.",
+    "expect": {
+      "verdict": "pass"
+    },
+    "tasks": {}
+  },
+  {
+    "id": "mutation-parallel-jobs",
+    "file": "plans/fieldmark-mutation-parallel-jobs.md",
+    "note": "Real, executed.",
+    "expect": {
+      "verdict": "pass"
+    },
+    "tasks": {}
+  },
+  {
+    "id": "workshop-calendar",
+    "file": "plans/workshop-calendar-plan.md",
+    "note": "Real, executed.",
+    "expect": {
+      "verdict": "pass"
+    },
+    "tasks": {}
+  },
+  {
+    "id": "outing-budget",
+    "file": "plans/outing-budget-plan.md",
+    "note": "Handwritten in the writing-plans shape.",
+    "expect": {
+      "verdict": "pass"
+    },
+    "tasks": {}
+  },
+  {
+    "id": "field-notes-1-degraded",
+    "file": "plans/fieldmark-field-notes-1-degraded.md",
+    "note": "Outing notes plan 1 with five tasks made worse; Tasks 1, 2 and 8 are unchanged.",
+    "expect": {
+      "verdict": "fail"
+    },
+    "tasks": {
+      "Task 3": [
+        "placeholder",
+        "test_after",
+        "vague_steps",
+        "not_self_contained"
+      ],
+      "Task 4": [
+        "test_after"
+      ],
+      "Task 5": [
+        "placeholder",
+        "no_test",
+        "vague_steps",
+        "not_self_contained"
+      ],
+      "Task 6": [
+        "several_tasks"
+      ],
+      "Task 7": [
+        "weak_test"
+      ]
+    }
+  },
+  {
+    "id": "workshop-calendar-degraded",
+    "file": "plans/workshop-calendar-degraded.md",
+    "note": "The workshop plan with Task 10 reduced to vague steps and Task 12 given weak tests and elided code.",
+    "expect": {
+      "verdict": "fail"
+    },
+    "tasks": {
+      "Task 10": [
+        "no_files",
+        "vague_steps",
+        "not_self_contained",
+        "test_after",
+        "weak_test"
+      ],
+      "Task 12": [
+        "placeholder",
+        "weak_test",
+        "not_self_contained"
+      ]
+    }
+  },
+  {
+    "id": "outing-budget-rough",
+    "file": "plans/outing-budget-plan-rough.md",
+    "note": "A rushed plan for the same feature: Task 1 is fine, the rest are not.",
+    "expect": {
+      "verdict": "fail"
+    },
+    "tasks": {
+      "Task 2": [
+        "placeholder",
+        "test_after",
+        "vague_steps"
+      ],
+      "Task 3": [
+        "several_tasks",
+        "vague_steps",
+        "not_self_contained",
+        "test_after"
+      ],
+      "Task 4": [
+        "placeholder",
+        "vague_steps",
+        "not_self_contained",
+        "no_files",
+        "no_test"
+      ]
+    }
+  },
+  {
+    "id": "sightings-export",
+    "file": "plans/sightings-export-plan.md",
+    "note": "A short plan for a bird log's CSV export: Tasks 1, 2 and 5 are test first with files and commands; Task 3 bundles the command, an importer, settings and docs; Task 4 is one paragraph with no files and no test. Neither problem is an error, so the plan as a whole passes.",
+    "expect": {
+      "verdict": "pass"
+    },
+    "tasks": {
+      "Task 3": [
+        "several_tasks"
+      ],
+      "Task 4": [
+        "no_files",
+        "no_test"
+      ]
+    }
+  }
+]

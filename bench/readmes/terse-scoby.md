@@ -1,0 +1,5 @@
+# scoby
+
+Batch tracker.
+
+MIT

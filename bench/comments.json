@@ -1,0 +1,947 @@
+[
+  {
+    "id": "why-meter-monotonic-clock",
+    "file": "src/meter/device-clock.ts",
+    "language": "ts",
+    "comment": "  // performance.now(), not Date.now(): waiting time is billed from the gap\n  // between two readings, and a wall clock that the phone's network time\n  // update steps back mid-ride would bill that gap short, or even negative.",
+    "code_before": "export class DeviceClock implements MeterClock {\n  sleep(milliseconds: number): Promise<void> {\n    return delay(milliseconds);\n  }\n\n",
+    "code_after": "  now(): number {\n    return performance.now();\n  }\n}",
+    "expect": {
+      "good": true,
+      "kind": "why",
+      "narrates": false,
+      "human": true
+    },
+    "note": "Names the rejected alternative (Date.now) and the concrete failure (a clock step making billed waiting time short or negative)."
+  },
+  {
+    "id": "why-subshell-harvest-export",
+    "file": "scripts/publish-harvest-report.sh",
+    "language": "sh",
+    "comment": "# A subshell keeps the directory change local, so a failed export cannot leave\n# the upload below running from inside exporter/. Parenthesized, any failure in\n# it also trips `set -e`; in a bare `&&` chain a failed `cd` is ignored.",
+    "code_before": "\n./build-exporter.sh\n\necho \"==> Exporting harvest weights for $SEASON...\"\n",
+    "code_after": "(cd exporter && ./export-weights --season \"$SEASON\" --out ../dist/weights.csv)\n\necho \"==> Uploading the report...\"\ncurl --fail --silent --show-error \\\n  -F \"report=@dist/weights.csv\" \\\n  \"$REPORT_URL\"",
+    "expect": {
+      "good": true,
+      "kind": "why",
+      "narrates": false,
+      "human": true
+    },
+    "note": "Explains a shell gotcha (errexit is ignored for all but the last command of an && list) that the parentheses exist for."
+  },
+  {
+    "id": "why-stop-label-comma",
+    "file": "src/routes/stop-input.ts",
+    "language": "ts",
+    "comment": "// The solver reads stops as plain CSV and does not honour quotes, so a comma\n// in a label shifts every column after it. Refuse up front rather than let the\n// solver report a latitude out of range that is really half a street name.",
+    "code_before": "    throw new RoutePlanError(\n      `stop ${stop.id} has no latitude — fill it in on the depot sheet`,\n    );\n  }\n",
+    "code_after": "  const label = stop.label.trim();\n  if (label.includes(',')) {\n    throw new RoutePlanError(\n      `the stop label \"${label}\" must not contain a comma — the solver reads unquoted CSV`,\n    );\n  }\n  return {\n    ...stop,",
+    "expect": {
+      "good": true,
+      "kind": "why",
+      "narrates": false,
+      "human": true
+    },
+    "note": "States the external constraint (the solver's unquoted CSV) and the misleading error it prevents."
+  },
+  {
+    "id": "why-shelf-code-no-dash",
+    "file": "src/catalogue/shelf-code.ts",
+    "language": "ts",
+    "comment": "// A code with no dash was never given a shelf, and slicing to -1 would chop off\n// its last digit and file the box on a shelf named after the puzzle.",
+    "code_before": "\nfunction shelfOf(code: string): string {\n  const cut = code.lastIndexOf('-');\n",
+    "code_after": "  if (cut < 0) return UNSHELVED;\n  return code.slice(0, cut);\n}\n\n/**",
+    "expect": {
+      "good": true,
+      "kind": "why",
+      "narrates": false,
+      "human": true
+    },
+    "note": "Explains the off-by-one that the early return guards against, which the code alone does not show."
+  },
+  {
+    "id": "why-flavour-tile-margin",
+    "file": "src/styles/flavour-board.css",
+    "language": "css",
+    "comment": "  /* base.css gives paragraphs a bottom margin. Inside a tile that pushes the\n     price down, so tiles with a description sit lower than tiles without. */",
+    "code_before": "    margin: 0;\n    padding: 0;\n  }\n\n",
+    "code_after": "  .flavour-tile p {\n    margin-bottom: 0;\n  }\n\n  .flavour-tile .price {\n    align-self: end;\n    font-variant-numeric: tabular-nums;",
+    "expect": {
+      "good": true,
+      "kind": "why",
+      "narrates": false,
+      "human": true
+    },
+    "note": "Says where the margin comes from and the visible misalignment that zeroing it fixes."
+  },
+  {
+    "id": "why-lstat-latest-sheet",
+    "file": "scripts/publish-inspection-sheets.ts",
+    "language": "ts",
+    "comment": "// lstat rather than existsSync: existsSync follows the link, so a `latest`\n// whose sheet has been archived reads as missing, and symlinkSync then fails\n// with EEXIST on the link that is still there.",
+    "code_before": "const sheets = listSheets(outDir);\nconst newest = sheets.at(-1);\nif (newest === undefined) die(\"No inspection sheets to publish.\", `Run the export first; ${outDir} is empty.`);\n\n",
+    "code_after": "const latest = join(outDir, \"latest.pdf\");\nconst current = lstatOrNull(latest);\n\nif (current !== null) {\n  // A real file here is a sheet someone saved by hand under this name, so\n  // stop rather than delete it.\n  if (!current.isSymbolicLink()) {\n    die(",
+    "expect": {
+      "good": true,
+      "kind": "why",
+      "narrates": false,
+      "human": true
+    },
+    "note": "Explains why lstat is used over existsSync: a dangling symlink would otherwise be missed and the relink would fail."
+  },
+  {
+    "id": "why-checklist-readline-closed",
+    "file": "src/cli/checklist-terminal.ts",
+    "language": "ts",
+    "comment": "    // Ctrl-D on an empty line closes readline before the checklist asks its\n    // next question; drawing a prompt on a closed interface throws\n    // ERR_USE_AFTER_CLOSE, so end of input has to be known before readline is\n    // touched at all.",
+    "code_before": "  }\n\n  ask(question: string): Promise<string | undefined> {\n",
+    "code_after": "    if (this.interactive && !this.closed) {\n      // Interactively, readline draws the prompt so it can keep the cursor\n      // right while the beekeeper edits the line; piped, it draws nothing,\n      // so write it directly and the saved transcript still reads properly.\n      this.lines.setPrompt(question);\n      this.lines.prompt();\n    } else if (!this.interactive) {\n      this.write(question);\n    }",
+    "expect": {
+      "good": true,
+      "kind": "why",
+      "narrates": false,
+      "human": true
+    },
+    "note": "Names the exact error and the ordering constraint behind the `!this.closed` check."
+  },
+  {
+    "id": "why-axe-target-size-tags",
+    "file": "tests/e2e/flavour-pages.test.ts",
+    "language": "ts",
+    "comment": "        // Target size lives in the 2.2 rules and orientation lock in 2.1. With\n        // the 2.0 tags alone, a 16px \"remove scoop\" button passes a green run,\n        // since no rule that could flag it is switched on.",
+    "code_before": "    test(`${name} has no accessibility violations`, async ({ page }) => {\n      await page.goto(url);\n      const results = await new AxeBuilder({ page })\n",
+    "code_after": "        .withTags([\"wcag2a\", \"wcag2aa\", \"wcag21a\", \"wcag21aa\", \"wcag22aa\"])\n        // The card reader's payment iframe is the processor's, not ours\n        .exclude(\"iframe[data-payment]\")\n        .analyze();\n      expect(results.violations).toEqual([]);",
+    "expect": {
+      "good": true,
+      "kind": "why",
+      "narrates": false,
+      "human": true
+    },
+    "note": "Explains what the extra tags catch and the concrete miss that running 2.0 alone allows."
+  },
+  {
+    "id": "why-row-block-dot",
+    "file": "src/orchard/rows.ts",
+    "language": "ts",
+    "comment": "  // The dot matters: row 12.4 must not count as part of block 1.",
+    "code_before": " */\nfunction rowInBlock(rowId: string, blockId: string): boolean {\n  if (blockId === '') return false;\n",
+    "code_after": "  return rowId.startsWith(`${blockId}.`);\n}\n\nfunction rowNumber(rowId: string): number | undefined {\n  const dot = rowId.lastIndexOf('.');",
+    "expect": {
+      "good": true,
+      "kind": "why",
+      "narrates": false,
+      "human": true
+    },
+    "note": "One-line example of the prefix bug the dot prevents; short and specific."
+  },
+  {
+    "id": "why-fare-fonts-reflow",
+    "file": "tests/e2e/fare-display.test.ts",
+    "language": "ts",
+    "comment": "// A font arriving late widens the fare's digits, which shifts the whole meter\n// panel and would change the screenshot for reasons that have nothing to do\n// with the fare.",
+    "code_before": "const SETTLE_MS = 500;\nconst TICK_MS = 1200;\n\n",
+    "code_after": "async function settle(page: Page): Promise<void> {\n  await page.evaluate(() => document.fonts.ready);\n  await page.waitForTimeout(SETTLE_MS);\n}\n\nasync function panelsApart(panel: Locator): Promise<[Buffer, Buffer]> {\n  const first = await panel.screenshot();\n  await panel.page().waitForTimeout(TICK_MS);",
+    "expect": {
+      "good": true,
+      "kind": "why",
+      "narrates": false,
+      "human": true
+    },
+    "note": "Explains the flake the helper prevents rather than what it awaits."
+  },
+  {
+    "id": "why-distinct-piece-counts",
+    "file": "Tests/LendingShelfTests/CatalogueImportTests.swift",
+    "language": "swift",
+    "comment": "            // A different piece count per box, so no two records share bytes.",
+    "code_before": "        let shelf = rig.catalogue.directory\n        try FileManager.default.createDirectory(at: shelf, withIntermediateDirectories: true)\n        var records: [Data] = []\n        for (number, box) in boxes.enumerated() {\n",
+    "code_after": "            let data = try PuzzleRecord.sample(pieces: 500 + Set(boxes.prefix(number + 1)).count).encoded()\n            if !unwritten.contains(number) { try data.write(to: rig.catalogue.url(for: box)) }\n            records.append(data)\n        }\n        self.records = records",
+    "expect": {
+      "good": true,
+      "kind": "why",
+      "narrates": false,
+      "human": true
+    },
+    "note": "Short note on the intent of an otherwise odd-looking piece-count formula."
+  },
+  {
+    "id": "why-summary-forgetful-part",
+    "file": "src/routes/summary-line.ts",
+    "language": "ts",
+    "comment": "  // Anything but text stays out, so a part that forgets to return is left off\n  // rather than leaving a stray separator in the driver's summary.",
+    "code_before": "    } catch (err) {\n      const why = err instanceof Error ? err.message : String(err);\n      return `${part.name || \"part\"} failed: ${why}`;\n    }\n  });\n",
+    "code_after": "  const shown = pieces.filter((piece) => typeof piece === \"string\" && piece !== \"\");\n  return shown.length > 0 ? shown.join(\" · \") : null;\n}\n\n/**",
+    "expect": {
+      "good": true,
+      "kind": "why",
+      "narrates": false,
+      "human": true
+    },
+    "note": "Explains why the filter checks typeof rather than null, and the visible symptom it avoids."
+  },
+  {
+    "id": "why-tester-exit-75",
+    "file": "tests/cylinders/hydro-test.test.ts",
+    "language": "ts",
+    "comment": "    // 75 is what the tester's driver returns when the serial port is busy — only exit 1 means the cylinder failed.",
+    "code_before": "\n  it('does not fail a cylinder when the hydro tester is busy', async () => {\n    const shop = makeShopHarness({ answers: ['t', 'AL80-0412', 'y', 'q'] });\n",
+    "code_after": "    shop.runner.onArgsContaining('hydro-read', { code: 75 });\n    await shop.run();\n    expect(shop.terminal.text).not.toContain('failed hydrostatic test');\n    expect(shop.terminal.text).toContain('tester busy — try again');\n  });",
+    "expect": {
+      "good": true,
+      "kind": "why",
+      "narrates": false,
+      "human": true
+    },
+    "note": "Explains a magic exit code and why it is distinct from the failed-cylinder case."
+  },
+  {
+    "id": "why-sprinkles-no-still-frame",
+    "file": "src/scripts/sprinkle-trail.ts",
+    "language": "ts",
+    "comment": "  // No still frame worth drawing: the sprinkles only exist under the cursor.",
+    "code_before": "  if (!cards.length) return;\n\n  if (!('transferControlToOffscreen' in HTMLCanvasElement.prototype)) return;\n\n",
+    "code_after": "  if (prefersReducedMotion()) return;\n\n  const worker = new Worker(\n    new URL('./sprinkle-worker.ts', import.meta.url),\n    { type: 'module' },\n  );",
+    "expect": {
+      "good": true,
+      "kind": "why",
+      "narrates": false,
+      "human": true
+    },
+    "note": "Explains why this effect returns with no fallback where other effects draw a still frame."
+  },
+  {
+    "id": "why-orchard-canvas-once",
+    "file": "src/orchard-map/draw-blocks.ts",
+    "language": "ts",
+    "comment": "    // A canvas can only be handed to a worker once, and a second handover\n    // throws, so never do this a second time.",
+    "code_before": "   * The map has no size at all until its tab is first opened.\n   */\n  function startDrawing(): void {\n",
+    "code_after": "    if (started) return;\n    started = true;\n\n    const maps = Array.from(\n      root.querySelectorAll<HTMLCanvasElement>(\"[data-orchard-map]\")\n    );\n    if (!maps.length) return;\n    if (!(\"transferControlToOffscreen\" in HTMLCanvasElement.prototype)) return;",
+    "expect": {
+      "good": true,
+      "kind": "why",
+      "narrates": false,
+      "human": true
+    },
+    "note": "States the platform constraint (transferControlToOffscreen is one-shot) behind the guard."
+  },
+  {
+    "id": "docs-default-tariff",
+    "file": "src/meter/defaults.ts",
+    "language": "ts",
+    "comment": "/** The tariff a meter starts on, when the cab's config does not name one. */",
+    "code_before": "/** Distance is charged in whole ticks of this many metres, rounded up. */\nexport const DISTANCE_TICK_METRES = 200;\n\n",
+    "code_after": "export function defaultTariff(zone: string): TariffId {\n  return `${zone}-day`;\n}",
+    "expect": {
+      "good": true,
+      "kind": "docs",
+      "narrates": false,
+      "human": true
+    },
+    "note": "One-line API doc that says what the value means and when it applies."
+  },
+  {
+    "id": "docs-parse-line-or-null",
+    "file": "src/hives/inspection-log.ts",
+    "language": "ts",
+    "comment": "/** JSON.parse that gives back null for a damaged line instead of throwing. */",
+    "code_before": "}\nconsole.log(`Inspections read: ${entries.length}`);\n\n",
+    "code_after": "function parseLineOrNull(line: string): unknown {\n  try {\n    return JSON.parse(line);\n  } catch {\n    return null;\n  }\n}",
+    "expect": {
+      "good": true,
+      "kind": "docs",
+      "narrates": false,
+      "human": true
+    },
+    "note": "Tells a caller the one contract difference from JSON.parse."
+  },
+  {
+    "id": "docs-on-visible-stops-change",
+    "file": "Sources/RouteBoard/RouteMapView.swift",
+    "language": "swift",
+    "comment": "    /// Told which stops of the route are on screen, as a range of stop\n    /// numbers, whenever that changes.",
+    "code_before": "    /// Told when a stop is tapped, with its number in the route.\n    var onStopTapped: ((Int) -> Void)?\n",
+    "code_after": "    var onVisibleStopsChange: ((ClosedRange<Int>) -> Void)?\n    /// Called once, the first time the map has a size.\n    var onFirstLayout: (() -> Void)?\n    /// A drop was dragged to a new position in the order: from, then to, both\n    /// as stop numbers before the move.",
+    "expect": {
+      "good": true,
+      "kind": "docs",
+      "narrates": false,
+      "human": true
+    },
+    "note": "Documents what the callback receives and when it fires."
+  },
+  {
+    "id": "docs-is-short-of-pieces",
+    "file": "Sources/LendingShelf/Returns/ReturnDesk.swift",
+    "language": "swift",
+    "comment": "    /// Whether `loan` came back short of `box`'s pieces, counting any that\n    /// turned up later in lost-and-found. A loan nobody counted is not short.",
+    "code_before": "        }\n    }\n\n",
+    "code_after": "    private static func isShortOfPieces(_ loan: Loan, in box: PuzzleBox) -> Bool {\n        guard let counted = loan.piecesCounted else { return false }\n        let recovered = box.lostAndFound.filter { $0.loanID == loan.id }.count\n        return counted + recovered < box.pieceCount\n    }",
+    "expect": {
+      "good": true,
+      "kind": "docs",
+      "narrates": false,
+      "human": true
+    },
+    "note": "Short doc that pins down what counts as short, which the name alone leaves vague."
+  },
+  {
+    "id": "docs-rotation-call",
+    "file": "src/rotation/rotation.ts",
+    "language": "ts",
+    "comment": "/**\n * Keeping a slow flavour a week too long costs a tub; dropping a regular's\n * favourite costs the regular, so \"watch\" is the cheap mistake and \"retire\"\n * the expensive one. Anything unclear lands on \"watch\".\n */",
+    "code_before": "  tubsPerWeek: number[];\n  floor: number;\n}\n\n",
+    "code_after": "export function rotationCall(sales: FlavourSales): RotationCall {\n  const { tubsPerWeek, floor } = sales;\n  if (tubsPerWeek.length < WEEKS_TO_JUDGE) return \"watch\";\n  if (tubsPerWeek.every((tubs) => tubs >= floor)) return \"keep\";\n  return tubsPerWeek.every((tubs) => tubs < floor) ? \"retire\" : \"watch\";\n}",
+    "expect": {
+      "good": true,
+      "kind": "docs",
+      "narrates": false,
+      "human": true
+    },
+    "note": "Doc comment that explains what the calls mean and which mistake is cheap, not the if-chain."
+  },
+  {
+    "id": "docs-depot-postcode",
+    "file": "src/config/depot-config.ts",
+    "language": "ts",
+    "comment": "/**\n * A depot postcode as a hand-edited config may have left it.\n *\n * Zones are found by matching the outward code as a prefix, so \"sw1a 1aa\" or a\n * doubled space would miss every zone and price each drop as out of area. An\n * emptied value is worse: the empty prefix matches the first zone in the file,\n * and every van would be planned from the wrong depot.\n */",
+    "code_before": "  };\n}\n\n",
+    "code_after": "function postcode(value: string, fallback: string): string {\n  return normalisePostcode(value === '' ? fallback : value);\n}\n\n/** Settings plus the van list, which an existing config may override. */",
+    "expect": {
+      "good": true,
+      "kind": "docs",
+      "narrates": false,
+      "human": true
+    },
+    "note": "Documents the input it normalises and the stakes (wrong zone, wrong depot) of getting it wrong."
+  },
+  {
+    "id": "docs-flavour-colour",
+    "file": "src/components/scoop-preview.ts",
+    "language": "ts",
+    "comment": "/**\n * The flavour's tub colour as the three 0-to-1 floats WebGL wants.\n *\n * Read here rather than imported from the shared palette module: the preview\n * uses none of that module's theme switching, and importing it would put a\n * chunk on every menu page for the sake of six lines.\n */",
+    "code_before": "  }\n}\n\n",
+    "code_after": "function flavourColour(tile: HTMLElement): [number, number, number] {\n  const hex = getComputedStyle(tile)\n    .getPropertyValue(\"--tub-colour\")\n    .trim()\n    .replace(\"#\", \"\");\n  const full = hex.length === 3 ? hex.replace(/./g, (c) => c + c) : hex;\n  const n = parseInt(full, 16);\n  return [((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255];\n}",
+    "expect": {
+      "good": true,
+      "kind": "docs",
+      "narrates": false,
+      "human": true
+    },
+    "note": "Says what it returns and why it is duplicated locally rather than imported."
+  },
+  {
+    "id": "docs-meter-clock-now",
+    "file": "src/meter/meter-clock.ts",
+    "language": "ts",
+    "comment": "  /**\n   * Milliseconds from an arbitrary origin, for timing a wait — not a wall\n   * clock. Only ever read in pairs and subtracted, so a fake may start\n   * wherever it likes, and a real one must be monotonic: a network time\n   * update that steps the clock mid-ride must not bill a short or negative wait.\n   */",
+    "code_before": "/** Waiting and telling the time, injected so a test can run a ride in no time. */\nexport interface MeterClock {\n  sleep(milliseconds: number): Promise<void>;\n",
+    "code_after": "  now(): number;\n}",
+    "expect": {
+      "good": true,
+      "kind": "docs",
+      "narrates": false,
+      "human": true
+    },
+    "note": "Interface doc stating the contract implementers must keep and why."
+  },
+  {
+    "id": "what-flush-notes",
+    "file": "src/hives/recording-terminal.ts",
+    "language": "ts",
+    "comment": "      // flush the notes file",
+    "code_before": "      // Before the answer is waited for, so a question that never gets one is\n      // in the file with everything seen at the hive before it.\n      notes.append(question);\n",
+    "code_after": "      await notes.flush();\n      const answer = await inner.ask(question);\n      notes.append(`${answer ?? NO_ANSWER}\\n`);\n      return answer;\n    },",
+    "expect": {
+      "good": false,
+      "kind": "what",
+      "narrates": false,
+      "human": true
+    },
+    "note": "Restates `await notes.flush()`; the real reason (flush before blocking on the beekeeper) is missing."
+  },
+  {
+    "id": "what-box-cover-label",
+    "file": "Sources/LendingShelf/Shelf/BoxCoverView.swift",
+    "language": "swift",
+    "comment": "        // Return the title prefixed with Puzzle, or just Puzzle",
+    "code_before": "\n    override func accessibilityLabel() -> String? {\n        let title = box?.title\n",
+    "code_after": "        return title.map { \"Puzzle: \\($0)\" } ?? \"Puzzle\"\n    }\n}\n\nextension BoxCoverView {",
+    "expect": {
+      "good": false,
+      "kind": "what",
+      "narrates": false,
+      "human": true
+    },
+    "note": "Paraphrases the return expression and says nothing about why the label starts with Puzzle."
+  },
+  {
+    "id": "what-frozen-time",
+    "file": "src/scripts/sprinkle-worker.ts",
+    "language": "ts",
+    "comment": "    // Set time to FROZEN_TIME if still, otherwise the elapsed seconds",
+    "code_before": "  const t0 = performance.now();\n\n  function frame() {\n",
+    "code_after": "    const time = still ? FROZEN_TIME : (performance.now() - t0) / 1000;\n\n    trails.forEach((trail, id) => {\n      if (!trail.visible) return;\n      const { rect } = trail;",
+    "expect": {
+      "good": false,
+      "kind": "what",
+      "narrates": false,
+      "human": true
+    },
+    "note": "Reads the ternary aloud."
+  },
+  {
+    "id": "what-split-route-guard",
+    "file": "src/routes/split.ts",
+    "language": "ts",
+    "comment": "  // Return a copy of routes if route or stop is undefined or there is only one stop",
+    "code_before": "): Route[] {\n  const route = routes[index];\n  const stop = route?.stops[stopIndex];\n",
+    "code_after": "  if (route === undefined || stop === undefined || route.stops.length < 2) {\n    return [...routes];\n  }\n  const kept = routes.map((r, i) =>\n    i === index ? { ...r, stops: r.stops.filter((_, s) => s !== stopIndex) } : r,",
+    "expect": {
+      "good": false,
+      "kind": "what",
+      "narrates": false,
+      "human": true
+    },
+    "note": "Restates the condition; omits why a one-stop route must not be split."
+  },
+  {
+    "id": "what-can-submit-inspection",
+    "file": "Sources/CylinderLog/Submission/InspectionOutbox.swift",
+    "language": "swift",
+    "comment": "        // Check that the grade is valid and the notes are not too long",
+    "code_before": "    /// too long, and that inspection never reached the test station.\n    static func canSubmit(_ record: InspectionRecord) -> Bool {\n",
+    "code_after": "        guard VisualGrade(rawValue: record.grade) != nil else { return false }\n        return (record.notes?.utf16.count ?? 0) <= InspectionLimits.notesLength\n    }\n\n    /// One stage of the submission got through.",
+    "expect": {
+      "good": false,
+      "kind": "what",
+      "narrates": false,
+      "human": true
+    },
+    "note": "Restates the two lines below; the interesting part (UTF-16, as the station's server counts) is left out."
+  },
+  {
+    "id": "what-part-error-to-string",
+    "file": "src/routes/summary-line.ts",
+    "language": "ts",
+    "comment": "      // Get the error message, or convert the error to a string",
+    "code_before": "  const pieces = parts.map((part) => {\n    try {\n      return part(route);\n    } catch (err) {\n",
+    "code_after": "      const why = err instanceof Error ? err.message : String(err);\n      return `${part.name || \"part\"} failed: ${why}`;\n    }\n  });\n  // Anything but text stays out, so a part that forgets to return is left off",
+    "expect": {
+      "good": false,
+      "kind": "what",
+      "narrates": false,
+      "human": true
+    },
+    "note": "Paraphrases the instanceof ternary."
+  },
+  {
+    "id": "what-recorder-early-return",
+    "file": "src/hives/session-recorder.ts",
+    "language": "ts",
+    "comment": "    // If recording is being turned off, return early",
+    "code_before": "  setEnabled(on: boolean): void {\n    if (on === this.on) return;\n    this.on = on;\n",
+    "code_after": "    if (!on) return;\n    // Armed, not written: switching recording on and back off before the\n    // first frame is looked at should leave no file behind.\n    this.headerDue = true;\n    // A recorder that gave up switched itself off, so this is the beekeeper",
+    "expect": {
+      "good": false,
+      "kind": "what",
+      "narrates": false,
+      "human": true
+    },
+    "note": "Restates a one-line guard."
+  },
+  {
+    "id": "what-wait-fare-fonts",
+    "file": "tests/e2e/fare-display.test.ts",
+    "language": "ts",
+    "comment": "  // Wait for the fonts to be ready, then wait SETTLE_MS",
+    "code_before": "// with the fare.\nasync function settle(page: Page): Promise<void> {\n",
+    "code_after": "  await page.evaluate(() => document.fonts.ready);\n  await page.waitForTimeout(SETTLE_MS);\n}\n\nasync function panelsApart(panel: Locator): Promise<[Buffer, Buffer]> {",
+    "expect": {
+      "good": false,
+      "kind": "what",
+      "narrates": false,
+      "human": true
+    },
+    "note": "Describes the two awaits; the reason (a late font shifts the meter panel) is what a reader needs."
+  },
+  {
+    "id": "what-note-caret-to-end",
+    "file": "Sources/HarvestLog/Rows/RowNotesPopover.swift",
+    "language": "swift",
+    "comment": "        // Set the selection to the end of the text and make the text view first responder",
+    "code_before": "    /// its words so typing carries on from them.\n    func focus() {\n        guard let id = list.focusedRow ?? list.rows.first?.id, let note = list.notes[id] else { return }\n",
+    "code_after": "        note.textView.setSelectedRange(NSRange(location: (note.textView.string as NSString).length, length: 0))\n        note.textView.window?.makeFirstResponder(note.textView)\n    }\n\n    // MARK: - Weights",
+    "expect": {
+      "good": false,
+      "kind": "what",
+      "narrates": false,
+      "human": true
+    },
+    "note": "Narrates both calls line by line."
+  },
+  {
+    "id": "what-loop-blocks",
+    "file": "src/orchard-map/map-worker.ts",
+    "language": "ts",
+    "comment": "      // Loop over each block",
+    "code_before": "    if (!still || needsDraw) {\n      const time = still ? FROZEN_TIME : (performance.now() - t0) / 1000;\n\n",
+    "code_after": "      blocks.forEach((block, id) => {\n        if (!block.visible) return;\n        const { gl, uTime, uPointer, uAspect, rect } = block;\n\n        const px = (pointerX - rect.left) / rect.width - 0.5;\n        const py = -((pointerY - rect.top) / rect.height - 0.5);\n\n        gl.uniform1f(uTime, time);",
+    "expect": {
+      "good": false,
+      "kind": "what",
+      "narrates": false,
+      "human": true
+    },
+    "note": "Labels a forEach as a loop."
+  },
+  {
+    "id": "history-round-pence",
+    "file": "src/meter/fare-format.ts",
+    "language": "ts",
+    "comment": "  // Updated to round the pence, since the tariff returns fractions now",
+    "code_before": " */\nfunction fareText(pence: number): string {\n",
+    "code_after": "  return pence < POUND\n    ? `${Math.round(pence)}p`\n    : `£${(pence / POUND).toFixed(2)}`;\n}\n\nfunction withoutCardNumber(receipt: string): string {\n  const at = receipt.indexOf(CARD_MARK);\n  return at === -1 ? receipt : `${receipt.slice(0, at + CARD_MARK.length)}${MASKED}`;",
+    "expect": {
+      "good": false,
+      "kind": "history",
+      "narrates": true,
+      "human": true
+    },
+    "note": "Narrates the change ('updated', 'now'); the fact about fractional amounts belongs in the doc as it stands."
+  },
+  {
+    "id": "history-depot-of",
+    "file": "src/routes/coverage.ts",
+    "language": "ts",
+    "comment": "  // Changed to use depotOf() instead of looking the depot up by hand",
+    "code_before": "  van: Van,\n  postcode: string,\n  zones: readonly string[],\n): boolean {\n",
+    "code_after": "  const outward = outwardCode(depotOf(van), postcode);\n  return zones.some(\n    (zone) => zone !== '' && (outward === zone || outward.startsWith(`${zone} `)),\n  );\n}",
+    "expect": {
+      "good": false,
+      "kind": "history",
+      "narrates": true,
+      "human": true
+    },
+    "note": "Describes the refactor, which belongs in the commit message, not the code."
+  },
+  {
+    "id": "history-notes-utf16",
+    "file": "Sources/CylinderLog/Submission/InspectionOutbox.swift",
+    "language": "swift",
+    "comment": "        // Switched from utf8 to utf16 to fix the rejected-inspections bug",
+    "code_before": "    static func canSubmit(_ record: InspectionRecord) -> Bool {\n        guard VisualGrade(rawValue: record.grade) != nil else { return false }\n",
+    "code_after": "        return (record.notes?.utf16.count ?? 0) <= InspectionLimits.notesLength\n    }\n\n    /// One stage of the submission got through.\n    ///",
+    "expect": {
+      "good": false,
+      "kind": "history",
+      "narrates": true,
+      "human": true
+    },
+    "note": "Points at a past bug and the old code instead of saying the station's server measures length in UTF-16 units."
+  },
+  {
+    "id": "history-motion-helper",
+    "file": "src/scripts/effect-worker-client.ts",
+    "language": "ts",
+    "comment": "  // Now uses the shared motionAllowed() helper instead of its own media query",
+    "code_before": "  const canvases = document.querySelectorAll<HTMLCanvasElement>(selector);\n  if (!canvases.length) return false;\n\n  if (!('transferControlToOffscreen' in HTMLCanvasElement.prototype)) return false;\n",
+    "code_after": "  if (!motionAllowed()) return false;\n\n  const dpr = Math.min(window.devicePixelRatio || 1, 2);\n\n  canvases.forEach((canvas, id) => {",
+    "expect": {
+      "good": false,
+      "kind": "history",
+      "narrates": true,
+      "human": true
+    },
+    "note": "'Now uses' narrates the refactor; the import already shows where the helper comes from."
+  },
+  {
+    "id": "history-menu-prefix",
+    "file": "src/styles/menu-board.css",
+    "language": "css",
+    "comment": "  /* Added the .menu prefix so these rules win over the theme now */",
+    "code_before": "    background: var(--board-bg);\n  }\n\n",
+    "code_after": "  .menu .flavour-tile img {\n    width: 100%;\n    height: 100%;\n    object-fit: cover;\n    transition: transform 0.3s;\n  }",
+    "expect": {
+      "good": false,
+      "kind": "history",
+      "narrates": true,
+      "human": true
+    },
+    "note": "Narrates the fix; should say the theme's own tile rule has the same specificity and loads later."
+  },
+  {
+    "id": "history-forget-count",
+    "file": "Sources/LendingShelf/Returns/ReturnDeskHost.swift",
+    "language": "swift",
+    "comment": "            // Added to fix the stale-count bug from QA",
+    "code_before": "            presenter?.dismissAll()\n            scanner?.stop()\n            model.lastBox = counter.box\n            model.close()\n",
+    "code_after": "            counter.reset()\n            for observer in observers {\n                NotificationCenter.default.removeObserver(observer)\n            }\n            observers = []",
+    "expect": {
+      "good": false,
+      "kind": "history",
+      "narrates": true,
+      "human": true
+    },
+    "note": "Refers to a QA round and 'the bug' instead of saying what a leftover count would do to the next return."
+  },
+  {
+    "id": "history-queenless-cut-short",
+    "file": "src/hives/checklist/queen-status.ts",
+    "language": "ts",
+    "comment": "  // No longer marks a hive queenless when the inspection was cut short",
+    "code_before": "    return false;\n  }\n  const seen = await session.frames.lookFor(hive, 'queen');\n",
+    "code_after": "  if (seen.kind === 'found') session.out.info(`queen seen in ${hive.name}.`);\n  else if (seen.kind === 'not-found')\n    session.out.info(`note: no queen seen in ${hive.name} — check for eggs next visit.`);\n  return true;\n}",
+    "expect": {
+      "good": false,
+      "kind": "history",
+      "narrates": true,
+      "human": true
+    },
+    "note": "'No longer' describes the old behaviour rather than the rule as it stands (only a finished look counts)."
+  },
+  {
+    "id": "history-sold-out-wording",
+    "file": "src/menu/labels.ts",
+    "language": "ts",
+    "comment": "// Changed from \"Unavailable\" to \"Sold out\" to match the till receipts",
+    "code_before": "import { TILL_LOCALE } from \"./till\";\n\n",
+    "code_after": "export const SOLD_OUT = \"Sold out today — back tomorrow.\";\n\n/** Words the till prints that must never reach the menu board. */\nconst TILL_ONLY = [\n  \"VOID\",",
+    "expect": {
+      "good": false,
+      "kind": "history",
+      "narrates": true,
+      "human": true
+    },
+    "note": "Has a reason in it, but framed as a change log; should just say it must match what the till prints."
+  },
+  {
+    "id": "ai-important-phone-numbers",
+    "file": "src/routes/pick-stop.ts",
+    "language": "ts",
+    "comment": "  // IMPORTANT: This ensures that customer phone numbers are never written to\n  // the route log, protecting customer privacy and maintaining compliance.",
+    "code_before": "  route: Route,\n  question: string,\n): Promise<number | undefined> {\n  if (route.stops.length <= 1) return 0;\n",
+    "code_after": "  await session.log.withoutRecording(() => {\n    route.stops.forEach((stop, index) => {\n      const phone = stop.phone === '' ? 'no phone' : stop.phone;\n      session.out.info(`  ${index + 1}) ${stop.label}  ${stop.postcode}   [${phone}]`);\n    });\n    return Promise.resolve();\n  });",
+    "expect": {
+      "good": false,
+      "kind": "why",
+      "narrates": false,
+      "human": false
+    },
+    "note": "Emphatic IMPORTANT plus 'This ensures' and padding; the concrete point (the listing prints phone numbers) is buried."
+  },
+  {
+    "id": "ai-here-we-tile-midpoints",
+    "file": "tests/e2e/menu-board.test.ts",
+    "language": "ts",
+    "comment": "    // Here we calculate the vertical midpoint of each key tile element so that\n    // we can verify they are all properly aligned on the same center line.",
+    "code_before": "      \"the price sits in the tile, not below it\"\n    );\n\n",
+    "code_after": "    const middles = await page.evaluate(() => {\n      const middle = (selector: string) => {\n        const box = document.querySelector(selector)!.getBoundingClientRect();\n        return box.y + box.height / 2;\n      };\n      return {\n        tile: middle(\".flavour-tile\"),\n        name: middle(\".flavour-tile h3\"),\n        price: middle(\".flavour-tile .price\"),\n        badge: middle(\".flavour-tile .badge\"),\n      };\n    });",
+    "expect": {
+      "good": false,
+      "kind": "what",
+      "narrates": false,
+      "human": false
+    },
+    "note": "'Here we' narration of what the evaluate call plainly does."
+  },
+  {
+    "id": "ai-docs-clear-drafts",
+    "file": "Sources/CylinderLog/Drafts/DraftStore.swift",
+    "language": "swift",
+    "comment": "    /// This function ensures that stale draft inspections from previous launches\n    /// are properly cleaned up, providing a robust and seamless user experience.",
+    "code_before": "        }\n    }\n\n",
+    "code_after": "    private func clearEarlierLaunches() {\n        guard Self.cleared.insert(directory.standardizedFileURL).inserted else { return }\n        try? FileManager.default.removeItem(at: directory)\n    }\n\n    /// A file of its own: never a folder, which \"\" or \"..\" for a name would\n    /// reach, and would be removed whole.\n    private static func isFile(_ url: URL) -> Bool {",
+    "expect": {
+      "good": false,
+      "kind": "docs",
+      "narrates": false,
+      "human": false
+    },
+    "note": "Filler (ensures, robust, seamless) and a vague benefit; misses that only the first call per launch clears."
+  },
+  {
+    "id": "ai-note-latest-null-check",
+    "file": "scripts/publish-inspection-sheets.ts",
+    "language": "ts",
+    "comment": "// Note that we check for null here to gracefully handle the case where the\n// link does not exist, since lstatOrNull returns null in that scenario.",
+    "code_before": "const latest = join(outDir, \"latest.pdf\");\nconst current = lstatOrNull(latest);\n\n",
+    "code_after": "if (current !== null) {\n  // A real file here is a sheet someone saved by hand under this name, so\n  // stop rather than delete it.\n  if (!current.isSymbolicLink()) {\n    die(\n      `Refusing: ${latest} is a real file, not a link.`,\n      \"Rename it (or delete it yourself), then run this again.\",\n    );\n  }",
+    "expect": {
+      "good": false,
+      "kind": "what",
+      "narrates": false,
+      "human": false
+    },
+    "note": "'Note that' and 'gracefully handle' explaining a trivial null check."
+  },
+  {
+    "id": "ai-critical-small-controls",
+    "file": "Sources/LendingShelf/Shelf/ShelfToolbar.swift",
+    "language": "swift",
+    "comment": "        // CRITICAL: Use small control size to ensure a consistent and polished\n        // user experience across the application.",
+    "code_before": "        .background(.bar)\n        .overlay(alignment: .bottom) {\n            Rectangle().fill(Color(nsColor: .separatorColor)).frame(height: 1)\n        }\n",
+    "code_after": "        .controlSize(.small)\n        .onChange(of: shelf.scanRequest) { _, request in\n            if request != nil { isScanning = true }\n        }\n        .accessibilityElement(children: .contain)",
+    "expect": {
+      "good": false,
+      "kind": "why",
+      "narrates": false,
+      "human": false
+    },
+    "note": "Emphatic CRITICAL and a vague benefit claim instead of a reason."
+  },
+  {
+    "id": "ai-ready-listener-map",
+    "file": "src/orchard-map/start-map.ts",
+    "language": "ts",
+    "comment": "  // Here we listen for the 'ready' message from the worker. When it is\n  // received, we set the data-map-ready attribute on the corresponding\n  // canvas element. This allows tests and styles to react accordingly.",
+    "code_before": "    worker.postMessage({ type: 'motion', still: reduced });\n  });\n\n",
+    "code_after": "  worker.onmessage = (message) => {\n    if (message.data?.type !== 'ready') return;\n    maps[message.data.id]?.setAttribute('data-map-ready', 'true');\n  };\n\n  const dpr = Math.min(window.devicePixelRatio || 1, 2);\n\n  maps.forEach((canvas, id) => {",
+    "expect": {
+      "good": false,
+      "kind": "what",
+      "narrates": false,
+      "human": false
+    },
+    "note": "Three lines narrating a four-line handler; 'react accordingly' is filler."
+  },
+  {
+    "id": "ai-switch-elegant-fare",
+    "file": "src/FareQuotes/Program.cs",
+    "language": "cs",
+    "comment": "    // This leverages a switch expression to elegantly map each FareQuote\n    // case to the appropriate HTTP response, ensuring robust error handling.",
+    "code_before": "\n// Try: /quote?from=EC1A&to=SW1A (works) and /quote?from=ZZ9&to=SW1A (rejected)\napp.MapGet(\"/quote\", async (string from, string to, FareClient fares, CancellationToken ct) =>\n",
+    "code_after": "    await fares.QuoteAsync(from, to, ct) switch\n    {\n        FareQuote.Priced p => Results.Ok(p.Fare),\n        FareQuote.Rejected r => Results.BadRequest(r.Reason),\n        FareQuote.Failed => Results.Problem(\"Tariff service unavailable\", statusCode: 502),\n        _ => throw new UnreachableException()\n    });",
+    "expect": {
+      "good": false,
+      "kind": "what",
+      "narrates": false,
+      "human": false
+    },
+    "note": "Explains language syntax with filler (leverages, elegantly, robust)."
+  },
+  {
+    "id": "ai-explain-when-filter-fare",
+    "file": "src/FareQuotes/FareClient.cs",
+    "language": "cs",
+    "comment": "        // Note: The `when` keyword here is an exception filter. It allows us to only\n        // catch the exception if the condition is true. This is important for\n        // proper cancellation handling.",
+    "code_before": "                ? new FareQuote.Failed()\n                : new FareQuote.Priced(fare);\n        }\n",
+    "code_after": "        catch (OperationCanceledException) when (ct.IsCancellationRequested)\n        {\n            throw;\n        }\n        catch (Exception ex)",
+    "expect": {
+      "good": false,
+      "kind": "what",
+      "narrates": false,
+      "human": false
+    },
+    "note": "Tutorial on trivial syntax; 'important for proper handling' never says what would go wrong."
+  },
+  {
+    "id": "ai-lets-verify-queen-field",
+    "file": "tests/hives/export.test.ts",
+    "language": "ts",
+    "comment": "  // Let's verify that the queen status field is properly included to ensure\n  // comprehensive coverage of colony health data during export.",
+    "code_before": "    expect(columns).toEqual(['hive', 'date', 'frames', 'temper']);\n  });\n\n",
+    "code_after": "  it('puts the queen status in its own column, from the default fields', () => {\n    const header = exportHeader(input({ fields: DEFAULT_FIELDS }));\n    const columns = header.split(',');\n    expect(columns).toContain('queen');\n  });",
+    "expect": {
+      "good": false,
+      "kind": "what",
+      "narrates": false,
+      "human": false
+    },
+    "note": "Chatty 'Let's verify' plus filler; restates the test name without the real risk (a queenless hive missing from the export)."
+  },
+  {
+    "id": "history-tariff-from-zone",
+    "file": "Sources/MeterKit/Tariffs/TariffPicker.swift",
+    "language": "swift",
+    "comment": "        // Changed to read the tariff from the zone instead of the hour of day",
+    "code_before": "    func tariff(for ride: Ride) -> Tariff {\n        let zone = zones.zone(containing: ride.pickup)\n",
+    "code_after": "        return zone.tariffs.first { $0.covers(ride.start) } ?? zone.fallbackTariff\n    }\n\n    /// The flag fall for `tariff`, in pence.",
+    "expect": {
+      "good": false,
+      "kind": "history",
+      "narrates": true,
+      "human": true
+    },
+    "note": "Narrates a change of approach; the code as it stands needs no pointer to the hour-based version."
+  },
+  {
+    "id": "history-harvest-upload-curl",
+    "file": "scripts/upload-harvest.sh",
+    "language": "sh",
+    "comment": "# Now uses curl with retries instead of scp, which kept timing out",
+    "code_before": "echo \"==> Uploading $(wc -l < \"$OUT\") weighings...\"\n\n",
+    "code_after": "curl --fail --retry 4 --retry-delay 10 \\\n  -T \"$OUT\" \\\n  \"$UPLOAD_URL/$SEASON/weights.csv\"\n\necho \"==> Done.\"",
+    "expect": {
+      "good": false,
+      "kind": "history",
+      "narrates": true,
+      "human": true
+    },
+    "note": "Frames the retry reason as a change log ('now', 'instead of scp'); should say the packhouse link drops out."
+  },
+  {
+    "id": "history-injected-clock-due",
+    "file": "src/CylinderLog/InspectionDue.cs",
+    "language": "cs",
+    "comment": "        // Replaced the old DateTime.Now check with the injected clock",
+    "code_before": "    public bool IsDue(Cylinder cylinder)\n    {\n        var last = cylinder.LastVisualInspection;\n",
+    "code_after": "        return last is null || clock.Today >= last.Value.AddYears(1);\n    }\n\n    public DateOnly NextHydroTest(Cylinder cylinder) =>",
+    "expect": {
+      "good": false,
+      "kind": "history",
+      "narrates": true,
+      "human": true
+    },
+    "note": "Describes the edit ('replaced the old...') rather than anything a reader of the current code needs."
+  },
+  {
+    "id": "history-sold-out-grayscale",
+    "file": "src/styles/flavour-board.css",
+    "language": "css",
+    "comment": "  /* Used to be opacity: 0.4, changed to grayscale after feedback */",
+    "code_before": "  .flavour-tile {\n    display: grid;\n    gap: 0.25rem;\n  }\n\n",
+    "code_after": "  .flavour-tile[data-sold-out] img {\n    filter: grayscale(1);\n  }",
+    "expect": {
+      "good": false,
+      "kind": "history",
+      "narrates": true,
+      "human": true
+    },
+    "note": "Records old values and a review round; the lasting reason (faded tubs still read as available) is missing."
+  },
+  {
+    "id": "docs-capped-frames",
+    "file": "Sources/HiveBook/Inspection.swift",
+    "language": "swift",
+    "comment": "    /// Frames with capped brood, each face counted on its own, so a full frame\n    /// is 2. Nil when the brood box was not opened, which is not the same as 0.",
+    "code_before": "    /// When the lid came off, in the apiary's local time.\n    var openedAt: Date\n",
+    "code_after": "    var cappedBroodFaces: Int?\n    /// Whether eggs were seen, which dates a queen to the last three days.\n    var eggsSeen: Bool",
+    "expect": {
+      "good": true,
+      "kind": "docs",
+      "narrates": false,
+      "human": true
+    },
+    "note": "Pins down the unit (faces, not frames) and what nil means, neither of which the name says."
+  },
+  {
+    "id": "docs-billed-metres",
+    "file": "src/MeterCore/RideTotals.cs",
+    "language": "cs",
+    "comment": "    /// <summary>\n    /// Metres charged so far, rounded down to the last whole tick. Time spent\n    /// waiting is billed by <see cref=\"WaitingSeconds\"/>, so a cab idling in\n    /// traffic adds nothing here.\n    /// </summary>",
+    "code_before": "public sealed record RideTotals\n{\n",
+    "code_after": "    public int BilledMetres { get; init; }\n\n    public int WaitingSeconds { get; init; }",
+    "expect": {
+      "good": true,
+      "kind": "docs",
+      "narrates": false,
+      "human": true
+    },
+    "note": "Says the rounding and what the value leaves out, which a caller summing fares needs."
+  },
+  {
+    "id": "ai-docs-nearest-stop",
+    "file": "src/routes/order-stops.ts",
+    "language": "ts",
+    "comment": "/**\n * This comprehensive utility function efficiently calculates the optimal\n * ordering of delivery stops, seamlessly leveraging a powerful algorithm to\n * ensure a streamlined and reliable routing experience.\n */",
+    "code_before": "import { distanceKm } from \"./geo\";\n\n",
+    "code_after": "export function orderStops(depot: Stop, stops: Stop[]): Stop[] {\n  const left = [...stops];\n  const ordered: Stop[] = [];\n  let at = depot;\n  while (left.length > 0) {\n    left.sort((a, b) => distanceKm(at, a) - distanceKm(at, b));\n    at = left.shift()!;\n    ordered.push(at);\n  }\n  return ordered;\n}",
+    "expect": {
+      "good": false,
+      "kind": "docs",
+      "narrates": false,
+      "human": false
+    },
+    "note": "Buzzwords (comprehensive, seamlessly, optimal) and it claims 'optimal' for a greedy nearest-next order, which it is not."
+  },
+  {
+    "id": "ai-docs-inspection-due",
+    "file": "src/CylinderLog/InspectionSchedule.cs",
+    "language": "cs",
+    "comment": "    /// <summary>\n    /// This method is responsible for handling the inspection due date\n    /// calculation in a robust and reliable manner, ensuring that all cylinders\n    /// are properly tracked and maintained according to best practices.\n    /// </summary>",
+    "code_before": "public sealed class InspectionSchedule(IClock clock)\n{\n",
+    "code_after": "    public DateOnly NextVisual(Cylinder cylinder) =>\n        (cylinder.LastVisualInspection ?? cylinder.Manufactured).AddYears(1);",
+    "expect": {
+      "good": false,
+      "kind": "docs",
+      "narrates": false,
+      "human": false
+    },
+    "note": "Filler (responsible for handling, robust, best practices); never says it is a year after the last visual, or after manufacture."
+  },
+  {
+    "id": "ai-important-pipefail",
+    "file": "scripts/back-up-hive-notes.sh",
+    "language": "sh",
+    "comment": "# IMPORTANT: We use set -euo pipefail here to ensure robust error handling and\n# prevent any unexpected behavior during the backup process.",
+    "code_before": "#!/usr/bin/env bash\n",
+    "code_after": "set -euo pipefail\n\nnotes_dir=\"${HIVE_NOTES:-$HOME/hive-notes}\"\nstamp=\"$(date +%Y-%m-%d)\"\ntar -cz -C \"$notes_dir\" . | split -b 50m - \"backups/notes-$stamp.tar.gz.\"",
+    "expect": {
+      "good": false,
+      "kind": "why",
+      "narrates": false,
+      "human": false
+    },
+    "note": "Emphatic IMPORTANT with vague benefits; never names the real failure (a tar error hidden behind the pipe into split)."
+  },
+  {
+    "id": "ai-here-we-in-season",
+    "file": "Sources/Scoops/FlavourMenu.swift",
+    "language": "swift",
+    "comment": "        // Here we iterate through each flavour and check whether it is in season,\n        // ensuring that only the appropriate flavours are displayed to the user.",
+    "code_before": "    var body: some View {\n        List {\n",
+    "code_after": "            ForEach(flavours.filter { $0.season.contains(today) }) { flavour in\n                FlavourRow(flavour: flavour)\n            }\n        }\n        .navigationTitle(\"Today's flavours\")",
+    "expect": {
+      "good": false,
+      "kind": "what",
+      "narrates": false,
+      "human": false
+    },
+    "note": "'Here we' narration of a filter the next line plainly shows, with filler about the user."
+  },
+  {
+    "id": "ai-history-async-quotes",
+    "file": "src/FareQuotes/TariffStore.cs",
+    "language": "cs",
+    "comment": "    // Updated to use the new asynchronous API for improved performance,\n    // scalability and maintainability.",
+    "code_before": "    public async Task<Tariff?> FindAsync(string zone, CancellationToken ct)\n    {\n",
+    "code_after": "        await using var connection = await source.OpenConnectionAsync(ct);\n        return await connection.QuerySingleOrDefaultAsync<Tariff>(\n            new CommandDefinition(FindSql, new { zone }, cancellationToken: ct));\n    }",
+    "expect": {
+      "good": false,
+      "kind": "history",
+      "narrates": true,
+      "human": false
+    },
+    "note": "Change-log narration ('updated to use the new') padded with stock benefits; says nothing a reader of the current code needs."
+  },
+  {
+    "id": "why-print0-block-names",
+    "file": "scripts/merge-block-weights.sh",
+    "language": "sh",
+    "comment": "# -print0 and -0 because the crew names exports after the block, and\n# \"North Slope 3.csv\" split on spaces is two files that do not exist.",
+    "code_before": "out=\"dist/all-blocks.csv\"\nhead -n 1 \"$template\" > \"$out\"\n\n",
+    "code_after": "find exports -name '*.csv' -print0 |\n  xargs -0 -I{} tail -n +2 {} >> \"$out\"\n\necho \"==> Merged $(($(wc -l < \"$out\") - 1)) weighings into $out\"",
+    "expect": {
+      "good": true,
+      "kind": "why",
+      "narrates": false,
+      "human": true
+    },
+    "note": "Names the real input that breaks the default word splitting and what goes wrong."
+  },
+  {
+    "id": "why-tabular-fare-digits",
+    "file": "src/styles/meter.css",
+    "language": "css",
+    "comment": "  /* Tabular figures keep every digit one width; with the font's proportional\n     ones the pound sign jumps sideways each time a 1 ticks over to a 2. */",
+    "code_before": "  .meter-panel {\n    display: flex;\n    justify-content: flex-end;\n  }\n\n",
+    "code_after": "  .meter-panel .fare {\n    font-variant-numeric: tabular-nums;\n    font-size: 3rem;\n  }",
+    "expect": {
+      "good": true,
+      "kind": "why",
+      "narrates": false,
+      "human": true
+    },
+    "note": "Says what the property prevents and the visible jitter without it."
+  }
+]

@@ -1,0 +1,154 @@
+[
+  {
+    "id": "outing-budget",
+    "design": "designs/outing-budget-design.md",
+    "plans": [
+      "plans/outing-budget-plan.md"
+    ],
+    "note": "Handwritten pair; every requirement has a task.",
+    "uncovered": [],
+    "unsure": []
+  },
+  {
+    "id": "outing-budget-dropped",
+    "design": "designs/outing-budget-design.md",
+    "plans": [
+      "plans/outing-budget-plan-dropped.md"
+    ],
+    "note": "The currency and sharing tasks removed.",
+    "uncovered": [
+      "The outing's currency is chosen once",
+      "Amounts are formatted with that code",
+      "Changing it later relabels amounts",
+      "Each expense is one row",
+      "Both are last-writer-wins",
+      "Until the server lists the kinds",
+      "Deleting a site keeps its expenses",
+      "Sharing: an expense added on one Mac"
+    ],
+    "unsure": []
+  },
+  {
+    "id": "field-notes-all",
+    "design": "designs/fieldmark-field-notes-design.md",
+    "plans": [
+      "plans/fieldmark-field-notes-1-model.md",
+      "plans/fieldmark-field-notes-2-editor.md",
+      "plans/fieldmark-field-notes-3-sharing.md"
+    ],
+    "note": "Real spec and its three approved plans.",
+    "uncovered": [],
+    "unsure": []
+  },
+  {
+    "id": "field-notes-editor",
+    "design": "designs/fieldmark-field-notes-design.md",
+    "plans": [
+      "plans/fieldmark-field-notes-2-editor.md"
+    ],
+    "note": "Real plan 2, which names the spec sections it implements. Plan 2 names \"Model and persistence\" and all of \"What people see\", but parts 1 and 3 build some of it; those are left unscored.",
+    "uncovered": [],
+    "unsure": [
+      "A pending save is cancelled",
+      "Changes from elsewhere",
+      "Everyone on the share sees edits",
+      "Nothing is ever written over such a file",
+      "Saving:",
+      "Stored like site photos",
+      "Field Notes visit only once",
+      "Two people editing the same paragraph",
+      "`FieldNotesModel` (`@MainActor @Observable`)",
+      "`FieldNotesStore` (Core) loads and saves"
+    ]
+  },
+  {
+    "id": "field-notes-editor-dropped",
+    "design": "designs/fieldmark-field-notes-design.md",
+    "plans": [
+      "plans/fieldmark-field-notes-2-dropped.md"
+    ],
+    "note": "Plan 2 without Task 6 (highlight notes in popovers) and Task 9 (the Format menu). Plan 2 names \"Model and persistence\" and all of \"What people see\", but parts 1 and 3 build some of it; those are left unscored.",
+    "uncovered": [
+      "Click highlighted words: the caret goes there",
+      "Reply adds a new note by you",
+      "Notes on notes: select words inside a note",
+      "A popover closed with its new note still empty",
+      "Deleting highlighted words does not delete their notes",
+      "Deleting a note removes its tint",
+      "A Format menu in the menu bar",
+      "The implementer checks every shortcut",
+      "`CommandMenu(\"Format\")` buttons reach the editor",
+      "`NSPopover` (`.transient`)"
+    ],
+    "unsure": [
+      "A pending save is cancelled",
+      "Changes from elsewhere",
+      "Everyone on the share sees edits",
+      "Notes save as you type",
+      "Nothing is ever written over such a file",
+      "Saving:",
+      "Select words and choose Add Highlight Note",
+      "Stored like site photos",
+      "Field Notes visit only once",
+      "Two people editing the same paragraph",
+      "`FieldNotesModel` (`@MainActor @Observable`)",
+      "`FieldNotesStore` (Core) loads and saves"
+    ]
+  },
+  {
+    "id": "workshop-calendar",
+    "design": "designs/workshop-calendar-design.md",
+    "plans": [
+      "plans/workshop-calendar-plan.md"
+    ],
+    "note": "Real spec and plan, both built. The plan has no task for the design write-up the spec's user constraints ask for.",
+    "uncovered": [
+      "Design write-up draft goes in a sibling folder"
+    ],
+    "unsure": [
+      "Rework history into atomic commits"
+    ]
+  },
+  {
+    "id": "workshop-calendar-dropped",
+    "design": "designs/workshop-calendar-design.md",
+    "plans": [
+      "plans/workshop-calendar-dropped.md"
+    ],
+    "note": "The workshop plan without Task 6 (invite and QR), Task 8 (storage and capacity) and Task 12 (booking). Task 1 still creates the schema, so the capacity column itself is covered.",
+    "uncovered": [
+      "Design write-up draft goes in a sibling folder",
+      "Integration (Vitest, Node + Miniflare D1)",
+      "Two requests racing for the last spot",
+      "`GET /workshops/:id/book`",
+      "`GET /bookings/:id`",
+      "`POST /workshops/:id/book`",
+      "`meta.changes === 1` means booked"
+    ],
+    "unsure": [
+      "Rework history into atomic commits"
+    ]
+  },
+  {
+    "id": "mutation-all",
+    "design": "designs/fieldmark-mutation-design.md",
+    "plans": [
+      "plans/fieldmark-mutation-quick-wins.md",
+      "plans/fieldmark-mutant-switching.md",
+      "plans/fieldmark-mutation-parallel-jobs.md"
+    ],
+    "note": "Real spec and its three executed plans.",
+    "uncovered": [],
+    "unsure": []
+  },
+  {
+    "id": "mutant-switching",
+    "design": "designs/fieldmark-mutation-design.md",
+    "plans": [
+      "plans/fieldmark-mutant-switching.md"
+    ],
+    "note": "Real plan for part 2, which names part 2 and the spike findings.",
+    "uncovered": [],
+    "unsure": []
+  }
+]

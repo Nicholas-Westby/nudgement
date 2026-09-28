@@ -1,0 +1,1855 @@
+[
+  {
+    "id": "site-layout",
+    "file": "copy/site-layout.tsx",
+    "strings": [
+      {
+        "text": "{title} - Claybank Studio",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Pottery workshops at Claybank Studio. Pick a workshop and save your spot.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Skip to main content",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Calendar",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Create a workshop",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "All times are Vancouver time.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Questions about a workshop? Ask at the counter or call {STUDIO.phone}.",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "The shared page shell: a title pattern with the studio name, a skip link, two nav links and a footer that says all times are Vancouver time, all plain and in sentence case."
+  },
+  {
+    "id": "calendar-month",
+    "file": "copy/calendar-month.tsx",
+    "strings": [
+      {
+        "text": "Previous month",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Next month",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Times are Vancouver time. Pick a workshop to see its details and book.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "No workshops are on the calendar for {month.label} yet.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Create a workshop",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "{workshop.spotsLeft} of {workshop.capacity} spots left",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Full",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Workshops in {month.label}",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "Month grid page with plain previous and next links, spot counts, a note that times are Vancouver time and an empty state that points to creating a workshop."
+  },
+  {
+    "id": "calendar-day",
+    "file": "copy/calendar-day.tsx",
+    "strings": [
+      {
+        "text": "NEW",
+        "good": false,
+        "problems": [
+          "all_caps"
+        ]
+      },
+      {
+        "text": "Starts {formatTime(workshop.startsAt)}",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Today",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Full",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "{workshop.spotsLeft} of {workshop.capacity} spots left",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "See all {day.workshops.length} workshops on {label}",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "A month grid day cell that is mostly plain but has an all caps NEW badge and a start time with no time zone."
+  },
+  {
+    "id": "calendar-agenda",
+    "file": "copy/calendar-agenda.tsx",
+    "strings": [
+      {
+        "text": "Upcoming Workshops",
+        "good": false,
+        "problems": [
+          "title_case"
+        ]
+      },
+      {
+        "text": "Starts at {start}",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "View",
+        "good": false,
+        "problems": [
+          "vague_action"
+        ]
+      },
+      {
+        "text": "At this point in time there are currently no upcoming workshops that have been scheduled for this month. Please check back again at a later date.",
+        "good": false,
+        "problems": [
+          "wordy",
+          "passive"
+        ]
+      },
+      {
+        "text": "{workshop.spotsLeft} spots left",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Needs {workshop.pottersNeeded} more potters to run",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Create a workshop",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "See {month.next().label}",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "Small-screen agenda with a Title Case heading, start times that don't say Vancouver, links that only say View and a padded, passive empty state."
+  },
+  {
+    "id": "workshop-page",
+    "file": "copy/workshop-page.tsx",
+    "strings": [
+      {
+        "text": "Back to the {month.label} calendar",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "{day}, {start} to {end} Vancouver time",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "{workshop.spotsLeft} of {workshop.capacity} spots left",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "The workshop runs if at least {workshop.minPotters} potters book.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Add to calendar",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Works with Google Calendar, Outlook and Apple Calendar.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "What to bring",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Who's playing",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Nobody has booked yet.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "QR code that opens the booking form for this workshop",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Scan the code with your phone camera, or open this link:",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Book for this workshop",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Booking closes when the workshop starts.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "This workshop is full. Check the calendar for another {workshop.courseName} workshop.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Booking closed when the workshop started. If you're at the studio, ask at the counter.",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "Workshop page with the facts, an add-to-calendar link, the potter list and the booking panel; the time says Vancouver, the buttons say what they do and the full and closed states say what to do next."
+  },
+  {
+    "id": "sign-up-sheet",
+    "file": "copy/sign-up-sheet.tsx",
+    "strings": [
+      {
+        "text": "Sign-Up Sheet",
+        "good": false,
+        "problems": [
+          "title_case"
+        ]
+      },
+      {
+        "text": "FULL",
+        "good": false,
+        "problems": [
+          "all_caps"
+        ]
+      },
+      {
+        "text": "Nobody has signed up yet. Be the first!",
+        "good": false,
+        "problems": [
+          "marketing"
+        ]
+      },
+      {
+        "text": "At least {workshop.minPotters} potters are required to start.",
+        "good": false,
+        "problems": [
+          "passive"
+        ]
+      },
+      {
+        "text": "{open} of {workshop.capacity} spots open",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Open spot",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Spots go to potters in the order they book.",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "Sign-up sheet component with a Title Case heading, an all caps FULL stamp, a cheerleading empty state and a passive minimum-potters line."
+  },
+  {
+    "id": "qr-panel",
+    "file": "copy/qr-panel.tsx",
+    "strings": [
+      {
+        "text": "Sorry, this workshop is full. Send potters to another {workshop.courseName} workshop on the calendar.",
+        "good": false,
+        "problems": [
+          "apologizes"
+        ]
+      },
+      {
+        "text": "Scan Me!",
+        "good": false,
+        "problems": [
+          "title_case",
+          "marketing"
+        ]
+      },
+      {
+        "text": "QR payload: {bookUrl}",
+        "good": false,
+        "problems": [
+          "jargon"
+        ]
+      },
+      {
+        "text": "Click here to book",
+        "good": false,
+        "problems": [
+          "vague_action"
+        ]
+      },
+      {
+        "text": "Booking closes at {start}.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "QR code for the booking link",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Point your phone camera at the code to open the booking form.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Print a flyer with this code",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "QR booking panel that apologizes when the workshop is full, shouts Scan Me!, shows a debug payload line, uses a Click here button and gives a closing time with no time zone."
+  },
+  {
+    "id": "add-to-calendar",
+    "file": "copy/add-to-calendar.tsx",
+    "strings": [
+      {
+        "text": "Download .ics",
+        "good": false,
+        "problems": [
+          "jargon"
+        ]
+      },
+      {
+        "text": "Seamlessly sync this workshop with Google Calendar, Outlook or Apple Calendar!",
+        "good": false,
+        "problems": [
+          "marketing"
+        ]
+      },
+      {
+        "text": "Your calendar app reads the UTC timestamp and converts it for you.",
+        "good": false,
+        "problems": [
+          "jargon"
+        ]
+      },
+      {
+        "text": "Please click the button above in order to download a file that can then be imported into the calendar application of your choice.",
+        "good": false,
+        "problems": [
+          "wordy",
+          "passive"
+        ]
+      },
+      {
+        "text": "Add to calendar",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Put it on your calendar",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "On a phone, open the downloaded file to add the workshop.",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "Calendar invite component whose compact link is plain, but whose full version names the .ics file, talks about UTC, oversells with Seamlessly and pads a passive instruction."
+  },
+  {
+    "id": "workshop-flyer",
+    "file": "copy/workshop-flyer.tsx",
+    "strings": [
+      {
+        "text": "DON'T MISS OUT!",
+        "good": false,
+        "problems": [
+          "all_caps",
+          "marketing"
+        ]
+      },
+      {
+        "text": "The ultimate {workshop.courseName} showdown is coming to Claybank Studio!",
+        "good": false,
+        "problems": [
+          "marketing"
+        ]
+      },
+      {
+        "text": "{day}, {start} to {end}",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "SCAN TO BOOK",
+        "good": false,
+        "problems": [
+          "all_caps"
+        ]
+      },
+      {
+        "text": "Print a flyer",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Print this page from your browser and post it by the counter.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Back to the workshop page",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "What to bring",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "QR code that opens the booking form",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Or type this link: {bookUrl}",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "Printable flyer whose screen instructions are plain, but whose flyer text shouts in capitals, oversells the workshop and prints the time without a time zone."
+  },
+  {
+    "id": "pick-course",
+    "file": "copy/pick-course.tsx",
+    "strings": [
+      {
+        "text": "Create a workshop",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Which course is the workshop for?",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Each course has its own formats, usual length and potter limits. You can change the length and spots on the next page.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Usual length",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "{course.workshop.minPotters} to 30",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Create a {course.name} workshop",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Don't see your course? Ask the studio owner to add it.",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "First step of creating a workshop: a plain question, each course's formats, length and potter range, and one specific link per course."
+  },
+  {
+    "id": "course-card",
+    "file": "copy/course-card.tsx",
+    "strings": [
+      {
+        "text": "Usual Length",
+        "good": false,
+        "problems": [
+          "title_case"
+        ]
+      },
+      {
+        "text": "min_potters: {course.workshop.minPotters}",
+        "good": false,
+        "problems": [
+          "jargon"
+        ]
+      },
+      {
+        "text": "Select",
+        "good": false,
+        "problems": [
+          "vague_action"
+        ]
+      },
+      {
+        "text": "{hours(course.workshop.defaultDurationMinutes)} hours",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Up to 30 potters",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Picking a course fills in its usual length and spot count. You can change both on the next page.",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "Course picker card with one Title Case fact label, the raw min_potters field name and a button that only says Select."
+  },
+  {
+    "id": "new-workshop-form",
+    "file": "copy/new-workshop-form.tsx",
+    "strings": [
+      {
+        "text": "Create New Workshop",
+        "good": false,
+        "problems": [
+          "title_case"
+        ]
+      },
+      {
+        "text": "In order to create a new workshop, please take a moment to fill out each of the fields below with the relevant information about your workshop.",
+        "good": false,
+        "problems": [
+          "wordy"
+        ]
+      },
+      {
+        "text": "You made some mistakes. Fix each field that shows a message.",
+        "good": false,
+        "problems": [
+          "blames_user"
+        ]
+      },
+      {
+        "text": "Workshop Name",
+        "good": false,
+        "problems": [
+          "title_case"
+        ]
+      },
+      {
+        "text": "Workshops can be scheduled up to one year in advance.",
+        "good": false,
+        "problems": [
+          "passive"
+        ]
+      },
+      {
+        "text": "Start Time",
+        "good": false,
+        "problems": [
+          "title_case"
+        ]
+      },
+      {
+        "text": "Capacity (int)",
+        "good": false,
+        "problems": [
+          "jargon"
+        ]
+      },
+      {
+        "text": "Submit",
+        "good": false,
+        "problems": [
+          "vague_action"
+        ]
+      },
+      {
+        "text": "New {course.name} workshop",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Up to 80 characters, like \"Friday Glazing night\".",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Pick a format",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "{course.name} needs at least {course.workshop.minPotters} potters, so pick a number from {course.workshop.minPotters} to 30.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Pick a different course",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "Create-workshop form with Title Case in the page title and two labels, a start time label with no time zone, int in the spots label, a padded intro, a passive hint, a line that blames the organizer and a Submit button."
+  },
+  {
+    "id": "workshop-form-errors",
+    "file": "copy/workshop-form-errors.tsx",
+    "strings": [
+      {
+        "text": "Workshop name is too long.",
+        "good": false,
+        "problems": [
+          "no_fix"
+        ]
+      },
+      {
+        "text": "Invalid input.",
+        "good": false,
+        "problems": [
+          "jargon",
+          "no_fix"
+        ]
+      },
+      {
+        "text": "You entered a past date by mistake. Pick today or a later date.",
+        "good": false,
+        "problems": [
+          "blames_user"
+        ]
+      },
+      {
+        "text": "This date can't be used.",
+        "good": false,
+        "problems": [
+          "passive",
+          "no_fix"
+        ]
+      },
+      {
+        "text": "Capacity out of range (min_potters..30).",
+        "good": false,
+        "problems": [
+          "jargon",
+          "no_fix"
+        ]
+      },
+      {
+        "text": "Error 404: unknown template id",
+        "good": false,
+        "problems": [
+          "jargon",
+          "no_fix"
+        ]
+      },
+      {
+        "text": "Oops! We couldn't save your workshop.",
+        "good": false,
+        "problems": [
+          "apologizes",
+          "marketing",
+          "no_fix"
+        ]
+      },
+      {
+        "text": "Enter a name for the workshop.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Pick a format for this course.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Enter the date of the workshop.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Enter a start time.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Enter the number of spots as a whole number, like 16.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Start time (Vancouver time)",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Check these before you create the workshop",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "The create-workshop error messages and summary: some say exactly what to do, while others use jargon, blame the organizer, apologize with Oops or name the problem without a fix."
+  },
+  {
+    "id": "book-page",
+    "file": "copy/book-page.tsx",
+    "strings": [
+      {
+        "text": "Enter your name to book.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "That name is longer than 50 characters. Shorten it, or use a first name and last initial.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Book for a workshop",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "{day} at {start} Vancouver time",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "{workshop.spotsLeft} of {workshop.capacity} spots left",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Your name",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Use the name the organizer will call at the table. Other potters see it on the sign-up sheet.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Book for this workshop",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Booking closes when the workshop starts at {start} Vancouver time.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Can't make it after all? Tell the organizer at the counter so someone else can have your spot.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "See the workshop details",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "Phone-first booking form with one labelled field, a hint that says who sees the name, errors that say what to do, a specific button and times labelled Vancouver."
+  },
+  {
+    "id": "potter-name-field",
+    "file": "copy/potter-name-field.tsx",
+    "strings": [
+      {
+        "text": "You didn't enter a name.",
+        "good": false,
+        "problems": [
+          "blames_user",
+          "no_fix"
+        ]
+      },
+      {
+        "text": "You made your name too long. Use 50 characters or fewer.",
+        "good": false,
+        "problems": [
+          "blames_user"
+        ]
+      },
+      {
+        "text": "You're trying to book twice.",
+        "good": false,
+        "problems": [
+          "blames_user",
+          "no_fix"
+        ]
+      },
+      {
+        "text": "We're sorry, but we couldn't save your name. Please try again.",
+        "good": false,
+        "problems": [
+          "apologizes"
+        ]
+      },
+      {
+        "text": "Please be aware that the name you enter here will be visible to all of the other potters on the public sign-up sheet for this workshop.",
+        "good": false,
+        "problems": [
+          "wordy"
+        ]
+      },
+      {
+        "text": "Use letters, numbers, spaces, apostrophes or hyphens in your name.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Your name",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "A first name and last initial is plenty, like Sam R.",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "Booking name field where three errors blame the potter, one apologizes and the hint about the public sign-up sheet is padded."
+  },
+  {
+    "id": "book-refused",
+    "file": "copy/book-refused.tsx",
+    "strings": [
+      {
+        "text": "Sorry, this workshop is full",
+        "good": false,
+        "problems": [
+          "apologizes"
+        ]
+      },
+      {
+        "text": "Workshop Already Started",
+        "good": false,
+        "problems": [
+          "title_case"
+        ]
+      },
+      {
+        "text": "Error 409",
+        "good": false,
+        "problems": [
+          "jargon"
+        ]
+      },
+      {
+        "text": "Your payload failed validation. Use only letters, numbers, spaces, apostrophes or hyphens in your name.",
+        "good": false,
+        "problems": [
+          "jargon"
+        ]
+      },
+      {
+        "text": "The workshop you requested could not be found. Check the calendar for upcoming workshops.",
+        "good": false,
+        "problems": [
+          "passive"
+        ]
+      },
+      {
+        "text": "Click here",
+        "good": false,
+        "problems": [
+          "vague_action"
+        ]
+      },
+      {
+        "text": "Someone took the last spot just before you. Look for another workshop on the calendar.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "It started before your booking reached us, so we couldn't add you online. Ask at the counter if there's room.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "That name is already on the list for this workshop. If it belongs to someone else, add your last initial to yours.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "That name didn't work",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "We couldn't find that workshop",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Back to {workshop.name}",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "Refused-booking page where every body gives a next step, but one heading apologizes, one is Title Case, one is a bare 409, one body says payload, one is passive and the fallback link says Click here."
+  },
+  {
+    "id": "booking-closed",
+    "file": "copy/booking-closed.tsx",
+    "strings": [
+      {
+        "text": "Workshop full",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Booking has closed",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Full",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "{workshop.name} is full",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "There are no spots left. Look for another {workshop.courseName} workshop on the calendar, or ask at the counter in case someone drops out.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Find another workshop",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Booking for {workshop.name} has closed",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "The workshop started on {day} at {start} Vancouver time. Online booking ends when a workshop starts.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "If you're at the studio, ask at the counter whether there's still room.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "See upcoming workshops",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Back to the workshop page",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "Full and started states that replace the booking form, each saying what happened and what to do next, with no apology and the start time labelled Vancouver."
+  },
+  {
+    "id": "booking-confirmed",
+    "file": "copy/booking-confirmed.tsx",
+    "strings": [
+      {
+        "text": "Booking Confirmation",
+        "good": false,
+        "problems": [
+          "title_case"
+        ]
+      },
+      {
+        "text": "Awesome, you're in!",
+        "good": false,
+        "problems": [
+          "marketing"
+        ]
+      },
+      {
+        "text": "Your booking has been submitted.",
+        "good": false,
+        "problems": [
+          "passive"
+        ]
+      },
+      {
+        "text": "{day} at {start}",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Confirmation UUID: {booking.id}",
+        "good": false,
+        "problems": [
+          "jargon"
+        ]
+      },
+      {
+        "text": "Get ready for an epic night of card battles!",
+        "good": false,
+        "problems": [
+          "marketing"
+        ]
+      },
+      {
+        "text": "Spot {booking.spot} of {workshop.capacity}",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Get to the studio 15 minutes early so the organizer can spot you.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Add to calendar",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Back to the workshop",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Know someone who wants to play? Send them this link:",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "Confirmation page with a Title Case title, hype in the heading and footer, a passive success line, a raw UUID and a start time with no time zone, next to plain spot and arrival details."
+  },
+  {
+    "id": "not-found",
+    "file": "copy/not-found.tsx",
+    "strings": [
+      {
+        "text": "404 Not Found",
+        "good": false,
+        "problems": [
+          "jargon",
+          "title_case"
+        ]
+      },
+      {
+        "text": "Oops! We can't find that page.",
+        "good": false,
+        "problems": [
+          "apologizes",
+          "marketing"
+        ]
+      },
+      {
+        "text": "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.",
+        "good": false,
+        "problems": [
+          "passive",
+          "wordy"
+        ]
+      },
+      {
+        "text": "Go Back",
+        "good": false,
+        "problems": [
+          "title_case",
+          "vague_action"
+        ]
+      },
+      {
+        "text": "If you scanned a QR code from an old flyer, the workshop may already be over.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Look for the workshop on the calendar. Each one has its own booking link.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Create a workshop",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Coming up at the studio",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "{formatDay(workshop.startsAt)}, {formatTime(workshop.startsAt)} Vancouver time",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "404 page with a 404 Not Found title, an Oops! heading, the stock passive and padded explanation and a Go Back button, next to a plain pointer to the calendar and upcoming workshops in Vancouver time."
+  },
+  {
+    "id": "server-error",
+    "file": "copy/server-error.tsx",
+    "strings": [
+      {
+        "text": "Page didn't load",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Something went wrong on our end",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "This page didn't load because of a problem with the calendar, not anything you did.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Wait a minute, then reload the page.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "If you were booking, check the sign-up sheet on the workshop page before you try again, in case your name went through.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Go to the workshop page",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Go to the calendar",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "If it keeps happening, let someone at the counter know.",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "Error page that says the problem is on the studio's side, says what to do next, and tells anyone who was booking to check the list before trying again."
+  },
+  {
+    "id": "join-share-sheet",
+    "file": "copy/join-share-sheet.swift",
+    "strings": [
+      {
+        "text": "Paste the invite code someone sent you.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Invite code",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "FIELDMARK-…",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Join as",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Your name",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Join Shared Survey",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Cancel",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Join",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Join the shared survey this code names",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "Fieldmark's join sheet as shipped: a one-line instruction, two fields with a sample code and a name as prompts, a title-style window title and the standard Cancel and Join buttons of a Mac sheet."
+  },
+  {
+    "id": "site-row-menu",
+    "file": "copy/site-row-menu.swift",
+    "strings": [
+      {
+        "text": "Category",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Remove from Favorites",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Remove {count} Sites from Favorites",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Add to Favorites",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Add {count} Sites to Favorites",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Annotate",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Annotate {count} Sites",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Add to Route",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Add {count} Sites to Route",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Copy to Another Survey",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Copy {count} Sites to Another Survey",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Move to Another Survey",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Move {count} Sites to Another Survey",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Delete…",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Delete {count} Sites…",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "Fieldmark's right-click menu for sites as shipped: Apple title style throughout, counts the way the Finder counts, a Category submenu, and Delete… whose ellipsis promises a question first."
+  },
+  {
+    "id": "route-view",
+    "file": "copy/route-view.swift",
+    "strings": [
+      {
+        "text": "Add Stop",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Add a stop to the route",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Shorten Route",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Plan Days",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Reorder",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Replace the outing you have?",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Replace",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "A plan is built from every saved site, so it replaces the stops already here.",
+        "good": false,
+        "problems": [
+          "passive"
+        ]
+      },
+      {
+        "text": "Deleted site",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Include time of day",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "Fieldmark's route as shipped: title-style toolbar buttons with sentence-style tooltips, a replace alert asked as a question, and one passive message about how a plan is built."
+  },
+  {
+    "id": "update-install-error",
+    "file": "copy/update-install-error.swift",
+    "strings": [
+      {
+        "text": "Fieldmark is running from a temporary site because it was opened straight from the download. Move it into the Applications folder, open it from there, and update again.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Fieldmark cannot replace itself in {folder} because this account cannot write there. Download the new version and drag it into Applications.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "The download did not match what the site published, so it was not installed.",
+        "good": false,
+        "problems": [
+          "passive",
+          "no_fix"
+        ]
+      },
+      {
+        "text": "The download could not be unpacked: {reason}.",
+        "good": false,
+        "problems": [
+          "passive",
+          "no_fix"
+        ]
+      },
+      {
+        "text": "The download did not contain Fieldmark, so nothing was installed.",
+        "good": false,
+        "problems": [
+          "passive",
+          "no_fix"
+        ]
+      },
+      {
+        "text": "The download is a different app ({identifier}), so it was not installed.",
+        "good": false,
+        "problems": [
+          "passive",
+          "no_fix"
+        ]
+      },
+      {
+        "text": "The download says it is version {version}, not the one that was offered, so it was not installed.",
+        "good": false,
+        "problems": [
+          "passive",
+          "no_fix"
+        ]
+      },
+      {
+        "text": "The new version needs macOS {version} or later, which this Mac does not have.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "The download is not signed by Fieldmark's developer, so it was not installed.",
+        "good": false,
+        "problems": [
+          "passive",
+          "no_fix"
+        ]
+      },
+      {
+        "text": "The new version could not be moved into site ({reason}). The previous version is still installed.",
+        "good": false,
+        "problems": [
+          "passive"
+        ]
+      },
+      {
+        "text": "The update could not be finished, and the previous version of Fieldmark could not be put back. It has not been lost: it is at {path}. Move it into your Applications folder to carry on using it.",
+        "good": false,
+        "problems": [
+          "passive"
+        ]
+      }
+    ],
+    "note": "Fieldmark's update errors as shipped, the message of an Error enum: the first two and the macOS one say what to do, most of the rest end on a passive 'so it was not installed' with nothing to try next."
+  },
+  {
+    "id": "share-sheet-bad",
+    "file": "copy/share-sheet-bad.swift",
+    "strings": [
+      {
+        "text": "Unlock seamless real-time collaboration! Share your amazing survey with all of your visit buddies and plan the outing of a lifetime together.",
+        "good": false,
+        "problems": [
+          "marketing"
+        ]
+      },
+      {
+        "text": "SHARE SURVEY",
+        "good": false,
+        "problems": [
+          "all_caps"
+        ]
+      },
+      {
+        "text": "Cancel",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Done",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Submit",
+        "good": false,
+        "problems": [
+          "vague_action"
+        ]
+      },
+      {
+        "text": "Share this survey and let everyone you invite edit it",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Oops! Something went wrong",
+        "good": false,
+        "problems": [
+          "apologizes"
+        ]
+      },
+      {
+        "text": "OK",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Sorry, an error occurred. Please try again later.",
+        "good": false,
+        "problems": [
+          "apologizes",
+          "no_fix"
+        ]
+      },
+      {
+        "text": "The survey can be joined by anyone this code has been sent to.",
+        "good": false,
+        "problems": [
+          "passive"
+        ]
+      },
+      {
+        "text": "Copied",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Copy",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Copy the invite code",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Regenerate invite Code",
+        "good": false,
+        "problems": [
+          "title_case"
+        ]
+      },
+      {
+        "text": "The old code stops working. Nobody who has already joined is affected.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Stop Sharing",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Terminates the share session and invalidates the member_token for all peers.",
+        "good": false,
+        "problems": [
+          "jargon"
+        ]
+      },
+      {
+        "text": "You joined this shared survey.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Leave",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "You keep this survey; it just stops updating.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "You entered the wrong code, so you have to ask for a new one.",
+        "good": false,
+        "problems": [
+          "blames_user"
+        ]
+      }
+    ],
+    "note": "Fieldmark's share sheet rewritten badly: a hype explanation, an ALL CAPS title, a Submit button, an apologizing alert that says nothing, a passive line about the code, a half title-case button, a tooltip in internal terms and an error that blames the reader. The standard Cancel, Done, OK and Copied stay good."
+  },
+  {
+    "id": "site-row-menu-bad",
+    "file": "copy/site-row-menu-bad.swift",
+    "strings": [
+      {
+        "text": "Category",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Remove From Favorites",
+        "good": false,
+        "problems": [
+          "title_case"
+        ]
+      },
+      {
+        "text": "Remove {count} sites from Favorites",
+        "good": false,
+        "problems": [
+          "title_case"
+        ]
+      },
+      {
+        "text": "Add To Favorites",
+        "good": false,
+        "problems": [
+          "title_case"
+        ]
+      },
+      {
+        "text": "Add {count} Sites To Favorites",
+        "good": false,
+        "problems": [
+          "title_case"
+        ]
+      },
+      {
+        "text": "Run Annotation Pipeline",
+        "good": false,
+        "problems": [
+          "jargon"
+        ]
+      },
+      {
+        "text": "Run Annotation Pipeline ({count} POIs)",
+        "good": false,
+        "problems": [
+          "jargon"
+        ]
+      },
+      {
+        "text": "Go",
+        "good": false,
+        "problems": [
+          "vague_action"
+        ]
+      },
+      {
+        "text": "Go ({count})",
+        "good": false,
+        "problems": [
+          "vague_action"
+        ]
+      },
+      {
+        "text": "Copy to Another Survey",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Copy {count} Sites to Another Survey",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Move to Another Survey",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Move {count} Sites to Another Survey",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "DELETE",
+        "good": false,
+        "problems": [
+          "all_caps"
+        ]
+      },
+      {
+        "text": "DELETE {count} SITES",
+        "good": false,
+        "problems": [
+          "all_caps"
+        ]
+      }
+    ],
+    "note": "Fieldmark's site menu rewritten badly: short words capitalized against Apple's title style or a mix of styles, pipeline jargon, a Go item that says nothing, and ALL CAPS delete items. The copy and move items keep the real title style and stay good."
+  },
+  {
+    "id": "renew-loans",
+    "file": "copy/renew-loans.tsx",
+    "app": "A town library's website. Members see the books they have out and renew them. Readers are library members, not developers.",
+    "properNouns": [],
+    "strings": [
+      {
+        "text": "Your loans",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Books are due back three weeks after you borrow them. You can renew a book up to three times if nobody has reserved it.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "You let your fines build up, so your card is blocked. Pay them at the desk before you renew anything.",
+        "good": false,
+        "problems": [
+          "blames_user"
+        ]
+      },
+      {
+        "text": "Sorry, this book has already been renewed three times and can't be renewed again.",
+        "good": false,
+        "problems": [
+          "apologizes",
+          "no_fix"
+        ]
+      },
+      {
+        "text": "OOPS! SOMETHING WENT WRONG.",
+        "good": false,
+        "problems": [
+          "all_caps",
+          "apologizes",
+          "no_fix"
+        ]
+      },
+      {
+        "text": "Title",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Due",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Renew",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Please note that in the event that a book you have selected for renewal has been reserved by another member of the library in the meantime, it will not be possible for that particular book to be renewed at this time.",
+        "good": false,
+        "problems": [
+          "wordy"
+        ]
+      },
+      {
+        "text": "Renew selected books",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "See books you returned",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "A library's renew page: plain headings, labels, button and link, then an error that blames the member for their fines, an apology with no way forward, a shouted OOPS, and a hint that takes forty words to say reserved books can't be renewed."
+  },
+  {
+    "id": "episode-download-menu",
+    "file": "copy/episode-download-menu.swift",
+    "app": "A Mac podcast player. Listeners follow shows, download episodes and play them. Readers are listeners, not developers.",
+    "properNouns": [
+      "Mac"
+    ],
+    "strings": [
+      {
+        "text": "Downloading…",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Download Episode",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Mark as Played",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "DELETE DOWNLOAD",
+        "good": false,
+        "problems": [
+          "all_caps"
+        ]
+      },
+      {
+        "text": "Delete this download?",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Delete",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "Cancel",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "The episode stays in your library and you can download it again at any time.",
+        "good": true,
+        "problems": []
+      },
+      {
+        "text": "We're really sorry, but the episode couldn't be downloaded.",
+        "good": false,
+        "problems": [
+          "apologizes",
+          "no_fix"
+        ]
+      },
+      {
+        "text": "This show has moved to a new feed address, and because of that the old address that the app currently has saved for it no longer works, so you will need to go to the show's page and update the feed address before new episodes can be downloaded.",
+        "good": false,
+        "problems": [
+          "wordy"
+        ]
+      }
+    ],
+    "note": "A podcast player's episode row: title-style menu items, a standard delete alert and a plain message, then one shouted menu item, an apology that never says the disk is full, and a one-sentence error that runs to fifty words."
+  }
+]

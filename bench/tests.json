@@ -1,0 +1,1459 @@
+[
+  {
+    "id": "potter-name-parse",
+    "file": "tests/potter-name-parse.test.ts",
+    "framework": "vitest",
+    "cases": [
+      {
+        "name": "trims the name and collapses runs of spaces inside it",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "keeps the capitalisation the potter typed for display",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "gives names that differ only in case and spacing the same key",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "folds full-width letters so they match the ordinary spelling",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "rejects a name made only of whitespace",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "accepts a name of exactly 50 characters",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "rejects a name of 51 characters",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "counts the length after collapsing whitespace",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "PotterName.parse unit tests that pin exact display text, keys and messages, including the 50/51-character boundary and full-width folding."
+  },
+  {
+    "id": "capacity-parse",
+    "file": "tests/capacity-parse.test.ts",
+    "framework": "vitest",
+    "cases": [
+      {
+        "name": "accepts all 30 spots in the studio",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "rejects 31 spots because the studio only has 30",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "accepts a capacity equal to the course's minimum potters",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "rejects a capacity below the course's minimum potters",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "takes the minimum from the template, so 3 spots suit one course but not another",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "rejects a fractional capacity",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "rejects a capacity written in words",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "ignores spaces around the number",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "Capacity.parse tests pinned to exact spot counts and messages at 30 and 31 spots and at the template's minimum potters."
+  },
+  {
+    "id": "book-route",
+    "file": "tests/book-route.test.ts",
+    "framework": "vitest",
+    "cases": [
+      {
+        "name": "books a potter and redirects to their confirmation page",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "lists the new potter on the workshop page",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "rejects a booking once the workshop is full",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "rejects a name that is already booked, ignoring case and spacing",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "tells the potter booking closed once the workshop has started",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "asks for a name when the form is submitted blank",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "returns 404 for a workshop that does not exist",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "Book-route tests against a local D1 with a frozen clock, checking status codes, the redirect target and the exact message for full, duplicate, closed and blank submissions."
+  },
+  {
+    "id": "last-spot-race",
+    "file": "tests/last-spot-race.test.ts",
+    "framework": "vitest",
+    "cases": [
+      {
+        "name": "gives the last spot to exactly one of two simultaneous bookings",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "never lists more potters than the capacity after a burst of bookings",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "lets two different potters take the last two spots at the same time",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "books only one of two simultaneous submissions of the same name",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "tells a booked potter they are already on the list even after the workshop fills",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "Repository tests that race concurrent bookings for the last spots and assert on the sorted outcomes and the potter list, never on how the SQL is written."
+  },
+  {
+    "id": "invite-ics",
+    "file": "tests/invite-ics.test.ts",
+    "framework": "vitest",
+    "cases": [
+      {
+        "name": "serves the invite as a calendar file named after the workshop",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "gives the start and end times in UTC",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "uses the workshop name as the title",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "puts the studio's address in the location",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "escapes commas and semicolons in the workshop name",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "identifies the invite by the workshop id so importing it again updates the same entry",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "returns 404 instead of an invite for an unknown workshop",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "Downloads the .ics through the route, unfolds its lines and asserts exact DTSTART, DTEND, SUMMARY, LOCATION and UID values and the download headers."
+  },
+  {
+    "id": "workshop-start-parse",
+    "file": "tests/workshop-start-parse.test.ts",
+    "framework": "vitest",
+    "cases": [
+      {
+        "name": "converts an October evening from Vancouver daylight time to UTC",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "converts a December afternoon from Vancouver standard time to UTC",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "picks the earlier 1:30 AM on the night the clocks fall back",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "rejects 2:30 AM on the night the clocks spring forward, because that time never happens",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "accepts a start later today",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "rejects a start earlier today",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "rejects a start more than a year away",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "rejects February 29 in a year that is not a leap year",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "Vancouver-to-UTC start parsing with the clock passed in, covering daylight and standard time, both clock changes, and the past and one-year limits."
+  },
+  {
+    "id": "calendar-route",
+    "file": "tests/calendar-route.test.ts",
+    "framework": "vitest",
+    "cases": [
+      {
+        "name": "shows a workshop on its Vancouver date even when it is already the next day in UTC",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "shows how many spots are taken on each workshop",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "lists workshops on the same day in start-time order",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "titles the page with the month and year",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "links from December to January of the next year",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "returns 404 for a month that does not exist",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "Calendar route tests that find day cells by their datetime attribute and check the Vancouver date, spot counts, ordering, title, year rollover and 404."
+  },
+  {
+    "id": "course-template-parse",
+    "file": "tests/course-template-parse.test.ts",
+    "framework": "vitest",
+    "cases": [
+      {
+        "name": "reads the formats, duration, default capacity and minimum potters",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "rejects a default capacity above the studio's 30 spots",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "rejects a minimum potter count above the default capacity",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "rejects a template that offers no formats",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "rejects a default duration that is not a whole number of half hours",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "rejects a color that could break out of the generated courses.css rule",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "CourseTemplate.parse tests that pin the parsed workshop properties and each rejection message, including a colour that would inject CSS."
+  },
+  {
+    "id": "workshop-name-parse",
+    "file": "tests/workshop-name-parse.test.ts",
+    "framework": "vitest",
+    "cases": [
+      {
+        "name": "trims and collapses whitespace in the workshop name",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "rejects an empty name",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "accepts a name of exactly 80 characters",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "test1",
+        "good": false,
+        "problems": [
+          "bad_name"
+        ]
+      },
+      {
+        "name": "parses an ordinary workshop name",
+        "good": false,
+        "problems": [
+          "weak_assertion"
+        ]
+      },
+      {
+        "name": "keeps angle brackets as typed and leaves escaping to the page",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "handles edge cases",
+        "good": false,
+        "problems": [
+          "bad_name",
+          "multiple_behaviours"
+        ]
+      }
+    ],
+    "note": "Mostly exact WorkshopName tests, plus an exact 81-character test named test1, one that only checks toBeDefined and toBeTruthy, and a 'handles edge cases' test bundling six unrelated inputs."
+  },
+  {
+    "id": "booking-service",
+    "file": "tests/booking-service.test.ts",
+    "framework": "vitest",
+    "cases": [
+      {
+        "name": "books the potter",
+        "good": false,
+        "problems": [
+          "over_mocked"
+        ]
+      },
+      {
+        "name": "parses the name exactly once",
+        "good": false,
+        "problems": [
+          "implementation_detail",
+          "over_mocked"
+        ]
+      },
+      {
+        "name": "does not call the repository when the name is invalid",
+        "good": false,
+        "problems": [
+          "implementation_detail",
+          "over_mocked"
+        ]
+      },
+      {
+        "name": "returns full when the workshop is full",
+        "good": false,
+        "problems": [
+          "over_mocked",
+          "vacuous"
+        ]
+      },
+      {
+        "name": "explains a full workshop in words a potter understands",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "tells a potter whose name is taken to add an initial if they are someone else",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "The service tests mock both the repository and PotterName, then check what the mocks were told to return, how often they were called, and in one case call the mock directly; only the two rejectionMessage tests are clean."
+  },
+  {
+    "id": "booking-form-route",
+    "file": "tests/booking-form-route.test.ts",
+    "framework": "vitest",
+    "cases": [
+      {
+        "name": "shows the booking form for an open workshop",
+        "good": false,
+        "problems": [
+          "weak_assertion"
+        ]
+      },
+      {
+        "name": "shows the workshop name and Vancouver start time above the form",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "replaces the form with an explanation when the workshop is full",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "returns 404 for a workshop id that is not a UUID",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "books a potter",
+        "good": false,
+        "problems": [
+          "weak_assertion",
+          "vacuous"
+        ]
+      },
+      {
+        "name": "redirects after booking",
+        "good": false,
+        "problems": [
+          "weak_assertion",
+          "vacuous"
+        ]
+      },
+      {
+        "name": "returns an error for a duplicate",
+        "good": false,
+        "problems": [
+          "weak_assertion"
+        ]
+      }
+    ],
+    "note": "Exact form-page tests beside POST tests that only check toBeTruthy, a status that is not 500 (a 404 passes), res.ok being falsy, and toBeDefined on a header getter that returns null."
+  },
+  {
+    "id": "booking-repository",
+    "file": "tests/booking-repository.test.ts",
+    "framework": "vitest",
+    "cases": [
+      {
+        "name": "rejects a booking once the workshop is full",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "refuses a booking after the workshop has started",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "keeps the potter's capitalisation in the listed name",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "returns an id for a new booking",
+        "good": false,
+        "problems": [
+          "weak_assertion"
+        ]
+      },
+      {
+        "name": "counts bookings before inserting",
+        "good": false,
+        "problems": [
+          "implementation_detail"
+        ]
+      },
+      {
+        "name": "uses a single statement to book a potter",
+        "good": false,
+        "problems": [
+          "implementation_detail"
+        ]
+      },
+      {
+        "name": "stores a lowercased name key",
+        "good": false,
+        "problems": [
+          "implementation_detail"
+        ]
+      },
+      {
+        "name": "returns the potters in the order they booked",
+        "good": false,
+        "problems": [
+          "vacuous"
+        ]
+      }
+    ],
+    "note": "Outcome tests on a real D1 mixed with tests that spy on prepare() for SQL text and call counts, read the internal name_key column, check only a type, and assert inside an un-awaited then()."
+  },
+  {
+    "id": "create-workshop-route",
+    "file": "tests/create-workshop-route.test.ts",
+    "framework": "vitest",
+    "cases": [
+      {
+        "name": "creates a workshop and redirects to its page",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "should work",
+        "good": false,
+        "problems": [
+          "bad_name"
+        ]
+      },
+      {
+        "name": "ends the workshop after the course's default duration when the form leaves it blank",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "re-renders the form with an error when capacity is over 30",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "rejects a format the course does not offer",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "accepts a Glazing workshop with 30 potters",
+        "good": false,
+        "problems": [
+          "no_assertion",
+          "vacuous"
+        ]
+      },
+      {
+        "name": "creates a workshop",
+        "good": false,
+        "problems": [
+          "multiple_behaviours"
+        ]
+      },
+      {
+        "name": "rejects a start date in the past",
+        "good": false,
+        "problems": [
+          "flaky"
+        ]
+      }
+    ],
+    "note": "Create-route tests where one is named 'should work', one has no assertion, one checks five unrelated routes, and one computes 'yesterday' in UTC from the real clock, which is still today in Vancouver time on a Vancouver evening."
+  },
+  {
+    "id": "duration-parse",
+    "file": "tests/duration-parse.test.ts",
+    "framework": "vitest",
+    "cases": [
+      {
+        "name": "accepts ninety minutes",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "rejects less than an hour",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "rejects nine hours",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "rejects a duration that is not a multiple of 30 minutes",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "has an eight hour maximum",
+        "good": false,
+        "problems": [
+          "vacuous"
+        ]
+      },
+      {
+        "name": "parses every offered option",
+        "good": false,
+        "problems": [
+          "no_assertion",
+          "vacuous"
+        ]
+      },
+      {
+        "name": "rejects zero",
+        "good": false,
+        "problems": [
+          "vacuous",
+          "weak_assertion"
+        ]
+      },
+      {
+        "name": "labels the first three options the way the form shows them",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "Exact Duration tests next to vacuous ones: asserting a constant, a loop with no expect, and an assertion that can never fail."
+  },
+  {
+    "id": "month-grid",
+    "file": "tests/month-grid.test.ts",
+    "framework": "vitest",
+    "cases": [
+      {
+        "name": "starts the October 2026 grid on the Sunday before the 1st",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "marks the days before October 1 as outside the month",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "fits February 2026 into exactly four weeks because it starts on a Sunday",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "adds a sixth week when a 31-day month starts on a Saturday",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "has seven days in every week",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "builds the grid out of weeks",
+        "good": false,
+        "problems": [
+          "weak_assertion"
+        ]
+      },
+      {
+        "name": "marks every day of October as inside the month",
+        "good": false,
+        "problems": [
+          "vacuous"
+        ]
+      },
+      {
+        "name": "shows the current month by default",
+        "good": false,
+        "problems": [
+          "flaky"
+        ]
+      }
+    ],
+    "note": "Exact month-grid tests plus an Array.isArray check, a forEach over a filter that never matches ('2026/10'), and a default-month test that compares with the machine's local clock instead of Vancouver time."
+  },
+  {
+    "id": "booking-shared-state",
+    "file": "tests/booking-shared-state.test.ts",
+    "framework": "vitest",
+    "cases": [
+      {
+        "name": "takes one of the two spots when the first potter books",
+        "good": false,
+        "problems": [
+          "flaky"
+        ]
+      },
+      {
+        "name": "books a second potter",
+        "good": false,
+        "problems": [
+          "flaky"
+        ]
+      },
+      {
+        "name": "rejects a third potter because the workshop is full",
+        "good": false,
+        "problems": [
+          "flaky"
+        ]
+      },
+      {
+        "name": "rejects the first potter booking again",
+        "good": false,
+        "problems": [
+          "flaky"
+        ]
+      },
+      {
+        "name": "handles edge case",
+        "good": false,
+        "problems": [
+          "bad_name"
+        ]
+      },
+      {
+        "name": "shows how many spots are left on the booking form",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "Four tests share one two-spot workshop from beforeAll and only pass in file order; the blank-name test does not depend on order but is called 'handles edge case', and the last seeds its own workshop."
+  },
+  {
+    "id": "courses-registry",
+    "file": "tests/courses-registry.test.ts",
+    "framework": "vitest",
+    "cases": [
+      {
+        "name": "lists the three bundled courses in alphabetical order by name",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "finds a course by the name of its template file",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "returns nothing for a course that has no template",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "offers a fourth course once its template file is added",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "loads courses",
+        "good": false,
+        "problems": [
+          "weak_assertion"
+        ]
+      },
+      {
+        "name": "parses each template only once",
+        "good": false,
+        "problems": [
+          "implementation_detail"
+        ]
+      },
+      {
+        "name": "supports a non-pottery such as a board course",
+        "good": false,
+        "problems": [
+          "vacuous"
+        ]
+      }
+    ],
+    "note": "Registry tests with exact lists (toBeUndefined is the exact answer for a missing course), plus a greater-than-zero count, a spy on CourseTemplate.parse call counts, and an expect(true) placeholder."
+  },
+  {
+    "id": "qr-code-route",
+    "file": "tests/qr-code-route.test.ts",
+    "framework": "vitest",
+    "cases": [
+      {
+        "name": "serves the QR code as an SVG image",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "lets browsers cache the QR code for a day",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "returns 404 for an unknown workshop instead of a QR code",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "returns an svg",
+        "good": false,
+        "problems": [
+          "weak_assertion"
+        ]
+      },
+      {
+        "name": "returns the generated svg",
+        "good": false,
+        "problems": [
+          "over_mocked"
+        ]
+      },
+      {
+        "name": "renders the QR code in under 50 milliseconds",
+        "good": false,
+        "problems": [
+          "flaky"
+        ]
+      },
+      {
+        "name": "shows the full booking URL as text on the workshop page",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "QR route tests with exact headers and the booking URL, plus a '<svg' substring check, a test that mocks qrcode and asserts the mock's own output, and a 50 ms wall-clock assertion."
+  },
+  {
+    "id": "workshop-page",
+    "file": "tests/workshop-page.test.ts",
+    "framework": "vitest",
+    "cases": [
+      {
+        "name": "shows how many spots are taken out of the capacity",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "draws one numbered line per spot",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "fills the sheet's lines with potter names in booking order",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "stamps a full workshop as full",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "shows the start and end time in Vancouver time",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "escapes a potter's name so it cannot add markup to the page",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "renders a spot line for every spot",
+        "good": false,
+        "problems": [
+          "implementation_detail"
+        ]
+      },
+      {
+        "name": "shows the page",
+        "good": false,
+        "problems": [
+          "weak_assertion",
+          "bad_name"
+        ]
+      }
+    ],
+    "note": "Workshop page tests that read the sign-up sheet by its accessible name, plus one that spies on the SpotLine component's call count and a vaguely named one that only regex-matches 'spots'."
+  },
+  {
+    "id": "security-headers",
+    "file": "tests/security-headers.test.ts",
+    "framework": "vitest",
+    "cases": [
+      {
+        "name": "forbids scripts on every page through the content security policy",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "stops other sites from framing the pages",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "refuses a booking posted from another site",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "renders pages without inline style attributes",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "sends a content security policy",
+        "good": false,
+        "problems": [
+          "weak_assertion"
+        ]
+      },
+      {
+        "name": "tells browsers not to sniff content types",
+        "good": false,
+        "problems": [
+          "vacuous"
+        ]
+      },
+      {
+        "name": "works",
+        "good": false,
+        "problems": [
+          "multiple_behaviours",
+          "bad_name"
+        ]
+      }
+    ],
+    "note": "Exact CSP, CSRF and inline-style checks, plus a toBeTruthy header check, a ?? 'nosniff' fallback that makes the assertion unable to fail, and a test named 'works' covering five unrelated things."
+  },
+  {
+    "id": "e2e-book-until-full",
+    "file": "tests/e2e-book-until-full.test.ts",
+    "framework": "playwright",
+    "cases": [
+      {
+        "name": "a potter books from the booking link and sees a confirmation",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "the workshop page lists a potter after they book",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "taking the last spot fills the workshop and the form then says it is full",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "booking a name that is already on the list is refused with a clear message",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "an organizer's new workshop appears on the calendar on its day",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "Playwright journeys using labels, roles and web-first assertions against a server with a fixed clock: book, see the sheet, take the last spot, refuse a duplicate, and create a workshop then find it on its day."
+  },
+  {
+    "id": "e2e-calendar",
+    "file": "tests/e2e-calendar.test.ts",
+    "framework": "playwright",
+    "cases": [
+      {
+        "name": "the calendar opens on the current month in Vancouver time",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "a visitor can move to the next month and back",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "a workshop on the calendar shows its start time and how many spots are taken",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "clicking a workshop on the calendar opens its page",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "on a phone-sized screen the calendar lists only the days that have workshops",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "a month that does not exist shows the not-found page",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "Playwright calendar tests with role-based locators and web-first assertions on headings, links, the URL and the phone agenda, all pinned to the server's fixed clock."
+  },
+  {
+    "id": "e2e-create-workshop",
+    "file": "tests/e2e-create-workshop.test.ts",
+    "framework": "playwright",
+    "cases": [
+      {
+        "name": "test1",
+        "good": false,
+        "problems": [
+          "bad_name",
+          "flaky",
+          "implementation_detail"
+        ]
+      },
+      {
+        "name": "should work",
+        "good": false,
+        "problems": [
+          "bad_name",
+          "flaky",
+          "implementation_detail",
+          "weak_assertion"
+        ]
+      },
+      {
+        "name": "the form starts from the course's default capacity and duration",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "a start time skipped by the spring clock change is refused with an explanation",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "create workshop page",
+        "good": false,
+        "problems": [
+          "bad_name",
+          "weak_assertion",
+          "implementation_detail"
+        ]
+      },
+      {
+        "name": "an organizer can pick Raku",
+        "good": false,
+        "problems": [
+          "no_assertion",
+          "vacuous"
+        ]
+      },
+      {
+        "name": "creates a workshop for tomorrow night",
+        "good": false,
+        "problems": [
+          "flaky"
+        ]
+      }
+    ],
+    "note": "Mostly bad Playwright tests: CSS class and id selectors, waitForTimeout sleeps, non-retrying isVisible and textContent checks, a test with no assertion, and a date built from the real clock with a UTC/local mix-up; two role-based tests are clean."
+  },
+  {
+    "id": "e2e-workshop-page",
+    "file": "tests/e2e-workshop-page.test.ts",
+    "framework": "playwright",
+    "cases": [
+      {
+        "name": "the invite downloads as a file named after the workshop",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "the QR code image says where it leads",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "each line of the sign-up sheet shows a potter's name in order",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "a potter books from the workshop page",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "the sign-up sheet shows the potter who just booked",
+        "good": false,
+        "problems": [
+          "flaky"
+        ]
+      },
+      {
+        "name": "shows the QR code",
+        "good": false,
+        "problems": [
+          "flaky",
+          "implementation_detail",
+          "weak_assertion"
+        ]
+      },
+      {
+        "name": "full workshop",
+        "good": false,
+        "problems": [
+          "bad_name",
+          "implementation_detail",
+          "weak_assertion"
+        ]
+      },
+      {
+        "name": "tells a potter when the workshop is full",
+        "good": false,
+        "problems": [
+          "over_mocked",
+          "vacuous"
+        ]
+      }
+    ],
+    "note": "Good download, QR alt-text and sign-up sheet tests mixed with a sleep before a class-selector isVisible, an element-handle null check, a page.route mock that fakes the server's answer, and a test that relies on an earlier test's booking."
+  },
+  {
+    "id": "swift-spoken-list",
+    "file": "tests/swift-spoken-list.swift",
+    "framework": "swift-testing",
+    "cases": [
+      {
+        "name": "twoThingsAreJoinedWithAndAlone",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "moreThingsAreCommaedUpToTheLastAnd",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "Fieldmark's list-joining helper, one exact string per case; function names read as sentences."
+  },
+  {
+    "id": "swift-slug",
+    "file": "tests/swift-slug.swift",
+    "framework": "swift-testing",
+    "cases": [
+      {
+        "name": "basics",
+        "good": false,
+        "problems": [
+          "bad_name",
+          "multiple_behaviours"
+        ]
+      },
+      {
+        "name": "untitledAlsoDisambiguates",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "lowerBoundaryAlphaIsKept",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "charJustBelowDigitRangeIsSeparator",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "Fieldmark's folder-name slugs: boundary tests pin exact characters, but basics is a label over five unrelated rules."
+  },
+  {
+    "id": "swift-map-appearance",
+    "file": "tests/swift-map-appearance.swift",
+    "framework": "swift-testing",
+    "cases": [
+      {
+        "name": "aForcedAppearanceIgnoresTheSystem",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "Whether the map is dark, checked for both forced appearances in both system modes; a bare Bool #expect is exact."
+  },
+  {
+    "id": "swift-visit-info",
+    "file": "tests/swift-visit-info.swift",
+    "framework": "swift-testing",
+    "cases": [
+      {
+        "name": "showingVisitInfoOpensAPanelThatResolvesTheCountries",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "dismissingStopsTheLookupWritingIntoTheClosedPanel",
+        "good": false,
+        "problems": [
+          "flaky"
+        ]
+      }
+    ],
+    "note": "A model test that waits on a condition, beside one that sleeps 50 ms and 900 ms and hopes a slow stub has finished."
+  },
+  {
+    "id": "swift-update-relauncher",
+    "file": "tests/swift-update-relauncher.swift",
+    "framework": "swift-testing",
+    "cases": [
+      {
+        "name": "opensTheAppOnceTheGivenPidHasGone",
+        "good": false,
+        "problems": [
+          "flaky"
+        ]
+      }
+    ],
+    "note": "Spawns a real /bin/sleep and checks after a fixed 150 ms that the opener has not run yet."
+  },
+  {
+    "id": "swift-annotation-logging",
+    "file": "tests/swift-annotation-logging.swift",
+    "framework": "swift-testing",
+    "cases": [
+      {
+        "name": "aRunAnnouncesTheSubjectItIsAbout",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "aRefusalIsLoggedWithTheUnderlyingErrorsOwnWords",
+        "good": true,
+        "problems": []
+      }
+    ],
+    "note": "A spy logger records the diagnostic stream the service emits; the log lines are the behaviour under test."
+  },
+  {
+    "id": "swift-site-search-model",
+    "file": "tests/swift-site-search-model.swift",
+    "framework": "swift-testing",
+    "cases": [
+      {
+        "name": "test1",
+        "good": false,
+        "problems": [
+          "bad_name"
+        ]
+      },
+      {
+        "name": "aSearchThatFailsShowsAnError",
+        "good": false,
+        "problems": [
+          "weak_assertion"
+        ]
+      },
+      {
+        "name": "searchingAsksTheSearcherOnceWithTheTrimmedText",
+        "good": false,
+        "problems": [
+          "implementation_detail"
+        ]
+      },
+      {
+        "name": "theFakeSearcherReturnsWhatItWasGiven",
+        "good": false,
+        "problems": [
+          "vacuous",
+          "over_mocked"
+        ]
+      },
+      {
+        "name": "typingShowsResultsAfterTheDebounce",
+        "good": false,
+        "problems": [
+          "flaky"
+        ]
+      },
+      {
+        "name": "pickingACandidateAddsIt",
+        "good": false,
+        "problems": [
+          "no_assertion"
+        ]
+      },
+      {
+        "name": "searchPickAndClear",
+        "good": false,
+        "problems": [
+          "multiple_behaviours",
+          "bad_name"
+        ]
+      }
+    ],
+    "note": "Written bad variants in Fieldmark's style: a label name, a non-nil error check, call counts on a fake, a test of the fake itself, a fixed sleep for a debounce, no assertion, and one test doing everything."
+  },
+  {
+    "id": "swift-xctest-slug",
+    "file": "tests/swift-xctest-slug.swift",
+    "framework": "xctest",
+    "cases": [
+      {
+        "name": "testLowercasesAndJoinsWordsWithHyphens",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "testFoldsAccentsToPlainLetters",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "testWorks",
+        "good": false,
+        "problems": [
+          "bad_name",
+          "weak_assertion"
+        ]
+      },
+      {
+        "name": "testMakesASlugForPunctuation",
+        "good": false,
+        "problems": [
+          "weak_assertion"
+        ]
+      }
+    ],
+    "note": "XCTest variant of the slug tests: exact XCTAssertEqual cases beside XCTAssertNotNil and non-empty checks."
+  },
+  {
+    "id": "dock-release",
+    "file": "tests/dock-release.test.ts",
+    "framework": "vitest",
+    "cases": [
+      {
+        "name": "releases the first bike in the dock and starts a ride on it",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "refuses a suspended member and unlocks nothing",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "works",
+        "good": false,
+        "problems": [
+          "no_assertion",
+          "bad_name"
+        ]
+      },
+      {
+        "name": "calls find on docks and members, then unlock, then startRide",
+        "good": false,
+        "problems": [
+          "implementation_detail",
+          "over_mocked"
+        ]
+      },
+      {
+        "name": "handles an empty dock, a member already riding and an unknown dock",
+        "good": false,
+        "problems": [
+          "multiple_behaviours"
+        ]
+      },
+      {
+        "name": "does not start a ride when the dock fails to unlock",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "logs the release",
+        "good": false,
+        "problems": [
+          "no_assertion"
+        ]
+      }
+    ],
+    "note": "A bike-share release use case with fake ports: four exact tests of results, one test with no assertion named 'works', one that only checks which ports were called, one that packs three refusals into one test, and a log spy nothing asserts on."
+  },
+  {
+    "id": "ladder-challenge",
+    "file": "tests/ladder-challenge.swift",
+    "framework": "swift-testing",
+    "cases": [
+      {
+        "name": "a win over the player one rung up swaps the two",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "a win from three rungs below moves the challenger up and everyone between down one",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "a loss leaves the ladder as it was",
+        "good": true,
+        "problems": []
+      },
+      {
+        "name": "challengeRules",
+        "good": false,
+        "problems": [
+          "multiple_behaviours",
+          "bad_name"
+        ]
+      },
+      {
+        "name": "posting a result saves the ladder and notifies both players",
+        "good": false,
+        "problems": [
+          "over_mocked",
+          "implementation_detail"
+        ]
+      }
+    ],
+    "note": "A chess-club ladder: three exact tests of the rung order after a result, one test named after the code that checks four challenge rules at once, and one that builds three fakes and counts their calls, down to how often the clock was read."
+  }
+]

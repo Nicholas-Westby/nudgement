@@ -1,0 +1,225 @@
+[
+  {
+    "id": "field-notes",
+    "file": "designs/fieldmark-field-notes-design.md",
+    "note": "Real fieldmark spec, approved and built. Every section taken as good.",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "intent": true,
+      "scope": true
+    },
+    "sections": {}
+  },
+  {
+    "id": "field-notes-vague",
+    "file": "designs/fieldmark-field-notes-vague-design.md",
+    "note": "The field-notes spec with five sections rewritten vague or undecided.",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "intent": true,
+      "scope": true
+    },
+    "sections": {
+      "Checklists": [
+        "vague"
+      ],
+      "Images": [
+        "open_decision"
+      ],
+      "Shared outings": [
+        "vague"
+      ],
+      "Limits": [
+        "vague"
+      ],
+      "Site cards (live": [
+        "vague",
+        "open_decision"
+      ]
+    }
+  },
+  {
+    "id": "workshop-calendar",
+    "file": "designs/workshop-calendar-design.md",
+    "note": "Real workshop-manager spec, self-approved and built.",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "intent": true,
+      "scope": true
+    },
+    "sections": {}
+  },
+  {
+    "id": "workshop-calendar-open",
+    "file": "designs/workshop-calendar-open-design.md",
+    "note": "The workshop spec with capacity, time, observability and security hand-waved.",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "intent": true,
+      "scope": true
+    },
+    "sections": {
+      "Capacity enforcement": [
+        "open_decision",
+        "vague"
+      ],
+      "Time": [
+        "vague",
+        "open_decision"
+      ],
+      "Observability": [
+        "vague"
+      ],
+      "Security": [
+        "vague"
+      ]
+    }
+  },
+  {
+    "id": "mutation",
+    "file": "designs/fieldmark-mutation-design.md",
+    "note": "Real fieldmark spec, approved in outline and built.",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "intent": true,
+      "scope": true
+    },
+    "sections": {}
+  },
+  {
+    "id": "mutation-no-why",
+    "file": "designs/fieldmark-mutation-no-why-design.md",
+    "note": "The mutation spec without its Why and Decided against sections. The rest still hints at the goal, so intent is borderline.",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "intent": null,
+      "scope": false
+    },
+    "sections": {}
+  },
+  {
+    "id": "outing-budget",
+    "file": "designs/outing-budget-design.md",
+    "note": "Handwritten, concrete spec for a small fieldmark feature.",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "intent": true,
+      "scope": true
+    },
+    "sections": {}
+  },
+  {
+    "id": "outing-budget-ai",
+    "file": "designs/outing-budget-ai-design.md",
+    "note": "The same feature written the way an assistant pads it: filler, no decisions, a TBD.",
+    "expect": {
+      "verdict": "fail",
+      "human": false,
+      "intent": null,
+      "scope": false
+    },
+    "sections": {
+      "Overview": [
+        "vague"
+      ],
+      "Key Features": [
+        "vague"
+      ],
+      "User Experience": [
+        "vague"
+      ],
+      "Data Storage": [
+        "open_decision",
+        "vague"
+      ],
+      "Sharing": [
+        "vague"
+      ],
+      "Currency Handling": [
+        "open_decision",
+        "vague"
+      ],
+      "Error Handling": [
+        "vague"
+      ],
+      "Testing Strategy": [
+        "vague"
+      ],
+      "Open Questions": null
+    }
+  },
+  {
+    "id": "feature-batch",
+    "file": "designs/fieldmark-feature-batch-design.md",
+    "note": "Real fieldmark spec for a 12-feature batch (fieldmark 78b34b2), written to be planned from. Every decision taken as fine.",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "intent": true,
+      "scope": true
+    },
+    "sections": {
+      "1. Removed Items (the recycle bin) > Data and sync": [
+        "open_decision"
+      ]
+    },
+    "decisions": {}
+  },
+  {
+    "id": "feature-batch-reasonless",
+    "file": "designs/fieldmark-feature-batch-reasonless-design.md",
+    "note": "The batch spec with the reasons and rejected options cut from 12 decisions, two proofs made untestable, and a vote error with a file path and a Submit button.",
+    "expect": {
+      "verdict": "fail",
+      "human": true,
+      "intent": true,
+      "scope": true
+    },
+    "sections": {
+      "2. One AI marker > Proof": [
+        "untestable"
+      ],
+      "8. Nothing moves when a sync runs > Proof": [
+        "untestable"
+      ],
+      "1. Removed Items (the recycle bin) > Data and sync": [
+        "open_decision"
+      ]
+    },
+    "decisions": {
+      "Name: \"Removed Items\".": true,
+      "One site to look.": true,
+      "A deleted site stays in its survey": true,
+      "A shared survey keeps its share": true,
+      "The marker is the word": true,
+      "A \"Duplicates\" switch": true,
+      "Merge is not part of this.": true,
+      "Similar photos means": true,
+      "Similar names": null,
+      "Fix by construction": true,
+      "Layout:": true,
+      "Votes are a seventh view": true,
+      "Every person answers every item": true,
+      "A vote that cannot be saved": null
+    },
+    "badCopy": {
+      "Uses the AI.": [
+        "unnamed_third_party"
+      ],
+      "Couldn't write ~/Library/Application Support/Fieldmark/votes.json.": [
+        "file_path",
+        "jargon"
+      ],
+      "Submit": [
+        "vague_action"
+      ]
+    }
+  }
+]

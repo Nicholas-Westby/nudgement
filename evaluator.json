@@ -1,0 +1,6 @@
+{
+  "ignore": ["bench/**"],
+  "hygiene": {
+    "ignore": ["tests/hygiene.test.ts", "src/hygiene.ts"]
+  }
+}

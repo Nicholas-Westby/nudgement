@@ -1,0 +1,1076 @@
+[
+ {
+  "id": "x-app-version-a",
+  "file": "files/x-app-version-a.swift",
+  "language": "swift",
+  "pair": "x-app-version",
+  "source": "anonymised",
+  "severity": "heavy",
+  "expect": {
+   "verdict": "bloated",
+   "problems": [
+    "premature_abstraction",
+    "speculative_generality",
+    "type_bloat",
+    "defensive_excess",
+    "verbose_logic",
+    "comment_bloat"
+   ]
+  },
+  "units": [
+   {
+    "name": "DefaultAppVersionParser",
+    "problems": [
+     "premature_abstraction",
+     "speculative_generality",
+     "defensive_excess",
+     "comment_bloat"
+    ]
+   },
+   {
+    "name": "AppVersionParsing",
+    "problems": [
+     "premature_abstraction"
+    ]
+   },
+   {
+    "name": "AppVersionError",
+    "problems": [
+     "type_bloat"
+    ]
+   },
+   {
+    "name": "VersionComponent",
+    "problems": [
+     "type_bloat",
+     "speculative_generality"
+    ]
+   },
+   {
+    "name": "AppVersion",
+    "problems": [
+     "speculative_generality",
+     "verbose_logic",
+     "comment_bloat"
+    ]
+   }
+  ],
+  "note": "A 60-line version type grows a parser protocol with one implementation, separator and component-count options nobody changes, a five-case error enum that init? throws away, empty and negative checks the digit test already covers, an if/else chain instead of tuple comparison, and a doc comment on every member."
+ },
+ {
+  "id": "x-app-version-b",
+  "file": "files/x-app-version-b.swift",
+  "language": "swift",
+  "pair": "x-app-version",
+  "source": "anonymised",
+  "severity": "lean",
+  "expect": {
+   "verdict": "lean",
+   "problems": []
+  },
+  "note": "Real file: three numbers, a strict failable parser, tuple comparison and one bump method, with comments that only give reasons."
+ },
+ {
+  "id": "x-agent-runner-a",
+  "file": "files/x-agent-runner-a.swift",
+  "language": "swift",
+  "pair": "x-agent-runner",
+  "source": "anonymised",
+  "severity": "lean",
+  "expect": {
+   "verdict": "lean",
+   "problems": []
+  },
+  "note": "Real file: one tool-calling loop with three budgets, a progress enum and a few small private helpers; the long comments record measured failures rather than restating code."
+ },
+ {
+  "id": "x-agent-runner-b",
+  "file": "files/x-agent-runner-b.swift",
+  "language": "swift",
+  "pair": "x-agent-runner",
+  "source": "anonymised",
+  "severity": "heavy",
+  "expect": {
+   "verdict": "bloated",
+   "problems": [
+    "speculative_generality",
+    "premature_abstraction",
+    "thin_wrappers",
+    "excess_logging",
+    "defensive_excess",
+    "comment_bloat"
+   ]
+  },
+  "units": [
+   {
+    "name": "AgentRunnerConfiguration",
+    "problems": [
+     "speculative_generality"
+    ]
+   },
+   {
+    "name": "AgentRetryPolicy",
+    "problems": [
+     "speculative_generality"
+    ]
+   },
+   {
+    "name": "AgentRunnerDelegate",
+    "problems": [
+     "speculative_generality",
+     "premature_abstraction"
+    ]
+   },
+   {
+    "name": "AgentToolRegistry",
+    "problems": [
+     "premature_abstraction",
+     "thin_wrappers",
+     "comment_bloat"
+    ]
+   },
+   {
+    "name": "AgentToolExecuting",
+    "problems": [
+     "premature_abstraction"
+    ]
+   },
+   {
+    "name": "DefaultAgentToolExecutor",
+    "problems": [
+     "premature_abstraction",
+     "thin_wrappers",
+     "excess_logging"
+    ]
+   },
+   {
+    "name": "AgentRunner",
+    "problems": [
+     "excess_logging",
+     "defensive_excess",
+     "thin_wrappers",
+     "comment_bloat"
+    ]
+   }
+  ],
+  "note": "The same loop gains a configuration struct and retry policy whose defaults nobody changes, a delegate protocol of empty hooks, a registry class and executor protocol that forward to a dictionary, os.Logger debug lines on every step, a zero-budget guard the loop already handles, a catch that logs and rethrows, and parameter docs that restate names."
+ },
+ {
+  "id": "x-json-path-a",
+  "file": "files/x-json-path-a.swift",
+  "language": "swift",
+  "pair": "x-json-path",
+  "source": "anonymised",
+  "severity": "moderate",
+  "expect": {
+   "verdict": "bloated",
+   "problems": [
+    "premature_abstraction",
+    "type_bloat"
+   ]
+  },
+  "units": [
+   {
+    "name": "JSONValueRenderer",
+    "problems": [
+     "premature_abstraction"
+    ]
+   },
+   {
+    "name": "JSONRendererChain",
+    "problems": [
+     "premature_abstraction"
+    ]
+   },
+   {
+    "name": "JSONPathSegment",
+    "problems": [
+     "type_bloat"
+    ]
+   },
+   {
+    "name": "JSONPathExpression",
+    "problems": [
+     "type_bloat"
+    ]
+   }
+  ],
+  "note": "The five-branch render function becomes a renderer protocol with five one-method strategy structs and a chain to run them, and the path is wrapped in segment and expression types that hold nothing but a String and an array."
+ },
+ {
+  "id": "x-json-path-b",
+  "file": "files/x-json-path-b.swift",
+  "language": "swift",
+  "pair": "x-json-path",
+  "source": "anonymised",
+  "severity": "lean",
+  "expect": {
+   "verdict": "lean",
+   "problems": []
+  },
+  "note": "Real file: a dotted-path reader for shell scripts whose doc comment is the output contract, with one small helper per CoreFoundation quirk."
+ },
+ {
+  "id": "x-feedback-client-a",
+  "file": "files/x-feedback-client-a.swift",
+  "language": "swift",
+  "pair": "x-feedback-client",
+  "source": "anonymised",
+  "severity": "lean",
+  "expect": {
+   "verdict": "lean",
+   "problems": []
+  },
+  "note": "Real file: one POST, a status-code switch and two tolerant response parsers, with comments on why retries and oversized answers are refused."
+ },
+ {
+  "id": "x-feedback-client-b",
+  "file": "files/x-feedback-client-b.swift",
+  "language": "swift",
+  "pair": "x-feedback-client",
+  "source": "anonymised",
+  "severity": "moderate",
+  "expect": {
+   "verdict": "bloated",
+   "problems": [
+    "premature_abstraction",
+    "excess_logging",
+    "defensive_excess"
+   ]
+  },
+  "units": [
+   {
+    "name": "FeedbackRequestBuilding",
+    "problems": [
+     "premature_abstraction"
+    ]
+   },
+   {
+    "name": "JSONFeedbackRequestBuilder",
+    "problems": [
+     "premature_abstraction"
+    ]
+   },
+   {
+    "name": "FeedbackClient",
+    "problems": [
+     "excess_logging",
+     "defensive_excess"
+    ]
+   }
+  ],
+  "note": "Request building moves behind a protocol with a single implementation injected through init, every step of send gets an os.Logger line, and building the request is wrapped in a do/catch that only logs and rethrows."
+ },
+ {
+  "id": "x-retryable-failure-a",
+  "file": "files/x-retryable-failure-a.swift",
+  "language": "swift",
+  "pair": "x-retryable-failure",
+  "source": "anonymised",
+  "severity": "lean",
+  "expect": {
+   "verdict": "lean",
+   "problems": []
+  },
+  "note": "Real file: a two-case enum that classifies build output by marker text and picks a backoff, in about twenty lines of code."
+ },
+ {
+  "id": "x-retryable-failure-b",
+  "file": "files/x-retryable-failure-b.swift",
+  "language": "swift",
+  "pair": "x-retryable-failure",
+  "source": "anonymised",
+  "severity": "subtle",
+  "expect": {
+   "verdict": "ok",
+   "problems": [
+    "verbose_logic"
+   ]
+  },
+  "units": [
+   {
+    "name": "RetryableFailure",
+    "problems": [
+     "verbose_logic"
+    ]
+   }
+  ],
+  "note": "Identical except that contains(where:), max and the switch expression are spelled out as a flag loop, temporaries and an if; wordier, but small enough that a reviewer would likely let it through."
+ },
+ {
+  "id": "x-invite-code-a",
+  "file": "files/x-invite-code-a.swift",
+  "language": "swift",
+  "pair": "x-invite-code",
+  "source": "anonymised",
+  "severity": "subtle",
+  "expect": {
+   "verdict": "ok",
+   "problems": [
+    "defensive_excess"
+   ]
+  },
+  "units": [
+   {
+    "name": "InviteCode",
+    "problems": [
+     "defensive_excess"
+    ]
+   }
+  ],
+  "note": "Identical except for seven guards (empty input, empty remainder, a missing dash, first and last group, empty groups and group length in parse, and an empty check in isHexGroup) that the group count and isHexGroup already enforce; noise a reviewer might wave through."
+ },
+ {
+  "id": "x-invite-code-b",
+  "file": "files/x-invite-code-b.swift",
+  "language": "swift",
+  "pair": "x-invite-code",
+  "source": "anonymised",
+  "severity": "lean",
+  "expect": {
+   "verdict": "lean",
+   "problems": []
+  },
+  "note": "Real file: format and parse for a two-part hex invite code, with comments on the details that have to agree with the server."
+ },
+ {
+  "id": "x-fractional-index",
+  "file": "files/x-fractional-index.swift",
+  "language": "swift",
+  "pair": null,
+  "source": "anonymised",
+  "severity": "justified",
+  "expect": {
+   "verdict": "lean",
+   "problems": []
+  },
+  "note": "Real file: fractional-indexing sort keys plus a patience-sort longest increasing run; the arithmetic and branching come from the algorithm, not from structure."
+ },
+ {
+  "id": "x-server-sent-events",
+  "file": "files/x-server-sent-events.swift",
+  "language": "swift",
+  "pair": null,
+  "source": "anonymised",
+  "severity": "justified",
+  "expect": {
+   "verdict": "lean",
+   "problems": []
+  },
+  "note": "Real file: a byte-at-a-time SSE framer that hand-writes line splitting because AsyncLineSequence drops the blank lines that end events, as its doc comment explains."
+ },
+ {
+  "id": "x-release-files-a",
+  "file": "files/x-release-files-a.sh",
+  "language": "sh",
+  "pair": "x-release-files",
+  "source": "anonymised",
+  "severity": "heavy",
+  "expect": {
+   "verdict": "bloated",
+   "problems": [
+    "excess_logging",
+    "speculative_generality",
+    "defensive_excess",
+    "duplication",
+    "verbose_logic",
+    "comment_bloat"
+   ]
+  },
+  "units": [
+   {
+    "name": "log_debug",
+    "problems": [
+     "excess_logging"
+    ]
+   },
+   {
+    "name": "check_dependencies",
+    "problems": [
+     "defensive_excess"
+    ]
+   },
+   {
+    "name": "check_repository",
+    "problems": [
+     "defensive_excess"
+    ]
+   },
+   {
+    "name": "is_excluded_dir",
+    "problems": [
+     "verbose_logic",
+     "duplication"
+    ]
+   },
+   {
+    "name": "is_included_dir",
+    "problems": [
+     "verbose_logic",
+     "duplication"
+    ]
+   },
+   {
+    "name": "has_excluded_extension",
+    "problems": [
+     "verbose_logic",
+     "duplication"
+    ]
+   },
+   {
+    "name": "ships",
+    "problems": [
+     "excess_logging",
+     "defensive_excess",
+     "comment_bloat"
+    ]
+   },
+   {
+    "name": "filter_stdin",
+    "problems": [
+     "duplication",
+     "excess_logging"
+    ]
+   },
+   {
+    "name": "list_tracked_files",
+    "problems": [
+     "duplication",
+     "excess_logging"
+    ]
+   },
+   {
+    "name": "parse_args",
+    "problems": [
+     "speculative_generality"
+    ]
+   }
+  ],
+  "note": "A 47-line filter becomes a banner-heavy script with coloured log levels, --verbose and --help nobody asked for, a dependency check for printf, three near-identical loop helpers in place of one case statement, and two copies of the read loop."
+ },
+ {
+  "id": "x-release-files-b",
+  "file": "files/x-release-files-b.sh",
+  "language": "sh",
+  "pair": "x-release-files",
+  "source": "anonymised",
+  "severity": "lean",
+  "expect": {
+   "verdict": "lean",
+   "problems": []
+  },
+  "note": "Real file: one case statement decides what ships, shared by a stdin filter mode and a git ls-files mode."
+ },
+ {
+  "id": "x-install-script-a",
+  "file": "files/x-install-script-a.sh",
+  "language": "sh",
+  "pair": "x-install-script",
+  "source": "anonymised",
+  "severity": "lean",
+  "expect": {
+   "verdict": "lean",
+   "problems": []
+  },
+  "note": "Real file: a curl-pipe installer inside one function that checks the platform, downloads, verifies the checksum and hands setup.sh the terminal, with comments on each trap."
+ },
+ {
+  "id": "x-install-script-b",
+  "file": "files/x-install-script-b.sh",
+  "language": "sh",
+  "pair": "x-install-script",
+  "source": "anonymised",
+  "severity": "moderate",
+  "expect": {
+   "verdict": "bloated",
+   "problems": [
+    "excess_logging",
+    "speculative_generality"
+   ]
+  },
+  "units": [
+   {
+    "name": "download",
+    "problems": [
+     "speculative_generality",
+     "excess_logging"
+    ]
+   },
+   {
+    "name": "cleanup",
+    "problems": [
+     "speculative_generality",
+     "excess_logging"
+    ]
+   },
+   {
+    "name": "log_debug",
+    "problems": [
+     "excess_logging"
+    ]
+   },
+   {
+    "name": "fieldmark_install",
+    "problems": [
+     "excess_logging"
+    ]
+   }
+  ],
+  "note": "Same install steps, plus timestamped debug and info logging around every step and function, and environment knobs for retries, retry delay, keeping the temporary folder and debug output that nothing sets."
+ },
+ {
+  "id": "x-seed-library-a",
+  "file": "files/x-seed-library-a.sh",
+  "language": "sh",
+  "pair": "x-seed-library",
+  "source": "anonymised",
+  "severity": "subtle",
+  "expect": {
+   "verdict": "bloated",
+   "problems": [
+    "duplication"
+   ]
+  },
+  "note": "Identical except that the spare-survey loop pastes the bodies of write_survey and write_site inline, heredocs and all, instead of calling the two functions defined just above it."
+ },
+ {
+  "id": "x-seed-library-b",
+  "file": "files/x-seed-library-b.sh",
+  "language": "sh",
+  "pair": "x-seed-library",
+  "source": "anonymised",
+  "severity": "lean",
+  "expect": {
+   "verdict": "lean",
+   "problems": []
+  },
+  "note": "Real file: two small heredoc writers and a loop that seed a test library, with comments on why it writes the files directly."
+ },
+ {
+  "id": "x-find-duplicates-a",
+  "file": "files/x-find-duplicates-a.py",
+  "language": "py",
+  "pair": "x-find-duplicates",
+  "source": "written for the bench",
+  "severity": "lean",
+  "expect": {
+   "verdict": "lean",
+   "problems": []
+  },
+  "note": "Groups files by size, hashes only the candidates with hashlib.file_digest, and prints or deletes the copies in under seventy lines of code."
+ },
+ {
+  "id": "x-find-duplicates-b",
+  "file": "files/x-find-duplicates-b.py",
+  "language": "py",
+  "pair": "x-find-duplicates",
+  "source": "written for the bench",
+  "severity": "heavy",
+  "expect": {
+   "verdict": "bloated",
+   "problems": [
+    "premature_abstraction",
+    "speculative_generality",
+    "type_bloat",
+    "excess_logging",
+    "reinvents_builtin",
+    "defensive_excess",
+    "comment_bloat"
+   ]
+  },
+  "units": [
+   {
+    "name": "HashStrategy",
+    "problems": [
+     "premature_abstraction"
+    ]
+   },
+   {
+    "name": "HashStrategyFactory",
+    "problems": [
+     "premature_abstraction"
+    ]
+   },
+   {
+    "name": "ChunkedHashStrategy",
+    "problems": [
+     "reinvents_builtin",
+     "defensive_excess",
+     "excess_logging"
+    ]
+   },
+   {
+    "name": "FinderConfig",
+    "problems": [
+     "speculative_generality",
+     "defensive_excess"
+    ]
+   },
+   {
+    "name": "DuplicateFinderError",
+    "problems": [
+     "type_bloat"
+    ]
+   },
+   {
+    "name": "ScanResult",
+    "problems": [
+     "type_bloat"
+    ]
+   },
+   {
+    "name": "FileScanner",
+    "problems": [
+     "excess_logging"
+    ]
+   },
+   {
+    "name": "ReportFormatter",
+    "problems": [
+     "premature_abstraction",
+     "speculative_generality"
+    ]
+   },
+   {
+    "name": "DuplicateRemover",
+    "problems": [
+     "speculative_generality",
+     "defensive_excess"
+    ]
+   }
+  ],
+  "note": "The same scan behind an ABC and factory for one hash algorithm, a config dataclass with knobs the CLI never sets, three exceptions and three result dataclasses, a JSON formatter nothing can select, a log line per file, a hand-rolled chunk loop instead of hashlib.file_digest, and Args/Returns docstrings throughout."
+ },
+ {
+  "id": "x-releases-client-a",
+  "file": "files/x-releases-client-a.py",
+  "language": "py",
+  "pair": "x-releases-client",
+  "source": "written for the bench",
+  "severity": "moderate",
+  "expect": {
+   "verdict": "bloated",
+   "problems": [
+    "type_bloat",
+    "defensive_excess",
+    "thin_wrappers"
+   ]
+  },
+  "units": [
+   {
+    "name": "RepositoryRef",
+    "problems": [
+     "type_bloat"
+    ]
+   },
+   {
+    "name": "ApiToken",
+    "problems": [
+     "type_bloat"
+    ]
+   },
+   {
+    "name": "PageResult",
+    "problems": [
+     "type_bloat"
+    ]
+   },
+   {
+    "name": "ReleasePayload",
+    "problems": [
+     "type_bloat"
+    ]
+   },
+   {
+    "name": "GitHubReleases",
+    "problems": [
+     "defensive_excess",
+     "thin_wrappers"
+    ]
+   },
+   {
+    "name": "_release",
+    "problems": [
+     "defensive_excess"
+    ]
+   }
+  ],
+  "note": "Adds wrapper types for the repo string, the token and a page tuple plus TypedDicts, isinstance checks on already-typed arguments, except blocks that only log and re-raise, and alias and one-line forwarding methods."
+ },
+ {
+  "id": "x-releases-client-b",
+  "file": "files/x-releases-client-b.py",
+  "language": "py",
+  "pair": "x-releases-client",
+  "source": "written for the bench",
+  "severity": "lean",
+  "expect": {
+   "verdict": "lean",
+   "problems": []
+  },
+  "note": "A small urllib client: one dataclass, pagination by Link header that stops at the limit, drafts skipped, and a short CLI."
+ },
+ {
+  "id": "x-sales-report-a",
+  "file": "files/x-sales-report-a.py",
+  "language": "py",
+  "pair": "x-sales-report",
+  "source": "written for the bench",
+  "severity": "lean",
+  "expect": {
+   "verdict": "lean",
+   "problems": []
+  },
+  "note": "csv.DictReader, date.fromisoformat and a defaultdict of Decimals produce a region-by-month table with totals both ways."
+ },
+ {
+  "id": "x-sales-report-b",
+  "file": "files/x-sales-report-b.py",
+  "language": "py",
+  "pair": "x-sales-report",
+  "source": "written for the bench",
+  "severity": "moderate",
+  "expect": {
+   "verdict": "bloated",
+   "problems": [
+    "reinvents_builtin",
+    "verbose_logic"
+   ]
+  },
+  "units": [
+   {
+    "name": "parse_date",
+    "problems": [
+     "reinvents_builtin"
+    ]
+   },
+   {
+    "name": "is_leap_year",
+    "problems": [
+     "reinvents_builtin"
+    ]
+   },
+   {
+    "name": "days_in_month",
+    "problems": [
+     "reinvents_builtin"
+    ]
+   },
+   {
+    "name": "zero_pad",
+    "problems": [
+     "reinvents_builtin"
+    ]
+   },
+   {
+    "name": "unique_sorted",
+    "problems": [
+     "reinvents_builtin"
+    ]
+   },
+   {
+    "name": "monthly_revenue",
+    "problems": [
+     "verbose_logic"
+    ]
+   },
+   {
+    "name": "write_report",
+    "problems": [
+     "verbose_logic"
+    ]
+   }
+  ],
+  "note": "Hand-written date validation with its own leap-year rule, zero padding and de-duplication stand in for datetime, format specs and set, and the grouping and totals become manual loops with temporaries instead of defaultdict, sum and comprehensions."
+ },
+ {
+  "id": "x-webhook-receiver-a",
+  "file": "files/x-webhook-receiver-a.py",
+  "language": "py",
+  "pair": "x-webhook-receiver",
+  "source": "written for the bench",
+  "severity": "subtle",
+  "expect": {
+   "verdict": "bloated",
+   "problems": [
+    "comment_bloat"
+   ]
+  },
+  "units": [
+   {
+    "name": "signature_matches",
+    "problems": [
+     "comment_bloat"
+    ]
+   },
+   {
+    "name": "append_event",
+    "problems": [
+     "comment_bloat"
+    ]
+   },
+   {
+    "name": "WebhookHandler",
+    "problems": [
+     "comment_bloat"
+    ]
+   }
+  ],
+  "note": "Code identical to the lean version (same AST), but a restating module overview, section banners, Args/Returns docstrings and a comment narrating nearly every line double its length."
+ },
+ {
+  "id": "x-webhook-receiver-b",
+  "file": "files/x-webhook-receiver-b.py",
+  "language": "py",
+  "pair": "x-webhook-receiver",
+  "source": "written for the bench",
+  "severity": "lean",
+  "expect": {
+   "verdict": "lean",
+   "problems": []
+  },
+  "note": "An http.server handler that checks the HMAC signature before parsing and appends one JSON line per event under a lock."
+ },
+ {
+  "id": "x-cron-schedule",
+  "file": "files/x-cron-schedule.py",
+  "language": "py",
+  "pair": null,
+  "source": "written for the bench",
+  "severity": "justified",
+  "expect": {
+   "verdict": "lean",
+   "problems": []
+  },
+  "note": "Cron parsing with ranges, steps, names and macros plus a next-run search that skips by month, day and hour; the branches follow cron's own rules, including the day-of-month or day-of-week quirk."
+ },
+ {
+  "id": "x-uptime-monitor-a",
+  "file": "files/x-uptime-monitor-a.cs",
+  "language": "cs",
+  "pair": "x-uptime-monitor",
+  "source": "written for the bench",
+  "severity": "heavy",
+  "expect": {
+   "verdict": "bloated",
+   "problems": [
+    "premature_abstraction",
+    "speculative_generality",
+    "type_bloat",
+    "thin_wrappers",
+    "excess_logging",
+    "defensive_excess",
+    "comment_bloat",
+    "too_many_jobs"
+   ]
+  },
+  "units": [
+   {
+    "name": "UptimeMonitorOptions",
+    "problems": [
+     "speculative_generality",
+     "defensive_excess"
+    ]
+   },
+   {
+    "name": "IHealthCheckerFactory",
+    "problems": [
+     "premature_abstraction"
+    ]
+   },
+   {
+    "name": "HealthCheckerFactory",
+    "problems": [
+     "premature_abstraction",
+     "thin_wrappers"
+    ]
+   },
+   {
+    "name": "ISystemClock",
+    "problems": [
+     "premature_abstraction"
+    ]
+   },
+   {
+    "name": "SystemClock",
+    "problems": [
+     "thin_wrappers"
+    ]
+   },
+   {
+    "name": "InMemoryStatusStore",
+    "problems": [
+     "premature_abstraction",
+     "thin_wrappers"
+    ]
+   },
+   {
+    "name": "HealthCheckException",
+    "problems": [
+     "type_bloat"
+    ]
+   },
+   {
+    "name": "HttpHealthChecker",
+    "problems": [
+     "type_bloat",
+     "excess_logging",
+     "defensive_excess"
+    ]
+   },
+   {
+    "name": "CsvHistoryWriter",
+    "problems": [
+     "too_many_jobs",
+     "speculative_generality"
+    ]
+   },
+   {
+    "name": "WebhookAlertNotifier",
+    "problems": [
+     "too_many_jobs",
+     "speculative_generality"
+    ]
+   },
+   {
+    "name": "UptimeMonitor",
+    "problems": [
+     "excess_logging",
+     "defensive_excess"
+    ]
+   }
+  ],
+  "note": "The poller becomes six interfaces with single implementations, a factory, an options class read from environment variables nobody sets, a three-level exception hierarchy used for control flow, ThrowIfNull on every parameter, logging on every step, XML docs and regions throughout, and CSV history and webhook alerting in the same file."
+ },
+ {
+  "id": "x-uptime-monitor-b",
+  "file": "files/x-uptime-monitor-b.cs",
+  "language": "cs",
+  "pair": "x-uptime-monitor",
+  "source": "written for the bench",
+  "severity": "lean",
+  "expect": {
+   "verdict": "lean",
+   "problems": []
+  },
+  "note": "One monitor class, one record and a Main: parallel checks on a PeriodicTimer, a linked-token timeout, and a line printed only when a target changes state."
+ },
+ {
+  "id": "x-order-report-a",
+  "file": "files/x-order-report-a.cs",
+  "language": "cs",
+  "pair": "x-order-report",
+  "source": "written for the bench",
+  "severity": "lean",
+  "expect": {
+   "verdict": "lean",
+   "problems": []
+  },
+  "note": "Records deserialised with System.Text.Json and short LINQ pipelines for the per-customer summary and the data problems."
+ },
+ {
+  "id": "x-order-report-b",
+  "file": "files/x-order-report-b.cs",
+  "language": "cs",
+  "pair": "x-order-report",
+  "source": "written for the bench",
+  "severity": "moderate",
+  "expect": {
+   "verdict": "bloated",
+   "problems": [
+    "verbose_logic",
+    "duplication",
+    "dead_code"
+   ]
+  },
+  "units": [
+   {
+    "name": "OrderReport",
+    "problems": [
+     "verbose_logic",
+     "duplication",
+     "dead_code"
+    ]
+   },
+   {
+    "name": "Program",
+    "problems": [
+     "dead_code"
+    ]
+   }
+  ],
+  "note": "The LINQ grouping, sums, max and sort become dictionaries, loops and temporaries, the order total is computed again beside Order.Total, the bad-line message is built twice, and a commented-out CSV loader, an unused formatter and an unused constant are left behind."
+ },
+ {
+  "id": "x-password-policy-a",
+  "file": "files/x-password-policy-a.cs",
+  "language": "cs",
+  "pair": "x-password-policy",
+  "source": "written for the bench",
+  "severity": "subtle",
+  "expect": {
+   "verdict": "bloated",
+   "problems": [
+    "dead_code"
+   ]
+  },
+  "units": [
+   {
+    "name": "PasswordPolicy",
+    "problems": [
+     "dead_code"
+    ]
+   }
+  ],
+  "note": "Identical except for commented-out composition rules, three private helpers nothing calls and an unused legacy constant, about a quarter of the file."
+ },
+ {
+  "id": "x-password-policy-b",
+  "file": "files/x-password-policy-b.cs",
+  "language": "cs",
+  "pair": "x-password-policy",
+  "source": "written for the bench",
+  "severity": "lean",
+  "expect": {
+   "verdict": "lean",
+   "problems": []
+  },
+  "note": "A length-and-blocklist password policy with a rune-aware length check, following NIST SP 800-63B, in one small class."
+ },
+ {
+  "id": "x-filter-expression",
+  "file": "files/x-filter-expression.cs",
+  "language": "cs",
+  "pair": null,
+  "source": "written for the bench",
+  "severity": "justified",
+  "expect": {
+   "verdict": "lean",
+   "problems": []
+  },
+  "note": "A lexer, recursive-descent parser and small AST for a search-box filter language; the token kinds, node records and positioned syntax error are what the problem needs."
+ },
+ {
+  "id": "py-stall-fees",
+  "file": "files/py-stall-fees.py",
+  "language": "py",
+  "pair": null,
+  "source": "invented",
+  "severity": "subtle",
+  "expect": {
+   "verdict": "ok",
+   "problems": [
+    "too_many_jobs"
+   ]
+  },
+  "units": [
+   {
+    "name": "rename_pitch",
+    "problems": [
+     "too_many_jobs"
+    ]
+   }
+  ],
+  "note": "A plain monthly fee script for a farmers' market that is lean line by line, but also carries a rename-pitch command that edits the bookings file, an unrelated job behind the same main."
+ }
+]

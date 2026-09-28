@@ -1,0 +1,651 @@
+[
+  {
+    "id": "good-readline-ctrl-c",
+    "category": "good",
+    "repo": "dirmirror",
+    "hash": "db10bee551959d1adeebda17913a9150a194e078",
+    "message": "fix(terminal): return end of input instead of crashing after Ctrl-C\n\n- readline closes itself on Ctrl-C, and the next prompt hit ERR_USE_AFTER_CLOSE\n- it crashed at any nested prompt: settings, the add flow, a confirmation",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "problems": []
+    },
+    "note": "Original: names the crash, the error code and where it happened; bullets add the cause and the reach."
+  },
+  {
+    "id": "good-ssh-key-spaces",
+    "category": "good",
+    "repo": "dirmirror",
+    "hash": "c64ec21544c7ce291ec9fbe53fedf2495c24f7e9",
+    "message": "fix(config): refuse an SSH key path with whitespace in it\n\n- rsync word-splits -e and ignores quotes, so ssh got half the path",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "problems": []
+    },
+    "note": "Specific subject and one bullet giving the reason the diff's comment gives."
+  },
+  {
+    "id": "good-utf16-outbox",
+    "category": "good",
+    "repo": "fieldmark",
+    "hash": "f15adb42be83c6f47cc2609b3c3048f8f82399c0",
+    "message": "fix(sharing): measure an outbox body in UTF-16 units, as the server does\n\n- A site with long non-Latin notes was dropped as too big, never sent",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "problems": []
+    },
+    "note": "Original: precise subject (UTF-16 units, as the server counts) and a concrete symptom."
+  },
+  {
+    "id": "good-trace-off-monotonic",
+    "category": "good",
+    "repo": "dirmirror",
+    "hash": "2dc6a1c9169130babd07225556b5583e2d1ddfc7",
+    "message": "fix(trace): honour DIRMIRROR_DEBUG=off and time with a monotonic clock\n\n- off, no and any capitalisation of false now mean off, as the comment claimed\n- a wall clock stepped by a time sync could make a duration negative",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "problems": []
+    },
+    "note": "Original: two small related trace fixes, each bullet giving the concrete failure."
+  },
+  {
+    "id": "good-ungroup-only-pair",
+    "category": "good",
+    "repo": "dirmirror",
+    "hash": "1392731d5cc20a92006d86af8688135f9851b8e1",
+    "message": "fix(domain): refuse to ungroup a mapping's only pair\n\n- an empty pairs list serializes to no line at all, losing the name silently\n- the screen already guarded it; the invariant now lives with the function",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "problems": []
+    },
+    "note": "Original: says what is refused and why an empty pairs list loses the mapping's name."
+  },
+  {
+    "id": "good-click-selects-card",
+    "category": "good",
+    "repo": "fieldmark",
+    "hash": "8e282e0cbcf70eb064b447293312147162456e7e",
+    "message": "fix(notes): select a card or a picture when it is clicked\n\n- A click on one did nothing, and typing went on wherever the caret had been",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "problems": []
+    },
+    "note": "Original: user-visible behaviour in the subject, the old symptom in one bullet."
+  },
+  {
+    "id": "good-rename-rsync-version",
+    "category": "good",
+    "repo": "dirmirror",
+    "hash": "0ff57570a086798e59d02bb10a382fe2dcde3356",
+    "message": "refactor(sync): rename rsync-command-line to rsync-version\n\n- the command line moved next to shell-quote; only the version helpers stayed",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "problems": []
+    },
+    "note": "Original: a pure rename, with a bullet saying why the old name stopped fitting."
+  },
+  {
+    "id": "good-ignore-jetbrains",
+    "category": "good",
+    "repo": "robin-agents",
+    "hash": "7b4c88d765581ee622d27d3c8c581d480a5003a7",
+    "message": "chore: ignore JetBrains files",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "problems": []
+    },
+    "note": "Original: a one-line .gitignore change needs nothing more than this."
+  },
+  {
+    "id": "good-unused-constant",
+    "category": "good",
+    "repo": "fieldmark",
+    "hash": "d4336f4b5aa81729fda751a79f64894359a5a580",
+    "message": "refactor(notes): drop an unused bottom margin constant",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "problems": []
+    },
+    "note": "Original: exact and complete for a two-line deletion plus a doc tweak."
+  },
+  {
+    "id": "good-flush-before-prompt",
+    "category": "good",
+    "repo": "dirmirror",
+    "hash": "db58f59030925e2ee0dae7a787176fadd318d64c",
+    "message": "fix(log): flush before every question, so a waiting session is on disk\n\n- setup dots for minutes with no flush, so giving up left no file at all\n- a prompt is about to block on the user, which makes the write free",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "problems": []
+    },
+    "note": "Original: says when it flushes and why, and why the timing is free."
+  },
+  {
+    "id": "good-caret-after-words",
+    "category": "good",
+    "repo": "fieldmark",
+    "hash": "9b342a80368016d06d4647f0137f2f85b96ed6c7",
+    "message": "fix(notes): open a note with the caret after its words, not before them",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "problems": []
+    },
+    "note": "Original: subject alone fully describes a small, visible fix."
+  },
+  {
+    "id": "good-unreachable-guest",
+    "category": "good",
+    "repo": "dirmirror",
+    "hash": "20dbb2a4c6ac2bce351603aa92df2727d2cae3ee",
+    "message": "fix(wizard): tell an unreachable guest apart from a missing folder\n\n- only test -d exiting 1 means missing; ssh failing said \"does not exist\"\n- an unreachable guest now gets the same silence settings.ts gives it",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "problems": []
+    },
+    "note": "Original: distinguishes the two cases and names the exit code rule."
+  },
+  {
+    "id": "good-quicklook-copies",
+    "category": "good",
+    "repo": "fieldmark",
+    "hash": "ea6cf0dd4d317fa37f8f13a4b8ac88bd476793d9",
+    "message": "fix(notes): clear Quick Look's photo copies from earlier launches\n\n- macOS empties its temporary folder only at startup, so they piled up",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "problems": []
+    },
+    "note": "Original: one bullet with the macOS behaviour that made the copies pile up."
+  },
+  {
+    "id": "good-hook-first-sync-test",
+    "category": "good",
+    "repo": "dirmirror",
+    "hash": "6d6f07b94e5bc06fc50af754ee7ff11889c60722",
+    "message": "test(sync): cover the hook on a first sync and on a no-op sync",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "problems": []
+    },
+    "note": "Original: test-only commit naming both scenarios the two new tests cover."
+  },
+  {
+    "id": "good-host-path-inside-base",
+    "category": "good",
+    "repo": "dirmirror",
+    "hash": "77ef5f6a520e76766491765ee8d3d17b2ce3af3a",
+    "message": "fix(wizard): keep the host path suggestion inside the host base\n\n- a guest path of ~ offered the whole host home as a --delete destination\n- only the base rule matches the base itself; the home rule needs a descendant",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "problems": []
+    },
+    "note": "Original: the dangerous case (~ as a --delete destination) and the rule that fixes it."
+  },
+  {
+    "id": "good-prompt-suggestions-off",
+    "category": "good",
+    "repo": "drill-kit",
+    "hash": "3b8ad64863b52d5a89d2bc014f09c7d3e5c58e5f",
+    "message": "chore(config): turn off prompt suggestions for this project\n\n- Suggested prompts were giving away answers during drills\n\nCo-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01NTbZYJHmRe7s1F9R4rQrQ5",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "problems": []
+    },
+    "note": "Original: config change with the reason; the trailers are ignored when judging."
+  },
+  {
+    "id": "good-click-before-double",
+    "category": "good",
+    "repo": "fieldmark",
+    "hash": "e8af483c542aa1859759f946c62714f091162ba6",
+    "message": "test(notes): click a photo before double-clicking it, as a person does",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "problems": []
+    },
+    "note": "Original: test helper change described in terms of what a person does."
+  },
+  {
+    "id": "ai-normalize-base-paths",
+    "category": "ai",
+    "repo": "dirmirror",
+    "hash": "1fb88ba2be7ccfc85caf7f7620520e7386126092",
+    "message": "fix(config): normalize base paths for robust prefix matching\n\n- Add base() helper that strips trailing slashes and applies defaults\n- Ensure HOST_BASE falls back to the default when empty, like GUEST_BASE\n- Add comprehensive tests for trailing slash and empty base edge cases",
+    "expect": {
+      "verdict": "fail",
+      "human": false,
+      "problems": [
+        "ai_words"
+      ]
+    },
+    "note": "Correct content wrapped in robust/ensure/comprehensive and a mechanical add/ensure/add list."
+  },
+  {
+    "id": "ai-session-log-edge-cases",
+    "category": "ai",
+    "repo": "dirmirror",
+    "hash": "dda84bef4ee9ddc67d6efee480a71df01a4a6638",
+    "message": "fix(log): improve session log error handling and edge cases\n\n- Reset complained flag when logging is re-enabled for proper feedback\n- Handle bare filenames in directoryOf to prevent incorrect behavior\n- Add tests covering these scenarios",
+    "expect": {
+      "verdict": "fail",
+      "human": false,
+      "problems": [
+        "ai_words",
+        "subject_vague"
+      ]
+    },
+    "note": "'improve ... error handling and edge cases' is a template subject; bullets say 'proper' and 'incorrect behavior' instead of the symptoms."
+  },
+  {
+    "id": "ai-hook-secrets",
+    "category": "ai",
+    "repo": "dirmirror",
+    "hash": "aff017d2329ed0ccaba74fb967f748d057d1f7b3",
+    "message": "fix(log): prevent post-transfer commands from leaking into the log\n\n- Wrap the pair listing in withoutRecording to keep secrets out of logs\n- This ensures tokens in hooks are never persisted, enhancing security\n- Add test coverage for both the pick and ungroup flows",
+    "expect": {
+      "verdict": "fail",
+      "human": false,
+      "problems": [
+        "ai_words",
+        "fewer_bullets"
+      ]
+    },
+    "note": "Subject is fine; 'This ensures ... enhancing security' repeats it as a benefit claim and the test bullet adds nothing."
+  },
+  {
+    "id": "ai-strengthen-excludes-tests",
+    "category": "ai",
+    "repo": "dirmirror",
+    "hash": "f728467cb03d59f1c9728e135112bdd3d8278c0c",
+    "message": "test(sync): strengthen test coverage for default excludes and logging\n\n- Add test verifying .dirmirror is included in DEFAULT_EXCLUDES\n- Enhance assertions to ensure log files exist before negative checks\n- Improves overall reliability of the test suite",
+    "expect": {
+      "verdict": "fail",
+      "human": false,
+      "problems": [
+        "ai_words",
+        "fewer_bullets"
+      ]
+    },
+    "note": "'strengthen', 'enhance', 'ensure' and a closing vague-benefit bullet; never says why .dirmirror matters."
+  },
+  {
+    "id": "ai-wizard-test-robustness",
+    "category": "ai",
+    "repo": "dirmirror",
+    "hash": "9ddca06c06c7b42e47bb6a80701c925bbe1d62f7",
+    "message": "test(wizard): enhance test robustness for mappings and menu\n\n- Add test ensuring ~ never suggests the host home directory\n- Add additional assertions to prevent false positives in column tests\n- Clarify comments regarding code point padding behavior",
+    "expect": {
+      "verdict": "fail",
+      "human": false,
+      "problems": [
+        "ai_words",
+        "subject_vague"
+      ]
+    },
+    "note": "Generic 'enhance test robustness' subject with enhance/ensure filler; bullets are right but read as a changelog."
+  },
+  {
+    "id": "ai-pasted-card-own-line",
+    "category": "ai",
+    "repo": "fieldmark",
+    "hash": "35e5fae4351dda3f2570767f73fe5ca75ffd395e",
+    "message": "fix(notes): ensure pasted cards and pictures stay on their own line\n\n- Add keepCardsOnTheirOwnLines helper to handle line breaks during paste\n- Add isLoneLineHolder to detect standalone attachments\n- Add test coverage for pasting at the start, middle and end of a line",
+    "expect": {
+      "verdict": "fail",
+      "human": false,
+      "problems": [
+        "ai_words",
+        "fewer_bullets"
+      ]
+    },
+    "note": "Accurate but mechanical: three 'Add ...' bullets naming functions and tests, and 'ensure' in the subject."
+  },
+  {
+    "id": "ai-format-bar-polish",
+    "category": "ai",
+    "repo": "fieldmark",
+    "hash": "d3bec68155eb4eabf426e72f2afc6e7cb7100bb4",
+    "message": "fix(notes): align format bar with text column for a polished look\n\n- Expose the text column range from the editor via onColumnChange\n- Use regular control size for better usability and visual consistency\n- Add a test to verify column calculation across different widths",
+    "expect": {
+      "verdict": "fail",
+      "human": false,
+      "problems": [
+        "ai_words"
+      ]
+    },
+    "note": "'for a polished look' and 'better usability and visual consistency' are vague benefit claims typical of agents."
+  },
+  {
+    "id": "ai-undo-cleanup",
+    "category": "ai",
+    "repo": "fieldmark",
+    "hash": "ff53f018b2d64b6a74b645d389f8d5c780503a6f",
+    "message": "fix(notes): properly clean up undo stack and editor on leave\n\n- Call forgetUndo() when leaving to prevent stale undo actions\n- Clear the editor box references to avoid potential memory leaks\n- Refactor test rig to find the text view dynamically",
+    "expect": {
+      "verdict": "fail",
+      "human": false,
+      "problems": [
+        "ai_words"
+      ]
+    },
+    "note": "'properly clean up' and 'avoid potential memory leaks' hedge where the diff states the concrete bug (Edit > Undo on a gone editor)."
+  },
+  {
+    "id": "ai-popover-height",
+    "category": "ai",
+    "repo": "fieldmark",
+    "hash": "140485e6932aa1eb6a9f2e01bccc20254c02cbb7",
+    "message": "fix(notes): correct popover height calculation to account for dividers\n\n- Update measuredSize() to include divider height and spacing\n- Extract HighlightNotesStack into a reusable view for better testability\n- This ensures the popover content fits without unnecessary scrolling",
+    "expect": {
+      "verdict": "fail",
+      "human": false,
+      "problems": [
+        "ai_words"
+      ]
+    },
+    "note": "'for better testability' and 'This ensures ...' closer are agent tics; the real symptom (Reply hidden under a scroll bar) is lost."
+  },
+  {
+    "id": "ai-emphasis-popover",
+    "category": "ai",
+    "repo": "fieldmark",
+    "hash": "9fc671840e15184cc68ecc989f37bdab2ff37414",
+    "message": "fix(notes): enhance visual emphasis for notes in open popovers\n\n- Add emphasize() method to highlight the words of the open notes\n- Clear emphasis when popovers close to maintain a consistent state\n- Add unit and drawing tests to validate the new behavior",
+    "expect": {
+      "verdict": "fail",
+      "human": false,
+      "problems": [
+        "ai_words",
+        "fewer_bullets"
+      ]
+    },
+    "note": "'enhance visual emphasis' and 'maintain a consistent state'; the test bullet is padding."
+  },
+  {
+    "id": "ai-streamline-symlink",
+    "category": "ai",
+    "repo": "robin-agents",
+    "hash": "a39dd222a90a055230f1aeabce20e5e81763eae3",
+    "message": "refactor(harborline-worktrees): streamline symlink detection logic\n\n- Replace isSymlink helper with lstatOrNull for a more robust approach\n- Reduce redundant filesystem calls when checking the media path\n- Reformat imports in hydrate.test.ts for improved readability",
+    "expect": {
+      "verdict": "fail",
+      "human": false,
+      "problems": [
+        "ai_words"
+      ]
+    },
+    "note": "streamline/robust/improved readability; also files-by-file listing including an import reformat."
+  },
+  {
+    "id": "ai-complexity-gate",
+    "category": "ai",
+    "repo": "dirmirror",
+    "hash": "c2385ce61691e853fc5809e0098c8783efa84296",
+    "message": "chore(test): integrate complexity gate into the test workflow\n\n- Update npm test to run the fta complexity check before vitest\n- Add test:unit script for running the suite in isolation\n- Update README to reflect the enhanced testing workflow",
+    "expect": {
+      "verdict": "fail",
+      "human": false,
+      "problems": [
+        "ai_words"
+      ]
+    },
+    "note": "Accurate, but 'integrate ... workflow', 'enhanced testing workflow' and the Update/Add/Update list read as generated."
+  },
+  {
+    "id": "type-fix-for-prettier",
+    "category": "wrong_type",
+    "repo": "robin-agents",
+    "hash": "0f976926d134991abdaa3c5db060a7969cbcbb66",
+    "message": "fix(how-to-commit): align the common types table\n\n- Prettier's output over the existing markdown; no wording changed",
+    "expect": {
+      "verdict": "fail",
+      "human": true,
+      "problems": [
+        "type"
+      ]
+    },
+    "note": "Whitespace-only table alignment fixes nothing: style (or docs), not fix."
+  },
+  {
+    "id": "type-fix-for-blank-line",
+    "category": "wrong_type",
+    "repo": "fieldmark",
+    "hash": "85954882f5d8c4b697f8b69a5d78ce1a677894ee",
+    "message": "fix(notes): drop the blank line the tint tests' move left behind",
+    "expect": {
+      "verdict": "fail",
+      "human": true,
+      "problems": [
+        "type"
+      ]
+    },
+    "note": "Removing one blank line in a test file is style."
+  },
+  {
+    "id": "type-feat-for-help",
+    "category": "wrong_type",
+    "repo": "fieldmark",
+    "hash": "f47af7820e545e9ca646d9da7ee43a382832a459",
+    "message": "feat(help): say double-clicking a photo opens Quick Look",
+    "expect": {
+      "verdict": "fail",
+      "human": true,
+      "problems": [
+        "type"
+      ]
+    },
+    "note": "Only HelpGuide.md (plus the VERSION bump) changes; describing an existing feature is docs."
+  },
+  {
+    "id": "type-fix-for-new-test",
+    "category": "wrong_type",
+    "repo": "dirmirror",
+    "hash": "86117fb5e9484d66b97cb1e78884557775fd4fda",
+    "message": "fix(domain): cover a guest path that is the guest home itself",
+    "expect": {
+      "verdict": "fail",
+      "human": true,
+      "problems": [
+        "type"
+      ]
+    },
+    "note": "Adds a test and rewords a test comment; no source change, so test."
+  },
+  {
+    "id": "type-feat-for-new-test",
+    "category": "wrong_type",
+    "repo": "dirmirror",
+    "hash": "02783edb9ff170f5625faa10d4c54aefc0654ac5",
+    "message": "feat(config): cover the SSH_KEY override that setup now reads",
+    "expect": {
+      "verdict": "fail",
+      "human": true,
+      "problems": [
+        "type"
+      ]
+    },
+    "note": "Test-only commit labelled feat."
+  },
+  {
+    "id": "type-fix-for-refactor",
+    "category": "wrong_type",
+    "repo": "dirmirror",
+    "hash": "0a5269fcd75a8ebd64faa452e79ec864ec1ffc5a",
+    "message": "fix(domain): build the guest home in one place\n\n- virtiofs and the settings screen rebuilt /home/<user> by hand",
+    "expect": {
+      "verdict": "fail",
+      "human": true,
+      "problems": [
+        "type"
+      ]
+    },
+    "note": "Swaps two hand-built paths for guestHome() with identical output: refactor, not fix."
+  },
+  {
+    "id": "wrong-preview-edits-photo",
+    "category": "inaccurate",
+    "repo": "fieldmark",
+    "hash": "146dc89f4cd78be7415f326f2691a594c6f700c2",
+    "message": "docs: say Preview edits the photo in the notes directly",
+    "expect": {
+      "verdict": "fail",
+      "human": true,
+      "problems": [
+        "subject_inaccurate"
+      ]
+    },
+    "note": "The help text says the opposite: Preview opens a copy, so the notes' photo is unchanged."
+  },
+  {
+    "id": "wrong-voiceover-alt",
+    "category": "inaccurate",
+    "repo": "fieldmark",
+    "hash": "30efbf9ea1018b4a64a4d861f79aa1e34b394da7",
+    "message": "fix(notes): have VoiceOver read a photo's alt text",
+    "expect": {
+      "verdict": "fail",
+      "human": true,
+      "problems": [
+        "subject_inaccurate"
+      ]
+    },
+    "note": "Alt text was already read; the diff only changes the label word from Picture to Photo."
+  },
+  {
+    "id": "wrong-bullet-cache",
+    "category": "inaccurate",
+    "repo": "fieldmark",
+    "hash": "00cef981e0662b860e837c1a51c494c2354ef257",
+    "message": "fix(notes): draw a picture pasted inside rich text at once\n\n- Hand the sanitizer the editor's image loader for pasted pictures\n- Cache decoded pictures so pasting the same one again is instant",
+    "expect": {
+      "verdict": "fail",
+      "human": true,
+      "problems": [
+        "bullet_inaccurate"
+      ]
+    },
+    "note": "Subject and first bullet are right; nothing in the diff caches anything."
+  },
+  {
+    "id": "wrong-comment-as-fix",
+    "category": "inaccurate",
+    "repo": "dirmirror",
+    "hash": "973fd8a8c1c7bf197972fd40708ebf7f321fd7e3",
+    "message": "fix(log): record a refused config dir in the session log",
+    "expect": {
+      "verdict": "fail",
+      "human": true,
+      "problems": [
+        "type",
+        "subject_inaccurate"
+      ]
+    },
+    "note": "Only a comment changes, and it says the opposite: nothing records it because the log was never built."
+  },
+  {
+    "id": "rule-header-75",
+    "category": "rule_break",
+    "repo": "robin-agents",
+    "hash": "44c58569e6fb550497b6aad49d9d4811e6a7dab0",
+    "message": "fix(reply-footer): quiet a segment that returns nothing, explain odd throws\n\n- A segment that forgets to return no longer leaves a dangling separator\n- A thrown string or null reads \"<name> failed: <value>\" instead of crashing",
+    "expect": {
+      "verdict": "fail",
+      "human": true,
+      "problems": [
+        "too_long_header"
+      ]
+    },
+    "note": "Original message is good in content but the first line is 75 characters, over the 72 limit."
+  },
+  {
+    "id": "rule-trailing-period",
+    "category": "rule_break",
+    "repo": "dirmirror",
+    "hash": "413c50f4976d0614d1156396114f21ff33470b96",
+    "message": "docs: say where the session log lives and that an old one may linger.",
+    "expect": {
+      "verdict": "fail",
+      "human": true,
+      "problems": [
+        "format"
+      ]
+    },
+    "note": "Accurate, but the subject ends with a period."
+  },
+  {
+    "id": "edge-history-bloat",
+    "category": "borderline",
+    "repo": "robin-agents",
+    "hash": "5d9e7ad2ade5dd2366a99a67c3e172b151d27730",
+    "message": "feat(refining-tickets): avoid history bloat",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "problems": [
+        "subject_vague"
+      ]
+    },
+    "note": "Original. 'avoid history bloat' hints at the rule without saying it is about discarded variations; acceptable for a one-line skill tweak."
+  },
+  {
+    "id": "edge-npm-updated-lockfile",
+    "category": "borderline",
+    "repo": "robin-agents",
+    "hash": "268b13ba0f1a2b6b540cfa49e170496006d0b5ce",
+    "message": "chore: npm i updated the package-lock.json",
+    "expect": {
+      "verdict": "fail",
+      "human": true,
+      "problems": [
+        "format",
+        "subject_vague"
+      ]
+    },
+    "note": "Original. Past tense with npm as the subject, and it hides the real change: version reset to 0.1.0 and the license field dropped."
+  },
+  {
+    "id": "edge-bullet-repeats-subject",
+    "category": "borderline",
+    "repo": "dirmirror",
+    "hash": "4942171166800eab6b93e2d6fe5beb32c55f9e25",
+    "message": "refactor(config): build the default guest base from guestHome\n\n- defaultGuestBase now calls guestHome instead of spelling out /Users",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "problems": [
+        "fewer_bullets"
+      ]
+    },
+    "note": "Accurate and human; the bullet only restates the subject, so it could go."
+  },
+  {
+    "id": "edge-scope-skills",
+    "category": "borderline",
+    "repo": "robin-agents",
+    "hash": "d7bd7bc8bb8ee26db61ebd88529853f5260af91f",
+    "message": "docs(skills): say the transfer URL is an exact route, not a prefix\n\n- an extra path segment gets a 404 that looks like someone else's request",
+    "expect": {
+      "verdict": "pass",
+      "human": true,
+      "problems": [
+        "scope"
+      ]
+    },
+    "note": "Only one skill changes, so 'skills' is broader than needed; tolerable given how long the skill's own name is."
+  }
+]

@@ -1,0 +1,614 @@
+[
+  {
+    "id": "potter-name-parse",
+    "file": "tests/potter-name-parse.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "bench manifest",
+    "note": "Tests a whitespace-only name, exactly 50 and 51 characters, full-width letters and the length counted after collapsing spaces."
+  },
+  {
+    "id": "capacity-parse",
+    "file": "tests/capacity-parse.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "bench manifest",
+    "note": "Tests 30 and 31 spots, the course's minimum and one below it, a fraction, a number written in words and padding spaces."
+  },
+  {
+    "id": "book-route",
+    "file": "tests/book-route.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "bench manifest",
+    "note": "Tests a full workshop, a duplicate name in another case and a started workshop (all 409), a blank name (400) and an unknown workshop (404)."
+  },
+  {
+    "id": "last-spot-race",
+    "file": "tests/last-spot-race.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "bench manifest",
+    "note": "Races two potters for the last spot, twelve for five spots and one name submitted twice at once, and repeats a name on a full workshop, though it has no started-workshop case."
+  },
+  {
+    "id": "invite-ics",
+    "file": "tests/invite-ics.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "bench manifest",
+    "note": "Tests commas and semicolons escaped in the workshop name and a 404 for an unknown workshop besides the normal invite fields."
+  },
+  {
+    "id": "workshop-start-parse",
+    "file": "tests/workshop-start-parse.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "bench manifest",
+    "note": "Tests both Vancouver clock changes, a start earlier and later today, more than a year out and February 29 in a non-leap year, though no blank or malformed field."
+  },
+  {
+    "id": "calendar-route",
+    "file": "tests/calendar-route.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "bench manifest",
+    "note": "Tests an evening workshop that is already the next day in UTC, same-day ordering, December linking to January and a 404 for month 13."
+  },
+  {
+    "id": "course-template-parse",
+    "file": "tests/course-template-parse.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "bench manifest",
+    "note": "Rejects a capacity over 30, minimum potters above the capacity, no formats, an off-step duration and a colour that breaks out of the CSS rule, though not exactly 31 spots or a missing field."
+  },
+  {
+    "id": "workshop-name-parse",
+    "file": "tests/workshop-name-parse.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "bench manifest",
+    "note": "Tests empty and whitespace-only names, exactly 80 and 81 characters, a NUL character, emoji and angle brackets, even though some sit in a test named test1 or a bundle."
+  },
+  {
+    "id": "booking-service",
+    "file": "tests/booking-service.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": true,
+    "source": "bench manifest",
+    "note": "Tests an invalid name and the full and duplicate messages, but the full-workshop test calls the mock instead of the service, and no duplicate, closed or failing repository reaches bookForWorkshop."
+  },
+  {
+    "id": "booking-form-route",
+    "file": "tests/booking-form-route.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": true,
+    "source": "bench manifest",
+    "note": "The GET tests cover a full workshop and a non-UUID id (404), but the POST side only tries a duplicate, with a check a 404 would also pass, and never a blank name or a started workshop."
+  },
+  {
+    "id": "booking-repository",
+    "file": "tests/booking-repository.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": true,
+    "source": "bench manifest",
+    "note": "Tests a full workshop and a workshop that has already started, but not a duplicate name or a booking exactly at the start time."
+  },
+  {
+    "id": "create-workshop-route",
+    "file": "tests/create-workshop-route.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "bench manifest",
+    "note": "Tests a blank duration falling back to the default, 31 spots and a format the course does not offer (400) and a past date, though the 30-spot test asserts nothing and an unknown course is never tried."
+  },
+  {
+    "id": "duration-parse",
+    "file": "tests/duration-parse.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": true,
+    "source": "bench manifest",
+    "note": "Rejects 30, 540 and 100 minutes, but never pins 60 or 480 as accepted, tries no non-numeric input, and its zero test cannot fail."
+  },
+  {
+    "id": "month-grid",
+    "file": "tests/month-grid.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "bench manifest",
+    "note": "Tests the padding days before the 1st, a four-week February and a six-week August on already-parsed months, though no grid that crosses into a new year."
+  },
+  {
+    "id": "booking-shared-state",
+    "file": "tests/booking-shared-state.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "bench manifest",
+    "note": "Tests the last spot, a full workshop and a repeat name (409) and a blank name (400), though the first four only pass in file order."
+  },
+  {
+    "id": "courses-registry",
+    "file": "tests/courses-registry.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": true,
+    "source": "bench manifest",
+    "note": "Tests that a course with no template returns nothing, but never a malformed template file, and its other extra tests are a count, a spy and a placeholder."
+  },
+  {
+    "id": "qr-code-route",
+    "file": "tests/qr-code-route.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "bench manifest",
+    "note": "Tests a 404 for an unknown workshop besides the SVG content type and the cache header."
+  },
+  {
+    "id": "workshop-page",
+    "file": "tests/workshop-page.test.ts",
+    "framework": "vitest",
+    "covers_edges": false,
+    "borderline": true,
+    "source": "bench manifest",
+    "note": "Tests a full workshop, open spot lines and a hostile potter name, but never asks for an unknown or malformed workshop id, so the handler's 404 is untested."
+  },
+  {
+    "id": "security-headers",
+    "file": "tests/security-headers.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "bench manifest",
+    "note": "Tests a booking posted from another site (403) and the policy on several pages, though not a post with no Origin header, and the nosniff check cannot fail."
+  },
+  {
+    "id": "e2e-book-until-full",
+    "file": "tests/e2e-book-until-full.test.ts",
+    "framework": "playwright",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "bench manifest",
+    "note": "Takes the last spot and then finds the form full, and is refused a duplicate name typed in lowercase, though there is no blank name or started workshop."
+  },
+  {
+    "id": "e2e-calendar",
+    "file": "tests/e2e-calendar.test.ts",
+    "framework": "playwright",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "bench manifest",
+    "note": "Tests a month that does not exist (404) and an evening workshop shown on its Vancouver day, though no empty month or move from December to January."
+  },
+  {
+    "id": "e2e-create-workshop",
+    "file": "tests/e2e-create-workshop.test.ts",
+    "framework": "playwright",
+    "covers_edges": false,
+    "borderline": true,
+    "source": "bench manifest",
+    "note": "Its one edge case is a start time skipped by the spring clock change; there is no over-capacity, blank name, past date or unknown course, and the rest are happy-path runs."
+  },
+  {
+    "id": "e2e-workshop-page",
+    "file": "tests/e2e-workshop-page.test.ts",
+    "framework": "playwright",
+    "covers_edges": false,
+    "borderline": true,
+    "source": "bench manifest",
+    "note": "Tests a full workshop's stamp and blank lines for open spots, but the full-message test fakes the server's answer, and there is no unknown workshop or started workshop."
+  },
+  {
+    "id": "em-app",
+    "file": "tests/cov-em-app.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "anonymised",
+    "note": "Tests a 404, a route that throws (500 with the details hidden), security headers on error pages, form posts from another site or with no origin (403) and a body over 16 KiB (413)."
+  },
+  {
+    "id": "em-calendar-day",
+    "file": "tests/cov-em-calendar-day.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "anonymised",
+    "note": "Tests 11:30 PM Vancouver staying on its own day, both clock changes, the first and last minutes of the grid, a workshop past the grid, a full workshop, markup in a name and a retired course."
+  },
+  {
+    "id": "em-calendar-routes",
+    "file": "tests/cov-em-calendar-routes.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "anonymised",
+    "note": "Tests the last Vancouver evening of a month after UTC has moved on, December to January, the 2000 and 2100 limits, invalid months (404) and an empty month."
+  },
+  {
+    "id": "em-capacity",
+    "file": "tests/cov-em-capacity.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "anonymised",
+    "note": "Tests 4 and 30 spots, 3 and 31, an empty string, undefined, a word, a decimal and a negative number."
+  },
+  {
+    "id": "em-code-rules",
+    "file": "tests/cov-em-code-rules.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": true,
+    "source": "anonymised",
+    "note": "Tests several ways to write an inline style or a course's id and name, and one near miss for the course rule, but the inline-style rule's only clean sample is an ordinary class attribute."
+  },
+  {
+    "id": "em-css-values",
+    "file": "tests/cov-em-css-values.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "anonymised",
+    "note": "Tests nine kinds of raw CSS value against near misses such as a 1px border with a token colour and margin 0 auto, plus the tokens.css exemption."
+  },
+  {
+    "id": "em-duration",
+    "file": "tests/cov-em-duration.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "anonymised",
+    "note": "Pins the offered range from 60 to 480 minutes and rejects 45 and 500 minutes, an empty string, undefined and a word."
+  },
+  {
+    "id": "em-workshop-name",
+    "file": "tests/cov-em-workshop-name.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "anonymised",
+    "note": "Tests empty, whitespace-only, undefined and numeric input, exactly 80 and 81 characters, a NUL character and a right-to-left override."
+  },
+  {
+    "id": "em-workshop-page",
+    "file": "tests/cov-em-workshop-page.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "anonymised",
+    "note": "Tests the page when full, one spot short of full, under way, below and at the minimum potters, with a one-potter minimum and with its course template gone."
+  },
+  {
+    "id": "em-workshop-routes",
+    "file": "tests/cov-em-workshop-routes.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "anonymised",
+    "note": "Tests 404s for a non-UUID, a non-version-4 UUID and an unknown workshop on all three routes, a later route under /workshops, links built from the request host and markup in names."
+  },
+  {
+    "id": "em-workshop",
+    "file": "tests/cov-em-workshop.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "anonymised",
+    "note": "Tests bookingStatus 1 ms before the start, exactly at it and during the workshop, with 7 of 8 and 8 of 8 spots taken; its inputs are already parsed, so it needs no invalid input."
+  },
+  {
+    "id": "em-workshops-repository",
+    "file": "tests/cov-em-workshops-repository.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "anonymised",
+    "note": "Tests a missing id, workshops exactly at the window's start (included) and end (excluded), ties broken by name, and the schema refusing 31 spots or minimum potters above capacity."
+  },
+  {
+    "id": "em-field-error",
+    "file": "tests/cov-em-field-error.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "anonymised",
+    "note": "Tests the exact markup and that markup in the message is escaped, the one edge this small view has."
+  },
+  {
+    "id": "em-file-length",
+    "file": "tests/cov-em-file-length.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": true,
+    "source": "anonymised",
+    "note": "Tests the line counter with and without a trailing newline and on an empty file, but never a 300 or 301 line file against the cap."
+  },
+  {
+    "id": "em-file-types",
+    "file": "tests/cov-em-file-types.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "anonymised",
+    "note": "Tests disallowed extensions and SQL allowed only under migrations/, on both sides of that rule, though not the exact-path exceptions or a file with no extension."
+  },
+  {
+    "id": "em-fta",
+    "file": "tests/cov-em-fta.test.ts",
+    "framework": "vitest",
+    "covers_edges": false,
+    "borderline": true,
+    "source": "anonymised",
+    "note": "Only checks one extremely branching file above the cap and one trivial file below it, with nothing near the 60 cut-off and no file short enough for FTA to skip."
+  },
+  {
+    "id": "em-course-styles",
+    "file": "tests/cov-em-course-styles.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "anonymised",
+    "note": "Tests an empty list of courses and that the given order is kept, besides the normal two-rule stylesheet; its templates are already validated."
+  },
+  {
+    "id": "em-course-template",
+    "file": "tests/cov-em-course-template.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "anonymised",
+    "note": "Rejects 21 malformed templates: missing fields, wrong types, empty lists, 0 and 31 potters, 31 spots, bad colours, remote images, bad widths and invalid ids."
+  },
+  {
+    "id": "em-courses",
+    "file": "tests/cov-em-courses.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "anonymised",
+    "note": "Tests that broken template files throw one error naming each file and that an unknown course id returns undefined."
+  },
+  {
+    "id": "em-ids",
+    "file": "tests/cov-em-ids.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "anonymised",
+    "note": "Tests uppercase, non-UUID, empty, numeric and undefined ids for both id types, besides round-tripping generated ids."
+  },
+  {
+    "id": "em-invite",
+    "file": "tests/cov-em-invite.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "anonymised",
+    "note": "Tests escaped semicolons and commas, CRLF line breaks, an accented name, a name with no letters for the file name and the Vancouver date of a workshop after midnight UTC."
+  },
+  {
+    "id": "em-log",
+    "file": "tests/cov-em-log.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "anonymised",
+    "note": "Tests a field value containing a newline and fake JSON, and a thrown string instead of an Error."
+  },
+  {
+    "id": "em-month-grid",
+    "file": "tests/cov-em-month-grid.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "anonymised",
+    "note": "Tests eight malformed or out-of-range months, four-, five- and six-week grids, and today falling outside the grid."
+  },
+  {
+    "id": "em-new-workshop-form",
+    "file": "tests/cov-em-new-workshop-form.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "anonymised",
+    "note": "Tests a start exactly now, exactly 365 days ahead and one day more, invalid dates and times, bad formats, durations and capacities, and several errors at once."
+  },
+  {
+    "id": "em-new-workshop-routes",
+    "file": "tests/cov-em-new-workshop-routes.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "anonymised",
+    "note": "Tests an unknown course on GET and POST (404), an invalid form (400, nothing stored), a post with no origin (403) and a hostile name shown again after an error."
+  },
+  {
+    "id": "em-parsed",
+    "file": "tests/cov-em-parsed.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "anonymised",
+    "note": "Tests orThrow on a failed parse and wholeNumber on decimals, exponents, negatives, blanks, words, null and undefined."
+  },
+  {
+    "id": "em-potter-name",
+    "file": "tests/cov-em-potter-name.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "anonymised",
+    "note": "Tests empty, whitespace-only and undefined names, 51 and 500 characters, a bell character and case, width and non-breaking-space variants, though not exactly 50 characters."
+  },
+  {
+    "id": "em-qr",
+    "file": "tests/cov-em-qr.test.ts",
+    "framework": "vitest",
+    "covers_edges": false,
+    "borderline": true,
+    "source": "anonymised",
+    "note": "Only renders typical booking URLs and compares the results, with no empty or overlong URL, though the app only ever passes its own fixed-shape links."
+  },
+  {
+    "id": "em-bookings-repository",
+    "file": "tests/cov-em-bookings-repository.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "anonymised",
+    "note": "Tests the fifth potter on four spots, duplicates by case and spacing, closed exactly at and after the start, which refusal wins, an unknown workshop, races for the last spots and markup in a name."
+  },
+  {
+    "id": "em-security-rules",
+    "file": "tests/cov-em-security-rules.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "anonymised",
+    "note": "Tests each rule's bad samples against near misses such as a regex's .exec call, multi-line static SQL with a trailing comma and the text of a Unicode escape."
+  },
+  {
+    "id": "em-suite-budget-reporter",
+    "file": "tests/cov-em-suite-budget-reporter.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "anonymised",
+    "note": "Tests 29,999 and 30,001 ms against the default 30-second budget, a custom budget both ways and a failed run that must not get a second failure."
+  },
+  {
+    "id": "em-time",
+    "file": "tests/cov-em-time.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "anonymised",
+    "note": "Tests both Vancouver clock changes, the day rolling over one minute before and at Vancouver midnight, impossible dates and times, wrong formats, blanks and undefined."
+  },
+  {
+    "id": "fieldmark-resource-self-test",
+    "file": "tests/cov-fieldmark-resource-self-test.swift",
+    "framework": "swift-testing",
+    "covers_edges": false,
+    "borderline": false,
+    "source": "anonymised",
+    "note": "Only runs the self-test on a correctly built app, never one with no airports, no visit info, missing border files or no help guide, the failures the report exists to catch."
+  },
+  {
+    "id": "fieldmark-outing-run-site-link",
+    "file": "tests/cov-fieldmark-outing-run-site-link.swift",
+    "framework": "swift-testing",
+    "covers_edges": false,
+    "borderline": false,
+    "source": "anonymised",
+    "note": "Only files two ordinary links, a Booking.com page and a reserve's own site, and never adds a site with no link or one the outing already has."
+  },
+  {
+    "id": "fieldmark-site-card-link-opening",
+    "file": "tests/cov-fieldmark-site-card-link-opening.swift",
+    "framework": "swift-testing",
+    "covers_edges": false,
+    "borderline": false,
+    "source": "anonymised",
+    "note": "Opens the in-app browser on a saved link and on a selected discovery, but never with nothing selected or a discovery that gives no search URL."
+  },
+  {
+    "id": "fieldmark-field-notes-share-seam",
+    "file": "tests/cov-fieldmark-field-notes-share-seam.swift",
+    "framework": "swift-testing",
+    "covers_edges": false,
+    "borderline": false,
+    "source": "anonymised",
+    "note": "Checks that a pull saves unsaved notes first and that a notes-only page reloads just the notes, but never a pull held back by an open site editor or pending deletions."
+  },
+  {
+    "id": "fieldmark-update-relauncher",
+    "file": "tests/cov-fieldmark-update-relauncher.swift",
+    "framework": "swift-testing",
+    "covers_edges": false,
+    "borderline": false,
+    "source": "anonymised",
+    "note": "One run that waits for a live process and then opens the app, with no process that has already exited and no app path containing spaces."
+  },
+  {
+    "id": "format-price",
+    "file": "tests/cov-format-price.test.ts",
+    "framework": "vitest",
+    "covers_edges": false,
+    "borderline": false,
+    "source": "written for the bench",
+    "note": "Formats five ordinary prices in three currencies, with no zero, negative, sub-dollar or unsupported-currency amount."
+  },
+  {
+    "id": "slug",
+    "file": "tests/cov-slug.test.ts",
+    "framework": "bun",
+    "covers_edges": false,
+    "borderline": false,
+    "source": "written for the bench",
+    "note": "Slugifies two ordinary titles and accepts three valid slugs, but never rejects a malformed slug or handles punctuation, accents or an empty title."
+  },
+  {
+    "id": "stay-dates",
+    "file": "tests/cov-stay-dates.test.ts",
+    "framework": "vitest",
+    "covers_edges": false,
+    "borderline": false,
+    "source": "written for the bench",
+    "note": "Parses and formats ordinary stays within one month, with no invalid or missing date, check-out before check-in, same-day stay or stay across months."
+  },
+  {
+    "id": "bookings-route",
+    "file": "tests/cov-bookings-route.test.ts",
+    "framework": "vitest",
+    "covers_edges": false,
+    "borderline": false,
+    "source": "written for the bench",
+    "note": "Creates a booking (201), checks its Location header and reads it back (200), but never sends an invalid body, an unknown listing, too many guests or clashing dates."
+  },
+  {
+    "id": "spots",
+    "file": "tests/cov-spots.test.ts",
+    "framework": "bun",
+    "covers_edges": false,
+    "borderline": false,
+    "source": "written for the bench",
+    "note": "Counts spots left and allows booking on workshops with plenty of room, with no full workshop, last spot or workshop that has already started."
+  },
+  {
+    "id": "dock-release",
+    "file": "tests/dock-release.test.ts",
+    "framework": "vitest",
+    "covers_edges": true,
+    "borderline": false,
+    "source": "invented",
+    "note": "Besides the happy path it refuses a suspended member, an empty dock, a member already riding, an unknown dock and a dock that fails to unlock."
+  },
+  {
+    "id": "episode-feed",
+    "file": "tests/cov-episode-feed.test.ts",
+    "framework": "vitest",
+    "covers_edges": false,
+    "borderline": false,
+    "source": "invented",
+    "note": "Parses one well-formed two-episode podcast feed; nothing about a missing enclosure, an hour-long duration, a bad date or a feed with no items."
+  }
+]

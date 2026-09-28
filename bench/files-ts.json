@@ -1,0 +1,955 @@
+[
+  {
+    "id": "ts-worker-cors-a",
+    "file": "files/ts-worker-cors-a.ts",
+    "language": "ts",
+    "pair": "ts-worker-cors",
+    "source": "anonymised",
+    "severity": "lean",
+    "expect": {
+      "verdict": "lean",
+      "problems": []
+    },
+    "note": "Four small CORS and JSON helpers, each a few lines, with no options, classes or logging."
+  },
+  {
+    "id": "ts-worker-cors-b",
+    "file": "files/ts-worker-cors-b.ts",
+    "language": "ts",
+    "pair": "ts-worker-cors",
+    "source": "anonymised",
+    "severity": "heavy",
+    "expect": {
+      "verdict": "bloated",
+      "problems": [
+        "premature_abstraction",
+        "speculative_generality",
+        "defensive_excess",
+        "excess_logging",
+        "comment_bloat"
+      ]
+    },
+    "units": [
+      {
+        "name": "CorsPolicy",
+        "problems": [
+          "premature_abstraction",
+          "defensive_excess",
+          "excess_logging"
+        ]
+      },
+      {
+        "name": "OriginMatcher",
+        "problems": [
+          "premature_abstraction"
+        ]
+      },
+      {
+        "name": "createOriginMatchers",
+        "problems": [
+          "premature_abstraction",
+          "speculative_generality"
+        ]
+      },
+      {
+        "name": "CorsOptions",
+        "problems": [
+          "speculative_generality"
+        ]
+      },
+      {
+        "name": "createCorsPolicy",
+        "problems": [
+          "premature_abstraction"
+        ]
+      },
+      {
+        "name": "requestOrigin",
+        "problems": [
+          "defensive_excess",
+          "excess_logging"
+        ]
+      }
+    ],
+    "note": "Three one-line origin checks become a strategy interface with three classes, a policy class and a factory, driven by options nobody passes, with typeof checks, debug logs and JSDoc on everything."
+  },
+  {
+    "id": "ts-chat-token-b",
+    "file": "files/ts-chat-token-b.ts",
+    "language": "ts",
+    "pair": "ts-chat-token",
+    "source": "anonymised",
+    "severity": "lean",
+    "expect": {
+      "verdict": "lean",
+      "problems": []
+    },
+    "note": "HMAC session tokens and a salted visitor hash on WebCrypto, with small private helpers and a comment only where the reason is not obvious."
+  },
+  {
+    "id": "ts-chat-token-a",
+    "file": "files/ts-chat-token-a.ts",
+    "language": "ts",
+    "pair": "ts-chat-token",
+    "source": "anonymised",
+    "severity": "heavy",
+    "expect": {
+      "verdict": "bloated",
+      "problems": [
+        "premature_abstraction",
+        "type_bloat",
+        "speculative_generality",
+        "verbose_logic",
+        "excess_logging",
+        "defensive_excess",
+        "thin_wrappers"
+      ]
+    },
+    "units": [
+      {
+        "name": "TokenService",
+        "problems": [
+          "premature_abstraction",
+          "excess_logging",
+          "defensive_excess"
+        ]
+      },
+      {
+        "name": "TokenSigner",
+        "problems": [
+          "premature_abstraction"
+        ]
+      },
+      {
+        "name": "HmacTokenSigner",
+        "problems": [
+          "premature_abstraction",
+          "speculative_generality"
+        ]
+      },
+      {
+        "name": "createTokenService",
+        "problems": [
+          "premature_abstraction",
+          "thin_wrappers"
+        ]
+      },
+      {
+        "name": "TokenError",
+        "problems": [
+          "type_bloat"
+        ]
+      },
+      {
+        "name": "Encoding",
+        "problems": [
+          "verbose_logic"
+        ]
+      },
+      {
+        "name": "GateOptions",
+        "problems": [
+          "speculative_generality"
+        ]
+      },
+      {
+        "name": "isPlausibleClientDay",
+        "problems": [
+          "speculative_generality",
+          "excess_logging"
+        ]
+      }
+    ],
+    "note": "Same token logic buried under a signer interface with one implementation, a service class and factory, five error classes that are only caught to return false, an options object nobody overrides, a per-call key cache and manual byte loops."
+  },
+  {
+    "id": "ts-review-mention-a",
+    "file": "files/ts-review-mention-a.ts",
+    "language": "ts",
+    "pair": "ts-review-mention",
+    "source": "anonymised",
+    "severity": "lean",
+    "expect": {
+      "verdict": "lean",
+      "problems": []
+    },
+    "note": "Two Slack handlers written as straight-line functions over injected dependencies that the tests use; the long comments explain Slack behaviour."
+  },
+  {
+    "id": "ts-review-mention-b",
+    "file": "files/ts-review-mention-b.ts",
+    "language": "ts",
+    "pair": "ts-review-mention",
+    "source": "anonymised",
+    "severity": "heavy",
+    "expect": {
+      "verdict": "bloated",
+      "problems": [
+        "premature_abstraction",
+        "thin_wrappers",
+        "speculative_generality",
+        "defensive_excess",
+        "excess_logging"
+      ]
+    },
+    "units": [
+      {
+        "name": "ReviewAssignmentService",
+        "problems": [
+          "premature_abstraction",
+          "defensive_excess",
+          "excess_logging"
+        ]
+      },
+      {
+        "name": "GroupRepository",
+        "problems": [
+          "premature_abstraction",
+          "thin_wrappers"
+        ]
+      },
+      {
+        "name": "EventDeduplicator",
+        "problems": [
+          "premature_abstraction"
+        ]
+      },
+      {
+        "name": "createReviewAssignmentService",
+        "problems": [
+          "thin_wrappers"
+        ]
+      },
+      {
+        "name": "MentionOutcome",
+        "problems": [
+          "speculative_generality"
+        ]
+      },
+      {
+        "name": "reasonPhrase",
+        "problems": [
+          "defensive_excess"
+        ]
+      }
+    ],
+    "note": "The two handlers move into a service class with a repository wrapper and a deduplicator class, return an outcome type every caller discards, check dependencies the types guarantee, and log and rethrow around every Slack call."
+  },
+  {
+    "id": "ts-split-screenshots-b",
+    "file": "files/ts-split-screenshots-b.ts",
+    "language": "ts",
+    "pair": "ts-split-screenshots",
+    "source": "anonymised",
+    "severity": "lean",
+    "expect": {
+      "verdict": "lean",
+      "problems": []
+    },
+    "note": "A one-off 57-line sharp script: a constant, a target list and one loop."
+  },
+  {
+    "id": "ts-split-screenshots-a",
+    "file": "files/ts-split-screenshots-a.ts",
+    "language": "ts",
+    "pair": "ts-split-screenshots",
+    "source": "anonymised",
+    "severity": "heavy",
+    "expect": {
+      "verdict": "bloated",
+      "problems": [
+        "premature_abstraction",
+        "speculative_generality",
+        "excess_logging",
+        "dead_code",
+        "comment_bloat",
+        "type_bloat",
+        "defensive_excess"
+      ]
+    },
+    "units": [
+      {
+        "name": "ImageSplitter",
+        "problems": [
+          "premature_abstraction",
+          "excess_logging"
+        ]
+      },
+      {
+        "name": "SplitOptions",
+        "problems": [
+          "speculative_generality"
+        ]
+      },
+      {
+        "name": "SplitResult",
+        "problems": [
+          "type_bloat"
+        ]
+      },
+      {
+        "name": "fileExists",
+        "problems": [
+          "defensive_excess"
+        ]
+      },
+      {
+        "name": "main",
+        "problems": [
+          "defensive_excess",
+          "excess_logging"
+        ]
+      }
+    ],
+    "note": "The one-off script becomes a class with format, dry-run and background options nobody sets, types for every small shape, a log line per step, banner and restating comments, a commented-out old approach, and a catch that only logs and rethrows."
+  },
+  {
+    "id": "ts-config-dirs-a",
+    "file": "files/ts-config-dirs-a.ts",
+    "language": "ts",
+    "pair": "ts-config-dirs",
+    "source": "anonymised",
+    "severity": "lean",
+    "expect": {
+      "verdict": "ok",
+      "problems": [
+        "reinvents_builtin"
+      ]
+    },
+    "units": [
+      {
+        "name": "exists",
+        "problems": [
+          "reinvents_builtin"
+        ]
+      }
+    ],
+    "note": "One function with a local add() does the whole discovery; the only fat is exists(), a hand-written fs.existsSync."
+  },
+  {
+    "id": "ts-config-dirs-b",
+    "file": "files/ts-config-dirs-b.ts",
+    "language": "ts",
+    "pair": "ts-config-dirs",
+    "source": "anonymised",
+    "severity": "heavy",
+    "expect": {
+      "verdict": "bloated",
+      "problems": [
+        "premature_abstraction",
+        "speculative_generality",
+        "excess_logging",
+        "comment_bloat",
+        "reinvents_builtin"
+      ]
+    },
+    "units": [
+      {
+        "name": "DiscoveryStrategy",
+        "problems": [
+          "premature_abstraction"
+        ]
+      },
+      {
+        "name": "ConfigDirRegistry",
+        "problems": [
+          "premature_abstraction",
+          "excess_logging"
+        ]
+      },
+      {
+        "name": "FileSystemAdapter",
+        "problems": [
+          "premature_abstraction"
+        ]
+      },
+      {
+        "name": "NodeFileSystemAdapter",
+        "problems": [
+          "premature_abstraction",
+          "reinvents_builtin"
+        ]
+      },
+      {
+        "name": "FindConfigDirsOptions",
+        "problems": [
+          "speculative_generality"
+        ]
+      },
+      {
+        "name": "findClaudeConfigDirs",
+        "problems": [
+          "speculative_generality",
+          "excess_logging"
+        ]
+      }
+    ],
+    "note": "A four-step scan becomes four strategy classes, a registry class and a file-system adapter with one implementation, plus options for markers, patterns, extra strategies and verbose logging that nothing uses."
+  },
+  {
+    "id": "ts-budget-client-b",
+    "file": "files/ts-budget-client-b.ts",
+    "language": "ts",
+    "pair": "ts-budget-client",
+    "source": "anonymised",
+    "severity": "lean",
+    "expect": {
+      "verdict": "lean",
+      "problems": []
+    },
+    "note": "A private call() and three short exported wrappers that each state their failure policy; the two near-identical verdict functions are too small to be worth merging."
+  },
+  {
+    "id": "ts-budget-client-a",
+    "file": "files/ts-budget-client-a.ts",
+    "language": "ts",
+    "pair": "ts-budget-client",
+    "source": "anonymised",
+    "severity": "moderate",
+    "expect": {
+      "verdict": "bloated",
+      "problems": [
+        "speculative_generality",
+        "excess_logging"
+      ]
+    },
+    "units": [
+      {
+        "name": "call",
+        "problems": [
+          "speculative_generality",
+          "excess_logging"
+        ]
+      },
+      {
+        "name": "BudgetClientOptions",
+        "problems": [
+          "speculative_generality"
+        ]
+      },
+      {
+        "name": "checkBudget",
+        "problems": [
+          "excess_logging"
+        ]
+      },
+      {
+        "name": "chargeBudget",
+        "problems": [
+          "excess_logging"
+        ]
+      },
+      {
+        "name": "spendNeurons",
+        "problems": [
+          "excess_logging"
+        ]
+      }
+    ],
+    "note": "Adds a retry loop with backoff that defaults to zero retries, an instance name and base URL nobody overrides, and a log line before and after every call."
+  },
+  {
+    "id": "ts-rsync-args-a",
+    "file": "files/ts-rsync-args-a.ts",
+    "language": "ts",
+    "pair": "ts-rsync-args",
+    "source": "anonymised",
+    "severity": "lean",
+    "expect": {
+      "verdict": "lean",
+      "problems": []
+    },
+    "note": "Builds the rsync argument lists with plain arrays and spreads; the comments explain rsync ordering and trailing-slash rules."
+  },
+  {
+    "id": "ts-rsync-args-b",
+    "file": "files/ts-rsync-args-b.ts",
+    "language": "ts",
+    "pair": "ts-rsync-args",
+    "source": "anonymised",
+    "severity": "moderate",
+    "expect": {
+      "verdict": "bloated",
+      "problems": [
+        "premature_abstraction",
+        "verbose_logic",
+        "duplication"
+      ]
+    },
+    "units": [
+      {
+        "name": "RsyncOptionsBuilder",
+        "problems": [
+          "premature_abstraction"
+        ]
+      },
+      {
+        "name": "checksumArgs",
+        "problems": [
+          "duplication",
+          "verbose_logic"
+        ]
+      },
+      {
+        "name": "previewArgs",
+        "problems": [
+          "duplication",
+          "verbose_logic"
+        ]
+      },
+      {
+        "name": "transferArgs",
+        "problems": [
+          "duplication",
+          "verbose_logic"
+        ]
+      },
+      {
+        "name": "splitPatterns",
+        "problems": [
+          "verbose_logic"
+        ]
+      },
+      {
+        "name": "planRsync",
+        "problems": [
+          "verbose_logic"
+        ]
+      }
+    ],
+    "note": "A fluent builder class replaces a five-element array, filter and spread become index loops and if/else assignments, and the three argument lists are built by three copy-pasted push sequences instead of one spread each."
+  },
+  {
+    "id": "ts-jira-parse-b",
+    "file": "files/ts-jira-parse-b.ts",
+    "language": "ts",
+    "pair": "ts-jira-parse",
+    "source": "anonymised",
+    "severity": "lean",
+    "expect": {
+      "verdict": "lean",
+      "problems": []
+    },
+    "note": "Small regex helpers and URL parsing for Slack text; unescapeSlackText and stripBotMention are unused elsewhere in the prototype, but nothing in this file can show that."
+  },
+  {
+    "id": "ts-jira-parse-a",
+    "file": "files/ts-jira-parse-a.ts",
+    "language": "ts",
+    "pair": "ts-jira-parse",
+    "source": "anonymised",
+    "severity": "moderate",
+    "expect": {
+      "verdict": "bloated",
+      "problems": [
+        "type_bloat",
+        "reinvents_builtin"
+      ]
+    },
+    "units": [
+      {
+        "name": "IssueKey",
+        "problems": [
+          "type_bloat"
+        ]
+      },
+      {
+        "name": "ProjectKey",
+        "problems": [
+          "type_bloat"
+        ]
+      },
+      {
+        "name": "parseOrigin",
+        "problems": [
+          "reinvents_builtin"
+        ]
+      }
+    ],
+    "note": "Wraps the issue-key string in a class and three branded string types that are unwrapped straight away, and replaces new URL(raw).origin with a hand-written authority regex and default-port table."
+  },
+  {
+    "id": "ts-git-worktrees-a",
+    "file": "files/ts-git-worktrees-a.ts",
+    "language": "ts",
+    "pair": "ts-git-worktrees",
+    "source": "anonymised",
+    "severity": "lean",
+    "expect": {
+      "verdict": "lean",
+      "problems": []
+    },
+    "note": "Pure worktree helpers and one safety check, each commented only where the danger is not obvious."
+  },
+  {
+    "id": "ts-git-worktrees-b",
+    "file": "files/ts-git-worktrees-b.ts",
+    "language": "ts",
+    "pair": "ts-git-worktrees",
+    "source": "anonymised",
+    "severity": "moderate",
+    "expect": {
+      "verdict": "bloated",
+      "problems": [
+        "comment_bloat",
+        "defensive_excess",
+        "dead_code"
+      ]
+    },
+    "units": [
+      {
+        "name": "git",
+        "problems": [
+          "defensive_excess",
+          "comment_bloat"
+        ]
+      },
+      {
+        "name": "parseWorktreeList",
+        "problems": [
+          "defensive_excess",
+          "comment_bloat"
+        ]
+      },
+      {
+        "name": "checkRemovable",
+        "problems": [
+          "defensive_excess",
+          "comment_bloat"
+        ]
+      },
+      {
+        "name": "isDetached",
+        "problems": [
+          "dead_code"
+        ]
+      },
+      {
+        "name": "PORCELAIN_PREFIXES",
+        "problems": [
+          "dead_code"
+        ]
+      }
+    ],
+    "note": "Adds @param/@returns JSDoc and restating comments throughout, typeof checks and a log-and-rethrow around spawnSync, an unused helper, an unused constant and a commented-out old version."
+  },
+  {
+    "id": "ts-path-utils-b",
+    "file": "files/ts-path-utils-b.ts",
+    "language": "ts",
+    "pair": "ts-path-utils",
+    "source": "anonymised",
+    "severity": "lean",
+    "expect": {
+      "verdict": "lean",
+      "problems": []
+    },
+    "note": "Five pure string functions; the long comments explain shell quoting and idempotence, not the code."
+  },
+  {
+    "id": "ts-path-utils-a",
+    "file": "files/ts-path-utils-a.ts",
+    "language": "ts",
+    "pair": "ts-path-utils",
+    "source": "anonymised",
+    "severity": "subtle",
+    "expect": {
+      "verdict": "bloated",
+      "problems": [
+        "defensive_excess"
+      ]
+    },
+    "units": [
+      {
+        "name": "stripTrailingSlashes",
+        "problems": [
+          "defensive_excess"
+        ]
+      },
+      {
+        "name": "expandTilde",
+        "problems": [
+          "defensive_excess"
+        ]
+      },
+      {
+        "name": "unescapePath",
+        "problems": [
+          "defensive_excess"
+        ]
+      },
+      {
+        "name": "typedPath",
+        "problems": [
+          "defensive_excess"
+        ]
+      },
+      {
+        "name": "prettyPath",
+        "problems": [
+          "defensive_excess"
+        ]
+      }
+    ],
+    "note": "Identical to the original except that every function now re-checks types its string signature already guarantees, null-coalesces non-nullable strings and guards an impossible loop state."
+  },
+  {
+    "id": "ts-slack-signing-a",
+    "file": "files/ts-slack-signing-a.ts",
+    "language": "ts",
+    "pair": "ts-slack-signing",
+    "source": "anonymised",
+    "severity": "lean",
+    "expect": {
+      "verdict": "lean",
+      "problems": []
+    },
+    "note": "Two short functions implementing Slack's fixed v0 signing recipe, with the recipe documented once at the top."
+  },
+  {
+    "id": "ts-slack-signing-b",
+    "file": "files/ts-slack-signing-b.ts",
+    "language": "ts",
+    "pair": "ts-slack-signing",
+    "source": "anonymised",
+    "severity": "subtle",
+    "expect": {
+      "verdict": "bloated",
+      "problems": [
+        "speculative_generality"
+      ]
+    },
+    "units": [
+      {
+        "name": "SigningOptions",
+        "problems": [
+          "speculative_generality"
+        ]
+      },
+      {
+        "name": "slackSignature",
+        "problems": [
+          "speculative_generality"
+        ]
+      },
+      {
+        "name": "signRequest",
+        "problems": [
+          "speculative_generality"
+        ]
+      }
+    ],
+    "note": "Identical to the original except for an options object for version, algorithm, digest encoding and content type, though the header documents the single v0 HMAC-SHA256 recipe Slack uses."
+  },
+  {
+    "id": "ts-plugin-link-b",
+    "file": "files/ts-plugin-link-b.ts",
+    "language": "ts",
+    "pair": "ts-plugin-link",
+    "source": "anonymised",
+    "severity": "lean",
+    "expect": {
+      "verdict": "lean",
+      "problems": []
+    },
+    "note": "One linking function and two small helpers; the few comments explain symlink edge cases."
+  },
+  {
+    "id": "ts-plugin-link-a",
+    "file": "files/ts-plugin-link-a.ts",
+    "language": "ts",
+    "pair": "ts-plugin-link",
+    "source": "anonymised",
+    "severity": "subtle",
+    "expect": {
+      "verdict": "ok",
+      "problems": [
+        "comment_bloat"
+      ]
+    },
+    "units": [
+      {
+        "name": "linkPluginInto",
+        "problems": [
+          "comment_bloat"
+        ]
+      },
+      {
+        "name": "listSkills",
+        "problems": [
+          "comment_bloat"
+        ]
+      },
+      {
+        "name": "lstatOrNull",
+        "problems": [
+          "comment_bloat"
+        ]
+      }
+    ],
+    "note": "The code is token-for-token the original; only @param/@returns JSDoc and comments like \"// Build the paths\" and \"// Return the result\" are added, which a reviewer might wave through."
+  },
+  {
+    "id": "ts-bolt-entry-a",
+    "file": "files/ts-bolt-entry-a.ts",
+    "language": "ts",
+    "pair": "ts-bolt-entry",
+    "source": "anonymised",
+    "severity": "lean",
+    "expect": {
+      "verdict": "lean",
+      "problems": []
+    },
+    "note": "Thin Bolt wiring: read the tokens, build the app, register four listeners that hand straight off to app.ts, start."
+  },
+  {
+    "id": "ts-bolt-entry-b",
+    "file": "files/ts-bolt-entry-b.ts",
+    "language": "ts",
+    "pair": "ts-bolt-entry",
+    "source": "anonymised",
+    "severity": "subtle",
+    "expect": {
+      "verdict": "ok",
+      "problems": [
+        "too_many_jobs"
+      ]
+    },
+    "units": [
+      {
+        "name": "SlackWebApi",
+        "problems": [
+          "too_many_jobs"
+        ]
+      },
+      {
+        "name": "InMemoryGroupStore",
+        "problems": [
+          "too_many_jobs"
+        ]
+      }
+    ],
+    "note": "The same wiring, but the entry point now also carries the Slack Web API adapter with its name cache and the in-memory group store, copied in verbatim instead of imported; nothing is superfluous, it is just three jobs in one file."
+  },
+  {
+    "id": "ts-shell-config-format",
+    "file": "files/ts-shell-config-format.ts",
+    "language": "ts",
+    "pair": null,
+    "source": "anonymised",
+    "severity": "justified",
+    "expect": {
+      "verdict": "lean",
+      "problems": []
+    },
+    "note": "A parser and writer for a shell-sourced config that is read rather than executed, so quoting, escapes, trailing comments and line ownership all have to be handled by hand."
+  },
+  {
+    "id": "ts-tree-growth",
+    "file": "files/ts-tree-growth.ts",
+    "language": "ts",
+    "pair": null,
+    "source": "anonymised",
+    "severity": "justified",
+    "expect": {
+      "verdict": "lean",
+      "problems": []
+    },
+    "note": "A seeded procedural tree: recursive branching with a leaf budget, fitting to the box, and banding limbs into SVG strokes; the complexity is the algorithm itself."
+  },
+  {
+    "id": "ts-staged-markdown",
+    "file": "files/ts-staged-markdown.ts",
+    "language": "ts",
+    "pair": null,
+    "source": "anonymised",
+    "severity": "justified",
+    "expect": {
+      "verdict": "lean",
+      "problems": []
+    },
+    "note": "Formats the staged blobs through git plumbing (ls-files --stage, hash-object, update-index --index-info) so partly staged files keep their unstaged edits."
+  },
+  {
+    "id": "ts-session-log",
+    "file": "files/ts-session-log.ts",
+    "language": "ts",
+    "pair": null,
+    "source": "anonymised",
+    "severity": "justified",
+    "expect": {
+      "verdict": "ok",
+      "problems": [
+        "reinvents_builtin"
+      ]
+    },
+    "units": [
+      {
+        "name": "directoryOf",
+        "problems": [
+          "reinvents_builtin"
+        ]
+      }
+    ],
+    "note": "A buffered, ordered, fail-soft transcript writer whose flags and flush queue are all needed; the only fat is directoryOf, a hand-written path.dirname."
+  },
+  {
+    "id": "ts-leak-filter",
+    "file": "files/ts-leak-filter.ts",
+    "language": "ts",
+    "pair": null,
+    "source": "anonymised",
+    "severity": "justified",
+    "expect": {
+      "verdict": "ok",
+      "problems": [
+        "dead_code"
+      ]
+    },
+    "units": [
+      {
+        "name": "LeakFilter",
+        "problems": [
+          "dead_code"
+        ]
+      }
+    ],
+    "note": "A streaming filter that holds back a window of characters so a phrase split across chunks is still caught; the #refused flag is dead, because #trip only ever runs once."
+  },
+  {
+    "id": "ts-bake-sheet",
+    "file": "files/ts-bake-sheet.ts",
+    "language": "ts",
+    "pair": null,
+    "source": "invented",
+    "severity": "moderate",
+    "expect": {
+      "verdict": "bloated",
+      "problems": [
+        "duplication",
+        "dead_code"
+      ]
+    },
+    "units": [
+      {
+        "name": "shopSheet",
+        "problems": [
+          "duplication"
+        ]
+      },
+      {
+        "name": "traysFor",
+        "problems": [
+          "dead_code"
+        ]
+      },
+      {
+        "name": "formatSheet",
+        "problems": [
+          "dead_code"
+        ]
+      }
+    ],
+    "note": "A bakery's bake sheet: shopSheet copies bakeSheet whole to add walk-in stock, traysFor is never called, a commented-out old tray table stays, and formatSheet keeps a legacy branch behind a constant false."
+  }
+]

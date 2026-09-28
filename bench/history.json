@@ -1,0 +1,954 @@
+[
+  {
+    "id": "evaluator-e1aad30",
+    "repo": "evaluator",
+    "hash": "e1aad30e1693f88aad3788a2ebd205b0a748e6ec",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Loosens two thresholds after Jev's run-to-run noise failed an accurate subject, a change made after measuring rather than a slip."
+  },
+  {
+    "id": "evaluator-e222a53",
+    "repo": "evaluator",
+    "hash": "e222a532acc1feceae1b6b7b48c1b36cd7e0f4cf",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "A new feature that splits a code file into functions and classes and measures it, with its tests."
+  },
+  {
+    "id": "evaluator-48d508b",
+    "repo": "evaluator",
+    "hash": "48d508b66aa29c546e18594f2c1e6d97f35c7a57",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "A tooling change with its own purpose, limiting the typecheck to the evaluator before benchmark code samples arrive."
+  },
+  {
+    "id": "evaluator-2db4ae9",
+    "repo": "evaluator",
+    "hash": "2db4ae9d537793bb0e5b77d94e5d747c111bbbd0",
+    "expect": { "folds": true, "mixes": false, "into": "e222a532acc1feceae1b6b7b48c1b36cd7e0f4cf", "borderline": false },
+    "note": "Adds the non-null assertions that the tests from the unit-splitting commit two steps earlier needed to typecheck, since analyzeCode can return undefined."
+  },
+  {
+    "id": "evaluator-bab0cfb",
+    "repo": "evaluator",
+    "hash": "bab0cfb85deb4c071ee65633e6eea7306a1936c3",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "A new feature, the code bloat check, with the CLI flags and request cap it needs."
+  },
+  {
+    "id": "evaluator-8986d6d",
+    "repo": "evaluator",
+    "hash": "8986d6ddc78f4abc3059db7fc3e78b79841214a7",
+    "expect": { "folds": false, "mixes": false, "borderline": true },
+    "note": "Extends stats to report each kind of run, which also stops the crash that the previous commit's file runs caused, so it could be read as a missed call site."
+  },
+  {
+    "id": "evaluator-17cb74e",
+    "repo": "evaluator",
+    "hash": "17cb74e19834d649fb61bf0b45a75d3ac3d3a7b9",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "A new feature, the README check, with the small helper it exports from message.ts."
+  },
+  {
+    "id": "evaluator-84694a6",
+    "repo": "evaluator",
+    "hash": "84694a6598b33cbc20e84c5e7f73fdc252818597",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Wires the README check into the CLI as its own step, the way this repo adds each check."
+  },
+  {
+    "id": "evaluator-5d5ae56",
+    "repo": "evaluator",
+    "hash": "5d5ae56f2dabd0f621e9a6cdc12ed5cef83e11dc",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "README docs covering several features from the previous commits, so there is no single commit to fold into."
+  },
+  {
+    "id": "evaluator-5797828",
+    "repo": "evaluator",
+    "hash": "57978286b4670f18028dbe1c3ec70919b2b99694",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Adds benchmark scoring for two checks, with the hook it needs in the README check."
+  },
+  {
+    "id": "evaluator-eb69dd8",
+    "repo": "evaluator",
+    "hash": "eb69dd85fd5d33dba4fe9027f4a48b2e55a733a6",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Lowers a warning threshold after plain messages were flagged in real use."
+  },
+  {
+    "id": "evaluator-c5af0dc",
+    "repo": "evaluator",
+    "hash": "c5af0dc7c343f0ae2398828fe97b6f1d8fbe35cb",
+    "expect": { "folds": false, "mixes": false, "borderline": true },
+    "note": "Recalibrates the bloat thresholds against labelled files; the one-line __pycache__ ignore is unrelated to that, but too small to clearly count as a mix."
+  },
+  {
+    "id": "evaluator-c23c0a6",
+    "repo": "evaluator",
+    "hash": "c23c0a63c7cdb2f0139e1734e64715e398271038",
+    "expect": { "folds": false, "mixes": true, "borderline": true },
+    "note": "Adds two independent options, required README content and a spec for the file checks, and also rewords the reinvents_builtin question."
+  },
+  {
+    "id": "evaluator-8d98d7e",
+    "repo": "evaluator",
+    "hash": "8d98d7e8dd1e9dfaab955f914b4f5f55d4970900",
+    "expect": { "folds": true, "mixes": false, "into": "c23c0a63c7cdb2f0139e1734e64715e398271038", "borderline": false },
+    "note": "Documents the --context and --require flags the previous commit added, with the example requirement list the docs point to."
+  },
+  {
+    "id": "evaluator-e79981a",
+    "repo": "evaluator",
+    "hash": "e79981a212b804ac92205542492951f68fa3d0a2",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "A new feature for recording whether a run's findings were right."
+  },
+  {
+    "id": "evaluator-a34bf81",
+    "repo": "evaluator",
+    "hash": "a34bf817fe1ce616231444083fc689b442d49a74",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Shortens the Jev timeout after measuring a hung batch, in code from the first commit."
+  },
+  {
+    "id": "evaluator-748142f",
+    "repo": "evaluator",
+    "hash": "748142f9898794f0f9d167d8f1074054915891af",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Adds labelled benchmark data as a step of its own."
+  },
+  {
+    "id": "evaluator-1b83b8e",
+    "repo": "evaluator",
+    "hash": "1b83b8e31b50f39efbfa2824fad484019fc1cfc1",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Redesigns the bloat verdict after a lean file failed on one noisy reading."
+  },
+  {
+    "id": "evaluator-9b13aab",
+    "repo": "evaluator",
+    "hash": "9b13aabb4579116b8242ab83fb53305d5311e9d7",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Calibrates the README cut-offs against labelled READMEs."
+  },
+  {
+    "id": "evaluator-260f369",
+    "repo": "evaluator",
+    "hash": "260f369966afbae94b96f6f820dcfce16c3641b0",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Adds labelled benchmark data."
+  },
+  {
+    "id": "evaluator-cb8a9ff",
+    "repo": "evaluator",
+    "hash": "cb8a9ff63df886e34b1e1588094b7c65b2478134",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Fixes a bug found later: comments inside JSX braces were never found."
+  },
+  {
+    "id": "evaluator-604e337",
+    "repo": "evaluator",
+    "hash": "604e33703004c4d5be434b9700adacb17534bd51",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Fixes a bug found in use, a mistyped flag that silently skipped checks, by moving to util.parseArgs."
+  },
+  {
+    "id": "evaluator-0d16154",
+    "repo": "evaluator",
+    "hash": "0d1615413ebbbfd2510290fd17a476efa37e413b",
+    "expect": { "folds": false, "mixes": false, "borderline": true },
+    "note": "Fixes the benchmark's matching of labelled types to their split members, a bug in scoring code from thirteen commits back that showed up when benchmarking."
+  },
+  {
+    "id": "evaluator-84f6ce8",
+    "repo": "evaluator",
+    "hash": "84f6ce8cdb76e6dba5cf67014c469491623550d4",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Records a new measurement on 67 files in the thresholds comment."
+  },
+  {
+    "id": "evaluator-f743c4f",
+    "repo": "evaluator",
+    "hash": "f743c4f2b60e997c5effc2a61dd0c4e25d3c4d09",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Adds labelled benchmark data."
+  },
+  {
+    "id": "evaluator-f45dcd7",
+    "repo": "evaluator",
+    "hash": "f45dcd7e5d42bcc68260862bbf89855c061a2a0a",
+    "expect": { "folds": false, "mixes": true, "borderline": true },
+    "note": "Adds crash logging and, separately, a plain error for missing input files; both concern crashes, but each could stand alone."
+  },
+  {
+    "id": "evaluator-88d2c4d",
+    "repo": "evaluator",
+    "hash": "88d2c4da286768c31d43fa9c8a9fe03c7886e6e8",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Fixes a crash found in use when --file is given a folder."
+  },
+  {
+    "id": "evaluator-f526c92",
+    "repo": "evaluator",
+    "hash": "f526c925ef08d14a2c6a1e03a7c5a823a8849335",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Moves the requirement questions into their own request after measuring that they swayed the other readings."
+  },
+  {
+    "id": "evaluator-ed54c61",
+    "repo": "evaluator",
+    "hash": "ed54c61f2d2e7c7a35c20f406901b6200fe5d0d9",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "A performance change backed by its own measurement."
+  },
+  {
+    "id": "evaluator-87e9272",
+    "repo": "evaluator",
+    "hash": "87e92729ed9c727396bd64770ae50be3721ae93a",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Fixes the run footer undercounting Jev requests, a bug in code from 25 commits earlier."
+  },
+  {
+    "id": "evaluator-4592a82",
+    "repo": "evaluator",
+    "hash": "4592a820925d4ac1a5883ab385cf628aac06edf9",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "A new feature, the hygiene check, with its tests and config loader."
+  },
+  {
+    "id": "evaluator-f8c63c5",
+    "repo": "evaluator",
+    "hash": "f8c63c520afe17ac7b8bbe3241d8e9c39e0d6854",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Adds the project config and wires its settings into the hygiene check and the commit rules, as one step."
+  },
+  {
+    "id": "evaluator-f207fa2",
+    "repo": "evaluator",
+    "hash": "f207fa292cf9e6930f7be018fb9a6e9cf7903c64",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Adds an example project config that builds on the previous commit."
+  },
+  {
+    "id": "evaluator-8955960",
+    "repo": "evaluator",
+    "hash": "8955960e1fc260bb47e060cdd539ad99ef117aa1",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "A new feature, the design write-up check."
+  },
+  {
+    "id": "evaluator-9d7730f",
+    "repo": "evaluator",
+    "hash": "9d7730fefdfee0129016960f413c29a60f16a1f5",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Docs covering three features from the previous commits."
+  },
+  {
+    "id": "evaluator-80e5bcc",
+    "repo": "evaluator",
+    "hash": "80e5bcc46c30be6d067105fcd02cf085be3023bc",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "A new feature, the history check."
+  },
+  {
+    "id": "evaluator-38a88a7",
+    "repo": "evaluator",
+    "hash": "38a88a796a049ee774f56b38f6bc99c61b47843b",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "A new feature, the test file check."
+  },
+  {
+    "id": "evaluator-a651521",
+    "repo": "evaluator",
+    "hash": "a6515218dd7b1920432366b22d84016ae6d9f8c9",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "A new feature, the UI copy check, with its parser dependency and config."
+  },
+  {
+    "id": "evaluator-6e2dd0d",
+    "repo": "evaluator",
+    "hash": "6e2dd0d0e61f437b2b0ceaf94e83954673f05d9e",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "A new feature, the spec check."
+  },
+  {
+    "id": "evaluator-2fcb495",
+    "repo": "evaluator",
+    "hash": "2fcb495e62602925baf052adde26a41fdbf6fdc1",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Adds example spec checks for the new spec feature."
+  },
+  {
+    "id": "evaluator-76597a0",
+    "repo": "evaluator",
+    "hash": "76597a0c6975cc4e9c2716266f9083f113cdd416",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Docs covering four features from the previous commits."
+  },
+  {
+    "id": "evaluator-b592575",
+    "repo": "evaluator",
+    "hash": "b59257596054afbdc7aa5d3d10024d08547b0516",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Adds benchmark scoring for four checks."
+  },
+  {
+    "id": "evaluator-37cf66b",
+    "repo": "evaluator",
+    "hash": "37cf66b02718fbac904a3efd541d115af77b6acd",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Adds three more spec checks to the example file, extending it rather than correcting it; the array reflow is formatter output."
+  },
+  {
+    "id": "evaluator-b634558",
+    "repo": "evaluator",
+    "hash": "b634558b580e274e05a51d1a06936d54d2e7ae96",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Extends the hygiene check to branch and tag names."
+  },
+  {
+    "id": "evaluator-aa74af3",
+    "repo": "evaluator",
+    "hash": "aa74af3119e5c0ecfe8bbee844b1ec811b9083cf",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Rewords the doc check's concreteness question and adds a warning band after vague write-ups passed."
+  },
+  {
+    "id": "evaluator-ecf9f89",
+    "repo": "evaluator",
+    "hash": "ecf9f892978421d70c93eed07145190d3a94b025",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Rewrites the example's last-spot check after measuring that it caught none of three unsafe stories."
+  },
+  {
+    "id": "evaluator-63144c7",
+    "repo": "evaluator",
+    "hash": "63144c78e7dd4e508b48fe452d91d71072a9f952",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Adds labelled benchmark data."
+  },
+  {
+    "id": "evaluator-5b85a36",
+    "repo": "evaluator",
+    "hash": "5b85a3659f03524ce57415e27cf167ca21e9261a",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "A new feature, the site check, with its docs."
+  },
+  {
+    "id": "evaluator-1dc15a8",
+    "repo": "evaluator",
+    "hash": "1dc15a889476f05e26763a8a5dfb3546b120c177",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Fixes --recent printing undefined for run kinds with no path or score, a display bug found in use that hygiene runs had shown since long before the site commit."
+  },
+  {
+    "id": "evaluator-5644030",
+    "repo": "evaluator",
+    "hash": "56440300bf87bd79747da122d7701c4c13802237",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Changes a matcher rule after a real test was misjudged."
+  },
+  {
+    "id": "evaluator-bb9b8d7",
+    "repo": "evaluator",
+    "hash": "bb9b8d7e9b195d08d290aeb58a9297415d4d6018",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Fixes a false alarm found in use: wrangler.jsonc was judged for bloat."
+  },
+  {
+    "id": "evaluator-6f3c0f3",
+    "repo": "evaluator",
+    "hash": "6f3c0f3f76576db79f635b6d58f9963e7280152a",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Changes a rule after learning that early commits land before the README is finished."
+  },
+  {
+    "id": "evaluator-7b4d075",
+    "repo": "evaluator",
+    "hash": "7b4d0752d128553a802c983a08011c1aed3862f6",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Adds shebang detection so extensionless scripts get checked, a gap found in use."
+  },
+  {
+    "id": "evaluator-e625559",
+    "repo": "evaluator",
+    "hash": "e6255595f1d20ce2a47ade514d4aaed756b49e45",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Calibrates the test-quality cuts against labelled tests."
+  },
+  {
+    "id": "evaluator-f6ea725",
+    "repo": "evaluator",
+    "hash": "f6ea725fbea076a033ce2e5a1b05b2182bd33bb1",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Adds labelled benchmark data."
+  },
+  {
+    "id": "evaluator-0a16f80",
+    "repo": "evaluator",
+    "hash": "0a16f80923d91a4eb768d2e8097b108d5f6f972d",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Rewords the spec question after comments misled it."
+  },
+  {
+    "id": "evaluator-08bbd9e",
+    "repo": "evaluator",
+    "hash": "08bbd9eb90086fb3706a788756930b13a7155e51",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Rewords two example checks after measuring wrong answers."
+  },
+  {
+    "id": "evaluator-d96a810",
+    "repo": "evaluator",
+    "hash": "d96a81096d5d5c21709de54280ae9dd8a37ee717",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Adds labelled benchmark data."
+  },
+  {
+    "id": "evaluator-71a176a",
+    "repo": "evaluator",
+    "hash": "71a176a862893a3ea54393b444d468e2de9d98f3",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Fixes the copy extractor missing component props and message maps, found against labelled views."
+  },
+  {
+    "id": "evaluator-39283f9",
+    "repo": "evaluator",
+    "hash": "39283f9e8092b0e7eb037257ba6bb2f0f2442577",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Calibrates the copy cuts against labelled strings."
+  },
+  {
+    "id": "evaluator-e4e7d8b",
+    "repo": "evaluator",
+    "hash": "e4e7d8b4999c741dd373f13fa178fa87b557a62c",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Adds labelled benchmark data."
+  },
+  {
+    "id": "evaluator-327b639",
+    "repo": "evaluator",
+    "hash": "327b6391185768bd6ade07abf6e342c7bc2b16c1",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "A new feature, --amend, with its docs row and test."
+  },
+  {
+    "id": "evaluator-f842086",
+    "repo": "evaluator",
+    "hash": "f842086c854f4786836257abe0b0734ed0f9b45a",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Fixes a false alarm found in use on a vitest config."
+  },
+  {
+    "id": "evaluator-a6b4f5d",
+    "repo": "evaluator",
+    "hash": "a6b4f5dcf14c26d2e83935e3d219fe15d6f7c59c",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Rewords the thin-wrapper question after a real false alarm."
+  },
+  {
+    "id": "evaluator-5567231",
+    "repo": "evaluator",
+    "hash": "55672319f73181becf07f20a7cd7409cb22532f7",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Fixes table-driven test names being judged with raw placeholders, found in use."
+  },
+  {
+    "id": "evaluator-348b4b5",
+    "repo": "evaluator",
+    "hash": "348b4b5fa90fd88dccc0f9b0bdcc002f9794a71a",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Adds size floors after real false alarms on small units."
+  },
+  {
+    "id": "evaluator-64b4dc6",
+    "repo": "evaluator",
+    "hash": "64b4dc6c1ec7408df939e16d8b5b1052b9cfd65b",
+    "expect": { "folds": false, "mixes": false, "borderline": true },
+    "note": "Loosens the plain-name cut for table-driven tests two commits after the placeholder fix; a new threshold rather than a slip, though it treats the same symptom."
+  },
+  {
+    "id": "evaluator-e0b6124",
+    "repo": "evaluator",
+    "hash": "e0b6124d419b4a7da8d1fa63878db527d6261b92",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "A new config feature with its test."
+  },
+  {
+    "id": "evaluator-960608f",
+    "repo": "evaluator",
+    "hash": "960608f362fd55266754fc92e80297ab75930450",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Uses the new feature to add house rules after a false alarm."
+  },
+  {
+    "id": "evaluator-97114ed",
+    "repo": "evaluator",
+    "hash": "97114edebadebaa7cc712d739245cb23fc129117",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Raises a threshold after a plain message failed in real use."
+  },
+  {
+    "id": "evaluator-bf845a1",
+    "repo": "evaluator",
+    "hash": "bf845a160b0f2b4c89094e6139a4c5cf30512967",
+    "expect": { "folds": false, "mixes": false, "borderline": true },
+    "note": "Adds a house rule two commits after the file was created; it reads as a new lesson from a false alarm, though it could be folded in."
+  },
+  {
+    "id": "evaluator-a6e9430",
+    "repo": "evaluator",
+    "hash": "a6e9430e7fb98e49be358e6e7f1bb22211887de5",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "A new feature that marks a bloated verdict near the cut as borderline."
+  },
+  {
+    "id": "evaluator-668bb5d",
+    "repo": "evaluator",
+    "hash": "668bb5dff887801fa08a7ca8db6129028705715e",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Adds a house rule after feedback from the workshop app."
+  },
+  {
+    "id": "evaluator-6b24784",
+    "repo": "evaluator",
+    "hash": "6b247849ea3bf128dcbce238b060abf87e858e01",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Changes the subject rule after a real false failure."
+  },
+  {
+    "id": "evaluator-fc38829",
+    "repo": "evaluator",
+    "hash": "fc38829f2f2c925b8ae5f3e9ec98f4eb2fc65d15",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Removes a forbidden word after a false alarm in use."
+  },
+  {
+    "id": "evaluator-a3c73e9",
+    "repo": "evaluator",
+    "hash": "a3c73e91f8c005f213a15d7c4053861327e3007e",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "A new config feature, with the evaluator's own config using it."
+  },
+  {
+    "id": "evaluator-7e8e1d4",
+    "repo": "evaluator",
+    "hash": "7e8e1d4d934fa16ee869f5fdb914ea828f3cfd3c",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Splits and renames hygiene tests written 46 commits earlier, a tidy-up with its own purpose."
+  },
+  {
+    "id": "evaluator-0bd3e77",
+    "repo": "evaluator",
+    "hash": "0bd3e77e7d9bcb5491c7bea5daf2a6e375f0e9af",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Fixes YAML front matter being judged as prose, found on a skill file."
+  },
+  {
+    "id": "evaluator-f79fc1c",
+    "repo": "evaluator",
+    "hash": "f79fc1cb8a06f8ffb5e6bc39cb6440bef249d722",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Adds a new skill file."
+  },
+  {
+    "id": "evaluator-c6f1410",
+    "repo": "evaluator",
+    "hash": "c6f1410a6381f0265be60ef4f9ab3807bd0edfef",
+    "expect": { "folds": false, "mixes": false, "borderline": true },
+    "note": "Makes the size counts respect the ignore setting from four commits earlier, whose message said it applies to every check, but the gap was found by running the history check and the message says what went wrong."
+  },
+  {
+    "id": "claybank-2aab7e9",
+    "repo": "claybank",
+    "hash": "2aab7e9ca2be6e6e0941cfb7c332d681e241da99",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Adds the codebase gate tests as one suite, the first step after the scaffold."
+  },
+  {
+    "id": "claybank-9c8d69b",
+    "repo": "claybank",
+    "hash": "9c8d69b747adb555392414bdea9012df60465dfb",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "New value types with their tests."
+  },
+  {
+    "id": "claybank-48062bb",
+    "repo": "claybank",
+    "hash": "48062bb1d1c8c775512bac7ef84660667adda2b4",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Adds the Vancouver time helpers and the month grid, both foundations for the calendar."
+  },
+  {
+    "id": "claybank-7bf0d4d",
+    "repo": "claybank",
+    "hash": "7bf0d4d238de796b335f1158e24e53718760e2a8",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Adds the design system, fonts and favicon as one UI foundation step."
+  },
+  {
+    "id": "claybank-ac8581c",
+    "repo": "claybank",
+    "hash": "ac8581c4c1d9260f5b1dff3d5a729d28b6097c24",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Adds the app shell: the layout, security middleware and error pages that all hang off createApp."
+  },
+  {
+    "id": "claybank-8bb1706",
+    "repo": "claybank",
+    "hash": "8bb170608ca5a5738b5959a201b5c416dfe19dcc",
+    "expect": { "folds": false, "mixes": true, "borderline": false },
+    "note": "Splits the source rules test into separate files and, separately, lets the SQL rule accept a trailing comma; either would stand alone."
+  },
+  {
+    "id": "claybank-fc9f3aa",
+    "repo": "claybank",
+    "hash": "fc9f3aa11565e433e396682db9525965ae68b13a",
+    "expect": { "folds": false, "mixes": false, "borderline": true },
+    "note": "Adds the .ics invite and the booking QR code together; they share no code, but both are small outputs of the same workshop page."
+  },
+  {
+    "id": "claybank-07078d4",
+    "repo": "claybank",
+    "hash": "07078d46552d337c6ab25e46a9b4f342bb0f5ee5",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "New repositories and schema with their tests."
+  },
+  {
+    "id": "claybank-938d8d6",
+    "repo": "claybank",
+    "hash": "938d8d6c1f11f7e01f4d46a6960f5849bcaeaf62",
+    "expect": { "folds": true, "mixes": false, "into": "07078d46552d337c6ab25e46a9b4f342bb0f5ee5", "borderline": false },
+    "note": "Tightens the previous commit's tests so they prove what they claim, and fixes a comment that commit got wrong."
+  },
+  {
+    "id": "claybank-cea0edf",
+    "repo": "claybank",
+    "hash": "cea0edfd125533a0c444ae43c90c284a472a18ad",
+    "expect": { "folds": false, "mixes": true, "borderline": false },
+    "note": "Moves the error prefix into the markup and also enlarges the wordmark's touch target and tokenizes the focus outline, three separate UI fixes."
+  },
+  {
+    "id": "claybank-185faca",
+    "repo": "claybank",
+    "hash": "185faca6ce109b39298ed703691ee32f4ec54cc3",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Fixes the content security policy after Lighthouse's robots.txt fetch was blocked, a bug found later in a policy from six commits back."
+  },
+  {
+    "id": "claybank-278a0d9",
+    "repo": "claybank",
+    "hash": "278a0d94eb2f37fca195fe6df214da00466f3bb4",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "A test refactor preparing for routes that need a database."
+  },
+  {
+    "id": "claybank-3ef7014",
+    "repo": "claybank",
+    "hash": "3ef70148440426886581bec326e89250b9d12914",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "A refactor with its own purpose, preparing the calendar query."
+  },
+  {
+    "id": "claybank-6996006",
+    "repo": "claybank",
+    "hash": "69960063fe8b8235dabb05d1c442b6df26dbfc95",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "A new feature, the calendar page."
+  },
+  {
+    "id": "claybank-359ab1d",
+    "repo": "claybank",
+    "hash": "359ab1df33d94293fd57b71da291cf55efdc60cc",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "A new feature, the course templates."
+  },
+  {
+    "id": "claybank-376c509",
+    "repo": "claybank",
+    "hash": "376c509609dd103a9232cf790fafb9573de980af",
+    "expect": { "folds": true, "mixes": false, "into": "359ab1df33d94293fd57b71da291cf55efdc60cc", "borderline": false },
+    "note": "Re-crops the Raku art the previous commit added and fixes its recorded height."
+  },
+  {
+    "id": "claybank-c2e4b04",
+    "repo": "claybank",
+    "hash": "c2e4b04c4779d8482d50938bd1478fe09432a073",
+    "expect": { "folds": true, "mixes": false, "into": "fc9f3aa11565e433e396682db9525965ae68b13a", "borderline": false },
+    "note": "Rewords the slug comment written in the invite commit so it names no course, since its raku example broke the course-neutral code rule once the course templates arrived two commits earlier."
+  },
+  {
+    "id": "claybank-dd345b2",
+    "repo": "claybank",
+    "hash": "dd345b2d6eeac39ffa073b28aad1e3f4c55fab5d",
+    "expect": { "folds": false, "mixes": true, "borderline": true },
+    "note": "Names each workshop's course in words after learning that color alone is not enough, and also tightens unrelated grid tests and moves date formatting into one helper."
+  },
+  {
+    "id": "claybank-67a0922",
+    "repo": "claybank",
+    "hash": "67a0922c616f31412f596865569dd80f899b9020",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "A new feature: sample workshops and the seed script."
+  },
+  {
+    "id": "claybank-363e8ec",
+    "repo": "claybank",
+    "hash": "363e8ec17381d0bc16e8a3e42f2dc0a894f9764b",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "A new feature, the new-workshop form parser."
+  },
+  {
+    "id": "claybank-e238e08",
+    "repo": "claybank",
+    "hash": "e238e08d16ec3ba8452b15cc39a6530c88e51282",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "A new feature, the workshop creation pages."
+  },
+  {
+    "id": "claybank-a9bc94f",
+    "repo": "claybank",
+    "hash": "a9bc94f084c6c3028ac724c005ac0404f79ca72c",
+    "expect": { "folds": false, "mixes": true, "borderline": true },
+    "note": "Bundles boundary tests for the form parser, CSS tokens for the course cards and a tighter formats type; each tidies one of the previous two commits, so it would need splitting before any folding."
+  },
+  {
+    "id": "dirmirror-02783ed",
+    "repo": "dirmirror",
+    "hash": "02783edb9ff170f5625faa10d4c54aefc0654ac5",
+    "expect": { "folds": true, "mixes": false, "into": "9c098d0d0eb6ac7971f5beb3e8a145d20024a212", "borderline": false },
+    "note": "Fixes the setup settings test that the previous commit left failing when it added sshKey, and tests the SSH_KEY override that commit introduced."
+  },
+  {
+    "id": "dirmirror-688fe01",
+    "repo": "dirmirror",
+    "hash": "688fe01670870c7e0d4164a2845c966806f12aae",
+    "expect": { "folds": true, "mixes": false, "into": "816c6b59ebd0b362f801bd3bfa8fa24209dbca82", "borderline": false },
+    "note": "Documents the log's new location and the .dirmirror exclude, both changed by the previous commit without touching the docs."
+  },
+  {
+    "id": "dirmirror-0ff5757",
+    "repo": "dirmirror",
+    "hash": "0ff57570a086798e59d02bb10a382fe2dcde3356",
+    "expect": { "folds": true, "mixes": false, "into": "88de36ef06ec7b39a0f657ed5a351c7b26f2639f", "borderline": false },
+    "note": "Renames the file that the move three commits earlier left holding only the version helpers, finishing that move."
+  },
+  {
+    "id": "dirmirror-973fd8a",
+    "repo": "dirmirror",
+    "hash": "973fd8a8c1c7bf197972fd40708ebf7f321fd7e3",
+    "expect": { "folds": true, "mixes": false, "into": "816c6b59ebd0b362f801bd3bfa8fa24209dbca82", "borderline": false },
+    "note": "Rewrites a comment in main.ts that the log move three commits earlier made false, in a file that commit already edited."
+  },
+  {
+    "id": "dirmirror-4942171",
+    "repo": "dirmirror",
+    "hash": "4942171166800eab6b93e2d6fe5beb32c55f9e25",
+    "expect": { "folds": true, "mixes": false, "into": "0a5269fcd75a8ebd64faa452e79ec864ec1ffc5a", "borderline": false },
+    "note": "Converts the last caller that still built the guest home by hand, completing the refactor whose subject said it is built in one place."
+  },
+  {
+    "id": "dirmirror-f48815a",
+    "repo": "dirmirror",
+    "hash": "f48815a3a810a30bbfa2e4dbe2026bd0c2893c3d",
+    "expect": { "folds": true, "mixes": false, "into": "ff3770eae6db4a4eec4a7bb918440900c013bd98", "borderline": false },
+    "note": "Corrects a menu label and adds two facts that the logging docs commit four steps earlier got wrong or left out."
+  },
+  {
+    "id": "dirmirror-927cdb4",
+    "repo": "dirmirror",
+    "hash": "927cdb4bb8ea9bc4af2d6f68c559fb7b37a7ec6d",
+    "expect": { "folds": true, "mixes": false, "into": "add1909fa74de37a51af53171ff56d171ac0a81e", "borderline": false },
+    "note": "Corrects a CLAUDE.md rule that was already false when the docs rewrite seven commits earlier wrote it, since the authorship tool calls git directly."
+  },
+  {
+    "id": "dirmirror-1392731",
+    "repo": "dirmirror",
+    "hash": "1392731d5cc20a92006d86af8688135f9851b8e1",
+    "expect": { "folds": true, "mixes": false, "into": "19cd5268c59c25953b92d6415c49321f7bdb0ca0", "borderline": true },
+    "note": "Moves a guard the screen already had into ungroupPair and fixes a test that could not catch mutation, both in the previous commit's code, though its fix type and stated consequence argue for keeping it."
+  },
+  {
+    "id": "dirmirror-4574d88",
+    "repo": "dirmirror",
+    "hash": "4574d8824b188315916d04dea7c1094edcde9ee2",
+    "expect": { "folds": false, "mixes": true, "borderline": false },
+    "note": "Fixes the verify skill's rsync shim for quoted paths and also adds an unrelated scratch repro test with console.log calls and a deliberately failing assertion."
+  },
+  {
+    "id": "dirmirror-3a3c804",
+    "repo": "dirmirror",
+    "hash": "3a3c8042d69570e6bf595298438c538fac8bdad7",
+    "expect": { "folds": false, "mixes": true, "borderline": false },
+    "note": "Three unrelated bug fixes in one commit: pairs file parsing, openrsync's banner in the preview, and pair deletion."
+  },
+  {
+    "id": "dirmirror-db7bd4b",
+    "repo": "dirmirror",
+    "hash": "db7bd4b7316cbbd0f0eff88f5e90e706bd01db99",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Fixes config rewrites deleting lines dirmirror did not write, a data-loss bug the previous commit's settings screen exposed, explained in the message, so it stays separate."
+  },
+  {
+    "id": "dirmirror-db58f59",
+    "repo": "dirmirror",
+    "hash": "db58f59030925e2ee0dae7a787176fadd318d64c",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Fixes a session log that never reached disk while setup waited, a bug found in use three commits after the recorder was added."
+  },
+  {
+    "id": "dirmirror-77ef5f6",
+    "repo": "dirmirror",
+    "hash": "77ef5f6a520e76766491765ee8d3d17b2ce3af3a",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Fixes the host path suggestion offering the whole home folder as a --delete destination, a bug found nine commits after the feature."
+  },
+  {
+    "id": "dirmirror-aff017d",
+    "repo": "dirmirror",
+    "hash": "aff017d2329ed0ccaba74fb967f748d057d1f7b3",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Keeps hook scripts out of the pair listing, a token leak that the recorder commit two steps earlier and its tests missed, so a separate bug found later."
+  },
+  {
+    "id": "fieldmark-8595488",
+    "repo": "fieldmark",
+    "hash": "85954882f5d8c4b697f8b69a5d78ce1a677894ee",
+    "expect": { "folds": true, "mixes": false, "into": "a0b10df611310867e758cf730f9e6f26ab9aef8e", "borderline": false },
+    "note": "Removes the blank line the previous commit left when it moved the tint tests out."
+  },
+  {
+    "id": "fieldmark-ebf5a48",
+    "repo": "fieldmark",
+    "hash": "ebf5a48c345c6e68eef419e0afed6f087a8cc623",
+    "expect": { "folds": true, "mixes": false, "into": "e7a2be274eb54837f861cbcd6d10fc9f5f5720d5", "borderline": false },
+    "note": "Removes a MapKit import the previous commit added but never used."
+  },
+  {
+    "id": "fieldmark-4d68d1c",
+    "repo": "fieldmark",
+    "hash": "4d68d1c3b5c932430230f8c61144d2f562cd65f6",
+    "expect": { "folds": true, "mixes": false, "into": "17b976799245fabfec7002767d02b0c41f5b7d7e", "borderline": false },
+    "note": "Wraps the line the previous commit lengthened past the 120-character lint limit."
+  },
+  {
+    "id": "fieldmark-6ffb832",
+    "repo": "fieldmark",
+    "hash": "6ffb832b2e73d8dcf62e32ed8539491a200157db",
+    "expect": { "folds": true, "mixes": false, "into": "98326eda6056765fcd14aee147a675c084415f1c", "borderline": false },
+    "note": "Rewrites the toolbar observers the previous commit wrote so the build has no warnings; typed as a fix, but it only clears a build slip."
+  },
+  {
+    "id": "fieldmark-248557d",
+    "repo": "fieldmark",
+    "hash": "248557d74e7cccef4ba96a57c16097e068923333",
+    "expect": { "folds": true, "mixes": false, "into": "ae9c3cd5e40fea4cbc730fbdc29344643e7e84d9", "borderline": false },
+    "note": "Finishes the previous lint cleanup: renames one me it missed and fixes a comment its file move made stale."
+  },
+  {
+    "id": "fieldmark-37d84af",
+    "repo": "fieldmark",
+    "hash": "37d84af319d32a79ae11145a9801fa9707181f7c",
+    "expect": { "folds": true, "mixes": false, "into": "3c5d8ba104374ca6845e4f9277c546f423c7b313", "borderline": false },
+    "note": "Routes the badge's call site through the orderLabel the previous commit added and tested, instead of repeating the format inline."
+  },
+  {
+    "id": "fieldmark-a019673",
+    "repo": "fieldmark",
+    "hash": "a019673d9b5aa8ae0b2e93f9278eb83d24c44d97",
+    "expect": { "folds": true, "mixes": false, "into": "93280d1a59b2a07e837d09186e26db051ce5081c", "borderline": false },
+    "note": "Updates the help guide for the two-column editor layout from three commits earlier."
+  },
+  {
+    "id": "fieldmark-8aa6414",
+    "repo": "fieldmark",
+    "hash": "8aa6414a9e0fd7ceb1ca73fc307201373d7cb98a",
+    "expect": { "folds": true, "mixes": false, "into": "48701bccab785686227940d4ddcdfd9259f1112d", "borderline": false },
+    "note": "Documents setup.sh and its flags, which the previous commit added without a README change."
+  },
+  {
+    "id": "fieldmark-33b597d",
+    "repo": "fieldmark",
+    "hash": "33b597d3317e4e783edb2a2e9ef2c1f0606b6528",
+    "expect": { "folds": true, "mixes": false, "into": "d938b8c56c923e2b911bb047894cc28eb894cc4e", "borderline": false },
+    "note": "Documents the Show Toolbar Labels menu item the previous commit added, and adds it to the guide's test."
+  },
+  {
+    "id": "fieldmark-8c2a78a",
+    "repo": "fieldmark",
+    "hash": "8c2a78ad95f5773630cdecd5b3859b8565c116e0",
+    "expect": { "folds": true, "mixes": false, "into": "70eb666cd00c7c4f099389cafce5125cb3358bc9", "borderline": false },
+    "note": "Removes the temp folders that the editor tests from four commits earlier created and never cleaned up."
+  },
+  {
+    "id": "fieldmark-4271215",
+    "repo": "fieldmark",
+    "hash": "4271215ffa1b5d1e8dbb5ed3d73209e839950663",
+    "expect": { "folds": true, "mixes": false, "into": "170bd304c8feb8b0d47a45934b6e0ed35fa85286", "borderline": true },
+    "note": "Replaces a racy read in the test the previous commit added, which fixes that commit's own test, though the race was probably found by later failing runs."
+  },
+  {
+    "id": "fieldmark-5a7f7c4",
+    "repo": "fieldmark",
+    "hash": "5a7f7c4ecb6a61de460de88cdbba2829cd65d8c0",
+    "expect": { "folds": false, "mixes": true, "borderline": false },
+    "note": "Addresses a code review with five unrelated edits across a test, an import, a visibility change, a hook test and a lint comment."
+  },
+  {
+    "id": "fieldmark-c4699de",
+    "repo": "fieldmark",
+    "hash": "c4699debf4f2424935b23fdcc4eee8ae87762654",
+    "expect": { "folds": false, "mixes": true, "borderline": false },
+    "note": "Two independent bug fixes, UTF-8 decoding of a cut-off page and case-folded HTML entities, in two files with separate tests."
+  },
+  {
+    "id": "fieldmark-b5d42b2",
+    "repo": "fieldmark",
+    "hash": "b5d42b261c10cbdcb9da507e1c404c19b416d706",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Fixes a boundary bug in the daily cap query the previous commit wrote, proved with a new test, so it stays a separate bug."
+  },
+  {
+    "id": "fieldmark-02258c8",
+    "repo": "fieldmark",
+    "hash": "02258c82b3a3c050855706d70da9e3dc5163c1c5",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Changes the --jobs default and test mode after measuring a grid of runs, one commit after the provisional defaults."
+  },
+  {
+    "id": "fieldmark-b3f47ed",
+    "repo": "fieldmark",
+    "hash": "b3f47edd50f2ec81620944379d656e25f9436ef6",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Fixes the same temp-copy leak in the map card, older code in another feature, right after the notes fix; it looks like a forgotten call site but is a separate bug."
+  },
+  {
+    "id": "fieldmark-4961b38",
+    "repo": "fieldmark",
+    "hash": "4961b381abef6dae958aa7fa6bdc1d6b7e029bbe",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Moves the editor's error line under both columns after finding that scrolling hid it, reversing a deliberate choice made four commits earlier."
+  },
+  {
+    "id": "toolbox-3a8cfc9",
+    "repo": "toolbox",
+    "hash": "3a8cfc9e2b15dce57c4db347b7273b9bea5f52de",
+    "expect": { "folds": true, "mixes": false, "into": "f4b117f302bfc163fc4978530482f2c8333b0a94", "borderline": false },
+    "note": "Updates the README for the rewrite in the previous commit, which left it describing the old behaviour."
+  },
+  {
+    "id": "toolbox-4c1c344",
+    "repo": "toolbox",
+    "hash": "4c1c344b79f704f906187a3fb73302232438de26",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Fixes field parsing when log.showSignature is on, a bug found in use two commits after the rewrite."
+  },
+  {
+    "id": "toolbox-628cb5b",
+    "repo": "toolbox",
+    "hash": "628cb5b46ebd57b7850eb8b9b2e506f3bcb4d545",
+    "expect": { "folds": false, "mixes": false, "borderline": false },
+    "note": "Fixes a race where a concurrent commit made the run report nothing to claim, a separate bug in the rewrite from three commits earlier."
+  }
+]
