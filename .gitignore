@@ -6,3 +6,4 @@ bench/results/
 __pycache__/
 .claude/worktrees/
 .idea
+.DS_Store
