@@ -5,3 +5,4 @@ live/
 bench/results/
 __pycache__/
 .claude/worktrees/
+.idea
