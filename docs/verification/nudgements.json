@@ -1,6 +1,6 @@
 {
   "capturedAt": "2026-09-29",
-  "note": "After versions are local proposals, not changes applied upstream. README reviews use the whole document; test reviews target the extracted test. Existing-link checks were disabled for the copied upstream README.",
+  "note": "The gallery shows short excerpts. Before text comes from the linked upstream revisions. After versions are local proposals, not changes applied upstream. Complete inputs and evaluation results are retained here. README and code reviews used complete files; the timing test and UI error were extracted and reviewed with their context. Link-existence checks were disabled for the copied README.",
   "examples": [
     {
       "id": "commit",
@@ -279,6 +279,284 @@
       ]
     },
     {
+      "before": "Gate another test on `test-pypi` (#21883)\n\n<!--\nThank you for contributing to uv! To help us out with reviewing, please\nconsider the following:\n\n- Does this pull request include a summary of the change? (See below.)\n- Does this pull request include a descriptive title?\n- Does this pull request include references to any relevant issues?\n-->\n\n## Summary\n\n<!-- What's the purpose of the change? What does it do, and why? -->\nThe test `upgrade_uses_extra_index_url_credentials_for_registry_source`\naccesses PyPI and fails in offline builds, so gate it with the\n`test-pypi` feature.\n\n## Test Plan\n\n<!-- How was it tested? -->\nApplied as a downstream patch in Fedora.",
+      "after": "test: gate PyPI credential test behind test-pypi\n\n- It accesses PyPI and fails in offline builds.",
+      "initial": {
+        "runId": "20260929061603-wg71",
+        "version": "9407dfb",
+        "repo": "/tmp/nudgement-short-examples",
+        "ref": "3011f564c3f01096ae9b6fdd6f04a1e26322cfcd",
+        "message": "Gate another test on `test-pypi` (#21883)\n\n<!--\nThank you for contributing to uv! To help us out with reviewing, please\nconsider the following:\n\n- Does this pull request include a summary of the change? (See below.)\n- Does this pull request include a descriptive title?\n- Does this pull request include references to any relevant issues?\n-->\n\n## Summary\n\n<!-- What's the purpose of the change? What does it do, and why? -->\nThe test `upgrade_uses_extra_index_url_credentials_for_registry_source`\naccesses PyPI and fails in offline builds, so gate it with the\n`test-pypi` feature.\n\n## Test Plan\n\n<!-- How was it tested? -->\nApplied as a downstream patch in Fedora.",
+        "verdict": "fail",
+        "score": 47,
+        "issues": [
+          {
+            "severity": "error",
+            "part": "header",
+            "message": "The first line must look like \"type(scope): subject\". Got: \"Gate another test on `test-pypi` (#21883)\"",
+            "source": "lint:format"
+          },
+          {
+            "severity": "error",
+            "part": "body",
+            "message": "The body has 12 line(s) of prose. Use at most 3 \"- \" bullets instead.",
+            "source": "lint:body-bullets-only"
+          },
+          {
+            "severity": "warn",
+            "part": "body",
+            "message": "Avoid Markdown headings and bold text in commit messages.",
+            "source": "lint:markdown"
+          },
+          {
+            "severity": "warn",
+            "part": "bullet 1",
+            "message": "Bullet 1 reads as AI-written.",
+            "source": "jev:bullet_1_human=0.25"
+          },
+          {
+            "severity": "warn",
+            "part": "bullet 2",
+            "message": "Bullet 2 reads as AI-written.",
+            "source": "jev:bullet_2_human=0.32"
+          },
+          {
+            "severity": "warn",
+            "part": "bullet 3",
+            "message": "Bullet 3 reads as AI-written.",
+            "source": "jev:bullet_3_human=0.34"
+          },
+          {
+            "severity": "warn",
+            "part": "body",
+            "message": "Use fewer bullets; some do not earn their place.",
+            "source": "jev:bullet_count=fewer@0.78"
+          },
+          {
+            "severity": "warn",
+            "part": "bullet 1",
+            "message": "Bullet 1 adds little beyond the subject. Consider dropping it.",
+            "source": "jev:bullet_1_adds_info=0.16"
+          },
+          {
+            "severity": "warn",
+            "part": "bullet 2",
+            "message": "Bullet 2 adds little beyond the subject. Consider dropping it.",
+            "source": "jev:bullet_2_adds_info=0.09"
+          },
+          {
+            "severity": "warn",
+            "part": "bullet 3",
+            "message": "Bullet 3 adds little beyond the subject. Consider dropping it.",
+            "source": "jev:bullet_3_adds_info=0.30"
+          },
+          {
+            "severity": "info",
+            "part": "bullet 1",
+            "message": "Most in need of improvement: bullet 1.",
+            "source": "jev:weakest_part=bullet_1@0.45"
+          }
+        ],
+        "comments": [],
+        "readings": {
+          "sounds_human": 0.73,
+          "ai_filler": 0.07,
+          "vague_benefits": 0.11,
+          "over_explained": 0.58,
+          "subject_imperative": 0.83,
+          "subject_generic": 0.07,
+          "tone": {
+            "choice": "plain_professional",
+            "probabilities": {
+              "terse_developer": 0.27,
+              "ai_assistant": 0.13,
+              "plain_professional": 0.6,
+              "marketing": 0
+            }
+          },
+          "bullets_repeat_subject": 0.1,
+          "bullet_1_human": 0.25,
+          "bullet_2_human": 0.32,
+          "bullet_3_human": 0.34,
+          "type_fits": 0.5,
+          "best_type": {
+            "choice": "test",
+            "confidence": 0.89,
+            "probabilities": {
+              "feat": 0,
+              "perf": 0,
+              "style": 0,
+              "refactor": 0,
+              "chore": 0.03,
+              "test": 0.9,
+              "build": 0,
+              "fix": 0.02,
+              "docs": 0,
+              "ci": 0.05,
+              "revert": 0
+            }
+          },
+          "subject_accurate": 0.94,
+          "subject_main_change": 0.93,
+          "subject_specificity": 2.16,
+          "claims_unsupported": 0.13,
+          "omits_major_change": 0.04,
+          "lists_files": 0.11,
+          "should_split": 0.02,
+          "why_given": {
+            "choice": "explains_why",
+            "probabilities": {
+              "why_missing": 0,
+              "why_obvious": 0,
+              "explains_why": 1
+            }
+          },
+          "bullet_count": {
+            "choice": "fewer",
+            "probabilities": {
+              "more": 0.01,
+              "fewer": 0.85,
+              "right": 0.14
+            }
+          },
+          "scope_needed": 0.6,
+          "bullet_1_accurate": 0.81,
+          "bullet_1_adds_info": 0.16,
+          "bullet_2_accurate": 0.68,
+          "bullet_2_adds_info": 0.09,
+          "bullet_3_accurate": 0.66,
+          "bullet_3_adds_info": 0.3,
+          "overall": 2.02,
+          "weakest_part": {
+            "choice": "bullet_1",
+            "confidence": 0.45,
+            "probabilities": {
+              "type": 0.13,
+              "bullet_3": 0.04,
+              "subject": 0.11,
+              "nothing": 0.13,
+              "scope": 0.05,
+              "bullet_1": 0.52,
+              "bullet_2": 0.02
+            }
+          }
+        },
+        "diffTruncated": [],
+        "files": [],
+        "jev": {
+          "requests": 2,
+          "failed": 0,
+          "inputTokens": 3940,
+          "ms": 372
+        }
+      },
+      "final": {
+        "runId": "20260929061603-b2mr",
+        "version": "9407dfb",
+        "repo": "/tmp/nudgement-short-examples",
+        "ref": "3011f564c3f01096ae9b6fdd6f04a1e26322cfcd",
+        "message": "test: gate PyPI credential test behind test-pypi\n\n- It accesses PyPI and fails in offline builds.",
+        "verdict": "pass",
+        "score": 84,
+        "issues": [
+          {
+            "severity": "info",
+            "part": "bullet 1",
+            "message": "Most in need of improvement: bullet 1.",
+            "source": "jev:weakest_part=bullet_1@0.56"
+          }
+        ],
+        "comments": [],
+        "readings": {
+          "sounds_human": 0.88,
+          "ai_filler": 0.04,
+          "vague_benefits": 0.16,
+          "over_explained": 0.32,
+          "subject_imperative": 0.83,
+          "subject_generic": 0.06,
+          "tone": {
+            "choice": "terse_developer",
+            "probabilities": {
+              "ai_assistant": 0,
+              "marketing": 0,
+              "terse_developer": 0.99,
+              "plain_professional": 0.01
+            }
+          },
+          "bullets_repeat_subject": 0.18,
+          "bullet_1_human": 0.89,
+          "type_fits": 0.92,
+          "best_type": {
+            "choice": "test",
+            "confidence": 0.99,
+            "probabilities": {
+              "build": 0,
+              "feat": 0,
+              "ci": 0,
+              "test": 0.99,
+              "refactor": 0,
+              "docs": 0,
+              "revert": 0,
+              "chore": 0,
+              "fix": 0.01,
+              "perf": 0,
+              "style": 0
+            }
+          },
+          "subject_accurate": 0.93,
+          "subject_main_change": 0.95,
+          "subject_specificity": 2.6,
+          "claims_unsupported": 0.22,
+          "omits_major_change": 0.07,
+          "lists_files": 0.09,
+          "should_split": 0.02,
+          "why_given": {
+            "choice": "explains_why",
+            "probabilities": {
+              "explains_why": 0.99,
+              "why_obvious": 0.01,
+              "why_missing": 0
+            }
+          },
+          "bullet_count": {
+            "choice": "fewer",
+            "probabilities": {
+              "more": 0.03,
+              "right": 0.45,
+              "fewer": 0.52
+            }
+          },
+          "scope_needed": 0.65,
+          "bullet_1_accurate": 0.82,
+          "bullet_1_adds_info": 0.78,
+          "overall": 2.16,
+          "weakest_part": {
+            "choice": "bullet_1",
+            "confidence": 0.56,
+            "probabilities": {
+              "bullet_1": 0.64,
+              "type": 0.06,
+              "scope": 0.06,
+              "subject": 0.12,
+              "nothing": 0.12
+            }
+          }
+        },
+        "diffTruncated": [],
+        "files": [],
+        "jev": {
+          "requests": 2,
+          "failed": 0,
+          "inputTokens": 3044,
+          "ms": 140
+        }
+      },
+      "diff": "diff --git a/crates/uv/tests/it/upgrade.rs b/crates/uv/tests/it/upgrade.rs\n--- a/crates/uv/tests/it/upgrade.rs\n+++ b/crates/uv/tests/it/upgrade.rs\n@@ -1717,6 +1717,7 @@ fn upgrade_allows_registry_source() -> Result<()> {\n }\n \n #[tokio::test]\n+#[cfg(feature = \"test-pypi\")]\n async fn upgrade_uses_extra_index_url_credentials_for_registry_source() -> Result<()> {\n     let context = uv_test::test_context!(\"3.12\");\n     let proxy = crate::pypi_proxy::start().await;",
+      "source": "https://github.com/astral-sh/uv/commit/3011f564c3f01096ae9b6fdd6f04a1e26322cfcd",
+      "id": "commit-bullet",
+      "scope": "Full upstream message and diff reviewed; gallery shows the second bullet and its replacement in the revised message."
+    },
+    {
       "id": "readme",
       "source": "https://github.com/chalk/ansi-regex/blob/f923667b5ea05b8b0447f6ead4c56661b7bf7fa1/readme.md",
       "before": "# ansi-regex\n\n> Regular expression for matching [ANSI escape codes](https://en.wikipedia.org/wiki/ANSI_escape_code)\n\n## Install\n\n```sh\nnpm install ansi-regex\n```\n\n## Usage\n\n```js\nimport ansiRegex from 'ansi-regex';\n\nansiRegex().test('\\u001B[4mcake\\u001B[0m');\n//=> true\n\nansiRegex().test('cake');\n//=> false\n\n'\\u001B[4mcake\\u001B[0m'.match(ansiRegex());\n//=> ['\\u001B[4m', '\\u001B[0m']\n\n'\\u001B[4mcake\\u001B[0m'.match(ansiRegex({onlyFirst: true}));\n//=> ['\\u001B[4m']\n\n'\\u001B]8;;https://github.com\\u0007click\\u001B]8;;\\u0007'.match(ansiRegex());\n//=> ['\\u001B]8;;https://github.com\\u0007', '\\u001B]8;;\\u0007']\n```\n\n## API\n\n### ansiRegex(options?)\n\nReturns a regex for matching ANSI escape codes.\n\n#### options\n\nType: `object`\n\n##### onlyFirst\n\nType: `boolean`\\\nDefault: `false` *(Matches any ANSI escape codes in a string)*\n\nMatch only the first ANSI escape.\n\n## Important\n\nIf you run the regex against untrusted user input in a server context, you should [give it a timeout](https://github.com/sindresorhus/super-regex).\n\n**I do not consider [ReDoS](https://blog.yossarian.net/2022/12/28/ReDoS-vulnerabilities-and-misaligned-incentives) a valid vulnerability for this package.**\n\n## FAQ\n\n### Why do you test for codes not in the ECMA 48 standard?\n\nSome of the codes we run as a test are codes that we acquired finding various lists of non-standard or manufacturer specific codes. We test for both standard and non-standard codes, as most of them follow the same or similar format and can be safely matched in strings without the risk of removing actual string content. There are a few non-standard control codes that do not follow the traditional format (i.e. they end in numbers) thus forcing us to exclude them from the test because we cannot reliably match them.\n\nOn the historical side, those ECMA standards were established in the early 90's whereas the VT100, for example, was designed in the mid/late 70's. At that point in time, control codes were still pretty ungoverned and engineers used them for a multitude of things, namely to activate hardware ports that may have been proprietary. Somewhere else you see a similar 'anarchy' of codes is in the x86 architecture for processors; there are a ton of \"interrupts\" that can mean different things on certain brands of processors, most of which have been phased out.\n\n## Maintainers\n\n- [Sindre Sorhus](https://github.com/sindresorhus)\n- [Josh Junon](https://github.com/qix-)\n",
@@ -553,6 +831,342 @@
           "ms": 252
         }
       }
+    },
+    {
+      "before": "export default function indentString(string, count = 1, options = {}) {\n\tconst {\n\t\tindent = ' ',\n\t\tincludeEmptyLines = false\n\t} = options;\n\n\tif (typeof string !== 'string') {\n\t\tthrow new TypeError(\n\t\t\t`Expected \\`input\\` to be a \\`string\\`, got \\`${typeof string}\\``\n\t\t);\n\t}\n\n\tif (typeof count !== 'number') {\n\t\tthrow new TypeError(\n\t\t\t`Expected \\`count\\` to be a \\`number\\`, got \\`${typeof count}\\``\n\t\t);\n\t}\n\n\tif (count < 0) {\n\t\tthrow new RangeError(\n\t\t\t`Expected \\`count\\` to be at least 0, got \\`${count}\\``\n\t\t);\n\t}\n\n\tif (typeof indent !== 'string') {\n\t\tthrow new TypeError(\n\t\t\t`Expected \\`options.indent\\` to be a \\`string\\`, got \\`${typeof indent}\\``\n\t\t);\n\t}\n\n\tif (count === 0) {\n\t\treturn string;\n\t}\n\n\tconst regex = includeEmptyLines ? /^/gm : /^(?!\\s*$)/gm;\n\n\treturn string.replace(regex, indent.repeat(count));\n}\n",
+      "after": "export default function indentString(string, count = 1, options = {}) {\n\tconst {\n\t\tindent = ' ',\n\t\tincludeEmptyLines = false\n\t} = options;\n\n\tif (typeof string !== 'string') {\n\t\tthrow new TypeError(\n\t\t\t`Expected \\`input\\` to be a \\`string\\`, got \\`${typeof string}\\``\n\t\t);\n\t}\n\n\tif (typeof count !== 'number') {\n\t\tthrow new TypeError(\n\t\t\t`Expected \\`count\\` to be a \\`number\\`, got \\`${typeof count}\\``\n\t\t);\n\t}\n\n\tif (count < 0) {\n\t\tthrow new RangeError(\n\t\t\t`Expected \\`count\\` to be at least 0, got \\`${count}\\``\n\t\t);\n\t}\n\n\tif (typeof indent !== 'string') {\n\t\tthrow new TypeError(\n\t\t\t`Expected \\`options.indent\\` to be a \\`string\\`, got \\`${typeof indent}\\``\n\t\t);\n\t}\n\n\tif (count === 0) {\n\t\treturn string;\n\t}\n\n\t// Anchor each line; unless requested, skip lines containing only whitespace.\n\tconst regex = includeEmptyLines ? /^/gm : /^(?!\\s*$)/gm;\n\n\treturn string.replace(regex, indent.repeat(count));\n}\n",
+      "initial": {
+        "kind": "file",
+        "runId": "20260929054938-agho",
+        "version": "28835da+dirty",
+        "ref": "worktree",
+        "path": "indent-string.js",
+        "language": "js",
+        "verdict": "lean",
+        "leanness": 73,
+        "metrics": {
+          "lines": 38,
+          "codeLines": 31,
+          "commentLines": 0,
+          "blankLines": 7,
+          "commentRatio": 0,
+          "units": 1,
+          "longestUnit": {
+            "name": "indentString",
+            "lines": 38
+          },
+          "maxDepth": 3,
+          "tryBlocks": 0,
+          "logCalls": 0,
+          "repeatedLines": 0,
+          "repeatedExamples": []
+        },
+        "issues": [
+          {
+            "severity": "warn",
+            "part": "indentString (lines 1-38)",
+            "message": "Give obscure literals or patterns meaningful names and explain their format, units or rationale.",
+            "source": "jev:magic_values=0.66"
+          }
+        ],
+        "units": [
+          {
+            "name": "indentString",
+            "kind": "function",
+            "startLine": 1,
+            "endLine": 38,
+            "codeLines": 31,
+            "otherFiles": null,
+            "issues": [],
+            "readings": {
+              "overbuilt": 1.33,
+              "shrink": 0.11,
+              "action": "keep",
+              "action_probabilities": {
+                "inline": 0,
+                "merge": 0,
+                "simplify": 0.12,
+                "delete": 0.01,
+                "keep": 0.87
+              },
+              "thin_wrapper": 0.03,
+              "premature_abstraction": 0.14,
+              "speculative": 0.46,
+              "defensive_excess": 0.28,
+              "verbose": 0.51,
+              "comment_bloat": 0.18
+            }
+          }
+        ],
+        "unitsNotJudged": 0,
+        "readings": {
+          "clarity": [
+            {
+              "name": "indentString",
+              "startLine": 1,
+              "endLine": 38,
+              "missing_explanation": 0.46,
+              "magic_values": 0.66
+            }
+          ],
+          "overbuilt": 1.09,
+          "shrink": 0.060000000000000005,
+          "rewrite_length": {
+            "choice": "about_the_same",
+            "probabilities": {
+              "a_fraction": 0.01,
+              "much_shorter": 0.05,
+              "about_the_same": 0.75,
+              "somewhat_shorter": 0.19
+            }
+          },
+          "justified_complexity": 0.21,
+          "simpler_exists": 0.34,
+          "ceremony": 0.47,
+          "reviewer_simplify": 0.29,
+          "bloat": 0.36583333333333334,
+          "ai_style": 0.29,
+          "biggest_problem": {
+            "choice": "nothing",
+            "confidence": 0.53,
+            "probabilities": {
+              "too_many_jobs": 0,
+              "premature_abstraction": 0,
+              "nothing": 0.58,
+              "type_bloat": 0,
+              "reinvents_builtin": 0,
+              "dead_code": 0,
+              "comment_bloat": 0,
+              "verbose_logic": 0.01,
+              "excess_logging": 0,
+              "thin_wrappers": 0,
+              "defensive_excess": 0.31,
+              "speculative_generality": 0.06,
+              "duplication": 0.04
+            }
+          },
+          "premature_abstraction": 0.07,
+          "speculative_generality": 0.46,
+          "defensive_excess": 0.23,
+          "duplication": 0.31,
+          "thin_wrappers": 0.12,
+          "verbose_logic": 0.11,
+          "comment_bloat": 0.03,
+          "dead_code": 0.07,
+          "excess_logging": 0.02,
+          "reinvents_builtin": 0.15,
+          "too_many_jobs": 0.06,
+          "type_bloat": 0.03
+        },
+        "jev": {
+          "requests": 3,
+          "failed": 0,
+          "inputTokens": 4926,
+          "ms": 223
+        }
+      },
+      "final": {
+        "kind": "file",
+        "runId": "20260929061320-vtdh",
+        "version": "9407dfb",
+        "path": "indent-string.js",
+        "language": "js",
+        "verdict": "lean",
+        "leanness": 73,
+        "metrics": {
+          "lines": 39,
+          "codeLines": 31,
+          "commentLines": 1,
+          "blankLines": 7,
+          "commentRatio": 0.03,
+          "units": 1,
+          "longestUnit": {
+            "name": "indentString",
+            "lines": 39
+          },
+          "maxDepth": 3,
+          "tryBlocks": 0,
+          "logCalls": 0,
+          "repeatedLines": 0,
+          "repeatedExamples": []
+        },
+        "issues": [],
+        "units": [
+          {
+            "name": "indentString",
+            "kind": "function",
+            "startLine": 1,
+            "endLine": 39,
+            "codeLines": 31,
+            "otherFiles": null,
+            "issues": [],
+            "readings": {
+              "overbuilt": 1.33,
+              "shrink": 0.11,
+              "action": "keep",
+              "action_probabilities": {
+                "keep": 0.9400000000000001,
+                "merge": 0,
+                "inline": 0,
+                "simplify": 0.06,
+                "delete": 0
+              },
+              "thin_wrapper": 0.03,
+              "premature_abstraction": 0.11,
+              "speculative": 0.46,
+              "defensive_excess": 0.27,
+              "verbose": 0.46,
+              "comment_bloat": 0.55
+            }
+          }
+        ],
+        "unitsNotJudged": 0,
+        "readings": {
+          "clarity": [
+            {
+              "name": "indentString",
+              "startLine": 1,
+              "endLine": 39,
+              "missing_explanation": 0.32,
+              "magic_values": 0.43
+            }
+          ],
+          "overbuilt": 1.07,
+          "shrink": 0.060000000000000005,
+          "rewrite_length": {
+            "choice": "about_the_same",
+            "probabilities": {
+              "a_fraction": 0.01,
+              "somewhat_shorter": 0.17,
+              "about_the_same": 0.77,
+              "much_shorter": 0.05
+            }
+          },
+          "justified_complexity": 0.21,
+          "simpler_exists": 0.36,
+          "ceremony": 0.47,
+          "reviewer_simplify": 0.27,
+          "bloat": 0.36416666666666664,
+          "ai_style": 0.3,
+          "biggest_problem": {
+            "choice": "nothing",
+            "confidence": 0.58,
+            "probabilities": {
+              "defensive_excess": 0.27,
+              "duplication": 0.05,
+              "verbose_logic": 0.01,
+              "type_bloat": 0,
+              "dead_code": 0,
+              "speculative_generality": 0.05,
+              "too_many_jobs": 0,
+              "excess_logging": 0,
+              "comment_bloat": 0,
+              "reinvents_builtin": 0,
+              "thin_wrappers": 0,
+              "premature_abstraction": 0,
+              "nothing": 0.62
+            }
+          },
+          "premature_abstraction": 0.07,
+          "speculative_generality": 0.46,
+          "defensive_excess": 0.25,
+          "duplication": 0.31,
+          "thin_wrappers": 0.13,
+          "verbose_logic": 0.11,
+          "comment_bloat": 0.14,
+          "dead_code": 0.08,
+          "excess_logging": 0.02,
+          "reinvents_builtin": 0.16,
+          "too_many_jobs": 0.07,
+          "type_bloat": 0.04
+        },
+        "jev": {
+          "requests": 3,
+          "failed": 0,
+          "inputTokens": 4986,
+          "ms": 312
+        }
+      },
+      "id": "code-regex",
+      "source": "https://github.com/sindresorhus/indent-string/blob/7e6c356c4a8425b06efb5c031479304ee0bd67ea/index.js",
+      "scope": "Full source file reviewed; gallery shows the regex excerpt."
+    },
+    {
+      "before": "Encryption key must be of 22 characters. Live collaboration is disabled.",
+      "after": "This collaboration link is invalid. Ask the sender for a new link.",
+      "initial": {
+        "kind": "copy",
+        "runId": "20260929061422-vy04",
+        "version": "9407dfb",
+        "path": "locales/en.json",
+        "verdict": "pass",
+        "strings": [
+          {
+            "text": "Encryption key must be of 22 characters. Live collaboration is disabled.",
+            "role": "error",
+            "line": 1,
+            "issues": [
+              {
+                "severity": "warn",
+                "part": "error",
+                "message": "Use plainer words; this reads like jargon.",
+                "source": "jev:plain=0.33"
+              }
+            ],
+            "readings": {
+              "plain": 0.33,
+              "passive": 0.54,
+              "marketing": 0.01,
+              "wordy": 0.8,
+              "error_helpful": 0.29,
+              "blames": 0.22,
+              "apologizes": 0.01
+            }
+          }
+        ],
+        "issues": [],
+        "jev": {
+          "requests": 1,
+          "failed": 0,
+          "inputTokens": 664,
+          "ms": 254
+        }
+      },
+      "final": {
+        "kind": "copy",
+        "runId": "20260929061422-xxr1",
+        "version": "9407dfb",
+        "path": "locales/en.json",
+        "verdict": "pass",
+        "strings": [
+          {
+            "text": "This collaboration link is invalid. Ask the sender for a new link.",
+            "role": "error",
+            "line": 1,
+            "issues": [],
+            "readings": {
+              "plain": 0.79,
+              "passive": 0.22,
+              "marketing": 0.01,
+              "wordy": 0.8,
+              "error_helpful": 0.92,
+              "blames": 0.1,
+              "apologizes": 0.01
+            }
+          }
+        ],
+        "issues": [],
+        "jev": {
+          "requests": 1,
+          "failed": 0,
+          "inputTokens": 662,
+          "ms": 120
+        }
+      },
+      "id": "copy-link",
+      "source": "https://github.com/excalidraw/excalidraw/blob/5a406e51875157bece389b9bc92d41ff241d5f3d/packages/excalidraw/locales/en.json",
+      "scope": "Extracted alerts.invalidEncryptionKey, supplied as an error string with Excalidraw audience context.",
+      "contextSource": "https://github.com/excalidraw/excalidraw/blob/5a406e51875157bece389b9bc92d41ff241d5f3d/excalidraw-app/data/index.ts#L138-L145"
     },
     {
       "id": "test",
