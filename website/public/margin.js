@@ -7,18 +7,42 @@ const SETTLE_MS = 120;
 const TOP_SAFE_PX = 80;
 // The pencil crosses half the viewport, tilting a little further as the reader reaches the footer.
 const TRAVEL = { start: 0.2, distance: 0.5, initialTilt: -12, tiltChange: -12 };
-const ARROW = { textGap: 5, maxTextInset: 26, headWidth: 6, headHeight: 4 };
+const ARROW = {
+  textGap: 5,
+  maxTextInset: 26,
+  maxLength: 140,
+  leadIn: 18,
+  bend: 24,
+  edgeInset: 6,
+  headWidth: 7,
+  headHeight: 5,
+};
 
 /** Recalculate viewport coordinates so a lingering arrow follows its moving target. */
 function pointArrow(pencil, arrow, box) {
   const tip = pencil.querySelector(".pencil-tip").getBoundingClientRect();
-  const start = { x: tip.left + tip.width / 2, y: tip.bottom };
+  const pencilTip = { x: tip.left + tip.width / 2, y: tip.bottom };
   const end = { x: box.left - ARROW.textGap, y: box.top + Math.min(box.height / 2, ARROW.maxTextInset) };
+  // Finish horizontally so the curve cannot crowd either wing of the arrowhead.
+  const join = { x: end.x - ARROW.leadIn, y: end.y };
+  const control = { x: Math.max(ARROW.edgeInset, join.x - ARROW.bend), y: end.y };
+  // A Bezier curve is no longer than its control polygon. Reserve the straight
+  // lead-in, then bound the tail's reach; beyond it, the pencil moves independently.
+  const reach = ARROW.maxLength - ARROW.leadIn - Math.abs(join.x - control.x);
+  const distance = Math.hypot(pencilTip.x - control.x, pencilTip.y - control.y);
+  const scale = Math.min(1, reach / (distance || 1));
+  const start = {
+    x: control.x + (pencilTip.x - control.x) * scale,
+    y: control.y + (pencilTip.y - control.y) * scale,
+  };
   arrow
-    .querySelector("path")
+    .querySelector(".arrow-stem")
+    .setAttribute("d", `M${start.x} ${start.y} Q${control.x} ${control.y} ${join.x} ${join.y} L${end.x} ${end.y}`);
+  arrow
+    .querySelector(".arrow-head")
     .setAttribute(
       "d",
-      `M${start.x} ${start.y} Q${start.x} ${end.y} ${end.x} ${end.y} m-${ARROW.headWidth} -${ARROW.headHeight} ${ARROW.headWidth} ${ARROW.headHeight} -${ARROW.headWidth} ${ARROW.headHeight}`,
+      `M${end.x - ARROW.headWidth} ${end.y - ARROW.headHeight} L${end.x} ${end.y} L${end.x - ARROW.headWidth} ${end.y + ARROW.headHeight}`,
     );
 }
 

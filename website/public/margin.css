@@ -63,14 +63,10 @@
   border-top: 1px solid var(--line);
 }
 .revision-check {
-  flex: 0 0 30px;
-  width: 30px;
-  height: 30px;
-  fill: none;
-  stroke: #387847;
-  stroke-width: 3;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  fill: #387847;
   transform: rotate(-6deg);
 }
 .draft figcaption {

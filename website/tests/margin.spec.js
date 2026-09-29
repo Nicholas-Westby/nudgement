@@ -52,7 +52,7 @@ test("the pencil follows scroll position and stops when scrolling stops", async 
 
 test("a nudge lingers, fades, and repeats when the reader returns", async ({ page }) => {
   await startNudge(page);
-  await expect(page.locator(".nudge-arrow path")).toHaveAttribute("d", /^M.+Q/);
+  await expect(page.locator(".arrow-stem")).toHaveAttribute("d", /^M.+Q/);
   await expect(page.locator(".nudge-arrow")).toBeVisible();
   await expect
     .poll(() => page.locator(".nudge-arrow").evaluate((node) => Number(getComputedStyle(node).opacity)))
@@ -84,7 +84,7 @@ test("the pencil points into the page and its arrow follows a scrolling target",
   const tip = await page.locator(".pencil-tip").boundingBox();
   const eraser = await page.locator(".pencil-eraser").boundingBox();
   expect(tip.x + tip.width / 2).toBeGreaterThan(eraser.x + eraser.width / 2);
-  const arrow = page.locator(".nudge-arrow path");
+  const arrow = page.locator(".arrow-stem");
   const before = await arrow.getAttribute("d");
   await page.evaluate(() => window.scrollBy({ top: 30, behavior: "instant" }));
   await expect(arrow).not.toHaveAttribute("d", before);

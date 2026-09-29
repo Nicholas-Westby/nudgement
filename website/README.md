@@ -22,6 +22,7 @@ Automated accessibility checks supplement manual keyboard, zoom and visual inspe
 
 `public/margin.js` moves a pencil with reading progress and nudges marked elements for 2.8 seconds.
 Each cue can repeat after the reader scrolls away and returns. Arrows follow their targets during scrolling.
+Their shafts stay under 140 pixels, detaching from the pencil when it moves farther away.
 It schedules frames only after scroll/resize, waits for a reading pause before starting a cue,
 and stops when the tab is hidden, motion is paused or reduced motion is requested.
 The page and annotated draft remain usable without JavaScript. Examples read before → nudgement → after
