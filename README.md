@@ -6,6 +6,10 @@ Use it before committing to catch things a formatter cannot: a message that
 misrepresents the diff, a comment that contradicts the code, or a test that
 would pass even if the behavior broke.
 
+For example, flag overly generic commit messages so they can be made more useful:
+
+![Example of Nudgement Improving Code Comment](docs/images/nudgement-example.webp)
+
 ## Run it
 
 Install [Bun](https://bun.sh), clone this repository, and run `bun install`.
