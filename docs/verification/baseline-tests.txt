@@ -1,0 +1,283 @@
+bun test v1.4.2 (744846f84)
+
+tests/test-evaluate.test.ts:
+(pass) holds end-to-end tests to a higher flakiness bar, since they must use the real clock [3.35ms]
+(pass) does not call a test flaky for relying on earlier tests in a file that runs in order [0.06ms]
+(pass) does not call a type-level test vacuous, since the typechecker is what runs it [0.53ms]
+(pass) judges a Swift test by its #expect assertions [5.21ms]
+(pass) names the Swift test framework from the file's imports [0.10ms]
+(pass) shows Jev a Swift function name as the words it spells [2.92ms]
+(pass) shows Jev a table test's placeholders as values [0.57ms]
+
+tests/spec-parse.test.ts:
+(pass) docSections > splits at level two and three headings, keeping a parent's own text apart from its children [2.91ms]
+(pass) isBackground > marks sections that give reasons or record choices, and their children [1.10ms]
+(pass) judgedText > skips a table of contents [0.07ms]
+(pass) judgedText > skips a section that only quotes the request [0.04ms]
+(pass) judgedText > drops quoted lines and keeps the design [0.02ms]
+(pass) judgedText > leaves quoted requests out of the requirements [0.93ms]
+(pass) quotedCopy > takes quoted strings from behaviour sections, not code, quotes of the request or background [0.99ms]
+(pass) quotedCopy > guesses the role from the words around the string [0.07ms]
+(pass) quotedCopy > takes no role from the words of another quoted string beside it [0.36ms]
+(pass) quotedCopy > takes backticked spans that read like copy, not code [0.18ms]
+(pass) quotedCopy > leaves out quoted terms, headings and repeats, and reads a role named after the string [0.05ms]
+(pass) decisionsOf > takes the top-level items of Decisions sections, leaving out rejected options and nested detail [0.22ms]
+(pass) untestable wording > warns about outcomes a tester could not check [0.49ms]
+(pass) designLint > flags placeholders in prose as errors but not in code blocks or inline code [0.12ms]
+(pass) designLint > calls a trailing etc. weak, not an error [0.06ms]
+(pass) designLint > warns about open questions that are still listed, and notes the word count [0.51ms]
+(pass) designLint > an open questions section that says none is left passes [0.05ms]
+(pass) extractRequirements > takes list items, table rows and sentences from behaviour sections only [0.31ms]
+(pass) extractRequirements > keeps only the named sections [0.18ms]
+(pass) extractRequirements > caps the count by taking from each section in turn [0.79ms]
+(pass) extractRequirements > splits a table whose header repeats into one requirement per pair of cells [0.51ms]
+(pass) extractRequirements > names each cell by its column when a table has more than two [0.07ms]
+(pass) extractRequirements > splits a long list item into its sentences, each keeping the item's bold lead [0.10ms]
+(pass) extractRequirements > matches numbered sections by their number [0.38ms]
+(pass) extractRequirements > leaves out a long rejected option and what the code does today [0.09ms]
+(pass) extractRequirements > leaves out an item that says what something is today rather than what to build [0.05ms]
+(pass) extractRequirements > leaves out the contents list and rejected options [0.06ms]
+(pass) extractRequirements > leaves out the questions a spike is meant to answer [0.03ms]
+(pass) extractRequirements > leaves out measurements, even under a heading that does not start with the word [0.03ms]
+(pass) condenseDoc > drops code, then trims the longest sections so every heading survives [1.12ms]
+
+tests/hygiene.test.ts:
+(pass) checkHygiene > flags forbidden paths in what would be committed [84.34ms]
+(pass) checkHygiene > flags forbidden words, case-insensitively, with the line [146.69ms]
+(pass) checkHygiene > flags forbidden words in branch names [311.18ms]
+(pass) checkHygiene > flags secrets [58.30ms]
+(pass) checkHygiene > flags trailers in the history when they are forbidden [166.05ms]
+(pass) checkHygiene > judges a commit's tree without the working-tree leftovers [121.60ms]
+(pass) checkHygiene > skips ignored paths [63.10ms]
+(pass) checkHygiene > flags missing basics [75.65ms]
+(pass) loadConfig > reads the context file relative to the config [4.90ms]
+(pass) loadConfig > joins several context files in order [0.68ms]
+(pass) secretKind > names a key that looks random [0.06ms]
+(pass) secretKind > passes a fake key spelled out in words, as tests use [0.06ms]
+(pass) a git repository inside the repo > is flagged when it would be committed or is staged, as git add -A does to a worktree [181.33ms]
+
+tests/comments.test.ts:
+(pass) groups consecutive added comment lines into one comment [0.71ms]
+(pass) finds block comments and trailing comments [0.11ms]
+(pass) ignores unchanged comments, URLs, strings and directives [0.07ms]
+(pass) counts an edit to part of an existing comment [0.05ms]
+(pass) skips files it has no comment syntax for [0.01ms]
+(pass) finds JSX comments in TSX files [0.10ms]
+(pass) finds comments in an extensionless shell script [0.12ms]
+(pass) warns, never fails, when Jev reads a contradiction, more strongly when it is near sure [0.72ms]
+(pass) ignores tool directives such as Stryker's, each on its own line [0.12ms]
+(pass) suggests deleting a comment only when Jev also finds it not worth keeping [0.06ms]
+(pass) does not call a comment that gives the reasons a restatement of the code [0.06ms]
+(pass) ignores comment markers inside strings that span lines [0.43ms]
+(pass) still finds a comment after a string that spanned lines [0.03ms]
+(pass) a tagged comment that other code searches for is left alone, and an ordinary tagged one is not [56.99ms]
+
+tests/history.test.ts:
+(pass) a tidy history has no exact findings [1.30ms]
+(pass) flags leftover, vague and reverted commits [0.32ms]
+(pass) flags merges, repeated subjects and oversized commits [0.29ms]
+(pass) applies the message rules to every commit [0.17ms]
+(pass) reads a repo's history oldest first, with changed lines per file [81.18ms]
+(pass) judges every commit after the first, or only the latest ones in a long history [0.19ms]
+(pass) names each commit that only corrects an earlier one in a single warning [0.09ms]
+
+tests/markdown.test.ts:
+(pass) analyzeMarkdown > finds the title and splits sections at level-two headings [0.03ms]
+(pass) analyzeMarkdown > collects links, images and code blocks outside code [0.02ms]
+(pass) analyzeMarkdown > counts facts about the prose [0.02ms]
+(pass) analyzeMarkdown > ignores headings and links inside code blocks [0.03ms]
+(pass) slugs headings the way GitHub does [0.23ms]
+(pass) readmeLint > a clean README has no findings [0.38ms]
+(pass) readmeLint > flags broken relative links and anchors [0.11ms]
+(pass) readmeLint > flags a run script that package.json does not have [0.08ms]
+(pass) readmeLint > flags a command that runs a file that does not exist [0.05ms]
+(pass) readmeLint > flags heading structure problems [0.29ms]
+(pass) readmeLint > flags a table of contents in a short README [0.04ms]
+(pass) readmeLint > flags AI wording [0.04ms]
+(pass) skips a YAML front matter block at the top [0.05ms]
+
+tests/message.test.ts:
+(pass) parseMessage > splits header, bullets and trailers [0.04ms]
+(pass) parseMessage > joins a wrapped bullet onto the one above [0.02ms]
+(pass) parseMessage > a body line that merely looks like a trailer is not one
+(pass) lint > a clean message has no findings [0.03ms]
+(pass) lint > flags the header rules [0.08ms]
+(pass) lint > reads any first word ending in -ed or -ing as not imperative, but not base verbs that end that way [0.10ms]
+(pass) lint > allows exactly 72 characters [0.02ms]
+(pass) lint > flags body rules [0.03ms]
+(pass) lint > flags AI words and emoji but not in trailers [0.13ms]
+(pass) lint with repo rules > forbids trailers when the repo has none [0.05ms]
+(pass) lint with repo rules > forbids words anywhere in the message, as whole words [0.04ms]
+
+tests/swift-tests.test.ts:
+(pass) finds Swift Testing tests with display names, arguments, suites and lines [0.22ms]
+(pass) finds XCTest methods, and reads a leading x or underscore as a disabled test [0.06ms]
+(pass) ignores test syntax inside Swift strings, multi-line strings and comments [0.06ms]
+(pass) counts Swift Testing and XCTest assertions [0.60ms]
+(pass) counts an #expect or #require written with a trailing closure, such as the throws: form [0.01ms]
+(pass) counts a throwing lookup whose result is thrown away as an assertion, since only its throwing can fail the test [0.02ms]
+(pass) counts Swift assertions that only check definedness or non-emptiness as weak [0.13ms]
+(pass) counts a Swift test's own sleeps, but not a stub's sleep inside a closure [0.18ms]
+(pass) does not count a sleep inside a loop that polls for a condition [0.04ms]
+(pass) counts an inverted expectation's wait as a sleep, since it always waits out its timeout [0.03ms]
+(pass) counts each Swift fake, stub or spy the test makes as a mock [0.01ms]
+(pass) counts reading the real clock in Swift [0.01ms]
+(pass) recognizes Swift test files by their folder or name and by holding tests [0.16ms]
+(pass) treats a Swift helper beside the tests as code, since it holds no tests [0.02ms]
+
+tests/plan-parse.test.ts:
+(pass) findTasks > finds Task N headings and ends each at the next heading of its level or above [2.78ms]
+(pass) findTasks > accepts lettered tasks such as Task 7b and ignores headings inside code blocks [0.06ms]
+(pass) findTasks > falls back to numbered headings when there are no Task headings [0.04ms]
+(pass) taskFacts > reads the files, the failing test before the implementation, and a command with its expected result [0.65ms]
+(pass) taskFacts > a test step after the implementation is reported as after [0.09ms]
+(pass) taskFacts > adding tests or UI tests after the implementation is also after [0.09ms]
+(pass) taskFacts > a task with no test, file or command says so [0.02ms]
+(pass) taskFacts > a task that says why it has no test is marked as explained [0.04ms]
+(pass) taskFacts > a test suite named in the Files line is a file and a test [0.42ms]
+(pass) taskFacts > a step that proves the work by hand marks a task without tests as verified [0.10ms]
+(pass) taskFacts > a task that creates spec files is a test task, and a Run step verifies it [0.04ms]
+(pass) taskFacts > terse bullets that name tests count as a test step [0.19ms]
+(pass) taskFacts > a task that says it has no unit test has none, even if it names a test suite [0.03ms]
+(pass) taskFacts > a live check, a spike or a milestone task counts as checked by hand [0.08ms]
+(pass) taskFacts > backticked type names count as files named [0.06ms]
+(pass) taskFacts > a red step before a green one counts as a failing test first [0.04ms]
+(pass) taskFacts > a test file named with its extension in the files counts as a test [0.03ms]
+(pass) taskFacts > a task whose only file is a test file counts as test first [0.03ms]
+(pass) taskFacts > a gates task that runs the test suite counts as checked [0.04ms]
+(pass) taskFacts > tests named in prose count as a failing-test step [0.06ms]
+(pass) planPlaceholders > finds the placeholder phrases and elided code, but not a range operator [0.35ms]
+(pass) planPlaceholders > keeps a concrete edge case list and an existing-code marker [0.06ms]
+(pass) planHeader > reads the goal and the spec sections the plan names [0.06ms]
+(pass) planHeader > reads a Spec line that wraps onto the next line [0.01ms]
+(pass) specSectionsNamed > reads quoted section names and parts from the Spec line [0.06ms]
+(pass) specSectionsNamed > reads numbered sections, including ones in parentheses and after a section sign [0.02ms]
+(pass) rankTasks and taskExcerpt > ranks tasks by the requirement's rarer words [0.48ms]
+(pass) rankTasks and taskExcerpt > counts the requirement's words in a task's title more than in its body [0.08ms]
+(pass) rankTasks and taskExcerpt > does not rank on a bare section reference such as §12 [0.07ms]
+(pass) rankTasks and taskExcerpt > puts a task that repeats a symbol-bearing token such as a shortcut first [0.65ms]
+(pass) rankTasks and taskExcerpt > puts a task that uses the requirement's exact code span first [0.08ms]
+(pass) rankTasks and taskExcerpt > an excerpt within budget is the task itself, and a long one keeps the heading and the matching parts [1.74ms]
+(pass) fitText > fitText leaves short text alone and shortens long code blocks before cutting prose [0.21ms]
+(pass) planningDocKind > names the superpowers specs and plans, and any *-design.md, and nothing else [0.05ms]
+
+tests/test-parse.test.ts:
+(pass) finds each test with its name, modifiers, lines and describe path [0.11ms]
+(pass) does not mistake regex .test() calls or text in comments for tests [0.04ms]
+(pass) counts assertions, weak matchers, mocks, sleeps and selectors [0.10ms]
+(pass) counts toBeUndefined as an exact assertion, not a weak one [0.01ms]
+(pass) recognizes test files [0.03ms]
+(pass) treats helpers and setup files beside end-to-end tests as code, not tests [0.01ms]
+(pass) counts a call to a helper named expect... or assert... as an assertion [0.02ms]
+(pass) names the framework from the file's own imports, not from imports quoted in a fixture [0.02ms]
+(pass) spots a file that runs its tests in order on purpose [0.02ms]
+(pass) counts type-level assertions with type arguments, such as expectTypeOf<T>()
+(pass) counts expect.soft() split across lines by a formatter [0.02ms]
+
+tests/copy-extract.test.ts:
+(pass) pulls each user-facing string with its role and line [7.75ms]
+(pass) leaves out strings that are only an expression, such as {dock.street} [1.31ms]
+(pass) finds user-facing messages in plain TypeScript [1.22ms]
+(pass) applies the exact copy rules without Jev [0.46ms]
+(pass) does not count an acronym as a capitalized word [0.01ms]
+(pass) takes Apple's title style on Mac buttons, menu items and titles, but not a mix of styles [0.52ms]
+(pass) calls ALL CAPS shouting, but not an acronym or a sample code in a placeholder [0.03ms]
+(pass) leaves a Mac sheet's standard buttons alone but still flags vague ones [0.06ms]
+(pass) flags a file path or internal file name shown to the reader [0.06ms]
+(pass) pulls text from component props and sentence-like constants [0.38ms]
+
+tests/git.test.ts:
+(pass) with amend, staged changes are read together with the commit they fold into [117.09ms]
+(pass) lines to review leave out lockfiles, ignored paths and files that were only deleted from [0.07ms]
+(pass) lines moved from one file to another count as context, not as written [0.13ms]
+(pass) a scope earlier commits to the same files use is the house scope for them [80.86ms]
+
+tests/code.test.ts:
+(pass) analyzeCode units > detects the language from the extension [0.01ms]
+(pass) analyzeCode units > names each top-level declaration and groups the imports [0.01ms]
+(pass) analyzeCode units > attaches a doc comment to the declaration below it
+(pass) analyzeCode units > keeps a multi-line signature in one unit
+(pass) analyzeCode units > treats an arrow function constant as a function
+(pass) analyzeCode units > leaves a banner separated by a blank line out of every unit
+(pass) analyzeCode units > marks exported declarations
+(pass) analyzeCode units > keeps a small class whole
+(pass) splits a large class into its members [0.40ms]
+(pass) splits C# namespaces and classes down to methods [0.14ms]
+(pass) handles Python decorators, classes and main blocks [0.09ms]
+(pass) analyzeCode metrics > counts code, comment and blank lines [0.04ms]
+(pass) analyzeCode metrics > finds repeated blocks of four or more lines [0.07ms]
+(pass) analyzeCode metrics > does not count fields that two type declarations share as repeated code [0.07ms]
+(pass) analyzeCode metrics > still counts an object mapping written out twice as repeated code [0.06ms]
+(pass) analyzeCode metrics > counts try blocks and log calls [0.02ms]
+(pass) analyzeCode metrics > reports the longest unit [0.10ms]
+(pass) returns nothing for files that are not code
+(pass) counts the other files in a repo that use each name [47.28ms]
+(pass) splits a large Swift enum used as a namespace [0.27ms]
+(pass) keeps a large type whole when its members are all one-liners [0.11ms]
+(pass) does not start a unit at a C# preprocessor line [0.07ms]
+(pass) spots generated files [0.10ms]
+(pass) counts uses of a name elsewhere in the file, and ignores names that are not identifiers [0.07ms]
+(pass) only programming-language files get the bloat check [0.07ms]
+(pass) treats an extensionless script with a shebang as code [0.06ms]
+(pass) judgeFile > never fails a file under 30 lines of code as bloated, only warns [0.64ms]
+(pass) judgeFile > shows a strong pattern on a lean file only when Jev also calls it the biggest problem [0.08ms]
+(pass) reports how many changed functions were flagged when only those were judged [0.23ms]
+(pass) reads Swift properties with a setter access level or an attribute as their own members [0.19ms]
+(pass) judging only the changed functions, a file fails on an error, not on warnings however many [0.05ms]
+
+tests/config.test.ts:
+(pass) finds evaluator.json at the top of the repo, and nothing when there is none [0.15ms]
+(pass) a worktree also takes the names and lists added to the main checkout's config since it branched [57.34ms]
+
+tests/copy-swift.test.ts:
+(pass) pulls each user-facing string out of a SwiftUI view with its role [3.00ms]
+(pass) gives each Swift string the line it starts on [0.37ms]
+(pass) shows interpolation as {expression}, even with strings inside it [0.98ms]
+(pass) reads raw and multi-line strings as the text they show [0.15ms]
+(pass) treats labels in menus as menu items, and toggles there as choices [0.45ms]
+(pass) finds strings in types that feed the UI, named by what they hold [0.53ms]
+(pass) reads the message of an error type as an error [0.04ms]
+(pass) reads alert and dialog messages that report a failure as errors [0.07ms]
+(pass) reads custom views, empty states and menu labels by where they sit [0.09ms]
+(pass) joins split messages and skips queue labels and instructions for a model [0.11ms]
+(pass) leaves Swift test files alone
+-------------------------|---------|---------|-------------------
+File                     | % Funcs | % Lines | Uncovered Line #s
+-------------------------|---------|---------|-------------------
+All files                |   59.85 |   62.08 |
+ src/code-evaluate.ts    |   50.00 |   52.19 | 132-186,190-202,206-223,322-352,356-358
+ src/code-questions.ts   |   11.11 |   10.14 | 41-47,53,61-69,75-77,81-101,105-224,228-244,248-317
+ src/code.ts             |   97.67 |  100.00 | 
+ src/comments.ts         |   96.30 |  100.00 | 
+ src/config.ts           |   87.50 |   81.13 | 56-59,88-93
+ src/copy-evaluate.ts    |   71.43 |   36.70 | 96-160,165-193,226-230,232-234,236-238,240,242-254
+ src/copy-extract.ts     |   93.75 |   91.97 | 58,103-104,124-125,147-152
+ src/copy-swift.ts       |  100.00 |   99.00 | 224-225
+ src/design-evaluate.ts  |    0.00 |   21.38 | 85-140,144-159,163-172,176-189,193-206,212-215
+ src/evaluate.ts         |   45.45 |   30.32 | 132-197,205-233,237-242,266-302,306-399,440-446
+ src/git.ts              |   69.23 |   69.33 | 61,68-73,152-153,164-170,175-180,199-211,216-222,226-232,263
+ src/history.ts          |   90.00 |   69.79 | 95-101,106,169-218
+ src/hygiene.ts          |   91.84 |   91.57 | 190,241-253
+ src/jev.ts              |   42.86 |   30.56 | 24-30,66-68,76,80-118
+ src/log.ts              |    0.00 |   32.43 | 19,23-28,33,40,44-49,53,60-67,71
+ src/markdown.ts         |  100.00 |   99.46 | 106
+ src/message.ts          |  100.00 |   99.01 | 123
+ src/plan-evaluate.ts    |    0.00 |   18.75 | 116-164,168-189,193-208,213,218-220,226-232,236-237,245-313
+ src/plan-parse.ts       |   98.33 |   99.20 | 341-342
+ src/plan-questions.ts   |    0.00 |   78.03 | 126-154
+ src/questions.ts        |    0.00 |    8.67 | 35-43,47-104,112-125,129-139,143-278,282-292,303-379
+ src/readme-evaluate.ts  |    0.00 |   24.63 | 110-160,164-179,191-235,239-247,251-274,278-284,289
+ src/readme-questions.ts |    0.00 |    7.22 | 28-43,47-132,136-140,144-185,192-196,200-212
+ src/report.ts           |   17.39 |   21.30 | 16-17,24,39-65,89-91,106-123,127-133,137-148,152-161,165-173,179-199,203-215,219-245,262-281
+ src/run.ts              |   62.50 |   23.53 | 15-24,33-46,61-62
+ src/spec-parse.ts       |  100.00 |   99.67 | 264
+ src/swift-source.ts     |  100.00 |  100.00 | 
+ src/swift-tests.ts      |  100.00 |   99.07 | 49,88
+ src/test-evaluate.ts    |   70.00 |   70.34 | 75,79-81,193-258
+ src/test-parse.ts       |  100.00 |   97.14 | 69-71
+-------------------------|---------|---------|-------------------
+
+ 212 pass
+ 0 fail
+ 523 expect() calls
+Ran 212 tests across 15 files. [2.22s]

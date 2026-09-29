@@ -1,0 +1,272 @@
+
+COMMITS: verdict agrees on 37/45 (82%)
+  expected pass: 19 pass, 1 fail   expected fail: 18 fail, 7 pass
+  problem               found / labelled   false alarms
+  type                   7 / 7     100%     1
+  scope                  0 / 1       0%     0
+  subject_inaccurate     2 / 3      67%     1
+  subject_vague          2 / 4      50%     0
+  too_many_bullets       0 / 0        -     0
+  fewer_bullets          2 / 5      40%     1
+  bullet_inaccurate      1 / 1     100%     2
+  ai_words              11 / 12     92%     1
+  too_long_header        1 / 1     100%     0
+  format                 1 / 2      50%     0
+  disagreements:
+  good-rename-rsync-version: expected pass, got fail  []  errors: jev:bullet_1_accurate=0.28  human=0.86
+      refactor(sync): rename rsync-command-line to rsync-version
+  ai-format-bar-polish: expected fail, got pass  [ai_words]  errors: none  human=0.69
+      fix(notes): align format bar with text column for a polished look
+  ai-undo-cleanup: expected fail, got pass  [ai_words]  errors: none  human=0.80
+      fix(notes): properly clean up undo stack and editor on leave
+  type-fix-for-blank-line: expected fail, got pass  [type]  errors: none  human=0.88
+      fix(notes): drop the blank line the tint tests' move left behind
+  type-fix-for-refactor: expected fail, got pass  [type]  errors: none  human=0.88
+      fix(domain): build the guest home in one place
+  wrong-preview-edits-photo: expected fail, got pass  [subject_inaccurate]  errors: none  human=0.84
+      docs: say Preview edits the photo in the notes directly
+  wrong-voiceover-alt: expected fail, got pass  [subject_inaccurate]  errors: none  human=0.87
+      fix(notes): have VoiceOver read a photo's alt text
+  edge-npm-updated-lockfile: expected fail, got pass  [format,subject_vague]  errors: none  human=0.81
+      chore: npm i updated the package-lock.json
+
+COMMENTS: good/bad agrees on 60/63 (95%), kind right 71%
+  good: 26 ok, 1 flagged   bad: 34 flagged, 2 missed
+  disagreements:
+  why-axe-target-size-tags: expected good (why), got jev:narrates_change=0.71  kind=why
+              // Target size lives in the 2.2 rules and orientation lock in 2.1. With
+  history-menu-prefix: expected bad (history), got no flags  kind=why
+        /* Added the .menu prefix so these rules win over the theme now */
+  history-queenless-cut-short: expected bad (history), got no flags  kind=history
+        // No longer marks a hive queenless when the inspection was cut short
+
+CONTRADICTIONS error above 0.85: caught 7/26, false alarms 0/36
+
+CONTRADICTIONS warning above 0.7: caught 12/26, false alarms 0/36
+
+FILES: verdict exact 58/92 (63%), bloated-or-not 78/92 (85%)
+  expected->got: bloated->bloated 20, bloated->lean 4, bloated->ok 9, lean->bloated 1, lean->lean 36, lean->ok 14, ok->lean 6, ok->ok 2
+  labelled bad units flagged: 31/175 (18%)
+  pairs ranked right: 30/33 (91%)
+    wrong: x-retryable-failure-a 71 <= x-retryable-failure-b 73
+    wrong: ts-path-utils-b 72 <= ts-path-utils-a 73
+    wrong: ts-bolt-entry-a 65 <= ts-bolt-entry-b 65
+  problem                  found / labelled   false alarms
+  premature_abstraction     11 / 16     69%     7
+  speculative_generality    14 / 19     74%     6
+  defensive_excess          13 / 19     68%     2
+  duplication                5 / 7      71%     2
+  thin_wrappers              3 / 9      33%     0
+  verbose_logic              4 / 8      50%     2
+  comment_bloat             10 / 12     83%     10
+  dead_code                  4 / 6      67%     0
+  excess_logging            12 / 14     86%     2
+  reinvents_builtin          2 / 6      33%     4
+  too_many_jobs              0 / 3       0%     0
+  type_bloat                 6 / 11     55%     0
+  bloated-or-not disagreements:
+  swift-show-duplicates-command (lean): expected lean, got bloated  overbuilt=1.16 shrink=0.17 leanness=66  []
+  swift-gallery-status-bar-b (moderate): expected bloated, got lean  overbuilt=1.22 shrink=0.03 leanness=68  [premature_abstraction,speculative_generality,defensive_excess,thin_wrappers]
+  swift-join-sheet-model-b (heavy): expected bloated, got lean  overbuilt=0.44 shrink=0.12 leanness=76  [premature_abstraction,thin_wrappers,defensive_excess,excess_logging,speculative_generality]
+  swift-search-web-tool-b (moderate): expected bloated, got ok  overbuilt=1.11 shrink=0.01 leanness=71  [speculative_generality,defensive_excess,thin_wrappers]
+  swift-site-filter (heavy): expected bloated, got ok  overbuilt=1.05 shrink=0.02 leanness=72  [speculative_generality,duplication,verbose_logic,type_bloat]
+  x-app-version-a (heavy): expected bloated, got ok  overbuilt=1.43 shrink=0.11 leanness=60  [premature_abstraction,speculative_generality,type_bloat,defensive_excess,verbose_logic,comment_bloat]
+  x-feedback-client-b (moderate): expected bloated, got ok  overbuilt=1.30 shrink=0.05 leanness=68  [premature_abstraction,excess_logging,defensive_excess]
+  x-seed-library-a (subtle): expected bloated, got ok  overbuilt=0.98 shrink=0.10 leanness=69  [duplication]
+  x-sales-report-b (moderate): expected bloated, got ok  overbuilt=1.04 shrink=0.09 leanness=63  [reinvents_builtin,verbose_logic]
+  x-webhook-receiver-a (subtle): expected bloated, got lean  overbuilt=0.75 shrink=0.11 leanness=65  [comment_bloat]
+  x-password-policy-a (subtle): expected bloated, got ok  overbuilt=1.00 shrink=0.25 leanness=67  [dead_code]
+  ts-rsync-args-b (moderate): expected bloated, got ok  overbuilt=1.18 shrink=0.05 leanness=64  [premature_abstraction,verbose_logic,duplication]
+  ts-path-utils-a (subtle): expected bloated, got lean  overbuilt=0.80 shrink=0.10 leanness=73  [defensive_excess]
+  ts-slack-signing-b (subtle): expected bloated, got ok  overbuilt=1.10 shrink=0.21 leanness=70  [speculative_generality]
+
+READMES: verdict agrees on 28/31 (90%)
+  expected pass: 14 pass, 0 fail   expected fail: 14 fail, 3 pass
+  pairs ranked right: 7/7 (100%)
+  problem                  found / labelled   false alarms
+  ai_voice                   7 / 7     100%     4
+  marketing                  4 / 4     100%     1
+  padding                    5 / 5     100%     4
+  over_structured            5 / 5     100%     2
+  boilerplate                5 / 6      83%     0
+  redundancy                 5 / 7      71%     0
+  missing_what_it_is         2 / 5      40%     3
+  missing_usage              4 / 5      80%     0
+  disorganized               0 / 3       0%     0
+  too_terse                  4 / 4     100%     0
+  disagreements:
+  real-archive-screenshots (structure): expected fail, got pass  [padding,redundancy]  errors: none  human=0.84
+  structure-rename-by-date (structure): expected fail, got pass  [over_structured]  errors: none  human=0.87
+  structure-sweep-branches (structure): expected fail, got pass  [redundancy]  errors: none  human=0.85
+
+TESTS: good-or-flagged agrees on 188/203 (93%)
+  JS/TS: 160/175 (91%)
+  Swift: 28/28 (100%)
+  problem                  found / labelled   false alarms
+  implementation_detail      6 / 15     40%     5
+  weak_assertion            15 / 19     79%     6
+  over_mocked                9 / 9     100%     8
+  vacuous                    6 / 14     43%     9
+  bad_name                  13 / 16     81%     3
+  multiple_behaviours        7 / 7     100%     1
+  flaky                      9 / 15     60%     0
+  no_assertion               6 / 6     100%     0
+  disagreements:
+  booking-form-route "books a potter": labelled weak_assertion,vacuous, got no flags
+  booking-repository "stores a lowercased name key": labelled implementation_detail, got no flags
+  booking-repository "returns the potters in the order they booked": labelled vacuous, got no flags
+  create-workshop-route "rejects a start date in the past": labelled flaky, got no flags
+  month-grid "marks every day of October as inside the month": labelled vacuous, got no flags
+  booking-shared-state "takes one of the two spots when the first potter b": labelled flaky, got no flags
+  booking-shared-state "books a second potter": labelled flaky, got no flags
+  booking-shared-state "rejects a third potter because the workshop is ful": labelled flaky, got no flags
+  booking-shared-state "rejects the first potter booking again": labelled flaky, got no flags
+  qr-code-route "returns an svg": labelled weak_assertion, got no flags
+  workshop-page "shows the page": labelled weak_assertion,bad_name, got no flags
+  security-headers "tells browsers not to sniff content types": labelled vacuous, got no flags
+  e2e-create-workshop "create workshop page": labelled bad_name,weak_assertion,implementation_detail, got no flags
+  e2e-workshop-page "the sign-up sheet shows the potter who just booked": labelled flaky, got no flags
+  dock-release "does not start a ride when the dock fails to unloc": labelled good, got jev:over_mocked=0.45
+
+COVERAGE: "only the happy path" agrees on 56/56 clear files (100%) at 0.17
+  (borderline) workshop-page: covers edges false, read 0.45
+  (borderline) e2e-create-workshop: covers edges false, read 0.79
+  (borderline) e2e-workshop-page: covers edges false, read 0.81
+  (borderline) em-fta: covers edges false, read 0.25
+
+COPY: good-or-flagged agrees on 278/286 (97%): TSX 188/195, Swift 90/91
+  problem                  found / labelled   false alarms
+  jargon                    15 / 15    100%     0
+  title_case                15 / 16     94%     0
+  all_caps                   9 / 9     100%     0
+  passive                   14 / 18     78%     3
+  vague_action               7 / 9      78%     0
+  apologizes                10 / 10    100%     0
+  blames_user                2 / 7      29%     0
+  no_fix                     8 / 18     44%     2
+  marketing                 10 / 10    100%     2
+  wordy                      6 / 7      86%     4
+  disagreements:
+  sign-up-sheet "At least {workshop.minPotters} potters are require": labelled passive, got no flags
+  course-card "Usual Length": labelled title_case, got no flags
+  workshop-form-errors "Workshop name is too long.": labelled no_fix, got no flags
+  workshop-form-errors "You entered a past date by mistake. Pick today or ": labelled blames_user, got no flags
+  potter-name-field "You didn't enter a name.": labelled blames_user,no_fix, got no flags
+  potter-name-field "You're trying to book twice.": labelled blames_user,no_fix, got no flags
+  booking-closed: "Workshop full" not extracted
+  booking-closed: "Booking has closed" not extracted
+  server-error "This page didn't load because of a problem with th": labelled good, got jev:wordy=0.88
+  update-install-error "The download did not contain Fieldmark, so nothing": labelled passive,no_fix, got no flags
+
+HISTORY folds: agrees on 114/123 clear cases (93%) at 0.5; caught 14/23, false alarms 0/100
+  evaluator-8d98d7e: expected true, read 0.35  docs: show how to pass the take-home spec and README requirements
+  claybank-938d8d6: expected true, read 0.09  test(bookings): close gaps in ordering, priority, and race checks
+  dirmirror-02783ed: expected true, read 0.33  test(config): cover the SSH_KEY override setup now reads
+  dirmirror-688fe01: expected true, read 0.44  docs: say the log now lives beside the tool, not the config
+  dirmirror-0ff5757: expected true, read 0.47  refactor(sync): rename rsync-command-line to rsync-version
+  dirmirror-4942171: expected true, read 0.46  refactor(config): ask typed-paths for the guest home in the default ba
+  dirmirror-f48815a: expected true, read 0.47  docs: say what the log leaves out, and that DIRMIRROR_DEBUG is gone
+  (borderline) dirmirror-1392731: expected true, read 0.23  fix(domain): refuse to ungroup a mapping's only pair
+  fieldmark-a019673: expected true, read 0.42  docs(help): say which column of the editor holds what
+  (borderline) fieldmark-4271215: expected true, read 0.39  test(sharing): read joinedAt from the reply, not a racy sql() read
+  toolbox-3a8cfc9: expected true, read 0.30  docs: describe what the me command now handles
+
+HISTORY mixes: agrees on 120/123 clear cases (98%) at 0.55; caught 4/6, false alarms 1/117
+  (borderline) evaluator-c23c0a6: expected true, read 0.17  feat(cli): check required README content and pass a project spec to Je
+  (borderline) evaluator-f45dcd7: expected true, read 0.17  feat(log): record crashes with the arguments that caused them
+  claybank-8bb1706: expected true, read 0.43  test: split source rules and accept sql trailing commas
+  (borderline) claybank-dd345b2: expected true, read 0.18  fix(calendar): name each workshop's course on the grid, not just its c
+  dirmirror-4574d88: expected true, read 0.52  docs(verify): fix the rsync shim so quoted paths work
+  fieldmark-248557d: expected false, read 0.61  refactor(sharing): fix a stale comment and a lint name
+
+DESIGNS: verdict agrees on 10/10; sections flagged-or-not agree on 211/211 (100%)
+  decisions: 102/123 agree (12 labelled as needing a reason)   quoted copy: bad 2 flagged, 1 missed; good 117 ok, 4 flagged
+  bad sections: 18 flagged, 0 missed   good sections: 193 ok, 0 flagged
+  field-notes            {"sounds_human":0.9,"ai_filler":0.08,"states_intent":0.93,"states_out_of_scope":0.99}
+  field-notes-vague      {"sounds_human":0.89,"ai_filler":0.08,"states_intent":0.92,"states_out_of_scope":0.99}
+  workshop-calendar      {"sounds_human":0.71,"ai_filler":0.13,"states_intent":0.81,"states_out_of_scope":0.99}
+  workshop-calendar-open {"sounds_human":0.69,"ai_filler":0.15,"states_intent":0.81,"states_out_of_scope":0.99}
+  mutation               {"sounds_human":0.9,"ai_filler":0.09,"states_intent":0.96,"states_out_of_scope":0.92}
+  mutation-no-why        {"sounds_human":0.91,"ai_filler":0.08,"states_intent":0.89,"states_out_of_scope":0.66}
+  outing-budget          {"sounds_human":0.88,"ai_filler":0.05,"states_intent":0.95,"states_out_of_scope":0.99}
+  outing-budget-ai       {"sounds_human":0.18,"ai_filler":0.97,"states_intent":0.77,"states_out_of_scope":0.17}
+  feature-batch          {"sounds_human":0.87,"ai_filler":0.07,"states_intent":0.92,"states_out_of_scope":0.81}
+  feature-batch-reasonless {"sounds_human":0.85,"ai_filler":0.09,"states_intent":0.92,"states_out_of_scope":0.93}
+  disagreements:
+  outing-budget copy line 55 "This budget can't be read, so it's shown read-only": labelled good, got jev:passive=0.91
+  feature-batch decision line 355: labelled fine, read {"needs_reason":0.64}  Each view gets its own button, and so its own word. The segmented cont
+  feature-batch decision line 362: labelled fine, read {"needs_reason":0.57}  Distinct icons: no two views share an outline; List and Categories get
+  feature-batch decision line 443: labelled fine, read {"needs_reason":0.76}  Keep the standard Mac find bar (⌘F, ⌘G, the Edit ▸ Find menu), and mak
+  feature-batch decision line 453: labelled fine, read {"needs_reason":0.56}  Replace works in the document's own text only at first; a match inside
+  feature-batch decision line 485: labelled fine, read {"needs_reason":0.59}  Model: a `table` block with columns and rows that have stable ids and 
+  feature-batch copy line 85 "Items are deleted for good 30 days after they were": labelled good, got jev:passive=0.72
+  feature-batch-reasonless decision line 38: labelled needs a reason, read {"needs_reason":0.5}  Name: "Removed Items". Items stay 30 days, then go for good, as there.
+  feature-batch-reasonless decision line 39: labelled needs a reason, read {"needs_reason":0.32}  One site to look. A "Removed Items" row sits at the bottom of the side
+  feature-batch-reasonless decision line 43: labelled needs a reason, read {"needs_reason":0.27}  A deleted site stays in its survey, marked as deleted. Deleting writes
+  feature-batch-reasonless decision line 204: labelled needs a reason, read {"needs_reason":0.27}  A "Duplicates" switch in the List view, at the right of the filter box
+  feature-batch-reasonless decision line 210: labelled needs a reason, read {"needs_reason":0.09}  Merge is not part of this.
+  feature-batch-reasonless decision line 280: labelled needs a reason, read {"needs_reason":0.36}  Fix by construction: the site editor, Settings and Add Person stop usi
+  feature-batch-reasonless decision line 335: labelled fine, read {"needs_reason":0.65}  Each view gets its own button, and so its own word. The segmented cont
+  feature-batch-reasonless decision line 342: labelled fine, read {"needs_reason":0.55}  Distinct icons: no two views share an outline; List and Categories get
+  feature-batch-reasonless decision line 422: labelled fine, read {"needs_reason":0.8}  Keep the standard Mac find bar (⌘F, ⌘G, the Edit ▸ Find menu), and mak
+  feature-batch-reasonless decision line 432: labelled fine, read {"needs_reason":0.58}  Replace works in the document's own text only at first; a match inside
+  feature-batch-reasonless decision line 458: labelled needs a reason, read {"needs_reason":0.04}  Layout: The container becomes the full view width and everything that 
+  feature-batch-reasonless decision line 464: labelled fine, read {"needs_reason":0.62}  Model: a `table` block with columns and rows that have stable ids and 
+  feature-batch-reasonless decision line 498: labelled needs a reason, read {"needs_reason":0.39}  Votes are a seventh view, "Votes", after Field Notes, over their own v
+  feature-batch-reasonless decision line 506: labelled needs a reason, read {"needs_reason":0.49}  Every person answers every item Yes or No, or not at all. An answer is
+  feature-batch-reasonless decision line 510: labelled fine, read {"needs_reason":0.61}  Anyone can edit anything: add, reword, reorder or remove items; rename
+  feature-batch-reasonless decision line 513: labelled fine, read {"needs_reason":0.57}  A yes does not add a site to the outing. A candidate site's card offer
+  feature-batch-reasonless copy line 74 "Items are deleted for good 30 days after they were": labelled good, got jev:passive=0.74
+  feature-batch-reasonless copy line 169 "Uses the AI.": labelled unnamed_third_party, got no flags
+  feature-batch-reasonless copy line 172 "What you type here is sent to Nimbus.": labelled good, got jev:plain=0.30
+
+PLANS: verdict agrees on 12/12; tasks flagged-or-not agree on 119/122 (98%)
+  bad tasks: 12 flagged, 0 missed   good tasks: 107 ok, 3 flagged
+  problem                  found / labelled   false alarms
+  placeholder                5 / 5     100%     0
+  no_test                    2 / 3      67%     0
+  test_after                 4 / 5      80%     1
+  no_files                   3 / 3     100%     0
+  not_self_contained         2 / 6      33%     2
+  several_tasks              3 / 3     100%     0
+  vague_steps                6 / 6     100%     0
+  weak_test                  3 / 3     100%     3
+  disagreements:
+  mutation-parallel-jobs > Task 8: Run the whole thing and write down what it costs: labelled good, got jev:test_checks_behaviour=0.49  {"self_contained":0.36,"several_tasks":0.46,"vague_steps":0.32,"test_checks_behaviour":0.49}
+  workshop-calendar > Task 17: README and screenshots: labelled good, got jev:test_checks_behaviour=0.47  {"self_contained":0.59,"several_tasks":0.46,"vague_steps":0.22,"test_checks_behaviour":0.47}
+  workshop-calendar-degraded > Task 17: README and screenshots: labelled good, got jev:test_checks_behaviour=0.48  {"self_contained":0.55,"several_tasks":0.46,"vague_steps":0.23,"test_checks_behaviour":0.48}
+
+PLAN COVERAGE
+  outing-budget              21/21 checked: 21 covered, 0 no task, 0 unclear  (21 requests, 63784 tokens)
+  outing-budget-dropped      21/21 checked: 15 covered, 6 no task, 0 unclear  (21 requests, 64550 tokens)
+  field-notes-all            120/167 checked: 114 covered, 1 no task, 5 unclear  (120 requests, 676379 tokens)
+  field-notes-editor         92/92 checked: 76 covered, 8 no task, 8 unclear  (92 requests, 421426 tokens)
+  field-notes-editor-dropped 92/92 checked: 64 covered, 14 no task, 14 unclear  (92 requests, 414449 tokens)
+  workshop-calendar          110/110 checked: 103 covered, 1 no task, 6 unclear  (110 requests, 592306 tokens)
+  workshop-calendar-dropped  110/110 checked: 93 covered, 5 no task, 12 unclear  (110 requests, 583793 tokens)
+  mutation-all               109/109 checked: 95 covered, 1 no task, 13 unclear  (109 requests, 721854 tokens)
+  mutant-switching           57/57 checked: 52 covered, 0 no task, 5 unclear  (57 requests, 321011 tokens)
+  dropped requirements found 15/25; kept ones wrongly flagged 9/680 (1%), unclear 51
+  disagreements:
+  outing-budget-dropped [What people see > Currency] MISSED 0.76: Amounts are formatted with that code in the Mac's locale.  (Task 2, Task 1, Task 4, Task 3)
+  outing-budget-dropped [Sharing] MISSED 0.82: Each expense is one row of a new entity kind `expense`; the total and currency are one row of kind `budget`.  (Task 1, Task 3, Task 4, Task 2)
+  field-notes-all [Editor (FieldmarkUI, AppKit), from the research] FALSE ALARM 0.12: Highlights: Hit-testing uses `characterIndexForInsertion(at:)`.  (Task 5, Task 4, Task 6, Task 7)
+  field-notes-editor [What people see > Formatting] FALSE ALARM 0.27: Insert Site… / Insert Photo…: none  (Task 9, Task 5, Task 8, Task 10)
+  field-notes-editor [Editor (FieldmarkUI, AppKit), from the research] FALSE ALARM 0.27: Highlights: Hit-testing uses `characterIndexForInsertion(at:)`.  (Task 6, Task 8, Task 4, Task 5)
+  field-notes-editor-dropped: no requirement contains "Notes on notes: select words inside a note"
+  field-notes-editor-dropped [What people see > Formatting] MISSED 0.41: The implementer checks every shortcut against the app's existing ones (none are in use today) and against the   (Global Constraints, Task 8, Task 7, Task 5)
+  field-notes-editor-dropped [What people see > Highlight notes] MISSED 0.39: Click highlighted words: the caret goes there and a popover opens beside them listing every note on that spot,  (Task 10, Task 5, Task 8, Task 4)
+  field-notes-editor-dropped [What people see > Highlight notes] FALSE ALARM 0.19: Each note shows its author's name, when it was written ("Today at 8:05 PM"; "edited" if changed), its text (ri  (Task 5, Task 4, Task 8, Task 10)
+  field-notes-editor-dropped [What people see > Highlight notes] MISSED 0.60: Reply adds a new note by you over the same words as the note replied to. Overlapping notes draw darker where t  (Task 10, Task 3, Task 8, Task 2)
+  field-notes-editor-dropped [What people see > Highlight notes] MISSED 0.55: Deleting highlighted words does not delete their notes. They show under Detached Notes (a popover listing each  (Task 5, Task 10, Task 4, Task 8)
+  field-notes-editor-dropped [Editor (FieldmarkUI, AppKit), from the research] FALSE ALARM 0.23: Highlights: Hit-testing uses `characterIndexForInsertion(at:)`.  (Task 4, Task 8, Task 5, Review Focus)
+  field-notes-editor-dropped [Editor (FieldmarkUI, AppKit), from the research] FALSE ALARM 0.26: Popover: Each note body writes back on every change (debounced 0.3 s), never only on close.  (Task 5, Task 8, Task 10, Task 4)
+  field-notes-editor-dropped [Editor (FieldmarkUI, AppKit), from the research] FALSE ALARM 0.29: Popover: If real clicks show the parent closing when the child is used (the research could only prove this pro  (Task 10, Task 8, Task 5, Task 4)
+  field-notes-editor-dropped [Editor (FieldmarkUI, AppKit), from the research] MISSED 0.43: Commands: `CommandMenu("Format")` buttons reach the editor through the app coordinator's active notes editor (  (Task 8, Task 5, Task 4, Task 2)
+  workshop-calendar-dropped [Data model (D1) > Capacity enforcement] FALSE ALARM 0.27: One statement, atomic in SQLite, and D1 runs a database's writes one at a time:  (Task 1, Task 14, Task 2, Task 9)
+  workshop-calendar-dropped [Data model (D1) > Capacity enforcement] MISSED 0.53: Two requests racing for the last spot: the second INSERT sees the count at capacity and inserts nothing.  (Task 14, Task 9, Task 1, Task 5)
+  workshop-calendar-dropped [Pages and routes] MISSED 0.74: `GET /workshops/:id/book`: Booking form (QR target); explains full/closed  (Task 14, Task 11, Task 3, Task 10)
+  workshop-calendar-dropped [Testing] MISSED 0.76: Integration (Vitest, Node + Miniflare D1): repositories (capacity, last-spot race, duplicates, closing) and ro  (Task 1, Task 14, Task 9, Task 5)
+  mutation-all [Part 2: compile every mutant into one build > Mutants that do not compile] FALSE ALARM 0.18: In this repo it is `while true` flipped to `while false`, which turns a function that always returned into one  (Task 9, Task 5, Task 10, Task 1)
+
+Saved readings to /private/tmp/nudgement-original/bench/results/2026-09-29T02-12-58.691Z.json
