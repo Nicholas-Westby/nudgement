@@ -4,4 +4,4 @@ preload = ["./tests/setup.ts"]
 coverageReporter = ["text", "lcov"]
 coverageDir = "coverage"
 coverageSkipTestFiles = true
-coveragePathIgnorePatterns = ["bench/**", "tests/fixtures/**", "scripts/**"]
+coveragePathIgnorePatterns = ["bench/**", "tests/**", "scripts/**"]

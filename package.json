@@ -11,7 +11,7 @@
     "lint": "biome check . --error-on-warnings",
     "format": "biome check --write .",
     "complexity": "bun scripts/check-complexity.ts",
-    "coverage": "bun test --coverage",
+    "coverage": "bun scripts/check-coverage.ts",
     "fixtures:record": "bun scripts/record-jev.ts --live",
     "check": "bun run lint && bun run typecheck && bun test"
   },
