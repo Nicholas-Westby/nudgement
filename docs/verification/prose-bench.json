@@ -1,0 +1,1485 @@
+{
+  "copy": [
+    {
+      "id": "site-layout:{title} - Claybank Studio",
+      "readings": {}
+    },
+    {
+      "id": "site-layout:Pottery workshops at Claybank Studio. Pick a workshop and save your spot.",
+      "readings": {
+        "prose_setup": 0.04,
+        "prose_vague": 0.04
+      }
+    },
+    {
+      "id": "site-layout:Skip to main content",
+      "readings": {}
+    },
+    {
+      "id": "site-layout:Calendar",
+      "readings": {}
+    },
+    {
+      "id": "site-layout:Create a workshop",
+      "readings": {}
+    },
+    {
+      "id": "site-layout:All times are Vancouver time.",
+      "readings": {}
+    },
+    {
+      "id": "site-layout:Questions about a workshop? Ask at the counter or call {STUDIO.phone}.",
+      "readings": {
+        "prose_setup": 0.03,
+        "prose_vague": 0.02
+      }
+    },
+    {
+      "id": "calendar-month:Previous month",
+      "readings": {}
+    },
+    {
+      "id": "calendar-month:Next month",
+      "readings": {}
+    },
+    {
+      "id": "calendar-month:Times are Vancouver time. Pick a workshop to see its details and book.",
+      "readings": {
+        "prose_setup": 0.03,
+        "prose_vague": 0.02
+      }
+    },
+    {
+      "id": "calendar-month:No workshops are on the calendar for {month.label} yet.",
+      "readings": {
+        "prose_setup": 0.03,
+        "prose_vague": 0.02
+      }
+    },
+    {
+      "id": "calendar-month:Create a workshop",
+      "readings": {}
+    },
+    {
+      "id": "calendar-month:{workshop.spotsLeft} of {workshop.capacity} spots left",
+      "readings": {}
+    },
+    {
+      "id": "calendar-month:Full",
+      "readings": {}
+    },
+    {
+      "id": "calendar-month:Workshops in {month.label}",
+      "readings": {}
+    },
+    {
+      "id": "calendar-day:NEW",
+      "readings": {}
+    },
+    {
+      "id": "calendar-day:Starts {formatTime(workshop.startsAt)}",
+      "readings": {}
+    },
+    {
+      "id": "calendar-day:Today",
+      "readings": {}
+    },
+    {
+      "id": "calendar-day:Full",
+      "readings": {}
+    },
+    {
+      "id": "calendar-day:{workshop.spotsLeft} of {workshop.capacity} spots left",
+      "readings": {}
+    },
+    {
+      "id": "calendar-day:See all {day.workshops.length} workshops on {label}",
+      "readings": {}
+    },
+    {
+      "id": "calendar-agenda:Upcoming Workshops",
+      "readings": {}
+    },
+    {
+      "id": "calendar-agenda:Starts at {start}",
+      "readings": {}
+    },
+    {
+      "id": "calendar-agenda:View",
+      "readings": {}
+    },
+    {
+      "id": "calendar-agenda:At this point in time there are currently no upcoming workshops that have been scheduled for this month. Please check back again at a later date.",
+      "readings": {
+        "prose_setup": 0.06,
+        "prose_vague": 0.05
+      }
+    },
+    {
+      "id": "calendar-agenda:{workshop.spotsLeft} spots left",
+      "readings": {}
+    },
+    {
+      "id": "calendar-agenda:Needs {workshop.pottersNeeded} more potters to run",
+      "readings": {
+        "prose_setup": 0.03,
+        "prose_vague": 0.03
+      }
+    },
+    {
+      "id": "calendar-agenda:Create a workshop",
+      "readings": {}
+    },
+    {
+      "id": "calendar-agenda:See {month.next().label}",
+      "readings": {}
+    },
+    {
+      "id": "workshop-page:Back to the {month.label} calendar",
+      "readings": {}
+    },
+    {
+      "id": "workshop-page:{day}, {start} to {end} Vancouver time",
+      "readings": {
+        "prose_setup": 0.03,
+        "prose_vague": 0.02
+      }
+    },
+    {
+      "id": "workshop-page:{workshop.spotsLeft} of {workshop.capacity} spots left",
+      "readings": {}
+    },
+    {
+      "id": "workshop-page:The workshop runs if at least {workshop.minPotters} potters book.",
+      "readings": {
+        "prose_setup": 0.02,
+        "prose_vague": 0.03
+      }
+    },
+    {
+      "id": "workshop-page:Add to calendar",
+      "readings": {}
+    },
+    {
+      "id": "workshop-page:Works with Google Calendar, Outlook and Apple Calendar.",
+      "readings": {
+        "prose_setup": 0.02,
+        "prose_vague": 0.03
+      }
+    },
+    {
+      "id": "workshop-page:What to bring",
+      "readings": {}
+    },
+    {
+      "id": "workshop-page:Who's playing",
+      "readings": {}
+    },
+    {
+      "id": "workshop-page:Nobody has booked yet.",
+      "readings": {}
+    },
+    {
+      "id": "workshop-page:QR code that opens the booking form for this workshop",
+      "readings": {}
+    },
+    {
+      "id": "workshop-page:Scan the code with your phone camera, or open this link:",
+      "readings": {
+        "prose_setup": 0.03,
+        "prose_vague": 0.03
+      }
+    },
+    {
+      "id": "workshop-page:Book for this workshop",
+      "readings": {}
+    },
+    {
+      "id": "workshop-page:Booking closes when the workshop starts.",
+      "readings": {
+        "prose_setup": 0.03,
+        "prose_vague": 0.02
+      }
+    },
+    {
+      "id": "workshop-page:This workshop is full. Check the calendar for another {workshop.courseName} workshop.",
+      "readings": {
+        "prose_setup": 0.03,
+        "prose_vague": 0.03
+      }
+    },
+    {
+      "id": "workshop-page:Booking closed when the workshop started. If you're at the studio, ask at the counter.",
+      "readings": {
+        "prose_setup": 0.04,
+        "prose_vague": 0.03
+      }
+    },
+    {
+      "id": "sign-up-sheet:Sign-Up Sheet",
+      "readings": {}
+    },
+    {
+      "id": "sign-up-sheet:FULL",
+      "readings": {}
+    },
+    {
+      "id": "sign-up-sheet:Nobody has signed up yet. Be the first!",
+      "readings": {
+        "prose_setup": 0.12,
+        "prose_vague": 0.04
+      }
+    },
+    {
+      "id": "sign-up-sheet:At least {workshop.minPotters} potters are required to start.",
+      "readings": {
+        "prose_setup": 0.02,
+        "prose_vague": 0.03
+      }
+    },
+    {
+      "id": "sign-up-sheet:{open} of {workshop.capacity} spots open",
+      "readings": {}
+    },
+    {
+      "id": "sign-up-sheet:Open spot",
+      "readings": {}
+    },
+    {
+      "id": "sign-up-sheet:Spots go to potters in the order they book.",
+      "readings": {
+        "prose_setup": 0.03,
+        "prose_vague": 0.03
+      }
+    },
+    {
+      "id": "qr-panel:Sorry, this workshop is full. Send potters to another {workshop.courseName} workshop on the calendar.",
+      "readings": {
+        "prose_setup": 0.04,
+        "prose_vague": 0.03
+      }
+    },
+    {
+      "id": "qr-panel:Scan Me!",
+      "readings": {}
+    },
+    {
+      "id": "qr-panel:QR payload: {bookUrl}",
+      "readings": {}
+    },
+    {
+      "id": "qr-panel:Click here to book",
+      "readings": {}
+    },
+    {
+      "id": "qr-panel:Booking closes at {start}.",
+      "readings": {}
+    },
+    {
+      "id": "qr-panel:QR code for the booking link",
+      "readings": {}
+    },
+    {
+      "id": "qr-panel:Point your phone camera at the code to open the booking form.",
+      "readings": {
+        "prose_setup": 0.03,
+        "prose_vague": 0.02
+      }
+    },
+    {
+      "id": "qr-panel:Print a flyer with this code",
+      "readings": {}
+    },
+    {
+      "id": "add-to-calendar:Download .ics",
+      "readings": {}
+    },
+    {
+      "id": "add-to-calendar:Seamlessly sync this workshop with Google Calendar, Outlook or Apple Calendar!",
+      "readings": {
+        "prose_setup": 0.06,
+        "prose_vague": 0.23
+      }
+    },
+    {
+      "id": "add-to-calendar:Your calendar app reads the UTC timestamp and converts it for you.",
+      "readings": {
+        "prose_setup": 0.04,
+        "prose_vague": 0.06
+      }
+    },
+    {
+      "id": "add-to-calendar:Please click the button above in order to download a file that can then be imported into the calendar application of your choice.",
+      "readings": {
+        "prose_setup": 0.06,
+        "prose_vague": 0.05
+      }
+    },
+    {
+      "id": "add-to-calendar:Add to calendar",
+      "readings": {}
+    },
+    {
+      "id": "add-to-calendar:Put it on your calendar",
+      "readings": {}
+    },
+    {
+      "id": "add-to-calendar:On a phone, open the downloaded file to add the workshop.",
+      "readings": {
+        "prose_setup": 0.03,
+        "prose_vague": 0.03
+      }
+    },
+    {
+      "id": "workshop-flyer:DON'T MISS OUT!",
+      "readings": {}
+    },
+    {
+      "id": "workshop-flyer:The ultimate {workshop.courseName} showdown is coming to Claybank Studio!",
+      "readings": {
+        "prose_setup": 0.26,
+        "prose_vague": 0.2
+      }
+    },
+    {
+      "id": "workshop-flyer:{day}, {start} to {end}",
+      "readings": {}
+    },
+    {
+      "id": "workshop-flyer:SCAN TO BOOK",
+      "readings": {}
+    },
+    {
+      "id": "workshop-flyer:Print a flyer",
+      "readings": {}
+    },
+    {
+      "id": "workshop-flyer:Print this page from your browser and post it by the counter.",
+      "readings": {
+        "prose_setup": 0.02,
+        "prose_vague": 0.02
+      }
+    },
+    {
+      "id": "workshop-flyer:Back to the workshop page",
+      "readings": {}
+    },
+    {
+      "id": "workshop-flyer:What to bring",
+      "readings": {}
+    },
+    {
+      "id": "workshop-flyer:QR code that opens the booking form",
+      "readings": {}
+    },
+    {
+      "id": "workshop-flyer:Or type this link: {bookUrl}",
+      "readings": {}
+    },
+    {
+      "id": "pick-course:Create a workshop",
+      "readings": {}
+    },
+    {
+      "id": "pick-course:Which course is the workshop for?",
+      "readings": {
+        "prose_setup": 0.06,
+        "prose_vague": 0.02
+      }
+    },
+    {
+      "id": "pick-course:Each course has its own formats, usual length and potter limits. You can change the length and spots on the next page.",
+      "readings": {
+        "prose_setup": 0.04,
+        "prose_vague": 0.04
+      }
+    },
+    {
+      "id": "pick-course:Usual length",
+      "readings": {}
+    },
+    {
+      "id": "pick-course:{course.workshop.minPotters} to 30",
+      "readings": {}
+    },
+    {
+      "id": "pick-course:Create a {course.name} workshop",
+      "readings": {}
+    },
+    {
+      "id": "pick-course:Don't see your course? Ask the studio owner to add it.",
+      "readings": {
+        "prose_setup": 0.04,
+        "prose_vague": 0.03
+      }
+    },
+    {
+      "id": "course-card:Usual Length",
+      "readings": {}
+    },
+    {
+      "id": "course-card:min_potters: {course.workshop.minPotters}",
+      "readings": {}
+    },
+    {
+      "id": "course-card:Select",
+      "readings": {}
+    },
+    {
+      "id": "course-card:{hours(course.workshop.defaultDurationMinutes)} hours",
+      "readings": {}
+    },
+    {
+      "id": "course-card:Up to 30 potters",
+      "readings": {}
+    },
+    {
+      "id": "course-card:Picking a course fills in its usual length and spot count. You can change both on the next page.",
+      "readings": {
+        "prose_setup": 0.04,
+        "prose_vague": 0.05
+      }
+    },
+    {
+      "id": "new-workshop-form:Create New Workshop",
+      "readings": {}
+    },
+    {
+      "id": "new-workshop-form:In order to create a new workshop, please take a moment to fill out each of the fields below with the relevant information about your workshop.",
+      "readings": {
+        "prose_setup": 0.05,
+        "prose_vague": 0.03
+      }
+    },
+    {
+      "id": "new-workshop-form:You made some mistakes. Fix each field that shows a message.",
+      "readings": {}
+    },
+    {
+      "id": "new-workshop-form:Workshop Name",
+      "readings": {}
+    },
+    {
+      "id": "new-workshop-form:Workshops can be scheduled up to one year in advance.",
+      "readings": {
+        "prose_setup": 0.02,
+        "prose_vague": 0.03
+      }
+    },
+    {
+      "id": "new-workshop-form:Start Time",
+      "readings": {}
+    },
+    {
+      "id": "new-workshop-form:Capacity (int)",
+      "readings": {}
+    },
+    {
+      "id": "new-workshop-form:Submit",
+      "readings": {}
+    },
+    {
+      "id": "new-workshop-form:New {course.name} workshop",
+      "readings": {}
+    },
+    {
+      "id": "new-workshop-form:Up to 80 characters, like \"Friday Glazing night\".",
+      "readings": {
+        "prose_setup": 0.03,
+        "prose_vague": 0.02
+      }
+    },
+    {
+      "id": "new-workshop-form:Pick a format",
+      "readings": {}
+    },
+    {
+      "id": "new-workshop-form:{course.name} needs at least {course.workshop.minPotters} potters, so pick a number from {course.workshop.minPotters} to 30.",
+      "readings": {
+        "prose_setup": 0.04,
+        "prose_vague": 0.02
+      }
+    },
+    {
+      "id": "new-workshop-form:Pick a different course",
+      "readings": {}
+    },
+    {
+      "id": "workshop-form-errors:Workshop name is too long.",
+      "readings": {}
+    },
+    {
+      "id": "workshop-form-errors:Invalid input.",
+      "readings": {}
+    },
+    {
+      "id": "workshop-form-errors:You entered a past date by mistake. Pick today or a later date.",
+      "readings": {
+        "prose_setup": 0.07,
+        "prose_vague": 0.02
+      }
+    },
+    {
+      "id": "workshop-form-errors:This date can't be used.",
+      "readings": {}
+    },
+    {
+      "id": "workshop-form-errors:Capacity out of range (min_potters..30).",
+      "readings": {}
+    },
+    {
+      "id": "workshop-form-errors:Error 404: unknown template id",
+      "readings": {}
+    },
+    {
+      "id": "workshop-form-errors:Oops! We couldn't save your workshop.",
+      "readings": {
+        "prose_setup": 0.06,
+        "prose_vague": 0.04
+      }
+    },
+    {
+      "id": "workshop-form-errors:Enter a name for the workshop.",
+      "readings": {
+        "prose_setup": 0.03,
+        "prose_vague": 0.02
+      }
+    },
+    {
+      "id": "workshop-form-errors:Pick a format for this course.",
+      "readings": {
+        "prose_setup": 0.03,
+        "prose_vague": 0.02
+      }
+    },
+    {
+      "id": "workshop-form-errors:Enter the date of the workshop.",
+      "readings": {
+        "prose_setup": 0.03,
+        "prose_vague": 0.02
+      }
+    },
+    {
+      "id": "workshop-form-errors:Enter a start time.",
+      "readings": {}
+    },
+    {
+      "id": "workshop-form-errors:Enter the number of spots as a whole number, like 16.",
+      "readings": {
+        "prose_setup": 0.03,
+        "prose_vague": 0.02
+      }
+    },
+    {
+      "id": "workshop-form-errors:Start time (Vancouver time)",
+      "readings": {}
+    },
+    {
+      "id": "workshop-form-errors:Check these before you create the workshop",
+      "readings": {}
+    },
+    {
+      "id": "book-page:Enter your name to book.",
+      "readings": {}
+    },
+    {
+      "id": "book-page:That name is longer than 50 characters. Shorten it, or use a first name and last initial.",
+      "readings": {
+        "prose_setup": 0.03,
+        "prose_vague": 0.02
+      }
+    },
+    {
+      "id": "book-page:Book for a workshop",
+      "readings": {}
+    },
+    {
+      "id": "book-page:{day} at {start} Vancouver time",
+      "readings": {}
+    },
+    {
+      "id": "book-page:{workshop.spotsLeft} of {workshop.capacity} spots left",
+      "readings": {}
+    },
+    {
+      "id": "book-page:Your name",
+      "readings": {}
+    },
+    {
+      "id": "book-page:Use the name the organizer will call at the table. Other potters see it on the sign-up sheet.",
+      "readings": {
+        "prose_setup": 0.03,
+        "prose_vague": 0.02
+      }
+    },
+    {
+      "id": "book-page:Book for this workshop",
+      "readings": {}
+    },
+    {
+      "id": "book-page:Booking closes when the workshop starts at {start} Vancouver time.",
+      "readings": {
+        "prose_setup": 0.02,
+        "prose_vague": 0.02
+      }
+    },
+    {
+      "id": "book-page:Can't make it after all? Tell the organizer at the counter so someone else can have your spot.",
+      "readings": {
+        "prose_setup": 0.06,
+        "prose_vague": 0.02
+      }
+    },
+    {
+      "id": "book-page:See the workshop details",
+      "readings": {}
+    },
+    {
+      "id": "potter-name-field:You didn't enter a name.",
+      "readings": {}
+    },
+    {
+      "id": "potter-name-field:You made your name too long. Use 50 characters or fewer.",
+      "readings": {}
+    },
+    {
+      "id": "potter-name-field:You're trying to book twice.",
+      "readings": {}
+    },
+    {
+      "id": "potter-name-field:We're sorry, but we couldn't save your name. Please try again.",
+      "readings": {}
+    },
+    {
+      "id": "potter-name-field:Please be aware that the name you enter here will be visible to all of the other potters on the public sign-up sheet for this workshop.",
+      "readings": {}
+    },
+    {
+      "id": "potter-name-field:Use letters, numbers, spaces, apostrophes or hyphens in your name.",
+      "readings": {
+        "prose_setup": 0.03,
+        "prose_vague": 0.02
+      }
+    },
+    {
+      "id": "potter-name-field:Your name",
+      "readings": {}
+    },
+    {
+      "id": "potter-name-field:A first name and last initial is plenty, like Sam R.",
+      "readings": {}
+    },
+    {
+      "id": "book-refused:Sorry, this workshop is full",
+      "readings": {}
+    },
+    {
+      "id": "book-refused:Workshop Already Started",
+      "readings": {}
+    },
+    {
+      "id": "book-refused:Error 409",
+      "readings": {}
+    },
+    {
+      "id": "book-refused:Your payload failed validation. Use only letters, numbers, spaces, apostrophes or hyphens in your name.",
+      "readings": {}
+    },
+    {
+      "id": "book-refused:The workshop you requested could not be found. Check the calendar for upcoming workshops.",
+      "readings": {
+        "prose_setup": 0.04,
+        "prose_vague": 0.03
+      }
+    },
+    {
+      "id": "book-refused:Click here",
+      "readings": {}
+    },
+    {
+      "id": "book-refused:Someone took the last spot just before you. Look for another workshop on the calendar.",
+      "readings": {
+        "prose_setup": 0.05,
+        "prose_vague": 0.03
+      }
+    },
+    {
+      "id": "book-refused:It started before your booking reached us, so we couldn't add you online. Ask at the counter if there's room.",
+      "readings": {
+        "prose_setup": 0.05,
+        "prose_vague": 0.04
+      }
+    },
+    {
+      "id": "book-refused:That name is already on the list for this workshop. If it belongs to someone else, add your last initial to yours.",
+      "readings": {}
+    },
+    {
+      "id": "book-refused:That name didn't work",
+      "readings": {}
+    },
+    {
+      "id": "book-refused:We couldn't find that workshop",
+      "readings": {}
+    },
+    {
+      "id": "book-refused:Back to {workshop.name}",
+      "readings": {}
+    },
+    {
+      "id": "booking-closed:Full",
+      "readings": {}
+    },
+    {
+      "id": "booking-closed:{workshop.name} is full",
+      "readings": {}
+    },
+    {
+      "id": "booking-closed:There are no spots left. Look for another {workshop.courseName} workshop on the calendar, or ask at the counter in case someone drops out.",
+      "readings": {
+        "prose_setup": 0.04,
+        "prose_vague": 0.03
+      }
+    },
+    {
+      "id": "booking-closed:Find another workshop",
+      "readings": {}
+    },
+    {
+      "id": "booking-closed:Booking for {workshop.name} has closed",
+      "readings": {}
+    },
+    {
+      "id": "booking-closed:The workshop started on {day} at {start} Vancouver time. Online booking ends when a workshop starts.",
+      "readings": {
+        "prose_setup": 0.03,
+        "prose_vague": 0.02
+      }
+    },
+    {
+      "id": "booking-closed:If you're at the studio, ask at the counter whether there's still room.",
+      "readings": {
+        "prose_setup": 0.03,
+        "prose_vague": 0.02
+      }
+    },
+    {
+      "id": "booking-closed:See upcoming workshops",
+      "readings": {}
+    },
+    {
+      "id": "booking-closed:Back to the workshop page",
+      "readings": {}
+    },
+    {
+      "id": "booking-confirmed:Booking Confirmation",
+      "readings": {}
+    },
+    {
+      "id": "booking-confirmed:Awesome, you're in!",
+      "readings": {}
+    },
+    {
+      "id": "booking-confirmed:Your booking has been submitted.",
+      "readings": {}
+    },
+    {
+      "id": "booking-confirmed:{day} at {start}",
+      "readings": {}
+    },
+    {
+      "id": "booking-confirmed:Confirmation UUID: {booking.id}",
+      "readings": {}
+    },
+    {
+      "id": "booking-confirmed:Get ready for an epic night of card battles!",
+      "readings": {
+        "prose_setup": 0.12,
+        "prose_vague": 0.33
+      }
+    },
+    {
+      "id": "booking-confirmed:Spot {booking.spot} of {workshop.capacity}",
+      "readings": {}
+    },
+    {
+      "id": "booking-confirmed:Get to the studio 15 minutes early so the organizer can spot you.",
+      "readings": {
+        "prose_setup": 0.03,
+        "prose_vague": 0.03
+      }
+    },
+    {
+      "id": "booking-confirmed:Add to calendar",
+      "readings": {}
+    },
+    {
+      "id": "booking-confirmed:Back to the workshop",
+      "readings": {}
+    },
+    {
+      "id": "booking-confirmed:Know someone who wants to play? Send them this link:",
+      "readings": {
+        "prose_setup": 0.05,
+        "prose_vague": 0.03
+      }
+    },
+    {
+      "id": "not-found:404 Not Found",
+      "readings": {}
+    },
+    {
+      "id": "not-found:Oops! We can't find that page.",
+      "readings": {
+        "prose_setup": 0.06,
+        "prose_vague": 0.02
+      }
+    },
+    {
+      "id": "not-found:The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.",
+      "readings": {
+        "prose_setup": 0.05,
+        "prose_vague": 0.03
+      }
+    },
+    {
+      "id": "not-found:Go Back",
+      "readings": {}
+    },
+    {
+      "id": "not-found:If you scanned a QR code from an old flyer, the workshop may already be over.",
+      "readings": {
+        "prose_setup": 0.04,
+        "prose_vague": 0.03
+      }
+    },
+    {
+      "id": "not-found:Look for the workshop on the calendar. Each one has its own booking link.",
+      "readings": {
+        "prose_setup": 0.03,
+        "prose_vague": 0.03
+      }
+    },
+    {
+      "id": "not-found:Create a workshop",
+      "readings": {}
+    },
+    {
+      "id": "not-found:Coming up at the studio",
+      "readings": {}
+    },
+    {
+      "id": "not-found:{formatDay(workshop.startsAt)}, {formatTime(workshop.startsAt)} Vancouver time",
+      "readings": {}
+    },
+    {
+      "id": "server-error:Page didn't load",
+      "readings": {}
+    },
+    {
+      "id": "server-error:Something went wrong on our end",
+      "readings": {
+        "prose_setup": 0.1,
+        "prose_vague": 0.05
+      }
+    },
+    {
+      "id": "server-error:This page didn't load because of a problem with the calendar, not anything you did.",
+      "readings": {
+        "prose_setup": 0.16,
+        "prose_vague": 0.04
+      }
+    },
+    {
+      "id": "server-error:Wait a minute, then reload the page.",
+      "readings": {
+        "prose_setup": 0.09,
+        "prose_vague": 0.03
+      }
+    },
+    {
+      "id": "server-error:If you were booking, check the sign-up sheet on the workshop page before you try again, in case your name went through.",
+      "readings": {
+        "prose_setup": 0.04,
+        "prose_vague": 0.03
+      }
+    },
+    {
+      "id": "server-error:Go to the workshop page",
+      "readings": {}
+    },
+    {
+      "id": "server-error:Go to the calendar",
+      "readings": {}
+    },
+    {
+      "id": "server-error:If it keeps happening, let someone at the counter know.",
+      "readings": {
+        "prose_setup": 0.03,
+        "prose_vague": 0.03
+      }
+    },
+    {
+      "id": "join-share-sheet:Paste the invite code someone sent you.",
+      "readings": {
+        "prose_setup": 0.03,
+        "prose_vague": 0.02
+      }
+    },
+    {
+      "id": "join-share-sheet:Invite code",
+      "readings": {}
+    },
+    {
+      "id": "join-share-sheet:FIELDMARK-…",
+      "readings": {}
+    },
+    {
+      "id": "join-share-sheet:Join as",
+      "readings": {}
+    },
+    {
+      "id": "join-share-sheet:Your name",
+      "readings": {}
+    },
+    {
+      "id": "join-share-sheet:Join Shared Survey",
+      "readings": {}
+    },
+    {
+      "id": "join-share-sheet:Cancel",
+      "readings": {}
+    },
+    {
+      "id": "join-share-sheet:Join",
+      "readings": {}
+    },
+    {
+      "id": "join-share-sheet:Join the shared survey this code names",
+      "readings": {}
+    },
+    {
+      "id": "site-row-menu:Category",
+      "readings": {}
+    },
+    {
+      "id": "site-row-menu:Remove from Favorites",
+      "readings": {}
+    },
+    {
+      "id": "site-row-menu:Remove {count} Sites from Favorites",
+      "readings": {}
+    },
+    {
+      "id": "site-row-menu:Add to Favorites",
+      "readings": {}
+    },
+    {
+      "id": "site-row-menu:Add {count} Sites to Favorites",
+      "readings": {}
+    },
+    {
+      "id": "site-row-menu:Annotate",
+      "readings": {}
+    },
+    {
+      "id": "site-row-menu:Annotate {count} Sites",
+      "readings": {}
+    },
+    {
+      "id": "site-row-menu:Add to Route",
+      "readings": {}
+    },
+    {
+      "id": "site-row-menu:Add {count} Sites to Route",
+      "readings": {}
+    },
+    {
+      "id": "site-row-menu:Copy to Another Survey",
+      "readings": {}
+    },
+    {
+      "id": "site-row-menu:Copy {count} Sites to Another Survey",
+      "readings": {}
+    },
+    {
+      "id": "site-row-menu:Move to Another Survey",
+      "readings": {}
+    },
+    {
+      "id": "site-row-menu:Move {count} Sites to Another Survey",
+      "readings": {}
+    },
+    {
+      "id": "site-row-menu:Delete…",
+      "readings": {}
+    },
+    {
+      "id": "site-row-menu:Delete {count} Sites…",
+      "readings": {}
+    },
+    {
+      "id": "route-view:Add Stop",
+      "readings": {}
+    },
+    {
+      "id": "route-view:Add a stop to the route",
+      "readings": {}
+    },
+    {
+      "id": "route-view:Shorten Route",
+      "readings": {}
+    },
+    {
+      "id": "route-view:Plan Days",
+      "readings": {}
+    },
+    {
+      "id": "route-view:Reorder",
+      "readings": {}
+    },
+    {
+      "id": "route-view:Replace the outing you have?",
+      "readings": {}
+    },
+    {
+      "id": "route-view:Replace",
+      "readings": {}
+    },
+    {
+      "id": "route-view:A plan is built from every saved site, so it replaces the stops already here.",
+      "readings": {
+        "prose_setup": 0.05,
+        "prose_vague": 0.08
+      }
+    },
+    {
+      "id": "route-view:Deleted site",
+      "readings": {}
+    },
+    {
+      "id": "route-view:Include time of day",
+      "readings": {}
+    },
+    {
+      "id": "update-install-error:Fieldmark is running from a temporary site because it was opened straight from the download. Move it into the Applications folder, open it from there, and update again.",
+      "readings": {}
+    },
+    {
+      "id": "update-install-error:Fieldmark cannot replace itself in {folder} because this account cannot write there. Download the new version and drag it into Applications.",
+      "readings": {}
+    },
+    {
+      "id": "update-install-error:The download did not match what the site published, so it was not installed.",
+      "readings": {}
+    },
+    {
+      "id": "update-install-error:The download could not be unpacked: {reason}.",
+      "readings": {}
+    },
+    {
+      "id": "update-install-error:The download did not contain Fieldmark, so nothing was installed.",
+      "readings": {}
+    },
+    {
+      "id": "update-install-error:The download is a different app ({identifier}), so it was not installed.",
+      "readings": {}
+    },
+    {
+      "id": "update-install-error:The download says it is version {version}, not the one that was offered, so it was not installed.",
+      "readings": {}
+    },
+    {
+      "id": "update-install-error:The new version needs macOS {version} or later, which this Mac does not have.",
+      "readings": {}
+    },
+    {
+      "id": "update-install-error:The download is not signed by Fieldmark's developer, so it was not installed.",
+      "readings": {}
+    },
+    {
+      "id": "update-install-error:The new version could not be moved into site ({reason}). The previous version is still installed.",
+      "readings": {}
+    },
+    {
+      "id": "update-install-error:The update could not be finished, and the previous version of Fieldmark could not be put back. It has not been lost: it is at {path}. Move it into your Applications folder to carry on using it.",
+      "readings": {}
+    },
+    {
+      "id": "share-sheet-bad:Unlock seamless real-time collaboration! Share your amazing survey with all of your visit buddies and plan the outing of a lifetime together.",
+      "readings": {
+        "prose_setup": 0.14,
+        "prose_vague": 0.8
+      }
+    },
+    {
+      "id": "share-sheet-bad:SHARE SURVEY",
+      "readings": {}
+    },
+    {
+      "id": "share-sheet-bad:Cancel",
+      "readings": {}
+    },
+    {
+      "id": "share-sheet-bad:Done",
+      "readings": {}
+    },
+    {
+      "id": "share-sheet-bad:Submit",
+      "readings": {}
+    },
+    {
+      "id": "share-sheet-bad:Share this survey and let everyone you invite edit it",
+      "readings": {}
+    },
+    {
+      "id": "share-sheet-bad:Oops! Something went wrong",
+      "readings": {}
+    },
+    {
+      "id": "share-sheet-bad:OK",
+      "readings": {}
+    },
+    {
+      "id": "share-sheet-bad:Sorry, an error occurred. Please try again later.",
+      "readings": {}
+    },
+    {
+      "id": "share-sheet-bad:The survey can be joined by anyone this code has been sent to.",
+      "readings": {
+        "prose_setup": 0.03,
+        "prose_vague": 0.05
+      }
+    },
+    {
+      "id": "share-sheet-bad:Copied",
+      "readings": {}
+    },
+    {
+      "id": "share-sheet-bad:Copy",
+      "readings": {}
+    },
+    {
+      "id": "share-sheet-bad:Copy the invite code",
+      "readings": {}
+    },
+    {
+      "id": "share-sheet-bad:Regenerate invite Code",
+      "readings": {}
+    },
+    {
+      "id": "share-sheet-bad:The old code stops working. Nobody who has already joined is affected.",
+      "readings": {}
+    },
+    {
+      "id": "share-sheet-bad:Stop Sharing",
+      "readings": {}
+    },
+    {
+      "id": "share-sheet-bad:Terminates the share session and invalidates the member_token for all peers.",
+      "readings": {}
+    },
+    {
+      "id": "share-sheet-bad:You joined this shared survey.",
+      "readings": {}
+    },
+    {
+      "id": "share-sheet-bad:Leave",
+      "readings": {}
+    },
+    {
+      "id": "share-sheet-bad:You keep this survey; it just stops updating.",
+      "readings": {}
+    },
+    {
+      "id": "share-sheet-bad:You entered the wrong code, so you have to ask for a new one.",
+      "readings": {}
+    },
+    {
+      "id": "site-row-menu-bad:Category",
+      "readings": {}
+    },
+    {
+      "id": "site-row-menu-bad:Remove From Favorites",
+      "readings": {}
+    },
+    {
+      "id": "site-row-menu-bad:Remove {count} sites from Favorites",
+      "readings": {}
+    },
+    {
+      "id": "site-row-menu-bad:Add To Favorites",
+      "readings": {}
+    },
+    {
+      "id": "site-row-menu-bad:Add {count} Sites To Favorites",
+      "readings": {}
+    },
+    {
+      "id": "site-row-menu-bad:Run Annotation Pipeline",
+      "readings": {}
+    },
+    {
+      "id": "site-row-menu-bad:Run Annotation Pipeline ({count} POIs)",
+      "readings": {}
+    },
+    {
+      "id": "site-row-menu-bad:Go",
+      "readings": {}
+    },
+    {
+      "id": "site-row-menu-bad:Go ({count})",
+      "readings": {}
+    },
+    {
+      "id": "site-row-menu-bad:Copy to Another Survey",
+      "readings": {}
+    },
+    {
+      "id": "site-row-menu-bad:Copy {count} Sites to Another Survey",
+      "readings": {}
+    },
+    {
+      "id": "site-row-menu-bad:Move to Another Survey",
+      "readings": {}
+    },
+    {
+      "id": "site-row-menu-bad:Move {count} Sites to Another Survey",
+      "readings": {}
+    },
+    {
+      "id": "site-row-menu-bad:DELETE",
+      "readings": {}
+    },
+    {
+      "id": "site-row-menu-bad:DELETE {count} SITES",
+      "readings": {}
+    },
+    {
+      "id": "renew-loans:Your loans",
+      "readings": {}
+    },
+    {
+      "id": "renew-loans:Books are due back three weeks after you borrow them. You can renew a book up to three times if nobody has reserved it.",
+      "readings": {
+        "prose_setup": 0.02,
+        "prose_vague": 0.03
+      }
+    },
+    {
+      "id": "renew-loans:You let your fines build up, so your card is blocked. Pay them at the desk before you renew anything.",
+      "readings": {}
+    },
+    {
+      "id": "renew-loans:Sorry, this book has already been renewed three times and can't be renewed again.",
+      "readings": {}
+    },
+    {
+      "id": "renew-loans:OOPS! SOMETHING WENT WRONG.",
+      "readings": {}
+    },
+    {
+      "id": "renew-loans:Title",
+      "readings": {}
+    },
+    {
+      "id": "renew-loans:Due",
+      "readings": {}
+    },
+    {
+      "id": "renew-loans:Renew",
+      "readings": {}
+    },
+    {
+      "id": "renew-loans:Please note that in the event that a book you have selected for renewal has been reserved by another member of the library in the meantime, it will not be possible for that particular book to be renewed at this time.",
+      "readings": {
+        "prose_setup": 0.05,
+        "prose_vague": 0.04
+      }
+    },
+    {
+      "id": "renew-loans:Renew selected books",
+      "readings": {}
+    },
+    {
+      "id": "renew-loans:See books you returned",
+      "readings": {}
+    },
+    {
+      "id": "episode-download-menu:Downloading…",
+      "readings": {}
+    },
+    {
+      "id": "episode-download-menu:Download Episode",
+      "readings": {}
+    },
+    {
+      "id": "episode-download-menu:Mark as Played",
+      "readings": {}
+    },
+    {
+      "id": "episode-download-menu:DELETE DOWNLOAD",
+      "readings": {}
+    },
+    {
+      "id": "episode-download-menu:Delete this download?",
+      "readings": {}
+    },
+    {
+      "id": "episode-download-menu:Delete",
+      "readings": {}
+    },
+    {
+      "id": "episode-download-menu:Cancel",
+      "readings": {}
+    },
+    {
+      "id": "episode-download-menu:The episode stays in your library and you can download it again at any time.",
+      "readings": {
+        "prose_setup": 0.04,
+        "prose_vague": 0.05
+      }
+    },
+    {
+      "id": "episode-download-menu:We're really sorry, but the episode couldn't be downloaded.",
+      "readings": {}
+    },
+    {
+      "id": "episode-download-menu:This show has moved to a new feed address, and because of that the old address that the app currently has saved for it no longer works, so you will need to go to the show's page and update the feed address before new episodes can be downloaded.",
+      "readings": {}
+    }
+  ],
+  "prose": [
+    {
+      "id": "staged-setup",
+      "text": "The code compiles. The tests pass. But does the commit say anything? Does that comment explain why? Sometimes the next improvement needs a different kind of check.",
+      "role": "text",
+      "line": 1,
+      "issues": [
+        {
+          "severity": "warn",
+          "part": "text",
+          "message": "Drop the rhetorical setup. State the useful information directly.",
+          "source": "jev:prose_setup=0.69"
+        }
+      ],
+      "readings": {
+        "prose_setup": 0.69,
+        "prose_vague": 0.25
+      }
+    },
+    {
+      "id": "abstract-claim",
+      "text": "A formatter knows where the semicolon goes. nudgement asks whether the thought holds up.",
+      "role": "text",
+      "line": 2,
+      "issues": [
+        {
+          "severity": "warn",
+          "part": "text",
+          "message": "Replace the abstract claim with what the tool does, checks or changes.",
+          "source": "jev:prose_vague=0.54"
+        }
+      ],
+      "readings": {
+        "prose_setup": 0.27,
+        "prose_vague": 0.54
+      }
+    },
+    {
+      "id": "capabilities",
+      "text": "nudgement reviews commit messages, code comments, tests and documentation. Run it yourself or let your coding agent use the findings to revise its work.",
+      "role": "text",
+      "line": 3,
+      "issues": [],
+      "readings": {
+        "prose_setup": 0.07,
+        "prose_vague": 0.12
+      }
+    },
+    {
+      "id": "specific-checks",
+      "text": "Each evaluator sends Jev the relevant context and a set of focused questions. For a commit, that includes checking whether the message matches the diff.",
+      "role": "text",
+      "line": 4,
+      "issues": [],
+      "readings": {
+        "prose_setup": 0.06,
+        "prose_vague": 0.07
+      }
+    },
+    {
+      "id": "useful-contrast",
+      "text": "The default test command replays saved responses instead of making paid API calls.",
+      "role": "text",
+      "line": 5,
+      "issues": [],
+      "readings": {
+        "prose_setup": 0.05,
+        "prose_vague": 0.06
+      }
+    },
+    {
+      "id": "real-question",
+      "text": "Would this test still pass if the implementation returned the wrong booking date?",
+      "role": "text",
+      "line": 6,
+      "issues": [],
+      "readings": {
+        "prose_setup": 0.1,
+        "prose_vague": 0.07
+      }
+    },
+    {
+      "id": "specific-metaphor",
+      "text": "The pencil in the margin marks your reading position as you scroll.",
+      "role": "text",
+      "line": 7,
+      "issues": [],
+      "readings": {
+        "prose_setup": 0.07,
+        "prose_vague": 0.14
+      }
+    },
+    {
+      "id": "limitation",
+      "text": "Jev can miss problems or flag useful code. Read the findings before accepting an edit.",
+      "role": "text",
+      "line": 8,
+      "issues": [],
+      "readings": {
+        "prose_setup": 0.06,
+        "prose_vague": 0.08
+      }
+    },
+    {
+      "id": "empty-promise",
+      "text": "Unlock a new dimension of thoughtful work. Empower every idea to reach its fullest potential.",
+      "role": "text",
+      "line": 9,
+      "issues": [
+        {
+          "severity": "warn",
+          "part": "text",
+          "message": "Replace the abstract claim with what the tool does, checks or changes.",
+          "source": "jev:prose_vague=0.93"
+        }
+      ],
+      "readings": {
+        "prose_setup": 0.42,
+        "prose_vague": 0.93
+      }
+    },
+    {
+      "id": "focused-heading",
+      "text": "What happens when you review a commit",
+      "role": "heading",
+      "line": 10,
+      "issues": [],
+      "readings": {
+        "prose_setup": 0.14,
+        "prose_vague": 0.07
+      }
+    }
+  ]
+}

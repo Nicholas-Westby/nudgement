@@ -16,7 +16,7 @@ Files (working tree, or --staged / --hash):
   --file <path>              Review code, tests or Markdown (repeatable)
   --readme                   Review the repository's README
   --tests <path>             Review test quality (repeatable)
-  --copy <path>              Review TSX or SwiftUI text (repeatable)
+  --copy <path>              Review HTML, TSX or SwiftUI text (repeatable)
   --design <path>            Review a design specification
   --plan <path>              Review a plan; add --design for coverage
                              Repeat --plan when plans share a design

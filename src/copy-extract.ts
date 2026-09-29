@@ -1,5 +1,6 @@
 import ts from "typescript5";
 import { extractSwiftCopy } from "./copy-swift";
+import { extractHtmlCopy } from "./html-copy";
 import {
   ATTRIBUTES,
   attribute,
@@ -36,6 +37,7 @@ export interface CopyString {
 }
 
 export function extractCopy(path: string, source: string): CopyString[] {
+  if (/\.html?$/i.test(path)) return extractHtmlCopy(source);
   if (path.endsWith(".swift")) return extractSwiftCopy(path, source);
   const kind = /\.[jt]sx$/.test(path) ? ts.ScriptKind.TSX : ts.ScriptKind.TS;
   const file = ts.createSourceFile(path, source, ts.ScriptTarget.Latest, true, kind);

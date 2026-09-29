@@ -2,6 +2,7 @@ import { type CopyRole, type CopyString, extractCopy } from "./copy-extract";
 import { stringQuestions } from "./copy-questions";
 import { ALWAYS_PROPER, judgeString } from "./copy-rules";
 import type { Issue } from "./message";
+import { reviewProse } from "./prose";
 import { type JevStats, startRun } from "./run";
 
 const MAX_STRINGS = 120;
@@ -72,6 +73,8 @@ export async function evaluateCopy(
     ),
   );
   const results = strings.map((item, index) => judgeString(item, answers[index], proper, platform));
+
+  await reviewProse(input.path, strings, results, options.app ?? DEFAULT_APP[platform], track);
 
   const errors = [...issues, ...results.flatMap((result) => result.issues)].some((issue) => issue.severity === "error");
   const evaluation: CopyEvaluation = {

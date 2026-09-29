@@ -3,20 +3,27 @@
 `bun test` runs offline, even when API keys are present. Its preload replaces
 network requests with recorded responses and rejects missing recordings.
 The benchmark regression test preserves the original results and compares new
-clarity readings and warnings against a separate saved addition. A changed
+clarity readings and warnings against separate saved additions. A changed
 question or input requires an explicit capture and review of the differences.
 
 Manifest filenames are sorted before loading so discovery is consistent across
 filesystems. The regression test compares the serialized results by suite,
 matching file and README cases by ID because the original baseline used local
 directory order. Every case and its complete result must still match the
-original baseline plus [clarity findings](verification/clarity-bench.json).
+original baseline plus [clarity findings](verification/clarity-bench.json) and
+[prose readings](verification/prose-bench.json). Original copy readings remain unchanged.
 
 `bench/clarity.json` labels before/after examples from nudgement plus small
 Python and Swift examples. The clarity quality tests exercise all four captured
 responses, checking missing explanations, magic values, clear uncommented code,
 and comments that restate operations without explaining them. Tests also cover
 changed-line scope, tiny constants, batching, truncation and API failures.
+
+`bench/prose.json` contrasts the website's former rhetorical setup and abstract metaphor with
+concrete explanations, ordinary questions, useful comparisons and section headings. Four real
+responses per request test every labelled case. HTML extraction tests cover entities, inline
+sentences, source lines, optional end tags and excluded examples. The website's separate browser
+tests cover mobile reading order, motion preferences, keyboard use and enlarged text.
 
 ## Fixtures
 

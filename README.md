@@ -57,6 +57,9 @@ In tests, `expect(result).toBeDefined()` can hide a wrong result.
 nudgement reports weak assertions and asks Jev whether each test checks useful
 behavior. These are review suggestions, not proof that the code is correct.
 
+UI copy reviews also flag staged rhetorical setups and abstract claims that obscure what a tool does.
+HTML reviews preserve paragraphs and source lines, while excluding scripts, artwork and quoted examples.
+
 See [real before-and-after examples](NUDGEMENTS.md) with the findings that prompted each change.
 
 Reports use `✗` for errors, `!` for warnings, and `·` for notes. Only errors and
@@ -71,7 +74,7 @@ failed review, 2 for usage or Git errors, and 3 for an unexpected crash.
 | --- | --- |
 | `--staged -m "…" --check-files --repo-check` | Message, comments, changed files and repository hygiene |
 | `--tests tests/jev.test.ts` | Test quality |
-| `--copy bench/copy/booking-confirmed.tsx` | UI text in TSX or SwiftUI |
+| `--copy bench/copy/booking-confirmed.tsx` | UI text in HTML, TSX or SwiftUI |
 | `--history --range main..HEAD` | Commit sequence and changes that may belong together |
 | `--design bench/designs/workshop-calendar-design.md` | Whether a design is concrete and decided |
 | `--plan bench/plans/workshop-calendar-plan.md --design bench/designs/workshop-calendar-design.md` | Plan quality and coverage of the design |

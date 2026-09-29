@@ -1,0 +1,60 @@
+[
+  {
+    "id": "staged-setup",
+    "text": "The code compiles. The tests pass. But does the commit say anything? Does that comment explain why? Sometimes the next improvement needs a different kind of check.",
+    "setup": true
+  },
+  {
+    "id": "abstract-claim",
+    "text": "A formatter knows where the semicolon goes. nudgement asks whether the thought holds up.",
+    "vague": true
+  },
+  {
+    "id": "capabilities",
+    "text": "nudgement reviews commit messages, code comments, tests and documentation. Run it yourself or let your coding agent use the findings to revise its work.",
+    "setup": false,
+    "vague": false
+  },
+  {
+    "id": "specific-checks",
+    "text": "Each evaluator sends Jev the relevant context and a set of focused questions. For a commit, that includes checking whether the message matches the diff.",
+    "setup": false,
+    "vague": false
+  },
+  {
+    "id": "useful-contrast",
+    "text": "The default test command replays saved responses instead of making paid API calls.",
+    "setup": false,
+    "vague": false
+  },
+  {
+    "id": "real-question",
+    "text": "Would this test still pass if the implementation returned the wrong booking date?",
+    "setup": false,
+    "vague": false
+  },
+  {
+    "id": "specific-metaphor",
+    "text": "The pencil in the margin marks your reading position as you scroll.",
+    "setup": false,
+    "vague": false
+  },
+  {
+    "id": "limitation",
+    "text": "Jev can miss problems or flag useful code. Read the findings before accepting an edit.",
+    "setup": false,
+    "vague": false
+  },
+  {
+    "id": "empty-promise",
+    "text": "Unlock a new dimension of thoughtful work. Empower every idea to reach its fullest potential.",
+    "vague": true
+  },
+  {
+    "id": "focused-heading",
+    "role": "heading",
+    "text": "What happens when you review a commit",
+    "setup": false,
+    "vague": false
+  }
+]

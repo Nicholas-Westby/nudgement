@@ -7,6 +7,7 @@ import { sortIssues } from "../src/message";
 
 const baseline = await Bun.file(new URL("../docs/verification/baseline-bench.json", import.meta.url)).json();
 const clarity = await Bun.file(new URL("../docs/verification/clarity-bench.json", import.meta.url)).json();
+const prose = await Bun.file(new URL("../docs/verification/prose-bench.json", import.meta.url)).json();
 const filesystem: { readdirSync(path: fs.PathLike): string[] } = fs;
 
 function orderedSuite(name: string, value: unknown): unknown {
@@ -31,7 +32,7 @@ test.each([
   }
 });
 
-test("preserves original benchmark results and adds the recorded clarity findings", async () => {
+test("preserves original benchmark results and adds recorded clarity and prose findings", async () => {
   const output = spyOn(console, "log").mockImplementation(() => {});
   const replay = installReplay("baseline");
   try {
@@ -49,6 +50,13 @@ test("preserves original benchmark results and adds the recorded clarity finding
       };
     });
     expected.clarity = clarity.clarity;
+    // Preserve every original copy reading; only the new prose questions extend each result.
+    expected.copy = expected.copy.map((row: { id: string; readings: object }) => {
+      const added = prose.copy.find((entry: { id: string }) => entry.id === row.id);
+      expect(added, row.id).toBeDefined();
+      return { ...row, readings: { ...row.readings, ...added.readings } };
+    });
+    expected.prose = prose.prose;
     const { at: _after, ...actual } = JSON.parse(JSON.stringify(result));
     expect(Object.keys(actual).sort()).toEqual(Object.keys(expected).sort());
     for (const [suite, rows] of Object.entries(expected)) {

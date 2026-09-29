@@ -7,6 +7,7 @@ import { benchCopy } from "./scripts/suites/copy";
 import { benchDesigns } from "./scripts/suites/designs";
 import { benchFiles, benchReadmes } from "./scripts/suites/files";
 import { benchPlanCoverage, benchPlans } from "./scripts/suites/plans";
+import { benchProse } from "./scripts/suites/prose";
 import { sweep } from "./scripts/suites/sweep";
 import { benchCoverage, benchTests } from "./scripts/suites/tests";
 import { CODE_THRESHOLDS } from "./src/code-evaluate";
@@ -43,6 +44,7 @@ export async function runBench(suites: string[] = []) {
   if (run("readmes") && manifests("readmes").length) saved.readmes = await benchReadmes();
   if (run("tests") && existsSync(join(BENCH, "tests.json"))) saved.tests = await benchTests();
   if (run("coverage") && existsSync(join(BENCH, "tests-coverage.json"))) saved.coverage = await benchCoverage();
+  if (run("prose")) saved.prose = await benchProse();
   if (run("copy") && existsSync(join(BENCH, "copy.json"))) saved.copy = await benchCopy();
   if (run("history") && existsSync(join(BENCH, "history.json"))) saved.history = await benchHistory();
   if (run("designs") && existsSync(join(BENCH, "designs.json"))) saved.designs = await benchDesigns();
