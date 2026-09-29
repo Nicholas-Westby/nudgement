@@ -1,5 +1,6 @@
 import type { FileDiff } from "./git";
 
+/** Join numstat totals to unified-diff lines, keeping positions in the new file for later review findings. */
 export function parseDiff(diffText: string, numstat: string): FileDiff[] {
   const files = new Map<string, FileDiff>();
 
@@ -31,6 +32,7 @@ export function parseDiff(diffText: string, numstat: string): FileDiff[] {
       continue;
     }
     if (line.startsWith("--- ")) continue;
+    // @@ -oldStart,oldCount +newStart,newCount @@; only newStart is captured.
     const hunk = /^@@ -\d+(?:,\d+)? \+(\d+)(?:,\d+)? @@/.exec(line);
     if (hunk) {
       newLine = Number(hunk[1]);

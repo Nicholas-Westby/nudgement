@@ -9,6 +9,7 @@ const STOPWORDS = new Set(
 );
 
 function stem(word: string): string {
+  // Cheap English suffix matching for retrieval; minimum lengths keep short words from disappearing.
   let w = word.toLowerCase();
   if (w.length > 4 && w.endsWith("ing")) w = w.slice(0, -3);
   else if (w.length > 3 && w.endsWith("ed")) w = w.slice(0, -2);
@@ -32,7 +33,11 @@ function stemsOf(text: string): string[] {
     .map(stem);
 }
 
+// Exact identifiers/paths should outrank several loose word matches when choosing context for Jev.
 const EXACT_SPAN_WEIGHT = 5;
+
+// Retained lines per code block on successive passes; leave room for the plan's explanatory prose.
+const CODE_PREVIEW_LINE_LIMITS = [40, 20, 8, 0];
 
 // Cache token frequencies because every requirement ranks the same tasks.
 const indexes = new WeakMap<
@@ -59,6 +64,7 @@ function indexOf(tasks: PlanTask[]) {
 export function rankTasks(requirement: string, tasks: PlanTask[]): { task: PlanTask; score: number }[] {
   const wanted = [...new Set(stemsOf(requirement))];
   const { counts, titles, tasksUsing } = indexOf(tasks);
+  // Inverse task frequency favors specific terms. Smoothing avoids log(0), and 0.1 keeps common terms useful.
   const weight = (word: string) => Math.log((tasks.length + 1) / (tasksUsing.get(word) || tasks.length + 1)) + 0.1;
   // A name or path in backticks that a task repeats exactly is the strongest sign it is the one.
   // Tokens with symbols in them, such as ⇧⌘B or a/path.swift, are as telling as a code span.
@@ -102,6 +108,7 @@ export function taskExcerpt(task: PlanTask, words: string[], budget: number): st
     current = [];
   };
   lines.forEach((line, index) => {
+    // Break long code fences into 25-line candidates so one block cannot consume the entire excerpt budget.
     const chunkFull = inCode[index] && current.length >= 25;
     if ((!line.trim() && !inCode[index]) || chunkFull) close();
     if (line.trim() || inCode[index]) current.push(line);
@@ -134,7 +141,7 @@ export function taskExcerpt(task: PlanTask, words: string[], budget: number): st
 export function fitText(text: string, budget: number): string {
   if (text.length <= budget) return text;
   let out = text;
-  for (const keep of [40, 20, 8, 0]) {
+  for (const keep of CODE_PREVIEW_LINE_LIMITS) {
     const lines = out.split("\n");
     const inCode = codeLines(lines);
     const result: string[] = [];

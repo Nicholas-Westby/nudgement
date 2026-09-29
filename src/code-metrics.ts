@@ -60,6 +60,7 @@ export function measure(ctx: Context, units: CodeUnit[]): CodeMetrics {
 }
 
 // Infer one indentation level from the most common positive indent change.
+// Ignore jumps above eight columns as likely continuation alignment; default to two for flat files.
 function maxDepth(lines: string[], codeIndex: number[]): number {
   const steps = new Map<number, number>();
   for (let k = 1; k < codeIndex.length; k++) {
@@ -70,21 +71,28 @@ function maxDepth(lines: string[], codeIndex: number[]): number {
   return codeIndex.reduce((deepest, i) => Math.max(deepest, Math.round(indentOf(lines[i]) / step)), 0);
 }
 
+// Four substantive lines reduce duplicate reports from common guards and boilerplate.
 const WINDOW = 4;
+
+// Short fragments often repeat by accident; require eight characters as well as a four-line match.
+const MIN_DUPLICATE_LINE_LENGTH = 8;
 
 const normalize = (line: string) => line.trim().replace(/\s+/g, " ");
 
+// Very short lines, delimiters and bare control-flow keywords carry little evidence of duplication.
 const trivial = (line: string) =>
-  line.length < 8 ||
+  line.length < MIN_DUPLICATE_LINE_LENGTH ||
   /^[[\](){};,\s]*$/.test(line) ||
   /^(else|try|finally|break|continue|return|default|end|fi|done|esac)\b[\s;:{}]*$/.test(line);
 
 // Repeated type fields describe contracts, not duplicate executable logic.
+// Exclude executable labels and comma-terminated object mappings despite their similar colon syntax.
 const fieldDeclaration = (line: string) =>
   /^((export|public|private|protected|internal|readonly|static|declare|let|var)\s+)*[\w$]+[?!]?\s*:(?!\s*(return|break|throw|continue)\b)[^=(){}]+$/.test(
     line,
   ) && !line.endsWith(",");
 
+/** Match normalized windows of substantive lines, counting each source line only once across overlapping matches. */
 function repeated(lines: string[], codeIndex: number[]): Pick<CodeMetrics, "repeatedLines" | "repeatedExamples"> {
   const seq = codeIndex.filter((i) => !trivial(normalize(lines[i])) && !fieldDeclaration(normalize(lines[i])));
   const seen = new Map<string, number[]>();

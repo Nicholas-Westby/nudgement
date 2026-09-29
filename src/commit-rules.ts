@@ -89,7 +89,7 @@ export interface Evaluation {
 
 export interface Options {
   comments: boolean;
-  /** Also judge each changed code file for bloat. */
+  /** Also review changed files, including bloat and missing explanations in code. */
   checkFiles?: boolean;
   /** Passed to the file checks: what the project must do. */
   context?: string;
@@ -105,6 +105,7 @@ export interface Options {
 }
 
 export function overallScore(issues: Issue[], readings: Record<string, unknown>, comments: CommentResult[]): number {
+  // Normalize the 0–3 quality score; absent readings contribute a neutral 0.5.
   const human = typeof readings.sounds_human === "number" ? readings.sounds_human : 0.5;
   const overall = typeof readings.overall === "number" ? readings.overall / 3 : 0.5;
   const accurate = typeof readings.subject_accurate === "number" ? readings.subject_accurate : 0.5;
@@ -112,6 +113,7 @@ export function overallScore(issues: Issue[], readings: Record<string, unknown>,
   const commentErrors = comments
     .flatMap((comment) => comment.issues)
     .filter((issue) => issue.severity === "error").length;
+  // Weight voice/quality/accuracy at 35/35/30%, then deduct 15 points per lint error and five per comment error.
   const raw = 0.35 * human + 0.35 * overall + 0.3 * accurate - 0.15 * lintErrors - 0.05 * commentErrors;
   return Math.max(0, Math.min(100, Math.round(raw * 100)));
 }

@@ -18,6 +18,7 @@ export interface FoundComment {
   codeOnLine?: string;
 }
 
+/** Review comments with added lines, carrying nearby code so Jev can judge relevance and contradictions. */
 export function findComments(file: FileDiff, fullFile: string[] | undefined): FoundComment[] {
   const found = syntaxFor(file.path, fullFile?.join("\n") ?? file.lines.map((line) => line.text).join("\n"));
   if (!found || file.binary) return [];
@@ -117,6 +118,8 @@ function withContext(
     text: block.map((line) => line.text).join("\n"),
     wholeCommentIsNew: block.every((line) => line.added),
     trailing,
+    // Leading comments usually describe code below; trailing comments need only a smaller local window.
+    // These are line budgets for Jev's context, not part of the comment's own source range.
     codeBefore: around(first - (trailing ? 4 : 8), first - 1),
     codeAfter: trailing ? around(first + 1, first + 6) : around(lastLine + 1, lastLine + 25),
   };

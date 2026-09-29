@@ -4,6 +4,7 @@ import { declaration } from "./code-declarations";
 // Review members separately when a container is too large for a useful single judgment.
 export const SPLIT_LINES = 60;
 
+// Recognize dependency declarations across supported languages so they are grouped and not judged as functions.
 const IMPORT =
   /^(import\b|from\s+\S+\s+import\b|export\s+(\*|\{[^}]*\})\s+from\b|(const|let|var)\s+[\w{}\s,]+=\s*require\(|using\s+(static\s+)?[\w.]+\s*;|#include\b|#import\b|@import\b|package\s+[\w.]+;?$|use\s+[\w:{}, *]+;|require(_relative)?\b|source\s+\S)/;
 
@@ -19,8 +20,10 @@ const PREPROCESSOR =
 // Standalone attributes belong to the next declaration; inline attributes belong to the current one.
 const DECORATOR = /^(@[\w.]+\([^)]*$|(?:@[\w.]+(?:\((?:[^()]|\([^()]*\))*\))?\s*)+$|\[[A-Z][\w.]*(\(.*\))?\]$|#\[)/;
 
+// Swift do/catch starts with "do"; other supported exception blocks usually start with "try".
 export const TRY = /^\s*(try\s*(\{|:|$)|do\s*\{)/;
 
+// Approximate log-call counts for review context, without resolving imports or logger types.
 export const LOG =
   /\b(console\.(log|info|warn|error|debug|trace)|(logger|_logger|log|logging|Logger)\.(\w+)\s*\(|print(ln)?!?\s*\(|NSLog\s*\(|os_log\s*\(|debugPrint\s*\(|Console\.Write(Line)?\s*\(|System\.(out|err)\.print)/;
 
@@ -72,6 +75,7 @@ function leadStart(ctx: Context, start: number, floor: number, indent: number): 
   return top;
 }
 
+/** Partition siblings at one indentation level, attaching leading comments and splitting large containers. */
 export function collectUnits(
   ctx: Context,
   from: number,

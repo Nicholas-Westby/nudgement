@@ -7,6 +7,7 @@ const HEADING_FONTS = /^\.(largeTitle|title|title2|title3|headline)$/;
 
 const RED = /^\.?red$|^Color\.red$/;
 
+/** Infer a string's UI role from its enclosing call, chained modifiers and surrounding SwiftUI closures. */
 export function roleOf(swift: SwiftSource, index: number): CopyRole | undefined {
   const text = (j: number) => swift.text(j);
   const { parent, match } = swift;

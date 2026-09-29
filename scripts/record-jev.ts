@@ -21,6 +21,7 @@ async function record(url: Parameters<typeof fetch>[0], init: RequestInit): Prom
       if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
     }
   }
+  // Four independent responses retain Jev's observed variance; resume interrupted captures from the saved count.
   while (recording.samples.length < 4) {
     const response = await original(url, init);
     if (!response.ok) throw new Error(`Jev returned HTTP ${response.status}`);
@@ -36,6 +37,7 @@ globalThis.fetch = (async (url, init) => {
   if (String(url) !== "https://api.typesafe.ai/v1/systemone" || init?.method !== "POST")
     throw new Error("Unexpected capture destination");
   const key = requestKey(JSON.parse(String(init.body)));
+  // Duplicate benchmark inputs share an in-flight capture rather than racing to overwrite the same fixture.
   let work = pending.get(key);
   if (!work) {
     work = record(url, init);

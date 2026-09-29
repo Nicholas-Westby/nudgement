@@ -28,3 +28,26 @@ After the new checks: 251 tests passed, line coverage was 91.42%, and function
 coverage was 93.22%. Every maintained TypeScript file remained below FTA 60.
 The recorded API dataset grew from 3,170 to 3,361 distinct requests, each with
 four responses; old recordings were retained. Ordinary tests remain offline.
+
+## Applying the checks to nudgement
+
+A repository-wide pass covered the 125 previously tracked TypeScript files,
+excluding input fixtures. The final questions were also run against the saved
+pre-edit source, so the comparison uses the same prompts and thresholds.
+In the 20 files revised after the detector commit, warnings fell from 65 to 28.
+This is one live comparison, not an accuracy estimate or a promise of zero noise.
+
+The changes explain Git log/tree formats and name their separators, document
+why glob conversion needs a placeholder, describe duplicate-window detection,
+and clarify comment scanning, Swift token handling, request deduplication,
+concurrency handoff and score weights. `hygiene-files.ts`, `history-read.ts`
+and `code-metrics.ts` had 15 warnings before and none afterward. `where` now
+shows the diagnostic format it produces; parsing helpers explain their format
+assumptions instead of making readers decode escape sequences and captures.
+[Before/after readings](clarity-self-review.json) retain the run IDs and findings.
+
+The feature's staged self-review (`20260929054448-gtk8`) passed. Its findings led
+to clearer evaluation entry-point comments and a more descriptive test helper
+name. Advisory bloat and multi-behavior-test warnings were retained: batching
+bounds request size, and each regression checks the full result of one review
+contract across several labelled inputs.

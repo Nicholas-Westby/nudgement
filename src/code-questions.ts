@@ -5,6 +5,7 @@ import { clip } from "./run";
 // About 30k tokens. Longer files are judged on their first part and their units.
 const CODE_BUDGET = 120_000;
 
+// Character cap per function/type; the file request supplies broader context for larger declarations.
 export const UNIT_BUDGET = 24_000;
 
 export interface Usage {

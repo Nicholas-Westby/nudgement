@@ -1,0 +1,3555 @@
+{
+  "baselineCommit": "8833528",
+  "evaluatedOn": "2026-09-29",
+  "note": "Both sides use the final clarity questions and thresholds. One live response per self-review request; the separate quality regression fixtures exercise four responses each. Remaining warnings were reviewed, not automatically treated as required edits.",
+  "files": [
+    {
+      "path": "scripts/record-jev.ts",
+      "before": {
+        "path": "scripts/record-jev.ts",
+        "runId": "20260929054826-xqhi",
+        "issues": [
+          {
+            "severity": "warn",
+            "part": "record (lines 13-33)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.61"
+          },
+          {
+            "severity": "warn",
+            "part": "record (lines 13-33)",
+            "message": "Give obscure literals or patterns meaningful names and explain their format, units or rationale.",
+            "source": "jev:magic_values=0.69"
+          },
+          {
+            "severity": "warn",
+            "part": "globalThis.fetch = (async (url, init) => { (lines 35-50)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.73"
+          }
+        ],
+        "readings": [
+          {
+            "name": "if (!process.argv.includes(\"--live\"))",
+            "startLine": 4,
+            "endLine": 5,
+            "missing_explanation": 0.14,
+            "magic_values": 0.1
+          },
+          {
+            "name": "if (!process.env.JEV_API_KEY && !process.env.TYPESAFE_API_KE",
+            "startLine": 6,
+            "endLine": 6,
+            "missing_explanation": 0.27,
+            "magic_values": 0.12
+          },
+          {
+            "name": "original",
+            "startLine": 8,
+            "endLine": 8,
+            "missing_explanation": 0.28,
+            "magic_values": 0.06
+          },
+          {
+            "name": "pending",
+            "startLine": 9,
+            "endLine": 9,
+            "missing_explanation": 0.47,
+            "magic_values": 0.09
+          },
+          {
+            "name": "failures",
+            "startLine": 10,
+            "endLine": 10,
+            "missing_explanation": 0.36,
+            "magic_values": 0.07
+          },
+          {
+            "name": "refresh",
+            "startLine": 11,
+            "endLine": 11,
+            "missing_explanation": 0.43,
+            "magic_values": 0.13
+          },
+          {
+            "name": "record",
+            "startLine": 13,
+            "endLine": 33,
+            "missing_explanation": 0.61,
+            "magic_values": 0.69
+          },
+          {
+            "name": "globalThis.fetch = (async (url, init) => {",
+            "startLine": 35,
+            "endLine": 50,
+            "missing_explanation": 0.73,
+            "magic_values": 0.58
+          },
+          {
+            "name": "try {",
+            "startLine": 52,
+            "endLine": 58,
+            "missing_explanation": 0.44,
+            "magic_values": 0.15
+          }
+        ],
+        "failed": 0
+      },
+      "after": {
+        "path": "scripts/record-jev.ts",
+        "runId": "20260929054551-s2nb",
+        "issues": [],
+        "readings": [
+          {
+            "name": "if (!process.argv.includes(\"--live\"))",
+            "startLine": 4,
+            "endLine": 5,
+            "missing_explanation": 0.14,
+            "magic_values": 0.11
+          },
+          {
+            "name": "if (!process.env.JEV_API_KEY && !process.env.TYPESAFE_API_KE",
+            "startLine": 6,
+            "endLine": 6,
+            "missing_explanation": 0.26,
+            "magic_values": 0.13
+          },
+          {
+            "name": "original",
+            "startLine": 8,
+            "endLine": 8,
+            "missing_explanation": 0.27,
+            "magic_values": 0.07
+          },
+          {
+            "name": "pending",
+            "startLine": 9,
+            "endLine": 9,
+            "missing_explanation": 0.37,
+            "magic_values": 0.09
+          },
+          {
+            "name": "failures",
+            "startLine": 10,
+            "endLine": 10,
+            "missing_explanation": 0.38,
+            "magic_values": 0.07
+          },
+          {
+            "name": "refresh",
+            "startLine": 11,
+            "endLine": 11,
+            "missing_explanation": 0.43,
+            "magic_values": 0.16
+          },
+          {
+            "name": "record",
+            "startLine": 13,
+            "endLine": 34,
+            "missing_explanation": 0.4,
+            "magic_values": 0.34
+          },
+          {
+            "name": "globalThis.fetch = (async (url, init) => {",
+            "startLine": 36,
+            "endLine": 52,
+            "missing_explanation": 0.47,
+            "magic_values": 0.47
+          },
+          {
+            "name": "try {",
+            "startLine": 54,
+            "endLine": 60,
+            "missing_explanation": 0.45,
+            "magic_values": 0.15
+          }
+        ],
+        "failures": [],
+        "stats": {
+          "requests": 1,
+          "failed": 0,
+          "inputTokens": 6316,
+          "ms": 256
+        }
+      }
+    },
+    {
+      "path": "src/code-metrics.ts",
+      "before": {
+        "path": "src/code-metrics.ts",
+        "runId": "20260929054826-9cyy",
+        "issues": [
+          {
+            "severity": "warn",
+            "part": "maxDepth (lines 62-71)",
+            "message": "Give obscure literals or patterns meaningful names and explain their format, units or rationale.",
+            "source": "jev:magic_values=0.73"
+          },
+          {
+            "severity": "warn",
+            "part": "trivial (lines 77-80)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.69"
+          },
+          {
+            "severity": "warn",
+            "part": "trivial (lines 77-80)",
+            "message": "Give obscure literals or patterns meaningful names and explain their format, units or rationale.",
+            "source": "jev:magic_values=0.78"
+          },
+          {
+            "severity": "warn",
+            "part": "repeated (lines 88-119)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.59"
+          }
+        ],
+        "readings": [
+          {
+            "name": "CodeMetrics",
+            "startLine": 4,
+            "endLine": 20,
+            "missing_explanation": 0.3,
+            "magic_values": 0.19
+          },
+          {
+            "name": "measure",
+            "startLine": 22,
+            "endLine": 60,
+            "missing_explanation": 0.41,
+            "magic_values": 0.32
+          },
+          {
+            "name": "maxDepth",
+            "startLine": 62,
+            "endLine": 71,
+            "missing_explanation": 0.47,
+            "magic_values": 0.73
+          },
+          {
+            "name": "WINDOW",
+            "startLine": 73,
+            "endLine": 73,
+            "missing_explanation": 0.42,
+            "magic_values": 0.51
+          },
+          {
+            "name": "normalize",
+            "startLine": 75,
+            "endLine": 75,
+            "missing_explanation": 0.25,
+            "magic_values": 0.16
+          },
+          {
+            "name": "trivial",
+            "startLine": 77,
+            "endLine": 80,
+            "missing_explanation": 0.69,
+            "magic_values": 0.78
+          },
+          {
+            "name": "fieldDeclaration",
+            "startLine": 82,
+            "endLine": 86,
+            "missing_explanation": 0.34,
+            "magic_values": 0.62
+          },
+          {
+            "name": "repeated",
+            "startLine": 88,
+            "endLine": 119,
+            "missing_explanation": 0.59,
+            "magic_values": 0.57
+          }
+        ],
+        "failed": 0
+      },
+      "after": {
+        "path": "src/code-metrics.ts",
+        "runId": "20260929054552-vav6",
+        "issues": [],
+        "readings": [
+          {
+            "name": "CodeMetrics",
+            "startLine": 4,
+            "endLine": 20,
+            "missing_explanation": 0.27,
+            "magic_values": 0.16
+          },
+          {
+            "name": "measure",
+            "startLine": 22,
+            "endLine": 60,
+            "missing_explanation": 0.39,
+            "magic_values": 0.3
+          },
+          {
+            "name": "maxDepth",
+            "startLine": 62,
+            "endLine": 72,
+            "missing_explanation": 0.28,
+            "magic_values": 0.29
+          },
+          {
+            "name": "WINDOW",
+            "startLine": 74,
+            "endLine": 75,
+            "missing_explanation": 0.14,
+            "magic_values": 0.13
+          },
+          {
+            "name": "MIN_DUPLICATE_LINE_LENGTH",
+            "startLine": 77,
+            "endLine": 78,
+            "missing_explanation": 0.16,
+            "magic_values": 0.2
+          },
+          {
+            "name": "normalize",
+            "startLine": 80,
+            "endLine": 80,
+            "missing_explanation": 0.32,
+            "magic_values": 0.16
+          },
+          {
+            "name": "trivial",
+            "startLine": 82,
+            "endLine": 86,
+            "missing_explanation": 0.24,
+            "magic_values": 0.51
+          },
+          {
+            "name": "fieldDeclaration",
+            "startLine": 88,
+            "endLine": 93,
+            "missing_explanation": 0.35,
+            "magic_values": 0.61
+          },
+          {
+            "name": "repeated",
+            "startLine": 95,
+            "endLine": 127,
+            "missing_explanation": 0.45,
+            "magic_values": 0.48
+          }
+        ],
+        "failures": [],
+        "stats": {
+          "requests": 1,
+          "failed": 0,
+          "inputTokens": 7927,
+          "ms": 119
+        }
+      }
+    },
+    {
+      "path": "src/code-questions.ts",
+      "before": {
+        "path": "src/code-questions.ts",
+        "runId": "20260929054826-e4fg",
+        "issues": [
+          {
+            "severity": "warn",
+            "part": "shrinkOf (lines 30-31)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.56"
+          },
+          {
+            "severity": "warn",
+            "part": "CONFORMANCE (lines 55-57)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.53"
+          },
+          {
+            "severity": "warn",
+            "part": "CONFORMANCE (lines 55-57)",
+            "message": "Give obscure literals or patterns meaningful names and explain their format, units or rationale.",
+            "source": "jev:magic_values=0.69"
+          }
+        ],
+        "readings": [
+          {
+            "name": "CODE_BUDGET",
+            "startLine": 5,
+            "endLine": 6,
+            "missing_explanation": 0.24,
+            "magic_values": 0.33
+          },
+          {
+            "name": "UNIT_BUDGET",
+            "startLine": 8,
+            "endLine": 8,
+            "missing_explanation": 0.46,
+            "magic_values": 0.54
+          },
+          {
+            "name": "Usage",
+            "startLine": 10,
+            "endLine": 14,
+            "missing_explanation": 0.17,
+            "magic_values": 0.07
+          },
+          {
+            "name": "OVERBUILT_LEVELS",
+            "startLine": 16,
+            "endLine": 21,
+            "missing_explanation": 0.15,
+            "magic_values": 0.06
+          },
+          {
+            "name": "REWRITE_OPTIONS",
+            "startLine": 23,
+            "endLine": 28,
+            "missing_explanation": 0.19,
+            "magic_values": 0.26
+          },
+          {
+            "name": "shrinkOf",
+            "startLine": 30,
+            "endLine": 31,
+            "missing_explanation": 0.56,
+            "magic_values": 0.17
+          },
+          {
+            "name": "REWRITE_NOTE",
+            "startLine": 33,
+            "endLine": 33,
+            "missing_explanation": 0.18,
+            "magic_values": 0.06
+          },
+          {
+            "name": "outlineEntry",
+            "startLine": 35,
+            "endLine": 45,
+            "missing_explanation": 0.25,
+            "magic_values": 0.11
+          },
+          {
+            "name": "CONTEXT_BUDGET",
+            "startLine": 47,
+            "endLine": 48,
+            "missing_explanation": 0.15,
+            "magic_values": 0.29
+          },
+          {
+            "name": "withContext",
+            "startLine": 50,
+            "endLine": 51,
+            "missing_explanation": 0.25,
+            "magic_values": 0.25
+          },
+          {
+            "name": "REQUIREMENTS_NOTE",
+            "startLine": 53,
+            "endLine": 53,
+            "missing_explanation": 0.13,
+            "magic_values": 0.06
+          },
+          {
+            "name": "CONFORMANCE",
+            "startLine": 55,
+            "endLine": 57,
+            "missing_explanation": 0.53,
+            "magic_values": 0.69
+          },
+          {
+            "name": "conformances",
+            "startLine": 59,
+            "endLine": 75,
+            "missing_explanation": 0.33,
+            "magic_values": 0.52
+          },
+          {
+            "name": "implementsByFile",
+            "startLine": 77,
+            "endLine": 78,
+            "missing_explanation": 0.26,
+            "magic_values": 0.07
+          },
+          {
+            "name": "implementsOf",
+            "startLine": 80,
+            "endLine": 84,
+            "missing_explanation": 0.3,
+            "magic_values": 0.1
+          },
+          {
+            "name": "fileState",
+            "startLine": 86,
+            "endLine": 110,
+            "missing_explanation": 0.38,
+            "magic_values": 0.22
+          },
+          {
+            "name": "fileQuestions",
+            "startLine": 112,
+            "endLine": 241,
+            "missing_explanation": 0.39,
+            "magic_values": 0.19
+          }
+        ],
+        "failed": 0
+      },
+      "after": {
+        "path": "src/code-questions.ts",
+        "runId": "20260929054552-zi3o",
+        "issues": [
+          {
+            "severity": "warn",
+            "part": "shrinkOf (lines 31-32)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.56"
+          },
+          {
+            "severity": "warn",
+            "part": "CONFORMANCE (lines 56-58)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.57"
+          },
+          {
+            "severity": "warn",
+            "part": "CONFORMANCE (lines 56-58)",
+            "message": "Give obscure literals or patterns meaningful names and explain their format, units or rationale.",
+            "source": "jev:magic_values=0.69"
+          }
+        ],
+        "readings": [
+          {
+            "name": "CODE_BUDGET",
+            "startLine": 5,
+            "endLine": 6,
+            "missing_explanation": 0.21,
+            "magic_values": 0.3
+          },
+          {
+            "name": "UNIT_BUDGET",
+            "startLine": 8,
+            "endLine": 9,
+            "missing_explanation": 0.15,
+            "magic_values": 0.24
+          },
+          {
+            "name": "Usage",
+            "startLine": 11,
+            "endLine": 15,
+            "missing_explanation": 0.14,
+            "magic_values": 0.06
+          },
+          {
+            "name": "OVERBUILT_LEVELS",
+            "startLine": 17,
+            "endLine": 22,
+            "missing_explanation": 0.15,
+            "magic_values": 0.06
+          },
+          {
+            "name": "REWRITE_OPTIONS",
+            "startLine": 24,
+            "endLine": 29,
+            "missing_explanation": 0.19,
+            "magic_values": 0.22
+          },
+          {
+            "name": "shrinkOf",
+            "startLine": 31,
+            "endLine": 32,
+            "missing_explanation": 0.56,
+            "magic_values": 0.17
+          },
+          {
+            "name": "REWRITE_NOTE",
+            "startLine": 34,
+            "endLine": 34,
+            "missing_explanation": 0.16,
+            "magic_values": 0.06
+          },
+          {
+            "name": "outlineEntry",
+            "startLine": 36,
+            "endLine": 46,
+            "missing_explanation": 0.25,
+            "magic_values": 0.1
+          },
+          {
+            "name": "CONTEXT_BUDGET",
+            "startLine": 48,
+            "endLine": 49,
+            "missing_explanation": 0.15,
+            "magic_values": 0.23
+          },
+          {
+            "name": "withContext",
+            "startLine": 51,
+            "endLine": 52,
+            "missing_explanation": 0.24,
+            "magic_values": 0.26
+          },
+          {
+            "name": "REQUIREMENTS_NOTE",
+            "startLine": 54,
+            "endLine": 54,
+            "missing_explanation": 0.13,
+            "magic_values": 0.06
+          },
+          {
+            "name": "CONFORMANCE",
+            "startLine": 56,
+            "endLine": 58,
+            "missing_explanation": 0.57,
+            "magic_values": 0.69
+          },
+          {
+            "name": "conformances",
+            "startLine": 60,
+            "endLine": 76,
+            "missing_explanation": 0.34,
+            "magic_values": 0.55
+          },
+          {
+            "name": "implementsByFile",
+            "startLine": 78,
+            "endLine": 79,
+            "missing_explanation": 0.24,
+            "magic_values": 0.08
+          },
+          {
+            "name": "implementsOf",
+            "startLine": 81,
+            "endLine": 85,
+            "missing_explanation": 0.31,
+            "magic_values": 0.09
+          },
+          {
+            "name": "fileState",
+            "startLine": 87,
+            "endLine": 111,
+            "missing_explanation": 0.38,
+            "magic_values": 0.18
+          },
+          {
+            "name": "fileQuestions",
+            "startLine": 113,
+            "endLine": 242,
+            "missing_explanation": 0.37,
+            "magic_values": 0.16
+          }
+        ],
+        "failures": [],
+        "stats": {
+          "requests": 2,
+          "failed": 0,
+          "inputTokens": 17371,
+          "ms": 210
+        }
+      }
+    },
+    {
+      "path": "src/code-rules.ts",
+      "before": {
+        "path": "src/code-rules.ts",
+        "runId": "20260929054826-aw4k",
+        "issues": [
+          {
+            "severity": "warn",
+            "part": "MAX_UNITS (lines 58-58)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.68"
+          },
+          {
+            "severity": "warn",
+            "part": "MAX_UNITS (lines 58-58)",
+            "message": "Give obscure literals or patterns meaningful names and explain their format, units or rationale.",
+            "source": "jev:magic_values=0.66"
+          },
+          {
+            "severity": "warn",
+            "part": "factIssues (lines 99-128)",
+            "message": "Give obscure literals or patterns meaningful names and explain their format, units or rationale.",
+            "source": "jev:magic_values=0.76"
+          },
+          {
+            "severity": "warn",
+            "part": "judgeFile (lines 146-227)",
+            "message": "Give obscure literals or patterns meaningful names and explain their format, units or rationale.",
+            "source": "jev:magic_values=0.67"
+          }
+        ],
+        "readings": [
+          {
+            "name": "CODE_THRESHOLDS",
+            "startLine": 8,
+            "endLine": 45,
+            "missing_explanation": 0.29,
+            "magic_values": 0.52
+          },
+          {
+            "name": "T",
+            "startLine": 47,
+            "endLine": 47,
+            "missing_explanation": 0.18,
+            "magic_values": 0.06
+          },
+          {
+            "name": "MIN_UNIT_CODE_LINES",
+            "startLine": 49,
+            "endLine": 50,
+            "missing_explanation": 0.14,
+            "magic_values": 0.27
+          },
+          {
+            "name": "MIN_VALUE_CODE_LINES",
+            "startLine": 52,
+            "endLine": 53,
+            "missing_explanation": 0.18,
+            "magic_values": 0.35
+          },
+          {
+            "name": "MIN_OVERBUILT_CODE_LINES",
+            "startLine": 55,
+            "endLine": 56,
+            "missing_explanation": 0.18,
+            "magic_values": 0.23
+          },
+          {
+            "name": "MAX_UNITS",
+            "startLine": 58,
+            "endLine": 58,
+            "missing_explanation": 0.68,
+            "magic_values": 0.66
+          },
+          {
+            "name": "COMMON_NAMES",
+            "startLine": 60,
+            "endLine": 65,
+            "missing_explanation": 0.2,
+            "magic_values": 0.13
+          },
+          {
+            "name": "FileInput",
+            "startLine": 67,
+            "endLine": 75,
+            "missing_explanation": 0.14,
+            "magic_values": 0.07
+          },
+          {
+            "name": "FileOptions",
+            "startLine": 77,
+            "endLine": 86,
+            "missing_explanation": 0.17,
+            "magic_values": 0.07
+          },
+          {
+            "name": "UnitResult",
+            "startLine": 88,
+            "endLine": 97,
+            "missing_explanation": 0.33,
+            "magic_values": 0.07
+          },
+          {
+            "name": "factIssues",
+            "startLine": 99,
+            "endLine": 128,
+            "missing_explanation": 0.44,
+            "magic_values": 0.76
+          },
+          {
+            "name": "FILE_PATTERNS",
+            "startLine": 130,
+            "endLine": 144,
+            "missing_explanation": 0.24,
+            "magic_values": 0.07
+          },
+          {
+            "name": "judgeFile",
+            "startLine": 146,
+            "endLine": 227,
+            "missing_explanation": 0.49,
+            "magic_values": 0.67
+          }
+        ],
+        "failed": 0
+      },
+      "after": {
+        "path": "src/code-rules.ts",
+        "runId": "20260929054552-u5ru",
+        "issues": [
+          {
+            "severity": "warn",
+            "part": "factIssues (lines 100-129)",
+            "message": "Give obscure literals or patterns meaningful names and explain their format, units or rationale.",
+            "source": "jev:magic_values=0.76"
+          },
+          {
+            "severity": "warn",
+            "part": "judgeFile (lines 147-228)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.52"
+          },
+          {
+            "severity": "warn",
+            "part": "judgeFile (lines 147-228)",
+            "message": "Give obscure literals or patterns meaningful names and explain their format, units or rationale.",
+            "source": "jev:magic_values=0.69"
+          }
+        ],
+        "readings": [
+          {
+            "name": "CODE_THRESHOLDS",
+            "startLine": 8,
+            "endLine": 45,
+            "missing_explanation": 0.33,
+            "magic_values": 0.55
+          },
+          {
+            "name": "T",
+            "startLine": 47,
+            "endLine": 47,
+            "missing_explanation": 0.18,
+            "magic_values": 0.06
+          },
+          {
+            "name": "MIN_UNIT_CODE_LINES",
+            "startLine": 49,
+            "endLine": 50,
+            "missing_explanation": 0.14,
+            "magic_values": 0.29
+          },
+          {
+            "name": "MIN_VALUE_CODE_LINES",
+            "startLine": 52,
+            "endLine": 53,
+            "missing_explanation": 0.2,
+            "magic_values": 0.38
+          },
+          {
+            "name": "MIN_OVERBUILT_CODE_LINES",
+            "startLine": 55,
+            "endLine": 56,
+            "missing_explanation": 0.19,
+            "magic_values": 0.31
+          },
+          {
+            "name": "MAX_UNITS",
+            "startLine": 58,
+            "endLine": 59,
+            "missing_explanation": 0.15,
+            "magic_values": 0.2
+          },
+          {
+            "name": "COMMON_NAMES",
+            "startLine": 61,
+            "endLine": 66,
+            "missing_explanation": 0.23,
+            "magic_values": 0.15
+          },
+          {
+            "name": "FileInput",
+            "startLine": 68,
+            "endLine": 76,
+            "missing_explanation": 0.14,
+            "magic_values": 0.07
+          },
+          {
+            "name": "FileOptions",
+            "startLine": 78,
+            "endLine": 87,
+            "missing_explanation": 0.17,
+            "magic_values": 0.07
+          },
+          {
+            "name": "UnitResult",
+            "startLine": 89,
+            "endLine": 98,
+            "missing_explanation": 0.33,
+            "magic_values": 0.07
+          },
+          {
+            "name": "factIssues",
+            "startLine": 100,
+            "endLine": 129,
+            "missing_explanation": 0.46,
+            "magic_values": 0.76
+          },
+          {
+            "name": "FILE_PATTERNS",
+            "startLine": 131,
+            "endLine": 145,
+            "missing_explanation": 0.26,
+            "magic_values": 0.07
+          },
+          {
+            "name": "judgeFile",
+            "startLine": 147,
+            "endLine": 228,
+            "missing_explanation": 0.52,
+            "magic_values": 0.69
+          }
+        ],
+        "failures": [],
+        "stats": {
+          "requests": 2,
+          "failed": 0,
+          "inputTokens": 14613,
+          "ms": 181
+        }
+      }
+    },
+    {
+      "path": "src/code-units.ts",
+      "before": {
+        "path": "src/code-units.ts",
+        "runId": "20260929054826-6c6x",
+        "issues": [
+          {
+            "severity": "warn",
+            "part": "IMPORT (lines 7-8)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.69"
+          },
+          {
+            "severity": "warn",
+            "part": "BRACKETS_ONLY (lines 14-14)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.50"
+          },
+          {
+            "severity": "warn",
+            "part": "PREPROCESSOR (lines 16-17)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.53"
+          },
+          {
+            "severity": "warn",
+            "part": "DECORATOR (lines 19-20)",
+            "message": "Give obscure literals or patterns meaningful names and explain their format, units or rationale.",
+            "source": "jev:magic_values=0.67"
+          },
+          {
+            "severity": "warn",
+            "part": "TRY (lines 22-22)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.68"
+          },
+          {
+            "severity": "warn",
+            "part": "LOG (lines 24-25)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.71"
+          },
+          {
+            "severity": "warn",
+            "part": "collectUnits (lines 75-115)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.67"
+          },
+          {
+            "severity": "warn",
+            "part": "splitContainer (lines 117-150)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.53"
+          }
+        ],
+        "readings": [
+          {
+            "name": "SPLIT_LINES",
+            "startLine": 4,
+            "endLine": 5,
+            "missing_explanation": 0.16,
+            "magic_values": 0.26
+          },
+          {
+            "name": "IMPORT",
+            "startLine": 7,
+            "endLine": 8,
+            "missing_explanation": 0.69,
+            "magic_values": 0.53
+          },
+          {
+            "name": "CONTINUATION",
+            "startLine": 10,
+            "endLine": 12,
+            "missing_explanation": 0.26,
+            "magic_values": 0.39
+          },
+          {
+            "name": "BRACKETS_ONLY",
+            "startLine": 14,
+            "endLine": 14,
+            "missing_explanation": 0.5,
+            "magic_values": 0.32
+          },
+          {
+            "name": "PREPROCESSOR",
+            "startLine": 16,
+            "endLine": 17,
+            "missing_explanation": 0.53,
+            "magic_values": 0.33
+          },
+          {
+            "name": "DECORATOR",
+            "startLine": 19,
+            "endLine": 20,
+            "missing_explanation": 0.41,
+            "magic_values": 0.67
+          },
+          {
+            "name": "TRY",
+            "startLine": 22,
+            "endLine": 22,
+            "missing_explanation": 0.68,
+            "magic_values": 0.37
+          },
+          {
+            "name": "LOG",
+            "startLine": 24,
+            "endLine": 25,
+            "missing_explanation": 0.71,
+            "magic_values": 0.51
+          },
+          {
+            "name": "Context",
+            "startLine": 27,
+            "endLine": 32,
+            "missing_explanation": 0.34,
+            "magic_values": 0.06
+          },
+          {
+            "name": "indentOf",
+            "startLine": 34,
+            "endLine": 42,
+            "missing_explanation": 0.2,
+            "magic_values": 0.34
+          },
+          {
+            "name": "isBlank",
+            "startLine": 44,
+            "endLine": 44,
+            "missing_explanation": 0.16,
+            "magic_values": 0.05
+          },
+          {
+            "name": "isCode",
+            "startLine": 46,
+            "endLine": 46,
+            "missing_explanation": 0.19,
+            "magic_values": 0.06
+          },
+          {
+            "name": "isStart",
+            "startLine": 48,
+            "endLine": 60,
+            "missing_explanation": 0.45,
+            "magic_values": 0.23
+          },
+          {
+            "name": "leadStart",
+            "startLine": 62,
+            "endLine": 73,
+            "missing_explanation": 0.38,
+            "magic_values": 0.15
+          },
+          {
+            "name": "collectUnits",
+            "startLine": 75,
+            "endLine": 115,
+            "missing_explanation": 0.67,
+            "magic_values": 0.49
+          },
+          {
+            "name": "splitContainer",
+            "startLine": 117,
+            "endLine": 150,
+            "missing_explanation": 0.53,
+            "magic_values": 0.58
+          },
+          {
+            "name": "trimEnd",
+            "startLine": 152,
+            "endLine": 155,
+            "missing_explanation": 0.38,
+            "magic_values": 0.1
+          },
+          {
+            "name": "makeUnit",
+            "startLine": 157,
+            "endLine": 169,
+            "missing_explanation": 0.26,
+            "magic_values": 0.12
+          },
+          {
+            "name": "isExported",
+            "startLine": 171,
+            "endLine": 177,
+            "missing_explanation": 0.47,
+            "magic_values": 0.26
+          }
+        ],
+        "failed": 0
+      },
+      "after": {
+        "path": "src/code-units.ts",
+        "runId": "20260929054552-2nj3",
+        "issues": [
+          {
+            "severity": "warn",
+            "part": "PREPROCESSOR (lines 17-18)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.55"
+          },
+          {
+            "severity": "warn",
+            "part": "DECORATOR (lines 20-21)",
+            "message": "Give obscure literals or patterns meaningful names and explain their format, units or rationale.",
+            "source": "jev:magic_values=0.66"
+          },
+          {
+            "severity": "warn",
+            "part": "splitContainer (lines 121-154)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.50"
+          }
+        ],
+        "readings": [
+          {
+            "name": "SPLIT_LINES",
+            "startLine": 4,
+            "endLine": 5,
+            "missing_explanation": 0.13,
+            "magic_values": 0.21
+          },
+          {
+            "name": "IMPORT",
+            "startLine": 7,
+            "endLine": 9,
+            "missing_explanation": 0.33,
+            "magic_values": 0.43
+          },
+          {
+            "name": "CONTINUATION",
+            "startLine": 11,
+            "endLine": 13,
+            "missing_explanation": 0.28,
+            "magic_values": 0.36
+          },
+          {
+            "name": "BRACKETS_ONLY",
+            "startLine": 15,
+            "endLine": 15,
+            "missing_explanation": 0.49,
+            "magic_values": 0.32
+          },
+          {
+            "name": "PREPROCESSOR",
+            "startLine": 17,
+            "endLine": 18,
+            "missing_explanation": 0.55,
+            "magic_values": 0.33
+          },
+          {
+            "name": "DECORATOR",
+            "startLine": 20,
+            "endLine": 21,
+            "missing_explanation": 0.44,
+            "magic_values": 0.66
+          },
+          {
+            "name": "TRY",
+            "startLine": 23,
+            "endLine": 24,
+            "missing_explanation": 0.26,
+            "magic_values": 0.24
+          },
+          {
+            "name": "LOG",
+            "startLine": 26,
+            "endLine": 28,
+            "missing_explanation": 0.23,
+            "magic_values": 0.37
+          },
+          {
+            "name": "Context",
+            "startLine": 30,
+            "endLine": 35,
+            "missing_explanation": 0.36,
+            "magic_values": 0.06
+          },
+          {
+            "name": "indentOf",
+            "startLine": 37,
+            "endLine": 45,
+            "missing_explanation": 0.22,
+            "magic_values": 0.35
+          },
+          {
+            "name": "isBlank",
+            "startLine": 47,
+            "endLine": 47,
+            "missing_explanation": 0.15,
+            "magic_values": 0.05
+          },
+          {
+            "name": "isCode",
+            "startLine": 49,
+            "endLine": 49,
+            "missing_explanation": 0.19,
+            "magic_values": 0.05
+          },
+          {
+            "name": "isStart",
+            "startLine": 51,
+            "endLine": 63,
+            "missing_explanation": 0.45,
+            "magic_values": 0.22
+          },
+          {
+            "name": "leadStart",
+            "startLine": 65,
+            "endLine": 76,
+            "missing_explanation": 0.35,
+            "magic_values": 0.14
+          },
+          {
+            "name": "collectUnits",
+            "startLine": 78,
+            "endLine": 119,
+            "missing_explanation": 0.47,
+            "magic_values": 0.43
+          },
+          {
+            "name": "splitContainer",
+            "startLine": 121,
+            "endLine": 154,
+            "missing_explanation": 0.5,
+            "magic_values": 0.56
+          },
+          {
+            "name": "trimEnd",
+            "startLine": 156,
+            "endLine": 159,
+            "missing_explanation": 0.37,
+            "magic_values": 0.09
+          },
+          {
+            "name": "makeUnit",
+            "startLine": 161,
+            "endLine": 173,
+            "missing_explanation": 0.27,
+            "magic_values": 0.13
+          },
+          {
+            "name": "isExported",
+            "startLine": 175,
+            "endLine": 181,
+            "missing_explanation": 0.48,
+            "magic_values": 0.25
+          }
+        ],
+        "failures": [],
+        "stats": {
+          "requests": 2,
+          "failed": 0,
+          "inputTokens": 17121,
+          "ms": 244
+        }
+      }
+    },
+    {
+      "path": "src/comment-mask.ts",
+      "before": {
+        "path": "src/comment-mask.ts",
+        "runId": "20260929054826-k1jn",
+        "issues": [
+          {
+            "severity": "warn",
+            "part": "Line (lines 3-7)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.57"
+          },
+          {
+            "severity": "warn",
+            "part": "classify (lines 11-36)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.56"
+          },
+          {
+            "severity": "warn",
+            "part": "stringMask (lines 38-79)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.62"
+          },
+          {
+            "severity": "warn",
+            "part": "stringMask (lines 38-79)",
+            "message": "Give obscure literals or patterns meaningful names and explain their format, units or rationale.",
+            "source": "jev:magic_values=0.67"
+          }
+        ],
+        "readings": [
+          {
+            "name": "Line",
+            "startLine": 3,
+            "endLine": 7,
+            "missing_explanation": 0.57,
+            "magic_values": 0.07
+          },
+          {
+            "name": "Classified",
+            "startLine": 9,
+            "endLine": 9,
+            "missing_explanation": 0.38,
+            "magic_values": 0.1
+          },
+          {
+            "name": "classify",
+            "startLine": 11,
+            "endLine": 36,
+            "missing_explanation": 0.56,
+            "magic_values": 0.37
+          },
+          {
+            "name": "stringMask",
+            "startLine": 38,
+            "endLine": 79,
+            "missing_explanation": 0.62,
+            "magic_values": 0.67
+          },
+          {
+            "name": "commentMask",
+            "startLine": 81,
+            "endLine": 90,
+            "missing_explanation": 0.21,
+            "magic_values": 0.09
+          },
+          {
+            "name": "escapeRegex",
+            "startLine": 92,
+            "endLine": 94,
+            "missing_explanation": 0.19,
+            "magic_values": 0.28
+          },
+          {
+            "name": "insideString",
+            "startLine": 96,
+            "endLine": 100,
+            "missing_explanation": 0.35,
+            "magic_values": 0.39
+          }
+        ],
+        "failed": 0
+      },
+      "after": {
+        "path": "src/comment-mask.ts",
+        "runId": "20260929054552-tr68",
+        "issues": [
+          {
+            "severity": "warn",
+            "part": "Line (lines 3-7)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.56"
+          },
+          {
+            "severity": "warn",
+            "part": "classify (lines 11-36)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.57"
+          },
+          {
+            "severity": "warn",
+            "part": "stringMask (lines 38-81)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.56"
+          }
+        ],
+        "readings": [
+          {
+            "name": "Line",
+            "startLine": 3,
+            "endLine": 7,
+            "missing_explanation": 0.56,
+            "magic_values": 0.07
+          },
+          {
+            "name": "Classified",
+            "startLine": 9,
+            "endLine": 9,
+            "missing_explanation": 0.39,
+            "magic_values": 0.09
+          },
+          {
+            "name": "classify",
+            "startLine": 11,
+            "endLine": 36,
+            "missing_explanation": 0.57,
+            "magic_values": 0.39
+          },
+          {
+            "name": "stringMask",
+            "startLine": 38,
+            "endLine": 81,
+            "missing_explanation": 0.56,
+            "magic_values": 0.55
+          },
+          {
+            "name": "commentMask",
+            "startLine": 83,
+            "endLine": 92,
+            "missing_explanation": 0.22,
+            "magic_values": 0.09
+          },
+          {
+            "name": "escapeRegex",
+            "startLine": 94,
+            "endLine": 96,
+            "missing_explanation": 0.2,
+            "magic_values": 0.29
+          },
+          {
+            "name": "insideString",
+            "startLine": 98,
+            "endLine": 102,
+            "missing_explanation": 0.35,
+            "magic_values": 0.38
+          }
+        ],
+        "failures": [],
+        "stats": {
+          "requests": 1,
+          "failed": 0,
+          "inputTokens": 6143,
+          "ms": 120
+        }
+      }
+    },
+    {
+      "path": "src/comments.ts",
+      "before": {
+        "path": "src/comments.ts",
+        "runId": "20260929054827-0ibs",
+        "issues": [
+          {
+            "severity": "warn",
+            "part": "findComments (lines 21-88)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.66"
+          },
+          {
+            "severity": "warn",
+            "part": "findComments (lines 21-88)",
+            "message": "Give obscure literals or patterns meaningful names and explain their format, units or rationale.",
+            "source": "jev:magic_values=0.71"
+          },
+          {
+            "severity": "warn",
+            "part": "withContext (lines 95-123)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.59"
+          },
+          {
+            "severity": "warn",
+            "part": "withContext (lines 95-123)",
+            "message": "Give obscure literals or patterns meaningful names and explain their format, units or rationale.",
+            "source": "jev:magic_values=0.85"
+          }
+        ],
+        "readings": [
+          {
+            "name": "FoundComment",
+            "startLine": 5,
+            "endLine": 19,
+            "missing_explanation": 0.29,
+            "magic_values": 0.08
+          },
+          {
+            "name": "findComments",
+            "startLine": 21,
+            "endLine": 88,
+            "missing_explanation": 0.66,
+            "magic_values": 0.71
+          },
+          {
+            "name": "hasWords",
+            "startLine": 90,
+            "endLine": 93,
+            "missing_explanation": 0.23,
+            "magic_values": 0.47
+          },
+          {
+            "name": "withContext",
+            "startLine": 95,
+            "endLine": 123,
+            "missing_explanation": 0.59,
+            "magic_values": 0.85
+          },
+          {
+            "name": "export type { Syntax } from \"./comment-syntax\";",
+            "startLine": 126,
+            "endLine": 126,
+            "missing_explanation": 0.16,
+            "magic_values": 0.05
+          }
+        ],
+        "failed": 0
+      },
+      "after": {
+        "path": "src/comments.ts",
+        "runId": "20260929054552-340a",
+        "issues": [
+          {
+            "severity": "warn",
+            "part": "findComments (lines 21-89)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.51"
+          },
+          {
+            "severity": "warn",
+            "part": "withContext (lines 96-126)",
+            "message": "Give obscure literals or patterns meaningful names and explain their format, units or rationale.",
+            "source": "jev:magic_values=0.71"
+          }
+        ],
+        "readings": [
+          {
+            "name": "FoundComment",
+            "startLine": 5,
+            "endLine": 19,
+            "missing_explanation": 0.3,
+            "magic_values": 0.09
+          },
+          {
+            "name": "findComments",
+            "startLine": 21,
+            "endLine": 89,
+            "missing_explanation": 0.51,
+            "magic_values": 0.48
+          },
+          {
+            "name": "hasWords",
+            "startLine": 91,
+            "endLine": 94,
+            "missing_explanation": 0.25,
+            "magic_values": 0.47
+          },
+          {
+            "name": "withContext",
+            "startLine": 96,
+            "endLine": 126,
+            "missing_explanation": 0.29,
+            "magic_values": 0.71
+          },
+          {
+            "name": "export type { Syntax } from \"./comment-syntax\";",
+            "startLine": 129,
+            "endLine": 129,
+            "missing_explanation": 0.17,
+            "magic_values": 0.05
+          }
+        ],
+        "failures": [],
+        "stats": {
+          "requests": 1,
+          "failed": 0,
+          "inputTokens": 5462,
+          "ms": 124
+        }
+      }
+    },
+    {
+      "path": "src/commit-rules.ts",
+      "before": {
+        "path": "src/commit-rules.ts",
+        "runId": "20260929054827-njan",
+        "issues": [
+          {
+            "severity": "warn",
+            "part": "overallScore (lines 107-117)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.63"
+          },
+          {
+            "severity": "warn",
+            "part": "overallScore (lines 107-117)",
+            "message": "Give obscure literals or patterns meaningful names and explain their format, units or rationale.",
+            "source": "jev:magic_values=0.81"
+          }
+        ],
+        "readings": [
+          {
+            "name": "THRESHOLDS",
+            "startLine": 10,
+            "endLine": 50,
+            "missing_explanation": 0.33,
+            "magic_values": 0.45
+          },
+          {
+            "name": "T",
+            "startLine": 52,
+            "endLine": 52,
+            "missing_explanation": 0.17,
+            "magic_values": 0.06
+          },
+          {
+            "name": "NO_DIFF",
+            "startLine": 54,
+            "endLine": 55,
+            "missing_explanation": 0.11,
+            "magic_values": 0.06
+          },
+          {
+            "name": "CommentResult",
+            "startLine": 57,
+            "endLine": 63,
+            "missing_explanation": 0.27,
+            "magic_values": 0.04
+          },
+          {
+            "name": "Evaluation",
+            "startLine": 65,
+            "endLine": 88,
+            "missing_explanation": 0.29,
+            "magic_values": 0.12
+          },
+          {
+            "name": "Options",
+            "startLine": 90,
+            "endLine": 105,
+            "missing_explanation": 0.15,
+            "magic_values": 0.07
+          },
+          {
+            "name": "overallScore",
+            "startLine": 107,
+            "endLine": 117,
+            "missing_explanation": 0.63,
+            "magic_values": 0.81
+          }
+        ],
+        "failed": 0
+      },
+      "after": {
+        "path": "src/commit-rules.ts",
+        "runId": "20260929054552-86ea",
+        "issues": [],
+        "readings": [
+          {
+            "name": "THRESHOLDS",
+            "startLine": 10,
+            "endLine": 50,
+            "missing_explanation": 0.35,
+            "magic_values": 0.4
+          },
+          {
+            "name": "T",
+            "startLine": 52,
+            "endLine": 52,
+            "missing_explanation": 0.2,
+            "magic_values": 0.06
+          },
+          {
+            "name": "NO_DIFF",
+            "startLine": 54,
+            "endLine": 55,
+            "missing_explanation": 0.11,
+            "magic_values": 0.05
+          },
+          {
+            "name": "CommentResult",
+            "startLine": 57,
+            "endLine": 63,
+            "missing_explanation": 0.24,
+            "magic_values": 0.04
+          },
+          {
+            "name": "Evaluation",
+            "startLine": 65,
+            "endLine": 88,
+            "missing_explanation": 0.25,
+            "magic_values": 0.11
+          },
+          {
+            "name": "Options",
+            "startLine": 90,
+            "endLine": 105,
+            "missing_explanation": 0.14,
+            "magic_values": 0.06
+          },
+          {
+            "name": "overallScore",
+            "startLine": 107,
+            "endLine": 119,
+            "missing_explanation": 0.29,
+            "magic_values": 0.48
+          }
+        ],
+        "failures": [],
+        "stats": {
+          "requests": 1,
+          "failed": 0,
+          "inputTokens": 6656,
+          "ms": 184
+        }
+      }
+    },
+    {
+      "path": "src/copy-swift.ts",
+      "before": {
+        "path": "src/copy-swift.ts",
+        "runId": "20260929054827-wikk",
+        "issues": [
+          {
+            "severity": "warn",
+            "part": "extractSwiftCopy (lines 5-24)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.73"
+          },
+          {
+            "severity": "warn",
+            "part": "extractSwiftCopy (lines 5-24)",
+            "message": "Give obscure literals or patterns meaningful names and explain their format, units or rationale.",
+            "source": "jev:magic_values=0.72"
+          }
+        ],
+        "readings": [
+          {
+            "name": "extractSwiftCopy",
+            "startLine": 5,
+            "endLine": 24,
+            "missing_explanation": 0.73,
+            "magic_values": 0.72
+          }
+        ],
+        "failed": 0
+      },
+      "after": {
+        "path": "src/copy-swift.ts",
+        "runId": "20260929054552-q8v1",
+        "issues": [
+          {
+            "severity": "warn",
+            "part": "extractSwiftCopy (lines 5-25)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.53"
+          },
+          {
+            "severity": "warn",
+            "part": "extractSwiftCopy (lines 5-25)",
+            "message": "Give obscure literals or patterns meaningful names and explain their format, units or rationale.",
+            "source": "jev:magic_values=0.66"
+          }
+        ],
+        "readings": [
+          {
+            "name": "extractSwiftCopy",
+            "startLine": 5,
+            "endLine": 25,
+            "missing_explanation": 0.53,
+            "magic_values": 0.66
+          }
+        ],
+        "failures": [],
+        "stats": {
+          "requests": 1,
+          "failed": 0,
+          "inputTokens": 1356,
+          "ms": 267
+        }
+      }
+    },
+    {
+      "path": "src/git-diff.ts",
+      "before": {
+        "path": "src/git-diff.ts",
+        "runId": "20260929054827-1o11",
+        "issues": [
+          {
+            "severity": "warn",
+            "part": "parseDiff (lines 3-47)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.77"
+          }
+        ],
+        "readings": [
+          {
+            "name": "parseDiff",
+            "startLine": 3,
+            "endLine": 47,
+            "missing_explanation": 0.77,
+            "magic_values": 0.62
+          },
+          {
+            "name": "normalizeRename",
+            "startLine": 49,
+            "endLine": 55,
+            "missing_explanation": 0.33,
+            "magic_values": 0.46
+          },
+          {
+            "name": "withoutMovedLines",
+            "startLine": 57,
+            "endLine": 73,
+            "missing_explanation": 0.33,
+            "magic_values": 0.11
+          }
+        ],
+        "failed": 0
+      },
+      "after": {
+        "path": "src/git-diff.ts",
+        "runId": "20260929054553-0hg8",
+        "issues": [
+          {
+            "severity": "warn",
+            "part": "parseDiff (lines 3-49)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.51"
+          }
+        ],
+        "readings": [
+          {
+            "name": "parseDiff",
+            "startLine": 3,
+            "endLine": 49,
+            "missing_explanation": 0.51,
+            "magic_values": 0.57
+          },
+          {
+            "name": "normalizeRename",
+            "startLine": 51,
+            "endLine": 57,
+            "missing_explanation": 0.35,
+            "magic_values": 0.45
+          },
+          {
+            "name": "withoutMovedLines",
+            "startLine": 59,
+            "endLine": 75,
+            "missing_explanation": 0.35,
+            "magic_values": 0.11
+          }
+        ],
+        "failures": [],
+        "stats": {
+          "requests": 1,
+          "failed": 0,
+          "inputTokens": 3533,
+          "ms": 168
+        }
+      }
+    },
+    {
+      "path": "src/history-read.ts",
+      "before": {
+        "path": "src/history-read.ts",
+        "runId": "20260929054827-6ls9",
+        "issues": [
+          {
+            "severity": "warn",
+            "part": "readBatch (lines 20-51)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.75"
+          },
+          {
+            "severity": "warn",
+            "part": "readBatch (lines 20-51)",
+            "message": "Give obscure literals or patterns meaningful names and explain their format, units or rationale.",
+            "source": "jev:magic_values=0.86"
+          },
+          {
+            "severity": "warn",
+            "part": "outlineOf (lines 60-69)",
+            "message": "Give obscure literals or patterns meaningful names and explain their format, units or rationale.",
+            "source": "jev:magic_values=0.75"
+          }
+        ],
+        "readings": [
+          {
+            "name": "BATCH",
+            "startLine": 6,
+            "endLine": 7,
+            "missing_explanation": 0.19,
+            "magic_values": 0.5
+          },
+          {
+            "name": "readHistory",
+            "startLine": 9,
+            "endLine": 18,
+            "missing_explanation": 0.29,
+            "magic_values": 0.23
+          },
+          {
+            "name": "readBatch",
+            "startLine": 20,
+            "endLine": 51,
+            "missing_explanation": 0.75,
+            "magic_values": 0.86
+          },
+          {
+            "name": "changedLines",
+            "startLine": 53,
+            "endLine": 54,
+            "missing_explanation": 0.41,
+            "magic_values": 0.08
+          },
+          {
+            "name": "subjectOf",
+            "startLine": 56,
+            "endLine": 56,
+            "missing_explanation": 0.22,
+            "magic_values": 0.09
+          },
+          {
+            "name": "short",
+            "startLine": 58,
+            "endLine": 58,
+            "missing_explanation": 0.28,
+            "magic_values": 0.3
+          },
+          {
+            "name": "outlineOf",
+            "startLine": 60,
+            "endLine": 69,
+            "missing_explanation": 0.28,
+            "magic_values": 0.75
+          },
+          {
+            "name": "commitState",
+            "startLine": 71,
+            "endLine": 74,
+            "missing_explanation": 0.21,
+            "magic_values": 0.1
+          }
+        ],
+        "failed": 0
+      },
+      "after": {
+        "path": "src/history-read.ts",
+        "runId": "20260929054553-rfw9",
+        "issues": [],
+        "readings": [
+          {
+            "name": "BATCH",
+            "startLine": 6,
+            "endLine": 7,
+            "missing_explanation": 0.2,
+            "magic_values": 0.39
+          },
+          {
+            "name": "METADATA_FORMAT",
+            "startLine": 9,
+            "endLine": 12,
+            "missing_explanation": 0.18,
+            "magic_values": 0.23
+          },
+          {
+            "name": "COMMIT_START",
+            "startLine": 13,
+            "endLine": 13,
+            "missing_explanation": 0.29,
+            "magic_values": 0.25
+          },
+          {
+            "name": "METADATA_END",
+            "startLine": 14,
+            "endLine": 14,
+            "missing_explanation": 0.26,
+            "magic_values": 0.23
+          },
+          {
+            "name": "FIELD_SEPARATOR",
+            "startLine": 15,
+            "endLine": 15,
+            "missing_explanation": 0.37,
+            "magic_values": 0.34
+          },
+          {
+            "name": "PATCH_FORMAT",
+            "startLine": 16,
+            "endLine": 17,
+            "missing_explanation": 0.19,
+            "magic_values": 0.26
+          },
+          {
+            "name": "readHistory",
+            "startLine": 19,
+            "endLine": 28,
+            "missing_explanation": 0.24,
+            "magic_values": 0.17
+          },
+          {
+            "name": "readBatch",
+            "startLine": 30,
+            "endLine": 64,
+            "missing_explanation": 0.42,
+            "magic_values": 0.56
+          },
+          {
+            "name": "changedLines",
+            "startLine": 66,
+            "endLine": 67,
+            "missing_explanation": 0.44,
+            "magic_values": 0.08
+          },
+          {
+            "name": "subjectOf",
+            "startLine": 69,
+            "endLine": 69,
+            "missing_explanation": 0.25,
+            "magic_values": 0.09
+          },
+          {
+            "name": "short",
+            "startLine": 71,
+            "endLine": 71,
+            "missing_explanation": 0.29,
+            "magic_values": 0.31
+          },
+          {
+            "name": "outlineOf",
+            "startLine": 73,
+            "endLine": 82,
+            "missing_explanation": 0.26,
+            "magic_values": 0.4
+          },
+          {
+            "name": "commitState",
+            "startLine": 84,
+            "endLine": 87,
+            "missing_explanation": 0.23,
+            "magic_values": 0.08
+          }
+        ],
+        "failures": [],
+        "stats": {
+          "requests": 2,
+          "failed": 0,
+          "inputTokens": 10524,
+          "ms": 151
+        }
+      }
+    },
+    {
+      "path": "src/hygiene-files.ts",
+      "before": {
+        "path": "src/hygiene-files.ts",
+        "runId": "20260929054827-92hz",
+        "issues": [
+          {
+            "severity": "warn",
+            "part": "globToRegex (lines 73-86)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.75"
+          },
+          {
+            "severity": "warn",
+            "part": "globToRegex (lines 73-86)",
+            "message": "Give obscure literals or patterns meaningful names and explain their format, units or rationale.",
+            "source": "jev:magic_values=0.80"
+          },
+          {
+            "severity": "warn",
+            "part": "matchesPath (lines 88-95)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.63"
+          },
+          {
+            "severity": "warn",
+            "part": "where (lines 97-101)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.51"
+          },
+          {
+            "severity": "warn",
+            "part": "commitMessages (lines 103-115)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.66"
+          },
+          {
+            "severity": "warn",
+            "part": "commitMessages (lines 103-115)",
+            "message": "Give obscure literals or patterns meaningful names and explain their format, units or rationale.",
+            "source": "jev:magic_values=0.81"
+          },
+          {
+            "severity": "warn",
+            "part": "sizes (lines 117-130)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.72"
+          },
+          {
+            "severity": "warn",
+            "part": "sizes (lines 117-130)",
+            "message": "Give obscure literals or patterns meaningful names and explain their format, units or rationale.",
+            "source": "jev:magic_values=0.66"
+          }
+        ],
+        "readings": [
+          {
+            "name": "git",
+            "startLine": 5,
+            "endLine": 8,
+            "missing_explanation": 0.35,
+            "magic_values": 0.14
+          },
+          {
+            "name": "filesAt",
+            "startLine": 10,
+            "endLine": 27,
+            "missing_explanation": 0.41,
+            "magic_values": 0.22
+          },
+          {
+            "name": "nestedRepos",
+            "startLine": 29,
+            "endLine": 42,
+            "missing_explanation": 0.46,
+            "magic_values": 0.6
+          },
+          {
+            "name": "grep",
+            "startLine": 44,
+            "endLine": 69,
+            "missing_explanation": 0.47,
+            "magic_values": 0.6
+          },
+          {
+            "name": "globs",
+            "startLine": 71,
+            "endLine": 71,
+            "missing_explanation": 0.39,
+            "magic_values": 0.15
+          },
+          {
+            "name": "globToRegex",
+            "startLine": 73,
+            "endLine": 86,
+            "missing_explanation": 0.75,
+            "magic_values": 0.8
+          },
+          {
+            "name": "matchesPath",
+            "startLine": 88,
+            "endLine": 95,
+            "missing_explanation": 0.63,
+            "magic_values": 0.2
+          },
+          {
+            "name": "where",
+            "startLine": 97,
+            "endLine": 101,
+            "missing_explanation": 0.51,
+            "magic_values": 0.22
+          },
+          {
+            "name": "commitMessages",
+            "startLine": 103,
+            "endLine": 115,
+            "missing_explanation": 0.66,
+            "magic_values": 0.81
+          },
+          {
+            "name": "sizes",
+            "startLine": 117,
+            "endLine": 130,
+            "missing_explanation": 0.72,
+            "magic_values": 0.66
+          }
+        ],
+        "failed": 0
+      },
+      "after": {
+        "path": "src/hygiene-files.ts",
+        "runId": "20260929054553-sybs",
+        "issues": [],
+        "readings": [
+          {
+            "name": "GITLINK_MODE",
+            "startLine": 5,
+            "endLine": 6,
+            "missing_explanation": 0.12,
+            "magic_values": 0.16
+          },
+          {
+            "name": "COMMIT_FORMAT",
+            "startLine": 8,
+            "endLine": 10,
+            "missing_explanation": 0.24,
+            "magic_values": 0.28
+          },
+          {
+            "name": "COMMIT_FIELD_SEPARATOR",
+            "startLine": 11,
+            "endLine": 11,
+            "missing_explanation": 0.4,
+            "magic_values": 0.3
+          },
+          {
+            "name": "COMMIT_RECORD_SEPARATOR",
+            "startLine": 12,
+            "endLine": 12,
+            "missing_explanation": 0.48,
+            "magic_values": 0.35
+          },
+          {
+            "name": "BLOB_SIZE_ROW",
+            "startLine": 14,
+            "endLine": 16,
+            "missing_explanation": 0.15,
+            "magic_values": 0.3
+          },
+          {
+            "name": "git",
+            "startLine": 18,
+            "endLine": 21,
+            "missing_explanation": 0.34,
+            "magic_values": 0.13
+          },
+          {
+            "name": "filesAt",
+            "startLine": 23,
+            "endLine": 40,
+            "missing_explanation": 0.36,
+            "magic_values": 0.16
+          },
+          {
+            "name": "nestedRepos",
+            "startLine": 42,
+            "endLine": 55,
+            "missing_explanation": 0.45,
+            "magic_values": 0.37
+          },
+          {
+            "name": "grep",
+            "startLine": 57,
+            "endLine": 83,
+            "missing_explanation": 0.42,
+            "magic_values": 0.42
+          },
+          {
+            "name": "globs",
+            "startLine": 85,
+            "endLine": 85,
+            "missing_explanation": 0.41,
+            "magic_values": 0.17
+          },
+          {
+            "name": "globToRegex",
+            "startLine": 87,
+            "endLine": 102,
+            "missing_explanation": 0.43,
+            "magic_values": 0.46
+          },
+          {
+            "name": "matchesPath",
+            "startLine": 104,
+            "endLine": 112,
+            "missing_explanation": 0.31,
+            "magic_values": 0.2
+          },
+          {
+            "name": "where",
+            "startLine": 114,
+            "endLine": 119,
+            "missing_explanation": 0.16,
+            "magic_values": 0.22
+          },
+          {
+            "name": "commitMessages",
+            "startLine": 121,
+            "endLine": 134,
+            "missing_explanation": 0.36,
+            "magic_values": 0.23
+          },
+          {
+            "name": "sizes",
+            "startLine": 136,
+            "endLine": 150,
+            "missing_explanation": 0.36,
+            "magic_values": 0.34
+          }
+        ],
+        "failures": [],
+        "stats": {
+          "requests": 2,
+          "failed": 0,
+          "inputTokens": 13587,
+          "ms": 169
+        }
+      }
+    },
+    {
+      "path": "src/jev.ts",
+      "before": {
+        "path": "src/jev.ts",
+        "runId": "20260929054827-vg94",
+        "issues": [
+          {
+            "severity": "warn",
+            "part": "slot (lines 18-28)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.50"
+          }
+        ],
+        "readings": [
+          {
+            "name": "JEV_URL",
+            "startLine": 6,
+            "endLine": 6,
+            "missing_explanation": 0.18,
+            "magic_values": 0.2
+          },
+          {
+            "name": "JEV_MODEL",
+            "startLine": 7,
+            "endLine": 7,
+            "missing_explanation": 0.3,
+            "magic_values": 0.25
+          },
+          {
+            "name": "TIMEOUT_MS",
+            "startLine": 9,
+            "endLine": 10,
+            "missing_explanation": 0.15,
+            "magic_values": 0.15
+          },
+          {
+            "name": "RETRIES",
+            "startLine": 11,
+            "endLine": 11,
+            "missing_explanation": 0.34,
+            "magic_values": 0.4
+          },
+          {
+            "name": "MAX_IN_FLIGHT",
+            "startLine": 13,
+            "endLine": 14,
+            "missing_explanation": 0.2,
+            "magic_values": 0.38
+          },
+          {
+            "name": "inFlight",
+            "startLine": 15,
+            "endLine": 15,
+            "missing_explanation": 0.34,
+            "magic_values": 0.06
+          },
+          {
+            "name": "waiting",
+            "startLine": 16,
+            "endLine": 16,
+            "missing_explanation": 0.35,
+            "magic_values": 0.07
+          },
+          {
+            "name": "slot",
+            "startLine": 18,
+            "endLine": 28,
+            "missing_explanation": 0.5,
+            "magic_values": 0.12
+          },
+          {
+            "name": "NoulQuestion",
+            "startLine": 30,
+            "endLine": 34,
+            "missing_explanation": 0.41,
+            "magic_values": 0.16
+          },
+          {
+            "name": "ChoiceQuestion",
+            "startLine": 35,
+            "endLine": 35,
+            "missing_explanation": 0.27,
+            "magic_values": 0.11
+          },
+          {
+            "name": "ScoreQuestion",
+            "startLine": 36,
+            "endLine": 36,
+            "missing_explanation": 0.36,
+            "magic_values": 0.09
+          },
+          {
+            "name": "Question",
+            "startLine": 37,
+            "endLine": 37,
+            "missing_explanation": 0.24,
+            "magic_values": 0.06
+          },
+          {
+            "name": "NoulAnswer",
+            "startLine": 39,
+            "endLine": 39,
+            "missing_explanation": 0.26,
+            "magic_values": 0.1
+          },
+          {
+            "name": "ChoiceAnswer",
+            "startLine": 40,
+            "endLine": 45,
+            "missing_explanation": 0.23,
+            "magic_values": 0.08
+          },
+          {
+            "name": "ScoreAnswer",
+            "startLine": 46,
+            "endLine": 51,
+            "missing_explanation": 0.21,
+            "magic_values": 0.06
+          },
+          {
+            "name": "Answer",
+            "startLine": 52,
+            "endLine": 52,
+            "missing_explanation": 0.16,
+            "magic_values": 0.05
+          },
+          {
+            "name": "Answers",
+            "startLine": 53,
+            "endLine": 53,
+            "missing_explanation": 0.15,
+            "magic_values": 0.04
+          },
+          {
+            "name": "JevResult",
+            "startLine": 55,
+            "endLine": 59,
+            "missing_explanation": 0.25,
+            "magic_values": 0.07
+          },
+          {
+            "name": "apiKey",
+            "startLine": 61,
+            "endLine": 65,
+            "missing_explanation": 0.25,
+            "magic_values": 0.13
+          },
+          {
+            "name": "askJev",
+            "startLine": 67,
+            "endLine": 75,
+            "missing_explanation": 0.17,
+            "magic_values": 0.08
+          },
+          {
+            "name": "send",
+            "startLine": 77,
+            "endLine": 130,
+            "missing_explanation": 0.45,
+            "magic_values": 0.53
+          },
+          {
+            "name": "noul",
+            "startLine": 132,
+            "endLine": 136,
+            "missing_explanation": 0.34,
+            "magic_values": 0.07
+          },
+          {
+            "name": "choice",
+            "startLine": 138,
+            "endLine": 142,
+            "missing_explanation": 0.21,
+            "magic_values": 0.06
+          },
+          {
+            "name": "score",
+            "startLine": 144,
+            "endLine": 148,
+            "missing_explanation": 0.2,
+            "magic_values": 0.05
+          }
+        ],
+        "failed": 0
+      },
+      "after": {
+        "path": "src/jev.ts",
+        "runId": "20260929054553-fil7",
+        "issues": [],
+        "readings": [
+          {
+            "name": "JEV_URL",
+            "startLine": 6,
+            "endLine": 6,
+            "missing_explanation": 0.19,
+            "magic_values": 0.23
+          },
+          {
+            "name": "JEV_MODEL",
+            "startLine": 7,
+            "endLine": 7,
+            "missing_explanation": 0.26,
+            "magic_values": 0.24
+          },
+          {
+            "name": "TIMEOUT_MS",
+            "startLine": 9,
+            "endLine": 10,
+            "missing_explanation": 0.15,
+            "magic_values": 0.15
+          },
+          {
+            "name": "RETRIES",
+            "startLine": 11,
+            "endLine": 11,
+            "missing_explanation": 0.32,
+            "magic_values": 0.41
+          },
+          {
+            "name": "MAX_IN_FLIGHT",
+            "startLine": 13,
+            "endLine": 14,
+            "missing_explanation": 0.19,
+            "magic_values": 0.4
+          },
+          {
+            "name": "inFlight",
+            "startLine": 15,
+            "endLine": 15,
+            "missing_explanation": 0.36,
+            "magic_values": 0.07
+          },
+          {
+            "name": "waiting",
+            "startLine": 16,
+            "endLine": 16,
+            "missing_explanation": 0.39,
+            "magic_values": 0.07
+          },
+          {
+            "name": "slot",
+            "startLine": 18,
+            "endLine": 29,
+            "missing_explanation": 0.44,
+            "magic_values": 0.14
+          },
+          {
+            "name": "NoulQuestion",
+            "startLine": 31,
+            "endLine": 35,
+            "missing_explanation": 0.42,
+            "magic_values": 0.15
+          },
+          {
+            "name": "ChoiceQuestion",
+            "startLine": 36,
+            "endLine": 36,
+            "missing_explanation": 0.25,
+            "magic_values": 0.11
+          },
+          {
+            "name": "ScoreQuestion",
+            "startLine": 37,
+            "endLine": 37,
+            "missing_explanation": 0.33,
+            "magic_values": 0.08
+          },
+          {
+            "name": "Question",
+            "startLine": 38,
+            "endLine": 38,
+            "missing_explanation": 0.22,
+            "magic_values": 0.06
+          },
+          {
+            "name": "NoulAnswer",
+            "startLine": 40,
+            "endLine": 40,
+            "missing_explanation": 0.22,
+            "magic_values": 0.08
+          },
+          {
+            "name": "ChoiceAnswer",
+            "startLine": 41,
+            "endLine": 46,
+            "missing_explanation": 0.22,
+            "magic_values": 0.07
+          },
+          {
+            "name": "ScoreAnswer",
+            "startLine": 47,
+            "endLine": 52,
+            "missing_explanation": 0.21,
+            "magic_values": 0.05
+          },
+          {
+            "name": "Answer",
+            "startLine": 53,
+            "endLine": 53,
+            "missing_explanation": 0.15,
+            "magic_values": 0.04
+          },
+          {
+            "name": "Answers",
+            "startLine": 54,
+            "endLine": 54,
+            "missing_explanation": 0.15,
+            "magic_values": 0.05
+          },
+          {
+            "name": "JevResult",
+            "startLine": 56,
+            "endLine": 60,
+            "missing_explanation": 0.26,
+            "magic_values": 0.07
+          },
+          {
+            "name": "apiKey",
+            "startLine": 62,
+            "endLine": 66,
+            "missing_explanation": 0.27,
+            "magic_values": 0.13
+          },
+          {
+            "name": "askJev",
+            "startLine": 68,
+            "endLine": 76,
+            "missing_explanation": 0.2,
+            "magic_values": 0.09
+          },
+          {
+            "name": "send",
+            "startLine": 78,
+            "endLine": 131,
+            "missing_explanation": 0.43,
+            "magic_values": 0.55
+          },
+          {
+            "name": "noul",
+            "startLine": 133,
+            "endLine": 137,
+            "missing_explanation": 0.34,
+            "magic_values": 0.06
+          },
+          {
+            "name": "choice",
+            "startLine": 139,
+            "endLine": 143,
+            "missing_explanation": 0.21,
+            "magic_values": 0.06
+          },
+          {
+            "name": "score",
+            "startLine": 145,
+            "endLine": 149,
+            "missing_explanation": 0.2,
+            "magic_values": 0.05
+          }
+        ],
+        "failures": [],
+        "stats": {
+          "requests": 2,
+          "failed": 0,
+          "inputTokens": 16932,
+          "ms": 138
+        }
+      }
+    },
+    {
+      "path": "src/plan-ranking.ts",
+      "before": {
+        "path": "src/plan-ranking.ts",
+        "runId": "20260929054828-wyl5",
+        "issues": [
+          {
+            "severity": "warn",
+            "part": "stem (lines 11-19)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.54"
+          },
+          {
+            "severity": "warn",
+            "part": "rankTasks (lines 58-87)",
+            "message": "Give obscure literals or patterns meaningful names and explain their format, units or rationale.",
+            "source": "jev:magic_values=0.78"
+          },
+          {
+            "severity": "warn",
+            "part": "taskExcerpt (lines 89-131)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.59"
+          },
+          {
+            "severity": "warn",
+            "part": "taskExcerpt (lines 89-131)",
+            "message": "Give obscure literals or patterns meaningful names and explain their format, units or rationale.",
+            "source": "jev:magic_values=0.81"
+          },
+          {
+            "severity": "warn",
+            "part": "fitText (lines 133-161)",
+            "message": "Give obscure literals or patterns meaningful names and explain their format, units or rationale.",
+            "source": "jev:magic_values=0.82"
+          }
+        ],
+        "readings": [
+          {
+            "name": "STOPWORDS",
+            "startLine": 5,
+            "endLine": 9,
+            "missing_explanation": 0.34,
+            "magic_values": 0.19
+          },
+          {
+            "name": "stem",
+            "startLine": 11,
+            "endLine": 19,
+            "missing_explanation": 0.54,
+            "magic_values": 0.59
+          },
+          {
+            "name": "stemsOf",
+            "startLine": 21,
+            "endLine": 33,
+            "missing_explanation": 0.34,
+            "magic_values": 0.62
+          },
+          {
+            "name": "EXACT_SPAN_WEIGHT",
+            "startLine": 35,
+            "endLine": 35,
+            "missing_explanation": 0.36,
+            "magic_values": 0.55
+          },
+          {
+            "name": "indexes",
+            "startLine": 37,
+            "endLine": 40,
+            "missing_explanation": 0.29,
+            "magic_values": 0.09
+          },
+          {
+            "name": ">();",
+            "startLine": 41,
+            "endLine": 41,
+            "missing_explanation": 0.19,
+            "magic_values": 0.1
+          },
+          {
+            "name": "indexOf",
+            "startLine": 43,
+            "endLine": 56,
+            "missing_explanation": 0.42,
+            "magic_values": 0.12
+          },
+          {
+            "name": "rankTasks",
+            "startLine": 58,
+            "endLine": 87,
+            "missing_explanation": 0.49,
+            "magic_values": 0.78
+          },
+          {
+            "name": "taskExcerpt",
+            "startLine": 89,
+            "endLine": 131,
+            "missing_explanation": 0.59,
+            "magic_values": 0.81
+          },
+          {
+            "name": "fitText",
+            "startLine": 133,
+            "endLine": 161,
+            "missing_explanation": 0.35,
+            "magic_values": 0.82
+          }
+        ],
+        "failed": 0
+      },
+      "after": {
+        "path": "src/plan-ranking.ts",
+        "runId": "20260929054553-as3e",
+        "issues": [
+          {
+            "severity": "warn",
+            "part": "rankTasks (lines 60-90)",
+            "message": "Give obscure literals or patterns meaningful names and explain their format, units or rationale.",
+            "source": "jev:magic_values=0.74"
+          },
+          {
+            "severity": "warn",
+            "part": "taskExcerpt (lines 92-135)",
+            "message": "Give obscure literals or patterns meaningful names and explain their format, units or rationale.",
+            "source": "jev:magic_values=0.67"
+          },
+          {
+            "severity": "warn",
+            "part": "fitText (lines 137-166)",
+            "message": "Give obscure literals or patterns meaningful names and explain their format, units or rationale.",
+            "source": "jev:magic_values=0.75"
+          }
+        ],
+        "readings": [
+          {
+            "name": "STOPWORDS",
+            "startLine": 5,
+            "endLine": 9,
+            "missing_explanation": 0.4,
+            "magic_values": 0.16
+          },
+          {
+            "name": "stem",
+            "startLine": 11,
+            "endLine": 20,
+            "missing_explanation": 0.25,
+            "magic_values": 0.52
+          },
+          {
+            "name": "stemsOf",
+            "startLine": 22,
+            "endLine": 34,
+            "missing_explanation": 0.34,
+            "magic_values": 0.59
+          },
+          {
+            "name": "EXACT_SPAN_WEIGHT",
+            "startLine": 36,
+            "endLine": 37,
+            "missing_explanation": 0.17,
+            "magic_values": 0.3
+          },
+          {
+            "name": "indexes",
+            "startLine": 39,
+            "endLine": 42,
+            "missing_explanation": 0.31,
+            "magic_values": 0.09
+          },
+          {
+            "name": ">();",
+            "startLine": 43,
+            "endLine": 43,
+            "missing_explanation": 0.15,
+            "magic_values": 0.1
+          },
+          {
+            "name": "indexOf",
+            "startLine": 45,
+            "endLine": 58,
+            "missing_explanation": 0.39,
+            "magic_values": 0.12
+          },
+          {
+            "name": "rankTasks",
+            "startLine": 60,
+            "endLine": 90,
+            "missing_explanation": 0.44,
+            "magic_values": 0.74
+          },
+          {
+            "name": "taskExcerpt",
+            "startLine": 92,
+            "endLine": 135,
+            "missing_explanation": 0.46,
+            "magic_values": 0.67
+          },
+          {
+            "name": "fitText",
+            "startLine": 137,
+            "endLine": 166,
+            "missing_explanation": 0.28,
+            "magic_values": 0.75
+          }
+        ],
+        "failures": [],
+        "stats": {
+          "requests": 1,
+          "failed": 0,
+          "inputTokens": 9595,
+          "ms": 135
+        }
+      }
+    },
+    {
+      "path": "src/run.ts",
+      "before": {
+        "path": "src/run.ts",
+        "runId": "20260929054828-ivpi",
+        "issues": [
+          {
+            "severity": "warn",
+            "part": "reader (lines 58-59)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.75"
+          }
+        ],
+        "readings": [
+          {
+            "name": "JevStats",
+            "startLine": 7,
+            "endLine": 12,
+            "missing_explanation": 0.24,
+            "magic_values": 0.04
+          },
+          {
+            "name": "jevTracker",
+            "startLine": 14,
+            "endLine": 32,
+            "missing_explanation": 0.35,
+            "magic_values": 0.12
+          },
+          {
+            "name": "Track",
+            "startLine": 34,
+            "endLine": 34,
+            "missing_explanation": 0.26,
+            "magic_values": 0.04
+          },
+          {
+            "name": "startRun",
+            "startLine": 36,
+            "endLine": 51,
+            "missing_explanation": 0.44,
+            "magic_values": 0.08
+          },
+          {
+            "name": "fmt",
+            "startLine": 53,
+            "endLine": 53,
+            "missing_explanation": 0.39,
+            "magic_values": 0.26
+          },
+          {
+            "name": "jevSource",
+            "startLine": 55,
+            "endLine": 56,
+            "missing_explanation": 0.13,
+            "magic_values": 0.1
+          },
+          {
+            "name": "reader",
+            "startLine": 58,
+            "endLine": 59,
+            "missing_explanation": 0.75,
+            "magic_values": 0.07
+          },
+          {
+            "name": "clip",
+            "startLine": 61,
+            "endLine": 62,
+            "missing_explanation": 0.47,
+            "magic_values": 0.13
+          },
+          {
+            "name": "touches",
+            "startLine": 64,
+            "endLine": 68,
+            "missing_explanation": 0.13,
+            "magic_values": 0.05
+          }
+        ],
+        "failed": 0
+      },
+      "after": {
+        "path": "src/run.ts",
+        "runId": "20260929054554-aruj",
+        "issues": [
+          {
+            "severity": "warn",
+            "part": "clip (lines 62-63)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.50"
+          }
+        ],
+        "readings": [
+          {
+            "name": "JevStats",
+            "startLine": 7,
+            "endLine": 12,
+            "missing_explanation": 0.24,
+            "magic_values": 0.04
+          },
+          {
+            "name": "jevTracker",
+            "startLine": 14,
+            "endLine": 32,
+            "missing_explanation": 0.36,
+            "magic_values": 0.11
+          },
+          {
+            "name": "Track",
+            "startLine": 34,
+            "endLine": 34,
+            "missing_explanation": 0.28,
+            "magic_values": 0.03
+          },
+          {
+            "name": "startRun",
+            "startLine": 36,
+            "endLine": 51,
+            "missing_explanation": 0.46,
+            "magic_values": 0.08
+          },
+          {
+            "name": "fmt",
+            "startLine": 53,
+            "endLine": 53,
+            "missing_explanation": 0.41,
+            "magic_values": 0.21
+          },
+          {
+            "name": "jevSource",
+            "startLine": 55,
+            "endLine": 56,
+            "missing_explanation": 0.14,
+            "magic_values": 0.11
+          },
+          {
+            "name": "reader",
+            "startLine": 58,
+            "endLine": 60,
+            "missing_explanation": 0.37,
+            "magic_values": 0.08
+          },
+          {
+            "name": "clip",
+            "startLine": 62,
+            "endLine": 63,
+            "missing_explanation": 0.5,
+            "magic_values": 0.15
+          },
+          {
+            "name": "touches",
+            "startLine": 65,
+            "endLine": 69,
+            "missing_explanation": 0.13,
+            "magic_values": 0.05
+          }
+        ],
+        "failures": [],
+        "stats": {
+          "requests": 1,
+          "failed": 0,
+          "inputTokens": 6272,
+          "ms": 144
+        }
+      }
+    },
+    {
+      "path": "src/secrets.ts",
+      "before": {
+        "path": "src/secrets.ts",
+        "runId": "20260929054828-apw5",
+        "issues": [
+          {
+            "severity": "warn",
+            "part": "SECRETS (lines 1-7)",
+            "message": "Give obscure literals or patterns meaningful names and explain their format, units or rationale.",
+            "source": "jev:magic_values=0.76"
+          },
+          {
+            "severity": "warn",
+            "part": "SECRET_PREFIXES (lines 9-25)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.81"
+          },
+          {
+            "severity": "warn",
+            "part": "secretKind (lines 30-36)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.63"
+          },
+          {
+            "severity": "warn",
+            "part": "secretKind (lines 30-36)",
+            "message": "Give obscure literals or patterns meaningful names and explain their format, units or rationale.",
+            "source": "jev:magic_values=0.74"
+          }
+        ],
+        "readings": [
+          {
+            "name": "SECRETS",
+            "startLine": 1,
+            "endLine": 7,
+            "missing_explanation": 0.46,
+            "magic_values": 0.76
+          },
+          {
+            "name": "SECRET_PREFIXES",
+            "startLine": 9,
+            "endLine": 25,
+            "missing_explanation": 0.81,
+            "magic_values": 0.21
+          },
+          {
+            "name": "WORDY",
+            "startLine": 27,
+            "endLine": 28,
+            "missing_explanation": 0.37,
+            "magic_values": 0.57
+          },
+          {
+            "name": "secretKind",
+            "startLine": 30,
+            "endLine": 36,
+            "missing_explanation": 0.63,
+            "magic_values": 0.74
+          }
+        ],
+        "failed": 0
+      },
+      "after": {
+        "path": "src/secrets.ts",
+        "runId": "20260929054554-ws2v",
+        "issues": [
+          {
+            "severity": "warn",
+            "part": "SECRETS (lines 1-8)",
+            "message": "Give obscure literals or patterns meaningful names and explain their format, units or rationale.",
+            "source": "jev:magic_values=0.70"
+          },
+          {
+            "severity": "warn",
+            "part": "secretKind (lines 32-38)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.60"
+          },
+          {
+            "severity": "warn",
+            "part": "secretKind (lines 32-38)",
+            "message": "Give obscure literals or patterns meaningful names and explain their format, units or rationale.",
+            "source": "jev:magic_values=0.70"
+          }
+        ],
+        "readings": [
+          {
+            "name": "SECRETS",
+            "startLine": 1,
+            "endLine": 8,
+            "missing_explanation": 0.23,
+            "magic_values": 0.7
+          },
+          {
+            "name": "SECRET_PREFIXES",
+            "startLine": 10,
+            "endLine": 27,
+            "missing_explanation": 0.25,
+            "magic_values": 0.14
+          },
+          {
+            "name": "WORDY",
+            "startLine": 29,
+            "endLine": 30,
+            "missing_explanation": 0.46,
+            "magic_values": 0.59
+          },
+          {
+            "name": "secretKind",
+            "startLine": 32,
+            "endLine": 38,
+            "missing_explanation": 0.6,
+            "magic_values": 0.7
+          }
+        ],
+        "failures": [],
+        "stats": {
+          "requests": 1,
+          "failed": 0,
+          "inputTokens": 3258,
+          "ms": 157
+        }
+      }
+    },
+    {
+      "path": "src/swift-copy-roles.ts",
+      "before": {
+        "path": "src/swift-copy-roles.ts",
+        "runId": "20260929054828-ad83",
+        "issues": [
+          {
+            "severity": "warn",
+            "part": "roleOf (lines 10-61)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.79"
+          }
+        ],
+        "readings": [
+          {
+            "name": "HEADING_FONTS",
+            "startLine": 6,
+            "endLine": 6,
+            "missing_explanation": 0.37,
+            "magic_values": 0.3
+          },
+          {
+            "name": "RED",
+            "startLine": 8,
+            "endLine": 8,
+            "missing_explanation": 0.46,
+            "magic_values": 0.32
+          },
+          {
+            "name": "roleOf",
+            "startLine": 10,
+            "endLine": 61,
+            "missing_explanation": 0.79,
+            "magic_values": 0.61
+          }
+        ],
+        "failed": 0
+      },
+      "after": {
+        "path": "src/swift-copy-roles.ts",
+        "runId": "20260929054554-3xq9",
+        "issues": [
+          {
+            "severity": "warn",
+            "part": "roleOf (lines 10-62)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.64"
+          }
+        ],
+        "readings": [
+          {
+            "name": "HEADING_FONTS",
+            "startLine": 6,
+            "endLine": 6,
+            "missing_explanation": 0.32,
+            "magic_values": 0.25
+          },
+          {
+            "name": "RED",
+            "startLine": 8,
+            "endLine": 8,
+            "missing_explanation": 0.42,
+            "magic_values": 0.29
+          },
+          {
+            "name": "roleOf",
+            "startLine": 10,
+            "endLine": 62,
+            "missing_explanation": 0.64,
+            "magic_values": 0.48
+          }
+        ],
+        "failures": [],
+        "stats": {
+          "requests": 1,
+          "failed": 0,
+          "inputTokens": 3677,
+          "ms": 135
+        }
+      }
+    },
+    {
+      "path": "src/swift-tokens.ts",
+      "before": {
+        "path": "src/swift-tokens.ts",
+        "runId": "20260929054829-0knu",
+        "issues": [
+          {
+            "severity": "warn",
+            "part": "OPEN (lines 12-12)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.51"
+          },
+          {
+            "severity": "warn",
+            "part": "CONTROL (lines 16-16)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.71"
+          },
+          {
+            "severity": "warn",
+            "part": "scanSwift (lines 18-103)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.66"
+          }
+        ],
+        "readings": [
+          {
+            "name": "Token",
+            "startLine": 4,
+            "endLine": 10,
+            "missing_explanation": 0.19,
+            "magic_values": 0.08
+          },
+          {
+            "name": "OPEN",
+            "startLine": 12,
+            "endLine": 12,
+            "missing_explanation": 0.51,
+            "magic_values": 0.08
+          },
+          {
+            "name": "STRING_START",
+            "startLine": 14,
+            "endLine": 14,
+            "missing_explanation": 0.32,
+            "magic_values": 0.3
+          },
+          {
+            "name": "CONTROL",
+            "startLine": 16,
+            "endLine": 16,
+            "missing_explanation": 0.71,
+            "magic_values": 0.22
+          },
+          {
+            "name": "scanSwift",
+            "startLine": 18,
+            "endLine": 103,
+            "missing_explanation": 0.66,
+            "magic_values": 0.62
+          },
+          {
+            "name": "joinConcatenated",
+            "startLine": 105,
+            "endLine": 116,
+            "missing_explanation": 0.32,
+            "magic_values": 0.13
+          },
+          {
+            "name": "dedent",
+            "startLine": 118,
+            "endLine": 128,
+            "missing_explanation": 0.49,
+            "magic_values": 0.38
+          }
+        ],
+        "failed": 0
+      },
+      "after": {
+        "path": "src/swift-tokens.ts",
+        "runId": "20260929054554-jbkq",
+        "issues": [
+          {
+            "severity": "warn",
+            "part": "OPEN (lines 12-12)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.60"
+          },
+          {
+            "severity": "warn",
+            "part": "scanSwift (lines 19-106)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.61"
+          }
+        ],
+        "readings": [
+          {
+            "name": "Token",
+            "startLine": 4,
+            "endLine": 10,
+            "missing_explanation": 0.2,
+            "magic_values": 0.07
+          },
+          {
+            "name": "OPEN",
+            "startLine": 12,
+            "endLine": 12,
+            "missing_explanation": 0.6,
+            "magic_values": 0.07
+          },
+          {
+            "name": "STRING_START",
+            "startLine": 14,
+            "endLine": 14,
+            "missing_explanation": 0.36,
+            "magic_values": 0.31
+          },
+          {
+            "name": "CONTROL",
+            "startLine": 16,
+            "endLine": 17,
+            "missing_explanation": 0.19,
+            "magic_values": 0.14
+          },
+          {
+            "name": "scanSwift",
+            "startLine": 19,
+            "endLine": 106,
+            "missing_explanation": 0.61,
+            "magic_values": 0.61
+          },
+          {
+            "name": "joinConcatenated",
+            "startLine": 108,
+            "endLine": 119,
+            "missing_explanation": 0.31,
+            "magic_values": 0.13
+          },
+          {
+            "name": "dedent",
+            "startLine": 121,
+            "endLine": 131,
+            "missing_explanation": 0.46,
+            "magic_values": 0.36
+          }
+        ],
+        "failures": [],
+        "stats": {
+          "requests": 1,
+          "failed": 0,
+          "inputTokens": 6728,
+          "ms": 134
+        }
+      }
+    },
+    {
+      "path": "src/unit-rules.ts",
+      "before": {
+        "path": "src/unit-rules.ts",
+        "runId": "20260929054829-z0kv",
+        "issues": [
+          {
+            "severity": "warn",
+            "part": "judgeUnit (lines 25-73)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.51"
+          },
+          {
+            "severity": "warn",
+            "part": "leanness (lines 75-79)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.70"
+          },
+          {
+            "severity": "warn",
+            "part": "leanness (lines 75-79)",
+            "message": "Give obscure literals or patterns meaningful names and explain their format, units or rationale.",
+            "source": "jev:magic_values=0.84"
+          }
+        ],
+        "readings": [
+          {
+            "name": "REWRITE_RANGE",
+            "startLine": 9,
+            "endLine": 14,
+            "missing_explanation": 0.23,
+            "magic_values": 0.37
+          },
+          {
+            "name": "UNIT_PATTERNS",
+            "startLine": 16,
+            "endLine": 23,
+            "missing_explanation": 0.21,
+            "magic_values": 0.07
+          },
+          {
+            "name": "judgeUnit",
+            "startLine": 25,
+            "endLine": 73,
+            "missing_explanation": 0.51,
+            "magic_values": 0.49
+          },
+          {
+            "name": "leanness",
+            "startLine": 75,
+            "endLine": 79,
+            "missing_explanation": 0.7,
+            "magic_values": 0.84
+          },
+          {
+            "name": "verdictFromUnits",
+            "startLine": 81,
+            "endLine": 85,
+            "missing_explanation": 0.25,
+            "magic_values": 0.12
+          }
+        ],
+        "failed": 0
+      },
+      "after": {
+        "path": "src/unit-rules.ts",
+        "runId": "20260929054555-b53h",
+        "issues": [
+          {
+            "severity": "warn",
+            "part": "judgeUnit (lines 25-73)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.52"
+          }
+        ],
+        "readings": [
+          {
+            "name": "REWRITE_RANGE",
+            "startLine": 9,
+            "endLine": 14,
+            "missing_explanation": 0.26,
+            "magic_values": 0.43
+          },
+          {
+            "name": "UNIT_PATTERNS",
+            "startLine": 16,
+            "endLine": 23,
+            "missing_explanation": 0.2,
+            "magic_values": 0.06
+          },
+          {
+            "name": "judgeUnit",
+            "startLine": 25,
+            "endLine": 73,
+            "missing_explanation": 0.52,
+            "magic_values": 0.49
+          },
+          {
+            "name": "leanness",
+            "startLine": 75,
+            "endLine": 81,
+            "missing_explanation": 0.3,
+            "magic_values": 0.43
+          },
+          {
+            "name": "verdictFromUnits",
+            "startLine": 83,
+            "endLine": 87,
+            "missing_explanation": 0.23,
+            "magic_values": 0.13
+          }
+        ],
+        "failures": [],
+        "stats": {
+          "requests": 1,
+          "failed": 0,
+          "inputTokens": 4895,
+          "ms": 143
+        }
+      }
+    },
+    {
+      "path": "tests/fake-fetch.ts",
+      "before": {
+        "path": "tests/fake-fetch.ts",
+        "runId": "20260929054829-ywl4",
+        "issues": [
+          {
+            "severity": "warn",
+            "part": "fakeFetch (lines 1-3)",
+            "message": "Explain the non-obvious purpose, contract or logic with a short comment or clearer names.",
+            "source": "jev:missing_explanation=0.65"
+          }
+        ],
+        "readings": [
+          {
+            "name": "fakeFetch",
+            "startLine": 1,
+            "endLine": 3,
+            "missing_explanation": 0.65,
+            "magic_values": 0.05
+          }
+        ],
+        "failed": 0
+      },
+      "after": {
+        "path": "tests/fake-fetch.ts",
+        "runId": "20260929054555-8nn4",
+        "issues": [],
+        "readings": [
+          {
+            "name": "fakeFetch",
+            "startLine": 1,
+            "endLine": 4,
+            "missing_explanation": 0.21,
+            "magic_values": 0.06
+          }
+        ],
+        "failures": [],
+        "stats": {
+          "requests": 1,
+          "failed": 0,
+          "inputTokens": 918,
+          "ms": 115
+        }
+      }
+    }
+  ]
+}

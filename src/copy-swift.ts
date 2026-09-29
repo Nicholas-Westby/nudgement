@@ -10,6 +10,7 @@ export function extractSwiftCopy(path: string, source: string): CopyString[] {
     if (token.kind !== "str") return;
     const role = roleOf(swift, index);
     if (!role) return;
+    // Replace format placeholders before checking for prose; paths and identifiers are not visible UI messages.
     const clean = token.value!.replace(FORMAT, "{…}").replace(/\s+/g, " ").trim();
     if (
       !/\p{L}{2,}/u.test(clean.replace(/\{[^}]*\}/g, "")) ||

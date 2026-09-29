@@ -48,6 +48,7 @@ export function stringMask(lines: string[], syntax: Syntax): boolean[] {
       return true;
     }
     const inside = open !== undefined;
+    // A heredoc opens after this line; quotes and comments on the declaration line still matter.
     let pendingHeredoc: string | undefined;
     for (let j = 0; j < line.length; j++) {
       const at = (token: string) => line.startsWith(token, j);
@@ -69,6 +70,7 @@ export function stringMask(lines: string[], syntax: Syntax): boolean[] {
         const quote = line[j];
         for (j++; j < line.length && line[j] !== quote; j++) if (line[j] === "\\") j++;
       } else if (syntax.heredoc && at("<<")) {
+        // Capture the optional quote and matching identifier in <<EOF, <<'EOF' or <<-EOF.
         const match = /^<<-?\s*(['"]?)(\w+)\1/.exec(line.slice(j));
         if (match) pendingHeredoc = match[2];
       }

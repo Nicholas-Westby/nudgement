@@ -22,6 +22,7 @@ async function slot<T>(work: () => Promise<T>): Promise<T> {
     return await work();
   } finally {
     const next = waiting.shift();
+    // Hand the occupied slot directly to a waiter; decrement only when nobody is queued.
     if (next) next();
     else inFlight--;
   }

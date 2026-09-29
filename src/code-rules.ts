@@ -55,6 +55,7 @@ export const MIN_VALUE_CODE_LINES = 15;
 // Short parsers drew machinery warnings for ordinary validation; apply a minimum size.
 export const MIN_OVERBUILT_CODE_LINES = 8;
 
+// Cap the expensive per-unit bloat requests; evaluateFile selects the largest units first.
 export const MAX_UNITS = 60;
 
 // Names too common for a repo-wide search to mean anything.

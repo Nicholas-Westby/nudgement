@@ -55,6 +55,7 @@ export const fmt = (value: number) => value.toFixed(2);
 /** Where a finding came from: the Jev question and its reading, such as "jev:sounds_human=0.42". */
 export const jevSource = (key: string, value: number) => `jev:${key}=${fmt(value)}`;
 
+/** Read a probability and retain it in the report, so the evidence survives even when no warning fires. */
 export const reader = (answers: Answers, readings: Record<string, unknown>) => (key: string) =>
   (readings[key] = noul(answers, key)) as number;
 

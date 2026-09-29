@@ -13,6 +13,7 @@ export const OPEN: Record<string, string> = { "(": ")", "{": "}", "[": "]" };
 
 const STRING_START = /^#*"/;
 
+// Braces after these keywords belong to control flow, not a declaration or a SwiftUI view.
 export const CONTROL = /^(if|guard|else|for|while|repeat|do|catch|defer)$/;
 
 export function scanSwift(source: string): Token[] {
@@ -22,6 +23,7 @@ export function scanSwift(source: string): Token[] {
   const at = (offset = 0) => source[i + offset] ?? "";
 
   const readString = (): string => {
+    // Raw strings repeat their opening hash count in the closing delimiter and escape/interpolation marker.
     let hashes = 0;
     while (at() === "#") {
       hashes++;
@@ -50,6 +52,7 @@ export function scanSwift(source: string): Token[] {
         value += String.fromCodePoint(parseInt(source.slice(i + 1, end), 16));
         i = end + 1;
       } else if (c === "\n") line++;
+      // Normalize escaped whitespace and NUL for copy review; retain the words a user would read.
       else value += /[ntr]/.test(c) ? " " : c === "0" ? "" : c;
     }
     i += close.length;

@@ -75,6 +75,8 @@ export function judgeUnit(unit: CodeUnit, answers: Answers | undefined, usage: U
 export function leanness(readings: Record<string, unknown>, units: UnitResult[]): number {
   const flaggedShare = units.length ? units.filter((unit) => unit.issues.length).length / units.length : 0;
   if (typeof readings.bloat !== "number") return Math.round(100 * (1 - flaggedShare));
+  // Whole-file bloat contributes three quarters; the share of flagged units contributes the rest.
+  // This comparison score is not a probability that the code is good.
   return Math.round(100 * (0.75 * (1 - readings.bloat) + 0.25 * (1 - flaggedShare)));
 }
 
