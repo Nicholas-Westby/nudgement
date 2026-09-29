@@ -148,3 +148,16 @@ test("local navigation and assets resolve, unknown pages return 404", async ({ p
   }
   expect((await request.get("/this-page-does-not-exist")).status()).toBe(404);
 });
+
+test("the page loads without browser errors or third-party scripts", async ({ page }) => {
+  const errors = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  page.on("console", (message) => {
+    if (message.type() === "error") errors.push(message.text());
+  });
+  await page.goto("/");
+  await expect(page.getByRole("button", { name: labels.code })).toBeVisible();
+  const scripts = await page.locator("script[src]").evaluateAll((nodes) => nodes.map((node) => node.src));
+  expect(scripts.every((url) => new URL(url).origin === new URL(page.url()).origin)).toBe(true);
+  expect(errors).toEqual([]);
+});

@@ -1,0 +1,62 @@
+{
+  "url": "https://nudgement.dev",
+  "cloudflareVersion": "6bccf803-3768-49cf-858d-929e9c51212e",
+  "browserTests": {
+    "passed": 32,
+    "failed": 0
+  },
+  "repositoryTests": {
+    "passed": 251,
+    "failed": 0
+  },
+  "audits": {
+    "mobile": {
+      "at": "2026-09-29T07:56:55.534Z",
+      "lighthouse": "13.4.1",
+      "scores": {
+        "performance": 99,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": 1317.49,
+        "largest-contentful-paint": 1700.9879999999998,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0,
+        "total-byte-weight": 44157
+      }
+    },
+    "desktop": {
+      "at": "2026-09-29T07:57:02.675Z",
+      "lighthouse": "13.4.1",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": 1285.7354,
+        "largest-contentful-paint": 1285.7354,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0,
+        "total-byte-weight": 23784
+      }
+    }
+  },
+  "selfReview": {
+    "initialCodeRuns": [
+      "20260929074818-ke16",
+      "20260929074818-tmj8",
+      "20260929074818-vx1h"
+    ],
+    "revisedCodeRuns": [
+      "20260929075233-561d",
+      "20260929075233-i4c0",
+      "20260929075233-994q"
+    ],
+    "revisedLicenseLinkRun": "20260929075405-y693",
+    "featureCommitRun": "20260929075450-kb8g"
+  }
+}

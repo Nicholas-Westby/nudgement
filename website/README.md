@@ -1,6 +1,7 @@
 # nudgement.dev
 
 A static, single-page introduction to nudgement, deployed with Cloudflare Workers Static Assets.
+The `no-transform` response header prevents Cloudflare from injecting its analytics beacon.
 Only `public/` is uploaded. There is no server code, visitor tracking, external font request or live Jev call.
 The examples come from [NUDGEMENTS.md](../NUDGEMENTS.md); keep the excerpts and source licenses in sync when changing them.
 
