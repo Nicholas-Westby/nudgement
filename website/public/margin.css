@@ -54,10 +54,24 @@
   stroke-linejoin: round;
 }
 .draft-revision {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
   font: 0.875rem / 1.7 var(--mono);
   margin: 0;
   padding-top: 22px;
   border-top: 1px solid var(--line);
+}
+.revision-check {
+  flex: 0 0 30px;
+  width: 30px;
+  height: 30px;
+  fill: none;
+  stroke: #387847;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transform: rotate(-6deg);
 }
 .draft figcaption {
   font: 0.75rem / 1.7 var(--mono);

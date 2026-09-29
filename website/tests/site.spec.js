@@ -82,7 +82,7 @@ test("the page remains useful without JavaScript", async ({ browser, baseURL }) 
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Better judgement.");
   await expect(page.getByText(examples.commit.finding)).toBeVisible();
   await expect(page.getByText("# From your nudgement checkout", { exact: false })).toBeVisible();
-  await expect(page.getByRole("figure").locator("svg")).toBeVisible();
+  await expect(page.getByRole("figure").locator(".pencil-note svg")).toBeVisible();
   await expect(page.locator(".reading-pencil")).toBeHidden();
   await expect(page.getByRole("button")).toHaveCount(0);
   await context.close();
