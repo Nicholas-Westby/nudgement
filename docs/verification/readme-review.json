@@ -1,0 +1,191 @@
+{
+  "kind": "readme",
+  "runId": "20260929024948-y39j",
+  "version": "3ef7ed6+dirty",
+  "repo": "/Users/admin/Dev/nudgement",
+  "ref": "worktree",
+  "path": "README.md",
+  "verdict": "pass",
+  "score": 90,
+  "facts": {
+    "lines": 90,
+    "words": 485,
+    "headings": {
+      "h1": 1,
+      "h2": 4,
+      "h3": 0
+    },
+    "codeBlocks": 3,
+    "listItems": 0,
+    "tables": 1,
+    "badges": 0,
+    "emoji": 0,
+    "hasToc": false,
+    "longestParagraphWords": 83
+  },
+  "issues": [],
+  "sections": [
+    {
+      "heading": "nudgement",
+      "startLine": 1,
+      "endLine": 8,
+      "words": 56,
+      "issues": [],
+      "readings": {
+        "sounds_human": 0.73,
+        "filler": 0.4,
+        "earns_its_place": 0.51,
+        "matches_heading": 0.78,
+        "over_structured": 0.04,
+        "shrink": 0.15000000000000002,
+        "action": "keep",
+        "action_probabilities": {
+          "keep": 0.56,
+          "rewrite_plainly": 0.12,
+          "delete": 0.08,
+          "merge": 0.2,
+          "trim": 0.04
+        }
+      }
+    },
+    {
+      "heading": "Run it",
+      "startLine": 9,
+      "endLine": 36,
+      "words": 78,
+      "issues": [],
+      "readings": {
+        "sounds_human": 0.82,
+        "filler": 0.18,
+        "earns_its_place": 0.65,
+        "matches_heading": 0.93,
+        "over_structured": 0.21,
+        "shrink": 0.13,
+        "action": "keep",
+        "action_probabilities": {
+          "merge": 0.03,
+          "delete": 0.02,
+          "rewrite_plainly": 0.12,
+          "trim": 0.04,
+          "keep": 0.79
+        }
+      }
+    },
+    {
+      "heading": "What you get",
+      "startLine": 37,
+      "endLine": 54,
+      "words": 156,
+      "issues": [],
+      "readings": {
+        "sounds_human": 0.82,
+        "filler": 0.24,
+        "earns_its_place": 0.63,
+        "matches_heading": 0.89,
+        "over_structured": 0.24,
+        "shrink": 0.15,
+        "action": "keep",
+        "action_probabilities": {
+          "merge": 0.02,
+          "delete": 0.01,
+          "rewrite_plainly": 0.21,
+          "trim": 0.1,
+          "keep": 0.66
+        }
+      }
+    },
+    {
+      "heading": "Other checks",
+      "startLine": 55,
+      "endLine": 73,
+      "words": 133,
+      "issues": [],
+      "readings": {
+        "sounds_human": 0.84,
+        "filler": 0.14,
+        "earns_its_place": 0.65,
+        "matches_heading": 0.89,
+        "over_structured": 0.25,
+        "shrink": 0.09,
+        "action": "keep",
+        "action_probabilities": {
+          "merge": 0.09,
+          "trim": 0.02,
+          "keep": 0.78,
+          "delete": 0.01,
+          "rewrite_plainly": 0.1
+        }
+      }
+    },
+    {
+      "heading": "Develop",
+      "startLine": 74,
+      "endLine": 90,
+      "words": 62,
+      "issues": [],
+      "readings": {
+        "sounds_human": 0.87,
+        "filler": 0.11,
+        "earns_its_place": 0.72,
+        "matches_heading": 0.89,
+        "over_structured": 0.21,
+        "shrink": 0.04,
+        "action": "keep",
+        "action_probabilities": {
+          "trim": 0.06,
+          "rewrite_plainly": 0.07,
+          "keep": 0.8,
+          "merge": 0.04,
+          "delete": 0.02
+        }
+      }
+    }
+  ],
+  "readings": {
+    "sounds_human": 0.84,
+    "ai_filler": 0.09,
+    "marketing": 0.08,
+    "says_what_it_is": 0.95,
+    "shows_usage": 0.99,
+    "too_terse": 0.06,
+    "shrink": 0.16,
+    "rewrite_length": {
+      "choice": "somewhat_shorter",
+      "probabilities": {
+        "a_fraction": 0.02,
+        "somewhat_shorter": 0.63,
+        "much_shorter": 0.14,
+        "about_the_same": 0.21
+      }
+    },
+    "padding": 0.17,
+    "over_structured": 0.11,
+    "boilerplate": 0.09,
+    "redundancy": 0.39,
+    "disorganized": 0.14,
+    "overall": 2.86,
+    "biggest_problem": {
+      "choice": "nothing",
+      "confidence": 0.94,
+      "probabilities": {
+        "missing_usage": 0,
+        "disorganized": 0.01,
+        "redundancy": 0.01,
+        "boilerplate": 0,
+        "ai_voice": 0.02,
+        "missing_what_it_is": 0,
+        "padding": 0.01,
+        "over_structured": 0,
+        "nothing": 0.95,
+        "marketing": 0,
+        "too_terse": 0
+      }
+    }
+  },
+  "jev": {
+    "requests": 6,
+    "failed": 0,
+    "inputTokens": 7749,
+    "ms": 302
+  }
+}
