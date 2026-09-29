@@ -1,5 +1,7 @@
 # nudgement
 
+[Explore nudgement.dev](https://nudgement.dev) for an interactive introduction and real examples.
+
 nudgement reviews commit messages, code, comments, tests, READMEs and UI copy.
 It combines exact checks with focused questions to [TypeSafe's Jev model](https://typesafe.ai).
 Use it before committing to catch things a formatter cannot: a message that

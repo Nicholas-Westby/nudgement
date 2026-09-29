@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#163c35">
+    <title>nudgement — A little nudge. Better judgement.</title>
+    <meta
+      name="description"
+      content="Jev-based concept linting to nudge your LLM to improve its judgement. Explore real nudgements for code, commits, tests and writing."
+    >
+    <link rel="canonical" href="https://nudgement.dev/">
+    <meta property="og:title" content="nudgement — A little nudge. Better judgement.">
+    <meta
+      property="og:description"
+      content="Jev-based concept linting for the things a formatter can't catch. An open-source experiment in better judgement."
+    >
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nudgement.dev/">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/style.css">
+    <script type="module" src="/site.js"></script>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header wrap">
+      <a class="wordmark" href="#top" aria-label="nudgement home"
+        ><span class="brand-mark" aria-hidden="true">n<span>·</span></span>nudgement</a
+      >
+      <nav aria-label="Main navigation">
+        <a href="#nudgements">The nudgements</a><a href="#how">How it works</a
+        ><a class="repo-link" href="https://github.com/Nicholas-Westby/nudgement"
+          >GitHub
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+            <path
+              d="M12 .9a11.1 11.1 0 0 0-3.5 21.6c.6.1.8-.2.8-.5v-2.1c-3.3.7-4-1.4-4-1.4-.5-1.3-1.3-1.6-1.3-1.6-1.1-.8.1-.8.1-.8 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.7.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-6a4.7 4.7 0 0 1 1.2-3.3c-.1-.3-.5-1.6.1-3.2 0 0 1-.3 3.4 1.2a11.6 11.6 0 0 1 6.2 0C17.9 3.9 19 4.2 19 4.2c.6 1.6.2 2.9.1 3.2a4.7 4.7 0 0 1 1.2 3.3c0 4.7-2.8 5.7-5.5 6 .4.4.8 1.1.8 2.2V22c0 .3.2.6.8.5A11.1 11.1 0 0 0 12 .9Z"
+            />
+          </svg></a
+        >
+      </nav>
+    </header>
+    <main id="main">
+      <section class="hero wrap" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">
+            <span class="tiny-cross" aria-hidden="true">+</span>
+            Small corrections. Clearer thinking.
+          </p>
+          <h1 id="hero-title">A little nudge.<br>Better <em>judgement.</em></h1>
+          <p class="hero-description">Jev-based concept linting to nudge your LLM to improve its judgement.</p>
+          <p class="hero-detail">
+            The code compiles. The tests pass. But does the commit say anything? Does that comment explain <em>why</em>?
+            Sometimes the next improvement needs a different kind of check.
+          </p>
+          <div class="hero-links">
+            <a class="button primary" href="#nudgements">See a nudge in action</a
+            ><a class="text-link" href="#try">Try it in your repo</a>
+          </div>
+          <p class="hero-footnote">
+            Open source <span aria-hidden="true">/</span> MIT licensed <span aria-hidden="true">/</span> Built on
+            <a href="https://typesafe.ai">Jev</a>
+          </p>
+        </div>
+        <figure class="trajectory" aria-labelledby="trajectory-caption">
+          <div class="figure-heading">
+            <span>Fig. 01 — A small course correction</span><span aria-hidden="true">↗ 0.1°</span>
+          </div>
+          <div class="plot">
+            <svg class="trajectory-fallback" viewBox="0 0 600 420" aria-hidden="true">
+              <path d="M55 350 Q235 350 485 60" stroke="#84988c" stroke-width="2" stroke-dasharray="5 8" fill="none" />
+              <path d="M55 350 C275 350 260 115 485 185" stroke="#d8f36a" stroke-width="3" fill="none" />
+              <circle cx="55" cy="350" r="7" fill="#d8f36a" />
+              <circle cx="485" cy="185" r="29" fill="none" stroke="#d8f36a" />
+              <circle cx="485" cy="185" r="5" fill="#d8f36a" />
+            </svg><canvas id="trajectory" aria-hidden="true"></canvas
+            ><span class="plot-label start-label">First draft</span
+            ><span class="plot-label target-label">A little clearer.</span
+            ><span class="nudge-label">a useful question</span>
+          </div>
+          <figcaption id="trajectory-caption">Same intent. A more thoughtful result.</figcaption>
+          <div class="trajectory-controls" hidden>
+            <label for="nudge">Give it a nudge</label>
+            <input id="nudge" type="range" min="0" max="100" value="72" aria-describedby="nudge-help">
+            <span aria-hidden="true">+</span>
+            <p id="nudge-help" class="sr-only">
+              An illustration of a draft's path moving closer to its intent. This is a visual metaphor, not a live
+              review.
+            </p>
+          </div>
+        </figure>
+      </section>
+      <div class="discipline-strip">
+        <div class="wrap">
+          <span class="eyebrow">A second look at</span>
+          <p>Commits <span>/</span> Code <span>/</span> Comments <span>/</span> Tests <span>/</span> Writing</p>
+        </div>
+      </div>
+      <section class="examples wrap section" id="nudgements" aria-labelledby="examples-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">01 / The nudgements</p>
+            <h2 id="examples-title">Looks fine.<br><em>Look again.</em></h2>
+          </div>
+          <p>Small findings from real open-source code.<br>A before, a nudge, and a more considered after.</p>
+        </div>
+        <fieldset class="example-picker" hidden>
+          <legend class="sr-only">Choose a nudgement</legend>
+          <button type="button" data-example="commit" aria-pressed="true">01 <span>Commit message</span></button
+          ><button type="button" data-example="code" aria-pressed="false">02 <span>Code clarity</span></button
+          ><button type="button" data-example="copy" aria-pressed="false">03 <span>UI copy</span></button
+          ><button type="button" data-example="test" aria-pressed="false">04 <span>Test quality</span></button>
+        </fieldset>
+        <article class="example" aria-labelledby="example-title">
+          <div class="example-header">
+            <h3 id="example-title">Name what actually changed.</h3>
+            <a
+              id="example-source"
+              href="https://github.com/chalk/ansi-regex/commit/f1bf1f05234e43ad241cf0408cb03c39e147218c"
+              >Source: ansi-regex</a
+            >
+          </div>
+          <div class="comparison">
+            <div class="before">
+              <p class="code-label"><span aria-hidden="true">−</span> Before</p>
+              <pre><code id="example-before">Improve performance</code></pre>
+            </div>
+            <div class="after">
+              <p class="code-label"><span aria-hidden="true">+</span> After</p>
+              <pre><code id="example-after">fix: stop unterminated OSC strings consuming later escapes</code></pre>
+            </div>
+          </div>
+          <div class="finding">
+            <span class="finding-mark" aria-hidden="true">n·</span>
+            <div>
+              <p class="eyebrow">The nudgement</p>
+              <blockquote id="example-finding">The subject is generic. Name what actually changed.</blockquote>
+            </div>
+            <span class="finding-type" id="example-type">Commit evaluator</span>
+          </div>
+          <p class="example-note">
+            Recorded evaluator responses. Proposed edits, not upstream changes.
+            <a href="https://github.com/Nicholas-Westby/nudgement/blob/main/NUDGEMENTS.md">Read the full examples</a>
+            ·
+            <a href="/example-licenses.txt">Source licenses</a>.
+          </p>
+        </article>
+        <p class="sr-only" id="example-announcement" role="status"></p>
+      </section>
+      <section class="mechanism" id="how" aria-labelledby="how-title">
+        <div class="wrap section">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">02 / Under the hood</p>
+              <h2 id="how-title">Lint the idea.<br><em>Not just the syntax.</em></h2>
+            </div>
+            <p>A formatter knows where the semicolon goes. nudgement asks whether the thought holds up.</p>
+          </div>
+          <ol class="steps">
+            <li>
+              <span class="step-number">01</span>
+              <h3>Give it context.</h3>
+              <p>A file, a diff, a commit message. nudgement gathers the relevant context and runs exact checks.</p>
+              <code>draft + context</code>
+            </li>
+            <li>
+              <span class="step-number">02</span>
+              <h3>Ask a focused question.</h3>
+              <p>
+                <a href="https://typesafe.ai">TypeSafe’s Jev</a>
+                returns structured judgements. Does this message match the diff? Would this test catch a broken
+                implementation?
+              </p>
+              <code>questions → judgements</code>
+            </li>
+            <li>
+              <span class="step-number">03</span>
+              <h3>Make a better call.</h3>
+              <p>
+                nudgement turns those answers into findings. You or your coding agent decide what to change, then review
+                the next draft.
+              </p>
+              <code>findings → revision</code>
+            </li>
+          </ol>
+          <div class="margin-note">
+            <span aria-hidden="true">*</span>
+            <p>
+              A nudge is a reason to take another look. It isn’t proof of correctness, and it doesn’t rewrite your code
+              for you.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="try-section wrap section" id="try" aria-labelledby="try-title">
+        <div class="try-copy">
+          <p class="eyebrow">03 / Put it to work</p>
+          <h2 id="try-title">Give your agent<br><em>a second thought.</em></h2>
+          <p>
+            Run nudgement before a commit, or give your coding agent the included skill. Keep the useful findings.
+            Refine. Repeat.
+          </p>
+          <div class="try-links">
+            <a class="button primary" href="https://github.com/Nicholas-Westby/nudgement">Explore the repository</a
+            ><a
+              class="text-link"
+              href="https://github.com/Nicholas-Westby/nudgement/blob/main/skills/using-nudgement/SKILL.md"
+              >Read the agent skill</a
+            >
+          </div>
+        </div>
+        <div class="terminal">
+          <div class="terminal-header">
+            <span>One more look before you commit</span
+            ><button id="copy-command" type="button" hidden>Copy command</button>
+          </div>
+          <pre><code><span class="terminal-comment"># From your nudgement checkout</span>
+<span id="command">bun evaluate.ts /path/to/your-repo \
+  --staged \
+  -m "fix(cli): handle --help"</span></code></pre>
+          <div class="terminal-note">
+            Needs <a href="https://bun.sh">Bun</a>, a clone of the repo, and <code>JEV_API_KEY</code>.<br>
+            <a href="https://github.com/Nicholas-Westby/nudgement#run-it">Setup instructions</a>
+          </div>
+          <p class="api-note">
+            Reviews send selected text and context to Jev and may incur API charges. The examples on this page use saved
+            responses.
+          </p>
+          <span class="sr-only" id="copy-status" role="status"></span>
+        </div>
+      </section>
+      <section class="closing wrap" aria-label="About this project">
+        <p>Good judgement is a practice.</p>
+        <p class="closing-big">Keep nudging<span>·</span></p>
+        <div>
+          <p>A small open-source experiment by <a href="https://github.com/Nicholas-Westby">Nicholas Westby</a>.</p>
+          <a class="text-link" href="https://github.com/Nicholas-Westby/nudgement/blob/main/LICENSE"
+            >Read the MIT license. Make it your own.</a
+          >
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer wrap">
+      <a class="wordmark" href="#top">nudgement<span aria-hidden="true">·</span></a>
+      <p>A little more thought goes a long way.</p>
+      <a href="https://github.com/Nicholas-Westby/nudgement">Find it on GitHub</a>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,4 @@
+.wrangler/
+playwright-report/
+test-results/
+audit-results/

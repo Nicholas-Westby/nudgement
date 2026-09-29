@@ -1,0 +1,18 @@
+{
+  "name": "nudgement-website",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --port 8787",
+    "deploy": "wrangler deploy",
+    "test": "playwright test",
+    "audit": "node tests/lighthouse.js"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.13.0",
+    "@playwright/test": "1.63.0",
+    "lighthouse": "13.4.1",
+    "wrangler": "4.143.0",
+    "chrome-launcher": "1.2.1"
+  }
+}

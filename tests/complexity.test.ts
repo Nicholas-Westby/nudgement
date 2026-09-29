@@ -3,7 +3,15 @@ import { complexityScores } from "../scripts/check-complexity";
 
 test("keeps every source, script and test file below an FTA score of 60", () => {
   const rows = complexityScores();
-  const maintained = ["*.ts", "src/**/*.ts", "scripts/**/*.ts", "tests/**/*.ts"]
+  const maintained = [
+    "*.ts",
+    "src/**/*.ts",
+    "scripts/**/*.ts",
+    "tests/**/*.ts",
+    "website/*.js",
+    "website/public/*.js",
+    "website/tests/*.js",
+  ]
     .flatMap((pattern) => [...new Bun.Glob(pattern).scanSync({ cwd: `${import.meta.dir}/..` })])
     .filter((path) => !path.startsWith("tests/fixtures/"));
   expect(rows.map((row) => row.file_name).sort()).toEqual(maintained.sort());

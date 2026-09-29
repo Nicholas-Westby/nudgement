@@ -1,0 +1,34 @@
+name: Website
+on:
+  push:
+    paths: ["website/**", ".github/workflows/website.yml"]
+  pull_request:
+    paths: ["website/**", ".github/workflows/website.yml"]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: website
+    steps:
+      - uses: actions/checkout@v7
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.2
+      - run: bun install --frozen-lockfile
+      - run: bunx playwright install --with-deps chromium
+      - run: bun run test
+      - name: Audit performance and accessibility
+        run: |
+          bun run dev > /tmp/nudgement-site.log 2>&1 &
+          preview_pid=$!
+          trap 'kill "$preview_pid"' EXIT
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://localhost:8787 > /dev/null; then break; fi
+            sleep 1
+          done
+          curl --fail --silent http://localhost:8787 > /dev/null
+          bun run audit

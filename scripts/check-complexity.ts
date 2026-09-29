@@ -25,7 +25,7 @@ if (import.meta.main) {
   const failures = rows.filter((row) => !Number.isFinite(row.fta_score) || row.fta_score >= 60);
   for (const row of failures) console.error(`${row.file_name}: FTA ${row.fta_score.toFixed(2)} (must be below 60)`);
   console.log(
-    `${rows.length} TypeScript files analyzed; highest FTA ${Math.max(...rows.map((row) => row.fta_score)).toFixed(2)}.`,
+    `${rows.length} source files analyzed; highest FTA ${Math.max(...rows.map((row) => row.fta_score)).toFixed(2)}.`,
   );
   process.exitCode = failures.length ? 1 : 0;
 }
