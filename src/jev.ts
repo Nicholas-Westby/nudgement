@@ -1,5 +1,6 @@
 /** Jev transport, bounded concurrency and retry handling. Requests and answers are logged for diagnosis. */
 
+import { validateAnswers } from "./jev-response";
 import { logCall } from "./log";
 
 const JEV_URL = "https://api.typesafe.ai/v1/systemone";
@@ -16,12 +17,13 @@ const waiting: (() => void)[] = [];
 
 async function slot<T>(work: () => Promise<T>): Promise<T> {
   if (inFlight >= MAX_IN_FLIGHT) await new Promise<void>((resolve) => waiting.push(resolve));
-  inFlight++;
+  else inFlight++;
   try {
     return await work();
   } finally {
-    inFlight--;
-    waiting.shift()?.();
+    const next = waiting.shift();
+    if (next) next();
+    else inFlight--;
   }
 }
 
@@ -57,9 +59,9 @@ export interface JevResult {
 }
 
 function apiKey(): string {
-  const key = process.env.JEV_API_KEY ?? process.env.TYPESAFE_API_KEY;
-  if (!key) throw new Error("JEV_API_KEY is not set (expected in the nudgement's .env)");
-  return key.trim();
+  const key = process.env.JEV_API_KEY?.trim() || process.env.TYPESAFE_API_KEY?.trim();
+  if (!key) throw new Error("Set JEV_API_KEY or TYPESAFE_API_KEY in the environment or nudgement's .env");
+  return key;
 }
 
 /** Label requests by review target so their logged answers can be traced to a finding. */
@@ -78,16 +80,19 @@ async function send(
   state: unknown,
   questions: Record<string, Question>,
 ): Promise<JevResult> {
+  const key = apiKey();
   const body = { model: JEV_MODEL, state, questions };
   const started = Date.now();
   let lastError = "";
+  let attempts = 0;
 
   for (let attempt = 0; attempt <= RETRIES; attempt++) {
     if (attempt > 0) await Bun.sleep(500 * 2 ** attempt);
+    attempts++;
     try {
       const response = await fetch(JEV_URL, {
         method: "POST",
-        headers: { Authorization: `Bearer ${apiKey()}`, "Content-Type": "application/json" },
+        headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
         body: JSON.stringify(body),
         signal: AbortSignal.timeout(TIMEOUT_MS),
       });
@@ -98,13 +103,10 @@ async function send(
         if (response.status === 429 || response.status >= 500) continue;
         break;
       }
-      const parsed = JSON.parse(text) as { answers?: Answers; usage?: { input_tokens?: number } };
-      if (!parsed.answers) {
-        lastError = "response had no answers";
-        continue;
-      }
+      const parsed = JSON.parse(text) as { answers?: unknown; usage?: { input_tokens?: number } };
+      const answers = validateAnswers(parsed.answers, questions);
       const result = {
-        answers: parsed.answers,
+        answers,
         inputTokens: parsed.usage?.input_tokens ?? 0,
         ms: Date.now() - started,
       };
@@ -115,7 +117,7 @@ async function send(
         answers: result.answers,
         inputTokens: result.inputTokens,
         ms: result.ms,
-        attempts: attempt + 1,
+        attempts,
       });
       return result;
     } catch (error) {
@@ -123,7 +125,7 @@ async function send(
     }
   }
 
-  logCall({ runId, label, request: body, error: lastError, ms: Date.now() - started, attempts: RETRIES + 1 });
+  logCall({ runId, label, request: body, error: lastError, ms: Date.now() - started, attempts });
   throw new Error(`Jev request ${label} failed: ${lastError}`);
 }
 

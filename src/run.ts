@@ -21,10 +21,10 @@ function jevTracker(runId: string, issues: Issue[], stats: JevStats) {
     } catch (error) {
       stats.failed++;
       issues.push({
-        severity: "info",
-        part: "evaluator",
-        message: `Jev request ${label} failed, so its checks were skipped: ${error}`,
-        source: "evaluator",
+        severity: "error",
+        part: "nudgement",
+        message: `Jev request ${label} failed; this review is incomplete: ${error}`,
+        source: "nudgement",
       });
       return undefined;
     }

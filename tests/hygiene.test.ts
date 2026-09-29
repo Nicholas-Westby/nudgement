@@ -1,9 +1,9 @@
 import { beforeAll, describe, expect, test } from "bun:test";
-import { mkdirSync, mkdtempSync, writeFileSync } from "node:fs";
-import { tmpdir } from "node:os";
+import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { loadConfig } from "../src/config";
 import { checkHygiene, secretKind } from "../src/hygiene";
+import { temporaryDirectory } from "./temp-dir";
 
 let repo = "";
 const git = (...args: string[]) =>
@@ -14,7 +14,7 @@ const write = (path: string, text: string) => {
 };
 
 beforeAll(() => {
-  repo = mkdtempSync(join(tmpdir(), "nudgement-hygiene-"));
+  repo = temporaryDirectory();
   git("init", "-q");
   write("README.md", "# Shop\n\nTracks bread orders.\n");
   write(".gitignore", "node_modules/\n");
@@ -76,7 +76,7 @@ describe("checkHygiene", () => {
   });
 
   test("flags missing basics", () => {
-    const empty = mkdtempSync(join(tmpdir(), "nudgement-hygiene-empty-"));
+    const empty = temporaryDirectory();
     Bun.spawnSync(["git", "-C", empty, "init", "-q"]);
     writeFileSync(join(empty, "package.json"), "{}");
     const found = checkHygiene(empty, "worktree", {}).issues.map((issue) => issue.source);
@@ -88,7 +88,7 @@ describe("checkHygiene", () => {
 
 describe("loadConfig", () => {
   test("reads the context file relative to the config", () => {
-    const dir = mkdtempSync(join(tmpdir(), "nudgement-config-"));
+    const dir = temporaryDirectory();
     writeFileSync(join(dir, "spec.md"), "Build a thing.");
     writeFileSync(
       join(dir, "project.json"),
@@ -101,7 +101,7 @@ describe("loadConfig", () => {
   });
 
   test("joins several context files in order", () => {
-    const dir = mkdtempSync(join(tmpdir(), "nudgement-config-"));
+    const dir = temporaryDirectory();
     writeFileSync(join(dir, "spec.md"), "Build a thing.");
     writeFileSync(join(dir, "rules.md"), "Keep it small.");
     writeFileSync(join(dir, "project.json"), JSON.stringify({ context: ["spec.md", "rules.md"] }));
@@ -123,7 +123,7 @@ describe("secretKind", () => {
 
 describe("a git repository inside the repo", () => {
   test("is flagged when it would be committed or is staged, as git add -A does to a worktree", () => {
-    const outer = mkdtempSync(join(tmpdir(), "nudgement-nested-"));
+    const outer = temporaryDirectory();
     const run = (cwd: string, ...args: string[]) =>
       Bun.spawnSync(["git", "-C", cwd, "-c", "user.email=t@t", "-c", "user.name=t", ...args]);
     run(outer, "init", "-q");

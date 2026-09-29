@@ -1,6 +1,5 @@
 import { expect, test } from "bun:test";
-import { mkdtempSync, writeFileSync } from "node:fs";
-import { tmpdir } from "node:os";
+import { writeFileSync } from "node:fs";
 import { join } from "node:path";
 import {
   type CommitResult,
@@ -10,6 +9,7 @@ import {
   judgedIndexes,
   readHistory,
 } from "../src/history";
+import { temporaryDirectory } from "./temp-dir";
 
 const commit = (sha: string, message: string, changed = 10, parents = 1): HistoryCommit => ({
   sha: sha.padEnd(40, "0"),
@@ -64,7 +64,7 @@ test("applies the message rules to every commit", () => {
 });
 
 test("reads a repo's history oldest first, with changed lines per file", () => {
-  const repo = mkdtempSync(join(tmpdir(), "nudgement-history-"));
+  const repo = temporaryDirectory();
   const git = (...args: string[]) =>
     Bun.spawnSync(["git", "-C", repo, "-c", "user.email=t@t", "-c", "user.name=t", ...args]);
   git("init", "-q");

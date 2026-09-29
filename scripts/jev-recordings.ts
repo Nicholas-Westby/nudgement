@@ -37,7 +37,9 @@ export function recordingKeys(): string[] {
 export function writeRecording(recording: Recording): void {
   const key = requestKey(recording.request);
   let records: Record<string, Recording>;
-  try { records = bucket(key[0]); } catch (error) {
+  try {
+    records = bucket(key[0]);
+  } catch (error) {
     if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
     records = {};
     buckets.set(key[0], records);

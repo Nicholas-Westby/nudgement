@@ -6,7 +6,6 @@ import { installReplay } from "../scripts/jev-replay";
 
 const logDir = mkdtempSync(join(tmpdir(), "nudgement-tests-"));
 process.env.NUDGEMENT_LOG_DIR = logDir;
-process.env.EVALUATOR_LOG_DIR = logDir;
 const replay = installReplay("baseline");
 afterAll(() => {
   try {

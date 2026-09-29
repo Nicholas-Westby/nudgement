@@ -82,7 +82,7 @@ export function formatCoverageReport(evaluation: CoverageEvaluation, verbose: bo
     `COVERAGE ${evaluation.verdict.toUpperCase()}  ${evaluation.path} by ${evaluation.plans.join(", ")}`,
     `  ${evaluation.requirements.length} requirements checked: ${count("covered")} covered, ${count("uncovered")} with no task, ${count("unclear")} unclear${count("left out") ? `, ${count("left out")} left out on purpose` : ""}`,
   ];
-  const summary = evaluation.issues.filter((issue) => issue.part === "coverage" || issue.part === "evaluator");
+  const summary = evaluation.issues.filter((issue) => issue.part === "coverage" || issue.part === "nudgement");
   if (summary.length) out.push(summary.map((issue) => line(issue, verbose)).join("\n"));
   const groups: [string, string][] = [
     ["uncovered", "No task implements these"],

@@ -1,11 +1,11 @@
 import { expect, test } from "bun:test";
-import { mkdtempSync, writeFileSync } from "node:fs";
-import { tmpdir } from "node:os";
+import { writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { findComments } from "../src/comments";
 import { judgeComment, withoutMachineRead } from "../src/evaluate";
 import { parseDiff } from "../src/git";
 import type { Answer, Answers } from "../src/jev";
+import { temporaryDirectory } from "./temp-dir";
 
 const diff = (path: string, body: string[]) =>
   [`diff --git a/${path} b/${path}`, `--- a/${path}`, `+++ b/${path}`, `@@ -1,1 +1,${body.length} @@`, ...body].join(
@@ -200,7 +200,7 @@ test("still finds a comment after a string that spanned lines", () => {
 });
 
 test("a tagged comment that other code searches for is left alone, and an ordinary tagged one is not", () => {
-  const repo = mkdtempSync(join(tmpdir(), "nudgement-marker-"));
+  const repo = temporaryDirectory();
   const git = (...args: string[]) =>
     Bun.spawnSync(["git", "-C", repo, "-c", "user.email=t@t", "-c", "user.name=t", ...args]);
   git("init", "-q");

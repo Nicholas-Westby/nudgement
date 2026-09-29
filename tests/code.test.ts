@@ -1,11 +1,11 @@
 import { describe, expect, test } from "bun:test";
-import { mkdtempSync, writeFileSync } from "node:fs";
-import { tmpdir } from "node:os";
+import { writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { analyzeCode, countUsage, isBloatCandidate, isGenerated, usesInFile } from "../src/code";
 import { CODE_THRESHOLDS, type FileEvaluation, judgeFile, verdictFromUnits } from "../src/code-evaluate";
 import type { Answer, Answers } from "../src/jev";
 import { formatFileReport } from "../src/report";
+import { temporaryDirectory } from "./temp-dir";
 
 const TS = `import { a } from "./a";
 import b from "./b";
@@ -209,7 +209,7 @@ test("returns nothing for files that are not code", () => {
 });
 
 test("counts the other files in a repo that use each name", async () => {
-  const repo = mkdtempSync(join(tmpdir(), "nudgement-usage-"));
+  const repo = temporaryDirectory();
   const run = (...args: string[]) => Bun.spawnSync(["git", "-C", repo, ...args]);
   run("init", "-q");
   writeFileSync(join(repo, "lib.ts"), "export function helper() {}\nexport function unused() {}\n");

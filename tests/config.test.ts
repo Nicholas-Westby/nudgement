@@ -1,18 +1,18 @@
 import { expect, test } from "bun:test";
-import { mkdtempSync, writeFileSync } from "node:fs";
-import { tmpdir } from "node:os";
+import { writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { findConfig, projectConfig } from "../src/config";
+import { temporaryDirectory } from "./temp-dir";
 
 test("finds nudgement.json at the top of the repo, and nothing when there is none", () => {
-  const repo = mkdtempSync(join(tmpdir(), "nudgement-config-"));
+  const repo = temporaryDirectory();
   expect(findConfig(repo)).toBeUndefined();
   writeFileSync(join(repo, "nudgement.json"), "{}");
   expect(findConfig(repo)).toBe(join(repo, "nudgement.json"));
 });
 
 test("a worktree also takes the names and lists added to the main checkout's config since it branched", () => {
-  const repo = mkdtempSync(join(tmpdir(), "nudgement-config-main-"));
+  const repo = temporaryDirectory();
   const git = (cwd: string, ...args: string[]) =>
     Bun.spawnSync(["git", "-C", cwd, "-c", "user.email=t@t", "-c", "user.name=t", ...args]);
   git(repo, "init", "-q");

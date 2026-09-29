@@ -2,6 +2,7 @@ import { expect, test } from "bun:test";
 import { readRecording, recordingKeys, requestKey } from "../scripts/jev-recordings";
 import { installReplay } from "../scripts/jev-replay";
 import { askJev } from "../src/jev";
+import { validateAnswers } from "../src/jev-response";
 
 const keys = recordingKeys();
 const recording = readRecording(keys[0]);
@@ -13,7 +14,7 @@ test("keeps four real responses for every exact API request", () => {
     expect(requestKey(item.request)).toBe(key);
     expect(item.samples).toHaveLength(4);
     for (const sample of item.samples)
-      expect(Object.keys(sample.body.answers).sort()).toEqual(Object.keys(item.request.questions).sort());
+      expect(validateAnswers(sample.body.answers, item.request.questions)).toEqual(sample.body.answers);
   }
 });
 

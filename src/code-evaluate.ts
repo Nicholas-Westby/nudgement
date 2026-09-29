@@ -35,7 +35,7 @@ export interface FileEvaluation {
   path: string;
   language?: string;
   /** "skipped" for files that are not code or are generated. */
-  verdict: "lean" | "ok" | "bloated" | "skipped";
+  verdict: "lean" | "ok" | "bloated" | "skipped" | "fail";
   skippedBecause?: string;
   /** 0 to 100, higher is leaner. Rough, for comparing versions of the same file. */
   leanness: number;
@@ -114,6 +114,8 @@ export async function evaluateFile(input: FileInput, options: FileOptions = {}):
   if (!fileAnswers) {
     verdict = verdictFromUnits(units);
   }
+
+  if (stats.failed) verdict = "fail";
 
   const evaluation: FileEvaluation = {
     ...base,

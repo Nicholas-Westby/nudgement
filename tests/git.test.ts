@@ -1,11 +1,11 @@
 import { expect, test } from "bun:test";
-import { mkdtempSync, writeFileSync } from "node:fs";
-import { tmpdir } from "node:os";
+import { writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { linesToReview, parseDiff, readStaged, usesScope, withoutMovedLines } from "../src/git";
+import { temporaryDirectory } from "./temp-dir";
 
 test("with amend, staged changes are read together with the commit they fold into", () => {
-  const repo = mkdtempSync(join(tmpdir(), "nudgement-amend-"));
+  const repo = temporaryDirectory();
   const git = (...args: string[]) =>
     Bun.spawnSync(["git", "-C", repo, "-c", "user.email=t@t", "-c", "user.name=t", ...args]);
   git("init", "-q");
@@ -69,7 +69,7 @@ test("lines moved from one file to another count as context, not as written", ()
 });
 
 test("a scope earlier commits to the same files use is the house scope for them", () => {
-  const repo = mkdtempSync(join(tmpdir(), "nudgement-scope-"));
+  const repo = temporaryDirectory();
   const git = (...args: string[]) =>
     Bun.spawnSync(["git", "-C", repo, "-c", "user.email=t@t", "-c", "user.name=t", ...args]);
   git("init", "-q");
