@@ -1,0 +1,147 @@
+{
+  "url": "https://nudgement.dev",
+  "cloudflareVersion": "2797a7b8-91f5-4c83-bc1a-e55f268ad0c3",
+  "baseline": {
+    "commit": "ebf2235",
+    "repositoryTests": 251,
+    "previousWebsiteVerification": "website.json"
+  },
+  "repositoryTests": {
+    "passed": 261,
+    "failed": 0
+  },
+  "browserTests": {
+    "passed": 38,
+    "failed": 0
+  },
+  "newRecordedRequests": 26,
+  "samplesPerRequest": 4,
+  "audits": {
+    "mobile": {
+      "at": "2026-09-29T17:21:01.447Z",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": 1201.173,
+        "largest-contentful-paint": 1201.173,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0,
+        "total-byte-weight": 44029
+      }
+    },
+    "desktop": {
+      "at": "2026-09-29T17:21:09.717Z",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": 1007.4868,
+        "largest-contentful-paint": 1007.4868,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0,
+        "total-byte-weight": 23966
+      }
+    }
+  },
+  "selfReview": {
+    "beforePage": "20260929171248-jzhf",
+    "finalPage": "20260929171701-s6cu",
+    "code": [
+      "20260929171545-4u17",
+      "20260929171545-ra7j",
+      "20260929171545-9v9c",
+      "20260929171545-4g6v",
+      "20260929171545-26gb"
+    ],
+    "evaluatorCommit": "20260929171839-j8ni",
+    "websiteCommit": "20260929172116-xuoi",
+    "readmes": [
+      "20260929172325-nppd",
+      "20260929172325-xbmx"
+    ]
+  },
+  "copyComparison": {
+    "before": [
+      {
+        "text": "nudgement \u2014 A little nudge. Better judgement.",
+        "findings": [
+          {
+            "severity": "warn",
+            "part": "title",
+            "message": "Replace the abstract claim with what the tool does, checks or changes.",
+            "source": "jev:prose_vague=0.59"
+          }
+        ]
+      },
+      {
+        "text": "The code compiles. The tests pass. But does the commit say anything? Does that comment explain why? Sometimes the next improvement needs a different kind of check.",
+        "findings": [
+          {
+            "severity": "warn",
+            "part": "text",
+            "message": "Drop the rhetorical setup. State the useful information directly.",
+            "source": "jev:prose_setup=0.68"
+          }
+        ]
+      },
+      {
+        "text": "Same intent. A more thoughtful result.",
+        "findings": [
+          {
+            "severity": "warn",
+            "part": "text",
+            "message": "Replace the abstract claim with what the tool does, checks or changes.",
+            "source": "jev:prose_vague=0.59"
+          }
+        ]
+      },
+      {
+        "text": "A formatter knows where the semicolon goes. nudgement asks whether the thought holds up.",
+        "findings": [
+          {
+            "severity": "warn",
+            "part": "text",
+            "message": "Replace the abstract claim with what the tool does, checks or changes.",
+            "source": "jev:prose_vague=0.51"
+          }
+        ]
+      },
+      {
+        "text": "A little more thought goes a long way.",
+        "findings": [
+          {
+            "severity": "warn",
+            "part": "text",
+            "message": "Replace the abstract claim with what the tool does, checks or changes.",
+            "source": "jev:prose_vague=0.73"
+          }
+        ]
+      }
+    ],
+    "after": [
+      {
+        "text": "Jev-based concept linting to nudge your LLM to improve its judgement.",
+        "findings": [
+          {
+            "severity": "warn",
+            "part": "text",
+            "message": "Use plainer words; this reads like jargon.",
+            "source": "jev:plain=0.32"
+          }
+        ]
+      }
+    ]
+  },
+  "coverage": {
+    "lines": 91.57,
+    "functions": 93.38,
+    "testCount": 261
+  }
+}

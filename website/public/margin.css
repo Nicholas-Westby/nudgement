@@ -1,0 +1,233 @@
+/* The page is a working draft; the pencil stays in the gutter, outside reading and tap targets. */
+.draft {
+  margin: 0;
+  padding: 28px;
+  background: #eeeedf;
+  border: 1px solid #d7dbc8;
+  box-shadow: 8px 8px 0 #e5e8d8;
+  transform: rotate(1deg);
+}
+.draft-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font: 0.75rem / 1.5 var(--mono);
+  color: var(--muted);
+}
+.draft-sheet {
+  padding: 40px 20px 28px;
+  margin-block: 24px;
+  background: #fffef8;
+  border: 1px solid #dfe1d6;
+  background-image: repeating-linear-gradient(transparent 0 31px, #dfe4d44a 31px 32px);
+}
+.draft-label {
+  font: 0.75rem var(--mono);
+  color: var(--muted);
+  margin-bottom: 30px;
+}
+.draft-line {
+  font:
+    2.4rem / 1.2 Georgia,
+    serif;
+  letter-spacing: -1px;
+  margin-bottom: 0;
+}
+.draft-line span {
+  text-decoration: underline wavy var(--accent) 1px;
+  text-underline-offset: 7px;
+}
+.pencil-note {
+  position: relative;
+  color: var(--accent);
+  font:
+    italic 1.25rem / 1.3 Georgia,
+    serif;
+  text-align: right;
+  padding-top: 55px;
+  margin-bottom: 28px;
+  transform: rotate(-5deg);
+}
+.pencil-note svg {
+  position: absolute;
+  width: 80px;
+  height: 45px;
+  top: 10px;
+  right: 55px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.draft-revision {
+  font: 0.875rem / 1.7 var(--mono);
+  margin: 0;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+.draft figcaption {
+  font: 0.75rem / 1.7 var(--mono);
+  color: var(--muted);
+}
+.reading-pencil {
+  position: fixed;
+  top: 0;
+  left: max(13px, calc((100vw - 1400px) / 2));
+  width: 21px;
+  height: 77px;
+  pointer-events: none;
+  z-index: 5;
+  will-change: transform;
+}
+.reading-pencil svg {
+  width: 100%;
+  height: 100%;
+}
+.pencil-body {
+  fill: var(--accent);
+}
+.pencil-edge {
+  fill: none;
+  stroke: #e4775e;
+  stroke-width: 1;
+}
+.pencil-wood {
+  fill: #cdaa74;
+}
+.pencil-tip {
+  fill: var(--ink);
+}
+.pencil-ferrule {
+  fill: #9aab98;
+}
+.pencil-eraser {
+  fill: #d99884;
+}
+.nudge-arrow {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 4;
+}
+.nudge-arrow.is-nudging {
+  animation: pencil-cue 1000ms ease both;
+}
+[data-nudge].is-nudging {
+  animation: gentle-nudge 1000ms ease both;
+}
+@keyframes pencil-cue {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  25%,
+  60% {
+    opacity: 0.85;
+  }
+}
+@keyframes gentle-nudge {
+  0%,
+  100% {
+    translate: 0;
+  }
+  35% {
+    translate: 3px 0;
+  }
+}
+.motion-toggle {
+  min-height: 44px;
+  padding: 10px 0;
+  border: 0;
+  color: var(--muted);
+  background: transparent;
+  font: 0.75rem var(--mono);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+@media (max-width: 1050px) and (min-width: 761px) {
+  .wrap {
+    width: calc(100% - 96px);
+  }
+  .draft {
+    padding: 20px;
+  }
+  .draft-sheet {
+    padding-inline: 16px;
+  }
+  .draft-line {
+    font-size: 2rem;
+  }
+  .comparison {
+    grid-template-columns: 1fr;
+  }
+  .before,
+  .finding {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+}
+@media (max-width: 760px) {
+  .draft {
+    padding: 18px;
+    transform: none;
+    box-shadow: 4px 4px 0 #e5e8d8;
+  }
+  .draft-sheet {
+    padding: 24px 18px;
+    margin-block: 20px;
+  }
+  .draft-label {
+    margin-bottom: 18px;
+  }
+  .draft-line {
+    font-size: 2rem;
+  }
+  .pencil-note {
+    margin-bottom: 20px;
+  }
+  .draft-heading {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .reading-pencil {
+    left: 10px;
+    width: 16px;
+    height: 59px;
+  }
+  .site-footer {
+    gap: 8px 20px;
+  }
+  .site-footer p {
+    order: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reading-pencil,
+  .nudge-arrow {
+    display: none;
+  }
+  [data-nudge].is-nudging,
+  .nudge-arrow.is-nudging {
+    animation: none;
+  }
+}
+
+/* Grid children must be able to wrap at 200% text size, even with long headings. */
+.hero > *,
+.try-section > * {
+  min-width: 0;
+}
+.hero h1,
+.draft-line,
+.draft-revision {
+  overflow-wrap: anywhere;
+}

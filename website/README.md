@@ -20,6 +20,16 @@ The audit requires performance ≥95 and accessibility, best practices and SEO s
 Reports go to ignored `audit-results/`; browser failures keep traces in `test-results/`.
 Automated accessibility checks supplement manual keyboard, zoom and visual inspection.
 
-`public/trajectory.js` draws only on input or resize. It honors reduced motion, caps pixel density,
-and stops animation when the tab is hidden. The inline SVG remains when scripts or canvas are unavailable.
-The rest of the page is plain HTML; the example picker and clipboard button appear only when usable.
+`public/margin.js` moves a pencil with reading progress and briefly nudges marked elements once per visit.
+It schedules frames only after scroll/resize, waits for a reading pause before showing an arrow,
+and stops when the tab is hidden, motion is paused or reduced motion is requested.
+The page and annotated draft remain usable without JavaScript. Examples read before → nudgement → after
+in both document order and the responsive layout.
+
+Review the page copy from the repository root:
+
+```sh
+bun evaluate.ts . --copy website/public/index.html --config website/nudgement.json
+```
+
+This review sends the page text to Jev. The configuration describes its developer audience.

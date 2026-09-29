@@ -1,0 +1,6 @@
+{
+  "copy": {
+    "app": "An open-source code review tool for developers and their coding agents. The website explains its evaluators and shows saved before-and-after examples. Readers know Git, commits, diffs, API keys and command-line tools.",
+    "properNouns": ["Jev", "TypeSafe", "GitHub", "MIT", "Bun", "UI", "CLI", "OSC", "LLM", "Nicholas Westby"]
+  }
+}

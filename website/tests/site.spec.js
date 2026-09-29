@@ -12,8 +12,8 @@ for (const [key, example] of Object.entries(examples)) {
     await expect(button).toHaveAttribute("aria-pressed", "true");
     await expect(page.getByRole("button", { pressed: true })).toHaveCount(1);
     await expect(page.getByRole("heading", { name: example.title })).toBeVisible();
-    await expect(page.getByText(example.before, { exact: true })).toBeVisible();
-    await expect(page.getByText(example.after, { exact: true })).toBeVisible();
+    await expect(page.getByRole("article").getByText(example.before, { exact: true })).toBeVisible();
+    await expect(page.getByRole("article").getByText(example.after, { exact: true })).toBeVisible();
     await expect(page.getByText(example.finding, { exact: true })).toBeVisible();
     await expect(page.getByRole("link", { name: `Source: ${example.source}` })).toHaveAttribute("href", example.url);
   });
@@ -34,20 +34,6 @@ test("the skip link is the first keyboard stop and reaches main content", async 
   await expect(page.getByRole("link", { name: "Skip to content" })).toBeFocused();
   await page.keyboard.press("Enter");
   await expect(page).toHaveURL(/#main$/);
-});
-
-test("the slider changes the diagram using the keyboard", async ({ page }) => {
-  await page.goto("/");
-  const slider = page.getByRole("slider", { name: "Give it a nudge" });
-  await slider.focus();
-  await page.keyboard.press("ArrowRight");
-  await expect(slider).toHaveValue("73");
-  await expect(slider).toHaveAttribute("aria-valuetext", "73 percent toward the intended direction");
-  // The decorative canvas has no accessible role; compare its pixels after real keyboard input.
-  const before = await page.locator("canvas").evaluate((canvas) => canvas.toDataURL());
-  await page.keyboard.press("End");
-  await expect(slider).toHaveValue("100");
-  await expect.poll(() => page.locator("canvas").evaluate((canvas) => canvas.toDataURL())).not.toBe(before);
 });
 
 test("example buttons can be selected with a visible keyboard focus ring", async ({ page }) => {
@@ -81,19 +67,6 @@ test("clipboard denial selects the command for manual copying", async ({ page })
   expect(await page.evaluate(() => getSelection().toString())).toContain("bun evaluate.ts /path/to/your-repo");
 });
 
-test("reduced motion updates the diagram without an animation", async ({ page }) => {
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("/");
-  const slider = page.getByRole("slider");
-  await slider.focus();
-  await page.keyboard.press("End");
-  const still = await page.locator("canvas").evaluate((canvas) => canvas.toDataURL());
-  // Let queued frames run; reduced motion must not continue changing the pixels.
-  await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))));
-  expect(await page.locator("canvas").evaluate((canvas) => canvas.toDataURL())).toBe(still);
-  expect(await page.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior)).toBe("auto");
-});
-
 test("the page remains useful without JavaScript", async ({ browser, baseURL }) => {
   const context = await browser.newContext({ javaScriptEnabled: false });
   const page = await context.newPage();
@@ -102,7 +75,7 @@ test("the page remains useful without JavaScript", async ({ browser, baseURL }) 
   await expect(page.getByText(examples.commit.finding)).toBeVisible();
   await expect(page.getByText("# From your nudgement checkout", { exact: false })).toBeVisible();
   await expect(page.getByRole("figure").locator("svg")).toBeVisible();
-  await expect(page.getByRole("slider")).toHaveCount(0);
+  await expect(page.locator(".reading-pencil")).toBeHidden();
   await expect(page.getByRole("button")).toHaveCount(0);
   await context.close();
 });

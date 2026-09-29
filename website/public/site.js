@@ -1,5 +1,5 @@
 import { examples } from "./examples.js";
-import { initTrajectory } from "./trajectory.js";
+import { initMargin } from "./margin.js";
 
 const picker = document.querySelector(".example-picker");
 const buttons = [...picker.querySelectorAll("button")];
@@ -43,5 +43,4 @@ if (navigator.clipboard?.writeText) {
     }
   });
 }
-// Enhance the static diagram after the example controls are usable.
-initTrajectory();
+initMargin();
