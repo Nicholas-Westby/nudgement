@@ -19,14 +19,14 @@ Run the file directly from this checkout:
 
 ```sh
 # Review staged changes and the message you intend to commit.
-bun evaluate.ts . --staged -m "fix(cli): exit successfully for --help"
+bun evaluate.ts /path-to/your-repo --staged -m "fix(cli): exit successfully for --help"
 
 # Review a README or a source file, including its functions and classes.
-bun evaluate.ts . --readme
-bun evaluate.ts . --file src/jev.ts
+bun evaluate.ts /path-to/your-repo --readme
+bun evaluate.ts /path-to/your-repo --file src/jev.ts
 
 # Review another repository using an absolute path to the script.
-bun /path/to/nudgement/evaluate.ts /path/to/project --hash HEAD
+bun /path/to/nudgement/evaluate.ts /path-to/your-repo --hash HEAD
 ```
 
 Reviews send the selected text and relevant context to Jev and may incur API
