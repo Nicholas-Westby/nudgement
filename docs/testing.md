@@ -6,6 +6,11 @@ The benchmark regression test compares every result to the saved pre-change
 baseline. A changed question or input therefore requires an explicit capture
 and a review of the resulting differences.
 
+Manifest filenames are sorted before loading so discovery is consistent across
+filesystems. The regression test compares the serialized results by suite,
+matching file and README cases by ID because the original baseline used local
+directory order. Every case and its complete result must still match.
+
 ## Fixtures
 
 - `bench/` contains inputs: code, tests, documents, commit histories and human

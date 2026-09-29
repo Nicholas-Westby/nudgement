@@ -109,6 +109,7 @@ export function benchRepo(name: string): string {
 export function manifests<T>(prefix: string): T[] {
   return readdirSync(BENCH)
     .filter((name) => name.startsWith(prefix) && name.endsWith(".json"))
+    .sort()
     .flatMap((name) => JSON.parse(readFileSync(join(BENCH, name), "utf8")));
 }
 
