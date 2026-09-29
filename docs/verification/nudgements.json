@@ -1,0 +1,709 @@
+{
+  "capturedAt": "2026-09-29",
+  "note": "After versions are local proposals, not changes applied upstream. README reviews use the whole document; test reviews target the extracted test. Existing-link checks were disabled for the copied upstream README.",
+  "examples": [
+    {
+      "id": "commit",
+      "source": "https://github.com/chalk/ansi-regex/commit/f1bf1f05234e43ad241cf0408cb03c39e147218c",
+      "before": "Improve performance",
+      "after": "fix: stop unterminated OSC strings consuming later escapes",
+      "initial": {
+        "runId": "20260929054831-ozff",
+        "version": "28835da+dirty",
+        "repo": "/tmp/nudgement-public-examples",
+        "ref": "f1bf1f05234e43ad241cf0408cb03c39e147218c",
+        "message": "Improve performance",
+        "verdict": "fail",
+        "score": 32,
+        "issues": [
+          {
+            "severity": "error",
+            "part": "header",
+            "message": "The first line must look like \"type(scope): subject\". Got: \"Improve performance\"",
+            "source": "lint:format"
+          },
+          {
+            "severity": "error",
+            "part": "human",
+            "message": "The message reads as AI-written. Say plainly and briefly what changed.",
+            "source": "jev:sounds_human=0.52"
+          },
+          {
+            "severity": "warn",
+            "part": "human",
+            "message": "Has a hint of AI wording. Check for filler words and vague claims.",
+            "source": "jev:ai_filler=0.14"
+          },
+          {
+            "severity": "warn",
+            "part": "human",
+            "message": "Claims benefits without saying concretely what changed.",
+            "source": "jev:vague_benefits=0.98"
+          },
+          {
+            "severity": "warn",
+            "part": "subject",
+            "message": "The subject is generic. Name what actually changed.",
+            "source": "jev:subject_generic=0.91"
+          },
+          {
+            "severity": "warn",
+            "part": "subject",
+            "message": "The subject may not match what the diff does.",
+            "source": "jev:subject_accurate=0.59"
+          },
+          {
+            "severity": "warn",
+            "part": "subject",
+            "message": "The subject names a side detail. Lead with the main change.",
+            "source": "jev:subject_main_change=0.25"
+          },
+          {
+            "severity": "warn",
+            "part": "subject",
+            "message": "The subject is vague. Say what changed and where.",
+            "source": "jev:subject_specificity=0.02/3"
+          },
+          {
+            "severity": "warn",
+            "part": "body",
+            "message": "The diff has a significant change the message does not mention.",
+            "source": "jev:omits_major_change=0.77"
+          },
+          {
+            "severity": "info",
+            "part": "body",
+            "message": "Add a bullet: something a reviewer needs is missing.",
+            "source": "jev:bullet_count=more@0.62"
+          },
+          {
+            "severity": "info",
+            "part": "subject",
+            "message": "Most in need of improvement: subject.",
+            "source": "jev:weakest_part=subject@0.62"
+          }
+        ],
+        "comments": [],
+        "readings": {
+          "sounds_human": 0.52,
+          "ai_filler": 0.14,
+          "vague_benefits": 0.98,
+          "over_explained": 0.26,
+          "subject_imperative": 0.92,
+          "subject_generic": 0.91,
+          "tone": {
+            "choice": "terse_developer",
+            "probabilities": {
+              "terse_developer": 0.98,
+              "ai_assistant": 0,
+              "plain_professional": 0.01,
+              "marketing": 0.01
+            }
+          },
+          "type_fits": 0.17,
+          "best_type": {
+            "choice": "fix",
+            "confidence": 0.54,
+            "probabilities": {
+              "chore": 0,
+              "revert": 0,
+              "ci": 0,
+              "test": 0,
+              "refactor": 0,
+              "docs": 0,
+              "feat": 0,
+              "perf": 0.41,
+              "fix": 0.59,
+              "build": 0,
+              "style": 0
+            }
+          },
+          "subject_accurate": 0.59,
+          "subject_main_change": 0.25,
+          "subject_specificity": 0.02,
+          "claims_unsupported": 0.21,
+          "omits_major_change": 0.77,
+          "lists_files": 0.05,
+          "should_split": 0.07,
+          "why_given": {
+            "choice": "why_missing",
+            "probabilities": {
+              "why_obvious": 0.17,
+              "explains_why": 0.23,
+              "why_missing": 0.6
+            }
+          },
+          "bullet_count": {
+            "choice": "more",
+            "probabilities": {
+              "right": 0.25,
+              "fewer": 0.01,
+              "more": 0.74
+            }
+          },
+          "scope_needed": 0.39,
+          "overall": 0.96,
+          "weakest_part": {
+            "choice": "subject",
+            "confidence": 0.62,
+            "probabilities": {
+              "nothing": 0,
+              "subject": 0.69,
+              "body": 0.26,
+              "scope": 0,
+              "type": 0.05
+            }
+          }
+        },
+        "diffTruncated": [],
+        "files": [],
+        "jev": {
+          "requests": 2,
+          "failed": 0,
+          "inputTokens": 3459,
+          "ms": 249
+        },
+        "report": "FAIL  f1bf1f0523  score 32/100\n\n  | Improve performance\n\nCommit message\n  \u2717 [header] The first line must look like \"type(scope): subject\". Got: \"Improve performance\"\n  \u2717 [human] The message reads as AI-written. Say plainly and briefly what changed.  (jev:sounds_human=0.52)\n  ! [human] Has a hint of AI wording. Check for filler words and vague claims.  (jev:ai_filler=0.14)\n  ! [human] Claims benefits without saying concretely what changed.  (jev:vague_benefits=0.98)\n  ! [subject] The subject is generic. Name what actually changed.  (jev:subject_generic=0.91)\n  ! [subject] The subject may not match what the diff does.  (jev:subject_accurate=0.59)\n  ! [subject] The subject names a side detail. Lead with the main change.  (jev:subject_main_change=0.25)\n  ! [subject] The subject is vague. Say what changed and where.  (jev:subject_specificity=0.02/3)\n  ! [body] The diff has a significant change the message does not mention.  (jev:omits_major_change=0.77)\n  \u00b7 [subject] Most in need of improvement: subject.  (jev:weakest_part=subject@0.62)\n\nrun 20260929054831-ozff \u00b7 nudgement 28835da+dirty \u00b7 2 Jev requests \u00b7 249 ms"
+      },
+      "final": {
+        "runId": "20260929054831-qzae",
+        "version": "28835da+dirty",
+        "repo": "/tmp/nudgement-public-examples",
+        "ref": "f1bf1f05234e43ad241cf0408cb03c39e147218c",
+        "message": "fix: stop unterminated OSC strings consuming later escapes",
+        "verdict": "pass",
+        "score": 84,
+        "issues": [
+          {
+            "severity": "info",
+            "part": "body",
+            "message": "Most in need of improvement: body.",
+            "source": "jev:weakest_part=body@0.40"
+          }
+        ],
+        "comments": [],
+        "readings": {
+          "sounds_human": 0.88,
+          "ai_filler": 0.03,
+          "vague_benefits": 0.14,
+          "over_explained": 0.18,
+          "subject_imperative": 0.97,
+          "subject_generic": 0.06,
+          "tone": {
+            "choice": "terse_developer",
+            "probabilities": {
+              "terse_developer": 1,
+              "ai_assistant": 0,
+              "marketing": 0,
+              "plain_professional": 0
+            }
+          },
+          "type_fits": 0.97,
+          "best_type": {
+            "choice": "fix",
+            "confidence": 1,
+            "probabilities": {
+              "feat": 0,
+              "ci": 0,
+              "chore": 0,
+              "style": 0,
+              "revert": 0,
+              "refactor": 0,
+              "test": 0,
+              "perf": 0,
+              "fix": 1,
+              "docs": 0,
+              "build": 0
+            }
+          },
+          "subject_accurate": 0.94,
+          "subject_main_change": 0.95,
+          "subject_specificity": 2.81,
+          "claims_unsupported": 0.06,
+          "omits_major_change": 0.22,
+          "lists_files": 0.05,
+          "should_split": 0.05,
+          "why_given": {
+            "choice": "explains_why",
+            "probabilities": {
+              "explains_why": 0.77,
+              "why_missing": 0.03,
+              "why_obvious": 0.2
+            }
+          },
+          "bullet_count": {
+            "choice": "right",
+            "probabilities": {
+              "more": 0.29,
+              "fewer": 0.01,
+              "right": 0.7
+            }
+          },
+          "scope_needed": 0.38,
+          "overall": 2.1,
+          "weakest_part": {
+            "choice": "body",
+            "confidence": 0.4,
+            "probabilities": {
+              "body": 0.51,
+              "scope": 0.21,
+              "subject": 0.08,
+              "type": 0.01,
+              "nothing": 0.19
+            }
+          }
+        },
+        "diffTruncated": [],
+        "files": [],
+        "jev": {
+          "requests": 2,
+          "failed": 0,
+          "inputTokens": 3486,
+          "ms": 95
+        },
+        "report": "PASS  f1bf1f0523  score 84/100\n\n  | fix: stop unterminated OSC strings consuming later escapes\n\nCommit message\n  \u00b7 [body] Most in need of improvement: body.  (jev:weakest_part=body@0.40)\n\nrun 20260929054831-qzae \u00b7 nudgement 28835da+dirty \u00b7 2 Jev requests \u00b7 95 ms"
+      },
+      "diff": [
+        {
+          "filename": "index.js",
+          "additions": 3,
+          "deletions": 2,
+          "patch": "@@ -2,8 +2,9 @@ export default function ansiRegex({onlyFirst = false} = {}) {\n \t// Valid string terminator sequences are BEL, ESC\\, and 0x9c\n \tconst ST = '(?:\\\\u0007|\\\\u001B\\\\u005C|\\\\u009C)';\n \n-\t// OSC sequences only: ESC ] ... ST (non-greedy until the first ST)\n-\tconst osc = `(?:\\\\u001B\\\\][\\\\s\\\\S]*?${ST})`;\n+\t// OSC sequences only: ESC ] ... ST\n+\t// The payload stops at the first terminator character rather than scanning ahead for one, so an unterminated `ESC ]` cannot rescan the rest of the input. Terminals likewise abort a control string on an unexpected ESC.\n+\tconst osc = `(?:\\\\u001B\\\\][^\\\\u0007\\\\u001B\\\\u009C]*${ST})`;\n \n \t// CSI and related: ESC/C1, optional intermediates, optional params (supports ; and :) then final byte\n \tconst csi = '[\\\\u001B\\\\u009B][[\\\\]()#;?]*(?:\\\\d{1,4}(?:[;:]\\\\d{0,4})*)?[\\\\dA-PR-TZcf-nq-uy=><~]';"
+        },
+        {
+          "filename": "test.js",
+          "additions": 23,
+          "deletions": 0,
+          "patch": "@@ -159,6 +159,29 @@ test('does not match ESC followed by unsupported final', t => {\n \tt.is(inputString.match(ansiRegex()), null);\n });\n \n+test('an unterminated OSC sequence does not consume a later one', t => {\n+\t// The payload used to scan ahead for a terminator, so an unterminated `ESC ]` swallowed everything up to the next sequence's terminator, deleting the visible text in between.\n+\tconst inputString = '\\u001B]0;unterminated text \\u001B]8;;https://example.com\\u0007link';\n+\tt.true(inputString.replace(ansiRegex(), '').includes('text'));\n+\tt.false(inputString.replace(ansiRegex(), '').includes('https://example.com'));\n+});\n+\n+test('an OSC sequence does not consume a later sequence after an unexpected ESC', t => {\n+\tconst inputString = '\\u001B]:payload\\u001B[31mvisible\\u001B]8;;https://example.com\\u0007';\n+\tt.deepEqual(inputString.match(ansiRegex()), [\n+\t\t'\\u001B[31m',\n+\t\t'\\u001B]8;;https://example.com\\u0007',\n+\t]);\n+\tt.is(inputString.replace(ansiRegex(), ''), '\\u001B]:payloadvisible');\n+});\n+\n+test('match OSC sequences containing non-terminator control characters', t => {\n+\tfor (const terminator of ['\\u0007', '\\u001B\\u005C', '\\u009C']) {\n+\t\tconst inputString = `\\u001B]0;title\\u0000\\u0008\\n\\u000B\\u000C\\u000D${terminator}`;\n+\t\tt.is(inputString.match(ansiRegex())[0], inputString);\n+\t}\n+});\n+\n // Testing against extended codes (excluding codes ending in 0-9)\n for (const [codeSetKey, codeSetValue] of Object.entries(ansiCodes)) {\n \tfor (const [code, codeInfo] of codeSetValue) {"
+        }
+      ]
+    },
+    {
+      "id": "readme",
+      "source": "https://github.com/chalk/ansi-regex/blob/f923667b5ea05b8b0447f6ead4c56661b7bf7fa1/readme.md",
+      "before": "# ansi-regex\n\n> Regular expression for matching [ANSI escape codes](https://en.wikipedia.org/wiki/ANSI_escape_code)\n\n## Install\n\n```sh\nnpm install ansi-regex\n```\n\n## Usage\n\n```js\nimport ansiRegex from 'ansi-regex';\n\nansiRegex().test('\\u001B[4mcake\\u001B[0m');\n//=> true\n\nansiRegex().test('cake');\n//=> false\n\n'\\u001B[4mcake\\u001B[0m'.match(ansiRegex());\n//=> ['\\u001B[4m', '\\u001B[0m']\n\n'\\u001B[4mcake\\u001B[0m'.match(ansiRegex({onlyFirst: true}));\n//=> ['\\u001B[4m']\n\n'\\u001B]8;;https://github.com\\u0007click\\u001B]8;;\\u0007'.match(ansiRegex());\n//=> ['\\u001B]8;;https://github.com\\u0007', '\\u001B]8;;\\u0007']\n```\n\n## API\n\n### ansiRegex(options?)\n\nReturns a regex for matching ANSI escape codes.\n\n#### options\n\nType: `object`\n\n##### onlyFirst\n\nType: `boolean`\\\nDefault: `false` *(Matches any ANSI escape codes in a string)*\n\nMatch only the first ANSI escape.\n\n## Important\n\nIf you run the regex against untrusted user input in a server context, you should [give it a timeout](https://github.com/sindresorhus/super-regex).\n\n**I do not consider [ReDoS](https://blog.yossarian.net/2022/12/28/ReDoS-vulnerabilities-and-misaligned-incentives) a valid vulnerability for this package.**\n\n## FAQ\n\n### Why do you test for codes not in the ECMA 48 standard?\n\nSome of the codes we run as a test are codes that we acquired finding various lists of non-standard or manufacturer specific codes. We test for both standard and non-standard codes, as most of them follow the same or similar format and can be safely matched in strings without the risk of removing actual string content. There are a few non-standard control codes that do not follow the traditional format (i.e. they end in numbers) thus forcing us to exclude them from the test because we cannot reliably match them.\n\nOn the historical side, those ECMA standards were established in the early 90's whereas the VT100, for example, was designed in the mid/late 70's. At that point in time, control codes were still pretty ungoverned and engineers used them for a multitude of things, namely to activate hardware ports that may have been proprietary. Somewhere else you see a similar 'anarchy' of codes is in the x86 architecture for processors; there are a ton of \"interrupts\" that can mean different things on certain brands of processors, most of which have been phased out.\n\n## Maintainers\n\n- [Sindre Sorhus](https://github.com/sindresorhus)\n- [Josh Junon](https://github.com/qix-)\n",
+      "after": "# ansi-regex\n\nMatch [ANSI escape codes](https://en.wikipedia.org/wiki/ANSI_escape_code), including common vendor extensions.\n\n## Usage\n\n```sh\nnpm install ansi-regex\n```\n\n```js\nimport ansiRegex from 'ansi-regex';\n\n'\\u001B[4mcake\\u001B[0m'.match(ansiRegex());\n//=> ['\\u001B[4m', '\\u001B[0m']\n\n'\\u001B[4mcake\\u001B[0m'.match(ansiRegex({onlyFirst: true}));\n//=> ['\\u001B[4m']\n```\n\n`ansiRegex()` returns a global regular expression for ANSI escapes.\nPass `{onlyFirst: true}` to match only the first escape.\n\n## Notes\n\nFor untrusted server input, [apply a timeout](https://github.com/sindresorhus/super-regex).\nThe maintainer does not classify ReDoS as a vulnerability in this package.\n\nSome non-standard codes ending in numbers are excluded because matching them\ncould remove ordinary text.\n\n## Maintainers\n\n[Sindre Sorhus](https://github.com/sindresorhus) and [Josh Junon](https://github.com/qix-).\n",
+      "initial": {
+        "kind": "readme",
+        "runId": "20260929054930-mhes",
+        "version": "28835da+dirty",
+        "path": "README.md",
+        "verdict": "fail",
+        "score": 50,
+        "facts": {
+          "lines": 66,
+          "words": 277,
+          "headings": {
+            "h1": 1,
+            "h2": 6,
+            "h3": 4
+          },
+          "codeBlocks": 2,
+          "listItems": 2,
+          "tables": 0,
+          "badges": 0,
+          "emoji": 0,
+          "hasToc": false,
+          "longestParagraphWords": 94
+        },
+        "issues": [
+          {
+            "severity": "error",
+            "part": "length",
+            "message": "Bloated. The same content fits in far fewer words.",
+            "source": "jev:shrink=0.65"
+          }
+        ],
+        "sections": [
+          {
+            "heading": "API",
+            "startLine": 32,
+            "endLine": 48,
+            "words": 33,
+            "issues": [],
+            "readings": {
+              "sounds_human": 0.84,
+              "filler": 0.1,
+              "earns_its_place": 0.61,
+              "matches_heading": 0.91,
+              "over_structured": 0.21,
+              "shrink": 0.26,
+              "action": "keep",
+              "action_probabilities": {
+                "keep": 0.6,
+                "trim": 0.21,
+                "rewrite_plainly": 0.04,
+                "delete": 0.06,
+                "merge": 0.09
+              }
+            }
+          },
+          {
+            "heading": "Important",
+            "startLine": 49,
+            "endLine": 54,
+            "words": 31,
+            "issues": [],
+            "readings": {
+              "sounds_human": 0.89,
+              "filler": 0.12,
+              "earns_its_place": 0.67,
+              "matches_heading": 0.81,
+              "over_structured": 0.25,
+              "shrink": 0.13,
+              "action": "keep",
+              "action_probabilities": {
+                "keep": 0.41000000000000003,
+                "delete": 0.04,
+                "rewrite_plainly": 0.23,
+                "trim": 0.23,
+                "merge": 0.09
+              }
+            }
+          },
+          {
+            "heading": "FAQ",
+            "startLine": 55,
+            "endLine": 62,
+            "words": 198,
+            "issues": [],
+            "readings": {
+              "sounds_human": 0.78,
+              "filler": 0.17,
+              "earns_its_place": 0.66,
+              "matches_heading": 0.88,
+              "over_structured": 0.12,
+              "shrink": 0.43,
+              "action": "keep",
+              "action_probabilities": {
+                "delete": 0.03,
+                "trim": 0.16,
+                "rewrite_plainly": 0.1,
+                "merge": 0.04,
+                "keep": 0.67
+              }
+            }
+          }
+        ],
+        "readings": {
+          "sounds_human": 0.87,
+          "ai_filler": 0.08,
+          "marketing": 0.03,
+          "says_what_it_is": 0.86,
+          "shows_usage": 0.93,
+          "too_terse": 0.25,
+          "shrink": 0.65,
+          "rewrite_length": {
+            "choice": "much_shorter",
+            "probabilities": {
+              "about_the_same": 0.07,
+              "a_fraction": 0.16,
+              "somewhat_shorter": 0.28,
+              "much_shorter": 0.49
+            }
+          },
+          "padding": 0.29,
+          "over_structured": 0.12,
+          "boilerplate": 0.13,
+          "redundancy": 0.18,
+          "disorganized": 0.14,
+          "overall": 0.14,
+          "biggest_problem": {
+            "choice": "nothing",
+            "confidence": 0.82,
+            "probabilities": {
+              "disorganized": 0.01,
+              "redundancy": 0.01,
+              "over_structured": 0.01,
+              "boilerplate": 0.01,
+              "missing_usage": 0,
+              "ai_voice": 0.01,
+              "too_terse": 0,
+              "nothing": 0.84,
+              "marketing": 0,
+              "missing_what_it_is": 0.03,
+              "padding": 0.08
+            }
+          }
+        },
+        "jev": {
+          "requests": 4,
+          "failed": 0,
+          "inputTokens": 5242,
+          "ms": 271
+        }
+      },
+      "final": {
+        "kind": "readme",
+        "runId": "20260929055608-scly",
+        "version": "7263d22+dirty",
+        "path": "README.md",
+        "verdict": "pass",
+        "score": 61,
+        "facts": {
+          "lines": 34,
+          "words": 69,
+          "headings": {
+            "h1": 1,
+            "h2": 3,
+            "h3": 0
+          },
+          "codeBlocks": 2,
+          "listItems": 0,
+          "tables": 0,
+          "badges": 0,
+          "emoji": 0,
+          "hasToc": false,
+          "longestParagraphWords": 19
+        },
+        "issues": [],
+        "sections": [
+          {
+            "heading": "Usage",
+            "startLine": 5,
+            "endLine": 23,
+            "words": 19,
+            "issues": [],
+            "readings": {
+              "sounds_human": 0.86,
+              "filler": 0.08,
+              "earns_its_place": 0.75,
+              "matches_heading": 0.89,
+              "over_structured": 0.32,
+              "shrink": 0.2,
+              "action": "keep",
+              "action_probabilities": {
+                "trim": 0.33,
+                "rewrite_plainly": 0.07,
+                "merge": 0.03,
+                "keep": 0.51,
+                "delete": 0.06
+              }
+            }
+          },
+          {
+            "heading": "Notes",
+            "startLine": 24,
+            "endLine": 31,
+            "words": 35,
+            "issues": [],
+            "readings": {
+              "sounds_human": 0.86,
+              "filler": 0.1,
+              "earns_its_place": 0.65,
+              "matches_heading": 0.84,
+              "over_structured": 0.44,
+              "shrink": 0.16999999999999998,
+              "action": "rewrite_plainly",
+              "action_probabilities": {
+                "keep": 0.26,
+                "delete": 0.07,
+                "rewrite_plainly": 0.37,
+                "trim": 0.17,
+                "merge": 0.13
+              }
+            }
+          }
+        ],
+        "readings": {
+          "sounds_human": 0.9,
+          "ai_filler": 0.06,
+          "marketing": 0.03,
+          "says_what_it_is": 0.88,
+          "shows_usage": 0.94,
+          "too_terse": 0.38,
+          "shrink": 0.13,
+          "rewrite_length": {
+            "choice": "about_the_same",
+            "probabilities": {
+              "a_fraction": 0.03,
+              "somewhat_shorter": 0.37,
+              "much_shorter": 0.1,
+              "about_the_same": 0.5
+            }
+          },
+          "padding": 0.13,
+          "over_structured": 0.11,
+          "boilerplate": 0.1,
+          "redundancy": 0.14,
+          "disorganized": 0.11,
+          "overall": 0.1,
+          "biggest_problem": {
+            "choice": "nothing",
+            "confidence": 0.9,
+            "probabilities": {
+              "missing_usage": 0,
+              "redundancy": 0.01,
+              "disorganized": 0,
+              "boilerplate": 0.02,
+              "ai_voice": 0.01,
+              "missing_what_it_is": 0.02,
+              "padding": 0,
+              "over_structured": 0,
+              "nothing": 0.91,
+              "marketing": 0,
+              "too_terse": 0.03
+            }
+          }
+        },
+        "jev": {
+          "requests": 3,
+          "failed": 0,
+          "inputTokens": 3627,
+          "ms": 252
+        }
+      }
+    },
+    {
+      "id": "test",
+      "source": "https://github.com/oven-sh/bun/blob/9f70da074192e55c3ec68aef7fd982e6b4b0284b/test/js/bun/util/sleepSync.test.ts#L4-L10",
+      "before": "it(\"sleepSync uses milliseconds\", async () => {\n  const start = performance.now();\n  sleepSync(50);\n  const end = performance.now();\n  expect(end - start).toBeGreaterThanOrEqual(5);\n  expect(end - start).toBeLessThan(1000);\n});",
+      "after": "it(\"blocks for at least the requested milliseconds\", () => {\n  const durationMs = 50;\n  const start = performance.now();\n  sleepSync(durationMs);\n  expect(performance.now() - start).toBeGreaterThanOrEqual(durationMs);\n});",
+      "initial": {
+        "kind": "tests",
+        "runId": "20260929054832-r3jd",
+        "version": "28835da+dirty",
+        "path": "sleepSync.test.ts",
+        "framework": "bun",
+        "verdict": "pass",
+        "tests": [
+          {
+            "name": "sleepSync uses milliseconds",
+            "describe": [],
+            "startLine": 4,
+            "endLine": 10,
+            "issues": [
+              {
+                "severity": "warn",
+                "part": "sleepSync uses milliseconds",
+                "message": "Could fail at random (timing, clock, or test order).",
+                "source": "jev:flaky=0.69"
+              }
+            ],
+            "readings": {
+              "facts": {
+                "assertions": 2,
+                "typeAssertions": 0,
+                "weak": 0,
+                "mocks": 0,
+                "callCountAssertions": 0,
+                "sleeps": 0,
+                "cssSelectors": 0,
+                "realClock": 0
+              },
+              "user_visible": 0.68,
+              "specific": 0.56,
+              "over_mocked": 0.03,
+              "vacuous": 0.35,
+              "plain_name": 0.86,
+              "name_matches": 0.79,
+              "one_behaviour": 0.94,
+              "flaky": 0.69,
+              "action": "tighten",
+              "action_probabilities": {
+                "delete": 0.16,
+                "rewrite": 0.22,
+                "keep": 0.15,
+                "tighten": 0.47000000000000003
+              }
+            }
+          }
+        ],
+        "issues": [],
+        "readings": {
+          "clarity": [
+            {
+              "name": "it(\"sleepSync uses milliseconds\", async () => {",
+              "startLine": 4,
+              "endLine": 10,
+              "missing_explanation": 0.15,
+              "magic_values": 0.44
+            }
+          ]
+        },
+        "jev": {
+          "requests": 2,
+          "failed": 0,
+          "inputTokens": 2071,
+          "ms": 203
+        },
+        "report": "TESTS PASS  sleepSync.test.ts  1 tests judged, 1 flagged (bun)\n  sleepSync uses milliseconds  lines 4-10\n    ! Could fail at random (timing, clock, or test order).  (jev:flaky=0.69)\n\nrun 20260929054832-r3jd \u00b7 nudgement 28835da+dirty \u00b7 2 Jev requests \u00b7 203 ms"
+      },
+      "final": {
+        "kind": "tests",
+        "runId": "20260929054832-i2ml",
+        "version": "28835da+dirty",
+        "path": "sleepSync.test.ts",
+        "framework": "bun",
+        "verdict": "pass",
+        "tests": [
+          {
+            "name": "blocks for at least the requested milliseconds",
+            "describe": [],
+            "startLine": 4,
+            "endLine": 9,
+            "issues": [],
+            "readings": {
+              "facts": {
+                "assertions": 1,
+                "typeAssertions": 0,
+                "weak": 0,
+                "mocks": 0,
+                "callCountAssertions": 0,
+                "sleeps": 0,
+                "cssSelectors": 0,
+                "realClock": 0
+              },
+              "user_visible": 0.62,
+              "specific": 0.62,
+              "over_mocked": 0.03,
+              "vacuous": 0.23,
+              "plain_name": 0.94,
+              "name_matches": 0.94,
+              "one_behaviour": 0.98,
+              "flaky": 0.64,
+              "action": "keep",
+              "action_probabilities": {
+                "keep": 0.52,
+                "tighten": 0.14,
+                "delete": 0.08,
+                "rewrite": 0.26
+              }
+            }
+          }
+        ],
+        "issues": [],
+        "readings": {
+          "clarity": [
+            {
+              "name": "it(\"blocks for at least the requested milliseconds\", () => {",
+              "startLine": 4,
+              "endLine": 9,
+              "missing_explanation": 0.11,
+              "magic_values": 0.15
+            }
+          ]
+        },
+        "jev": {
+          "requests": 2,
+          "failed": 0,
+          "inputTokens": 2057,
+          "ms": 114
+        },
+        "report": "TESTS PASS  sleepSync.test.ts  1 tests judged, 0 flagged (bun)\n\nrun 20260929054832-i2ml \u00b7 nudgement 28835da+dirty \u00b7 2 Jev requests \u00b7 114 ms"
+      }
+    }
+  ],
+  "validation": {
+    "bunTimingTest": {
+      "passes": 20,
+      "failures": 0,
+      "runtime": "Bun 1.4.2, macOS",
+      "mutation": "Changing the implementation call to sleepSync(5) fails the improved test."
+    },
+    "gallerySelfReview": {
+      "runId": "20260929055358-v8ve",
+      "disposition": "README rubric asked for installation and flagged quoted originals/repeated headings; retained the user-required example structure and recorded feedback."
+    }
+  }
+}

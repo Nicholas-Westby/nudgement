@@ -51,6 +51,8 @@ In tests, `expect(result).toBeDefined()` can hide a wrong result.
 nudgement reports weak assertions and asks Jev whether each test checks useful
 behavior. These are review suggestions, not proof that the code is correct.
 
+See [real before-and-after examples](NUDGEMENTS.md) with the findings that prompted each change.
+
 Reports use `✗` for errors, `!` for warnings, and `·` for notes. Only errors and
 a `BLOATED` code verdict fail a review. Failed API calls also fail the review.
 Scores help compare drafts; read the findings before deciding what to change.
