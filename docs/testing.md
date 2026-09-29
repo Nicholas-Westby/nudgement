@@ -2,14 +2,21 @@
 
 `bun test` runs offline, even when API keys are present. Its preload replaces
 network requests with recorded responses and rejects missing recordings.
-The benchmark regression test compares every result to the saved pre-change
-baseline. A changed question or input therefore requires an explicit capture
-and a review of the resulting differences.
+The benchmark regression test preserves the original results and compares new
+clarity readings and warnings against a separate saved addition. A changed
+question or input requires an explicit capture and review of the differences.
 
 Manifest filenames are sorted before loading so discovery is consistent across
 filesystems. The regression test compares the serialized results by suite,
 matching file and README cases by ID because the original baseline used local
-directory order. Every case and its complete result must still match.
+directory order. Every case and its complete result must still match the
+original baseline plus [clarity findings](verification/clarity-bench.json).
+
+`bench/clarity.json` labels before/after examples from nudgement plus small
+Python and Swift examples. The clarity quality tests exercise all four captured
+responses, checking missing explanations, magic values, clear uncommented code,
+and comments that restate operations without explaining them. Tests also cover
+changed-line scope, tiny constants, batching, truncation and API failures.
 
 ## Fixtures
 

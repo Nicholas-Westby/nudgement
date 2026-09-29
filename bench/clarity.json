@@ -1,0 +1,154 @@
+[
+  {
+    "id": "hygiene-before",
+    "file": "clarity/hygiene-before.ts",
+    "expect": {
+      "commitMessages": {
+        "missing_explanation": true,
+        "magic_values": true
+      },
+      "globToRegex": {
+        "missing_explanation": true,
+        "magic_values": true
+      },
+      "sizes": {
+        "magic_values": true
+      },
+      "where": {
+        "missing_explanation": true
+      }
+    }
+  },
+  {
+    "id": "hygiene-after",
+    "file": "clarity/hygiene-after.ts",
+    "expect": {
+      "where": {
+        "missing_explanation": false,
+        "magic_values": false
+      },
+      "commitMessages": {
+        "missing_explanation": false,
+        "magic_values": false
+      },
+      "globToRegex": {
+        "missing_explanation": false,
+        "magic_values": false
+      },
+      "sizes": {
+        "missing_explanation": false,
+        "magic_values": false
+      }
+    }
+  },
+  {
+    "id": "history-before",
+    "file": "clarity/history-before.ts",
+    "expect": {
+      "readBatch": {
+        "missing_explanation": true,
+        "magic_values": true
+      }
+    }
+  },
+  {
+    "id": "history-after",
+    "file": "clarity/history-after.ts",
+    "expect": {
+      "readBatch": {
+        "missing_explanation": false,
+        "magic_values": false
+      }
+    }
+  },
+  {
+    "id": "metrics-before",
+    "file": "clarity/metrics-before.ts",
+    "expect": {
+      "trivial": {
+        "magic_values": true
+      }
+    }
+  },
+  {
+    "id": "metrics-after",
+    "file": "clarity/metrics-after.ts",
+    "expect": {
+      "trivial": {
+        "missing_explanation": false,
+        "magic_values": false
+      }
+    }
+  },
+  {
+    "id": "expiry-before",
+    "file": "clarity/expiry-before.py",
+    "expect": {
+      "expires_at": {
+        "magic_values": true
+      }
+    }
+  },
+  {
+    "id": "expiry-after",
+    "file": "clarity/expiry-after.py",
+    "expect": {
+      "expires_at": {
+        "missing_explanation": false,
+        "magic_values": false
+      }
+    }
+  },
+  {
+    "id": "frame-before",
+    "file": "clarity/frame-before.swift",
+    "expect": {
+      "payloadLength": {
+        "magic_values": true
+      }
+    }
+  },
+  {
+    "id": "frame-after",
+    "file": "clarity/frame-after.swift",
+    "expect": {
+      "payloadLength": {
+        "missing_explanation": false,
+        "magic_values": false
+      }
+    }
+  },
+  {
+    "id": "restated",
+    "file": "clarity/restated.swift",
+    "expect": {
+      "payloadLength": {
+        "missing_explanation": true,
+        "magic_values": true
+      }
+    }
+  },
+  {
+    "id": "clear",
+    "file": "clarity/clear.ts",
+    "expect": {
+      "sum": {
+        "missing_explanation": false,
+        "magic_values": false
+      },
+      "first": {
+        "missing_explanation": false,
+        "magic_values": false
+      },
+      "isEmpty": {
+        "missing_explanation": false,
+        "magic_values": false
+      }
+    }
+  },
+  {
+    "id": "test-data",
+    "file": "clarity/test-data.test.ts",
+    "expect": {}
+  }
+]

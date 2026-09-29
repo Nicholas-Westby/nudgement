@@ -1,5 +1,6 @@
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
+import { benchClarity } from "./scripts/suites/clarity";
 import { benchComments, benchCommits, benchContradictions, benchHistory } from "./scripts/suites/commits";
 import { args, BENCH, manifests, RESULTS } from "./scripts/suites/common";
 import { benchCopy } from "./scripts/suites/copy";
@@ -38,6 +39,7 @@ export async function runBench(suites: string[] = []) {
   if (run("contradictions") && existsSync(join(BENCH, "contradictions.json")))
     saved.contradictions = await benchContradictions();
   if (run("files") && manifests("files").length) saved.files = await benchFiles();
+  if (run("clarity")) saved.clarity = await benchClarity();
   if (run("readmes") && manifests("readmes").length) saved.readmes = await benchReadmes();
   if (run("tests") && existsSync(join(BENCH, "tests.json"))) saved.tests = await benchTests();
   if (run("coverage") && existsSync(join(BENCH, "tests-coverage.json"))) saved.coverage = await benchCoverage();

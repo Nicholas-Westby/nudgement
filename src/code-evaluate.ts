@@ -1,3 +1,4 @@
+import { reviewClarity } from "./clarity";
 import {
   analyzeCode,
   type CodeAnalysis,
@@ -47,6 +48,7 @@ export interface FileEvaluation {
   jev: JevStats;
 }
 
+/** Combine bloat judgments with independent clarity warnings; partial reviews keep only touched declarations. */
 export async function evaluateFile(input: FileInput, options: FileOptions = {}): Promise<FileEvaluation> {
   const { runId, version, stats, issues, track, finish } = startRun(options.runId);
   const base = { kind: "file" as const, runId, version, repo: input.repo, ref: input.ref, path: input.path };
@@ -85,7 +87,8 @@ export async function evaluateFile(input: FileInput, options: FileOptions = {}):
     .slice(0, MAX_UNITS)
     .sort((a, b) => a.startLine - b.startLine);
 
-  const [fileAnswers, ...unitAnswers] = await Promise.all([
+  const [clarity, fileAnswers, ...unitAnswers] = await Promise.all([
+    reviewClarity(input, track, options),
     options.skipFileLevel
       ? Promise.resolve(undefined)
       : track(
@@ -102,7 +105,8 @@ export async function evaluateFile(input: FileInput, options: FileOptions = {}):
     ),
   ]);
 
-  const readings: Record<string, unknown> = {};
+  const readings: Record<string, unknown> = { clarity: clarity.readings };
+  issues.push(...clarity.issues);
   issues.push(...factIssues(analysis));
   let verdict: FileEvaluation["verdict"] = "lean";
   if (fileAnswers) {
@@ -134,6 +138,8 @@ export async function evaluateFile(input: FileInput, options: FileOptions = {}):
 
 async function usageFor(input: FileInput, analysis: CodeAnalysis): Promise<Map<CodeUnit, Usage>> {
   const text = analysis.lines.join("\n");
+  // Search the member's bare name, not "Class.member"; counts are hints, not resolved call sites.
+  // Very short or common names would mostly count unrelated identifiers elsewhere in the repo.
   const bare = (unit: CodeUnit) => unit.name.split(".").pop()!;
   const searchable = (name: string) => /^[A-Za-z_$][\w$]*$/.test(name) && name.length >= 3 && !COMMON_NAMES.has(name);
   const units = analysis.units.filter((unit) => unit.kind !== "imports");

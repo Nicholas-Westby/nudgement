@@ -383,9 +383,9 @@ test("reports how many changed functions were flagged when only those were judge
     jev: { requests: 1, failed: 0, inputTokens: 0, ms: 0 },
   };
   const title = formatFileReport(evaluation, false, true).split("\n")[0];
-  expect(title).toBe("OK  src/store.ts  1 of 1 changed functions flagged  (bloat check)");
+  expect(title).toBe("OK  src/store.ts  1 of 1 changed functions flagged  (code check)");
   const outsideFunctions = formatFileReport({ ...evaluation, verdict: "lean", units: [] }, false, true).split("\n")[0];
-  expect(outsideFunctions).toBe("LEAN  src/store.ts  no changed functions to judge  (bloat check)");
+  expect(outsideFunctions).toBe("LEAN  src/store.ts  no changed functions to judge  (code check)");
 });
 
 test("reads Swift properties with a setter access level or an attribute as their own members", () => {

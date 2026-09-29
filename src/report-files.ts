@@ -19,7 +19,7 @@ export function formatFileReport(evaluation: FileEvaluation, verbose: boolean, i
       : evaluation.units.length
         ? `${flagged.length} of ${evaluation.units.length} ${changed}functions flagged`
         : `no ${changed}functions to judge`;
-  out.push(`${title}  ${measure}${inCommit ? "  (bloat check)" : ""}`);
+  out.push(`${title}  ${measure}${inCommit ? "  (code check)" : ""}`);
   const m = evaluation.metrics!;
   const longest = m.longestUnit ? ` · longest: ${m.longestUnit.name} (${m.longestUnit.lines} lines)` : "";
   out.push(

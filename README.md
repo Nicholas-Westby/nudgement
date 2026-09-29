@@ -41,6 +41,11 @@ tense and trailing period. A more useful message is
 `fix(cli): exit successfully for --help`: it names the behavior being changed.
 Jev also reads the diff to check whether the message is accurate.
 
+Code reviews flag missing explanations and obscure literals, even in short
+helpers. For example, a Git format string such as `%h%x00%B%x01` needs its field
+and record separators explained. Clear code does not need a comment on every
+function. These findings are warnings; the leanness score still measures bloat.
+
 In tests, `expect(result).toBeDefined()` can hide a wrong result.
 `expect(result).toEqual({ status: "booked", seats: 2 })` checks the actual outcome.
 nudgement reports weak assertions and asks Jev whether each test checks useful

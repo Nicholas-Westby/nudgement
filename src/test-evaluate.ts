@@ -1,3 +1,4 @@
+import { reviewClarity } from "./clarity";
 import { noul, score } from "./jev";
 import type { Issue } from "./message";
 import { clip, type JevStats, jevSource, reader, startRun, touches } from "./run";
@@ -76,6 +77,7 @@ export function nameForJev(test: FoundTest): string {
 
 export const isTable = (test: FoundTest) => test.modifiers.includes("each") || test.modifiers.includes("for");
 
+/** Combine assertion facts, Jev's behavior checks and code clarity; touched reviews omit whole-file quality claims. */
 export async function evaluateTests(
   input: { path: string; text: string; repo?: string; ref?: string },
   options: { tag?: string; touched?: Set<number> } = {},
@@ -89,7 +91,8 @@ export async function evaluateTests(
   const serial = declaresSerialOrder(input.text);
   const fileUsesFakeClock = /useFakeTimers|setSystemTime|clock\.install|\.clock\./.test(input.text);
 
-  const [whole, ...perTest] = await Promise.all([
+  const [clarity, whole, ...perTest] = await Promise.all([
+    reviewClarity(input, track, options),
     options.touched
       ? Promise.resolve(undefined)
       : track(`tests:${input.path}`, testFileState(input.path, input.text, framework), TEST_FILE_QUESTIONS),
@@ -119,7 +122,8 @@ export async function evaluateTests(
     serial: !swift && serial,
   };
   const results = tests.map((test, index) => judgeTest(test, perTest[index], file));
-  const readings: Record<string, unknown> = {};
+  const readings: Record<string, unknown> = { clarity: clarity.readings };
+  issues.push(...clarity.issues);
   if (whole) {
     // Shared servers and fixtures belong to the file; repeating the warning marked individual tests unfairly.
     const order = reader(whole, readings)("order_dependent");

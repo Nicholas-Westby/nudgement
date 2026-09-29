@@ -33,6 +33,6 @@ test("returns failure and structured findings for an incomplete source review", 
   expect(result.code).toBe(1);
   const report = JSON.parse(result.out);
   expect(report.verdict).toBe("fail");
-  expect(report.jev.failed).toBe(1);
+  expect(report.jev.failed).toBe(2);
   expect(report.issues[0].message).toContain("Network disabled in CLI tests");
 });

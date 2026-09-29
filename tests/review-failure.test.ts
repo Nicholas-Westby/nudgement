@@ -19,9 +19,9 @@ test("marks code and README reviews as failed when Jev is unavailable", async ()
     for (const result of results) {
       expect(result.verdict).toBe("fail");
       expect(failed(result)).toBe(true);
-      expect(result.issues.filter((issue) => issue.source === "nudgement").map((issue) => issue.severity)).toEqual([
-        "error",
-      ]);
+      const errors = result.issues.filter((issue) => issue.source === "nudgement");
+      expect(errors).toHaveLength(result.kind === "file" ? 2 : 1);
+      expect(errors.every((issue) => issue.severity === "error")).toBe(true);
       expect(formatAny(result, false)).toContain("this review is incomplete");
     }
   } finally {
