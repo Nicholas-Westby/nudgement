@@ -7,16 +7,9 @@
   box-shadow: 8px 8px 0 #e5e8d8;
   transform: rotate(1deg);
 }
-.draft-heading {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  font: 0.75rem / 1.5 var(--mono);
-  color: var(--muted);
-}
 .draft-sheet {
   padding: 40px 20px 28px;
-  margin-block: 24px;
+  margin-block: 0 24px;
   background: #fffef8;
   border: 1px solid #dfe1d6;
   background-image: repeating-linear-gradient(transparent 0 31px, #dfe4d44a 31px 32px);
@@ -28,10 +21,10 @@
 }
 .draft-line {
   font:
-    2.4rem / 1.2 Georgia,
+    1.75rem / 1.3 Georgia,
     serif;
   letter-spacing: -1px;
-  margin-bottom: 0;
+  margin: 0;
 }
 .draft-line span {
   text-decoration: underline wavy var(--accent) 1px;
@@ -119,19 +112,19 @@
   z-index: 4;
 }
 .nudge-arrow.is-nudging {
-  animation: pencil-cue 1000ms ease both;
+  animation: pencil-cue var(--nudge-duration) ease both;
 }
 [data-nudge].is-nudging {
-  animation: gentle-nudge 1000ms ease both;
+  animation: gentle-nudge var(--nudge-duration) ease both;
 }
 @keyframes pencil-cue {
   0%,
   100% {
     opacity: 0;
   }
-  25%,
-  60% {
-    opacity: 0.85;
+  12%,
+  75% {
+    opacity: 0.95;
   }
 }
 @keyframes gentle-nudge {
@@ -139,8 +132,9 @@
   100% {
     translate: 0;
   }
-  35% {
-    translate: 3px 0;
+  20%,
+  70% {
+    translate: 8px 0;
   }
 }
 .motion-toggle {
@@ -163,9 +157,6 @@
   .draft-sheet {
     padding-inline: 16px;
   }
-  .draft-line {
-    font-size: 2rem;
-  }
   .comparison {
     grid-template-columns: 1fr;
   }
@@ -183,20 +174,16 @@
   }
   .draft-sheet {
     padding: 24px 18px;
-    margin-block: 20px;
+    margin-block: 0 20px;
   }
   .draft-label {
     margin-bottom: 18px;
   }
   .draft-line {
-    font-size: 2rem;
+    font-size: 1.625rem;
   }
   .pencil-note {
     margin-bottom: 20px;
-  }
-  .draft-heading {
-    flex-wrap: wrap;
-    gap: 8px;
   }
   .reading-pencil {
     left: 10px;

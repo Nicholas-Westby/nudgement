@@ -4,6 +4,14 @@ import { examples } from "../public/examples.js";
 
 const labels = { commit: "01 Commit message", code: "02 Code clarity", copy: "03 UI copy", test: "04 Test quality" };
 
+test("the draft card shows the recorded UI copy example", async ({ page }) => {
+  await page.goto("/");
+  const draft = page.getByRole("figure");
+  await expect(draft.locator(".draft-line")).toHaveText(examples.copy.before);
+  await expect(draft.locator(".draft-revision")).toHaveText(examples.copy.after);
+  await expect(draft.getByRole("link")).toHaveAttribute("href", /#use-familiar-words-in-an-error$/);
+});
+
 for (const [key, example] of Object.entries(examples)) {
   test(`${labels[key]} displays its recorded finding and source`, async ({ page }) => {
     await page.goto("/");

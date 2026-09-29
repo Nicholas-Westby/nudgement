@@ -67,14 +67,13 @@
           </p>
         </div>
         <figure class="draft" aria-labelledby="draft-caption">
-          <div class="draft-heading"><span>In the margin</span><span aria-hidden="true">01 / edit</span></div>
           <div class="draft-sheet">
-            <p class="draft-label">Commit message</p>
-            <p class="draft-line"><span>Improve performance</span></p>
-            <p class="pencil-note">Name what changed.<svg viewBox="0 0 100 55" aria-hidden="true"><path d="M90 46 Q30 48 14 8 M11 24 L14 8 L29 14" /></svg></p>
-            <p class="draft-revision">fix: stop unterminated OSC strings consuming later escapes</p>
+            <p class="draft-label">Error message · before</p>
+            <blockquote class="draft-line"><span>Encryption key must be of 22 characters. Live collaboration is disabled.</span></blockquote>
+            <p class="pencil-note">Use plainer words.<svg viewBox="0 0 100 55" aria-hidden="true"><path d="M90 46 Q30 48 14 8 M11 24 L14 8 L29 14" /></svg></p>
+            <blockquote class="draft-revision">This collaboration link is invalid. Ask the sender for a new link.</blockquote>
           </div>
-          <figcaption id="draft-caption">The commit evaluator asks for a specific change. <a href="#nudgements">See the source below</a>.</figcaption>
+          <figcaption id="draft-caption">An Excalidraw error, revised after a UI copy review. <a href="https://github.com/Nicholas-Westby/nudgement/blob/main/NUDGEMENTS.md#use-familiar-words-in-an-error">See the full nudgement</a>.</figcaption>
         </figure>
       </section>
       <div class="discipline-strip">
@@ -147,7 +146,7 @@
             <li>
               <span class="step-number">01</span>
               <h3>Give it context.</h3>
-              <p>A file, a diff, a commit message. nudgement gathers the relevant context and runs exact checks.</p>
+              <p data-nudge>A file, a diff, a commit message. nudgement gathers the relevant context and runs exact checks.</p>
               <code>draft + context</code>
             </li>
             <li>
@@ -182,7 +181,7 @@
       <section class="try-section wrap section" id="try" aria-labelledby="try-title">
         <div class="try-copy">
           <p class="eyebrow">03 / Put it to work</p>
-          <h2 id="try-title">Try it on<br><em>your next commit.</em></h2>
+          <h2 id="try-title" data-nudge>Try it on<br><em>your next commit.</em></h2>
           <p>
             Run nudgement from your terminal, or give your coding agent the included skill to review its work before committing.
           </p>

@@ -1,0 +1,81 @@
+{
+  "url": "https://nudgement.dev",
+  "cloudflareVersion": "e12d2dc7-7147-4eb3-afdc-198c0060d454",
+  "baseline": {
+    "commit": "98cc57a",
+    "browserTests": 38,
+    "previousVerification": "website-revision.json"
+  },
+  "changes": {
+    "durationMs": {
+      "before": 1000,
+      "after": 2800
+    },
+    "displacementPx": {
+      "before": 3,
+      "after": 8
+    },
+    "repeat": "Scroll away from the reading band and return; small adjustments do not replay a cue.",
+    "arrow": "Follows the target while scrolling; clears when the target leaves the viewport.",
+    "hero": "Recorded Excalidraw UI copy example; the original and proposed revision match NUDGEMENTS.md."
+  },
+  "verification": {
+    "repositoryTests": 261,
+    "browserTests": 42,
+    "lint": "pass",
+    "typecheck": "pass",
+    "complexity": {
+      "files": 144,
+      "highest": 59.52
+    },
+    "visualReview": [
+      "390px mobile",
+      "1440px desktop",
+      "active mobile nudge"
+    ],
+    "audits": {
+      "mobile": {
+        "at": "2026-09-29T17:42:28.933Z",
+        "scores": {
+          "performance": 98,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "metrics": {
+          "largest-contentful-paint": 1875.201,
+          "total-blocking-time": 0,
+          "cumulative-layout-shift": 0
+        }
+      },
+      "desktop": {
+        "at": "2026-09-29T17:42:36.529Z",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "metrics": {
+          "largest-contentful-paint": 1328.6242,
+          "total-blocking-time": 0,
+          "cumulative-layout-shift": 0
+        }
+      }
+    }
+  },
+  "selfReview": {
+    "code": "20260929173921-wb1o",
+    "copy": "20260929173921-duve",
+    "testsBefore": "20260929173921-gk48",
+    "testsAfter": "20260929174113-2w6e",
+    "readme": "20260929174232-yh6l",
+    "commit": "20260929174255-bo7a",
+    "notes": [
+      "Code review found no issues. Test review prompted a shared cue setup helper, named timing values and comments explaining visual-order assertions.",
+      "Retained explicit per-test navigation and readable numeric assertions despite advisory setup/literal warnings.",
+      "The author-selected Jev-based description retains the existing jargon advisory.",
+      "The README command correctly runs from the repository root as documented; its missing-file warning assumes the website directory."
+    ]
+  }
+}

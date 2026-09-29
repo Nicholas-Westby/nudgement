@@ -20,8 +20,9 @@ The audit requires performance ≥95 and accessibility, best practices and SEO s
 Reports go to ignored `audit-results/`; browser failures keep traces in `test-results/`.
 Automated accessibility checks supplement manual keyboard, zoom and visual inspection.
 
-`public/margin.js` moves a pencil with reading progress and briefly nudges marked elements once per visit.
-It schedules frames only after scroll/resize, waits for a reading pause before showing an arrow,
+`public/margin.js` moves a pencil with reading progress and nudges marked elements for 2.8 seconds.
+Each cue can repeat after the reader scrolls away and returns. Arrows follow their targets during scrolling.
+It schedules frames only after scroll/resize, waits for a reading pause before starting a cue,
 and stops when the tab is hidden, motion is paused or reduced motion is requested.
 The page and annotated draft remain usable without JavaScript. Examples read before → nudgement → after
 in both document order and the responsive layout.
