@@ -1,6 +1,15 @@
 import { describe, expect, test } from "bun:test";
 import { analyzeMarkdown } from "../src/markdown";
-import { condenseDoc, designLint, docSections, extractRequirements, isBackground, judgedText, quotedCopy, decisionsOf } from "../src/spec-parse";
+import {
+  condenseDoc,
+  decisionsOf,
+  designLint,
+  docSections,
+  extractRequirements,
+  isBackground,
+  judgedText,
+  quotedCopy,
+} from "../src/spec-parse";
 
 const SPEC = `# Pantry list: design
 
@@ -48,7 +57,16 @@ Each change is saved within one second. A file that cannot be read is never writ
 describe("docSections", () => {
   test("splits at level two and three headings, keeping a parent's own text apart from its children", () => {
     const sections = docSections(analyzeMarkdown(SPEC));
-    expect(sections.map((s) => s.heading)).toEqual(["Pantry list: design", "Intent", "Scope", "What people see", "The list", "Saving", "Assumptions", "Open questions"]);
+    expect(sections.map((s) => s.heading)).toEqual([
+      "Pantry list: design",
+      "Intent",
+      "Scope",
+      "What people see",
+      "The list",
+      "Saving",
+      "Assumptions",
+      "Open questions",
+    ]);
     const parent = sections.find((s) => s.heading === "What people see")!;
     expect(parent.text.trim()).toBe("## What people see");
     const list = sections.find((s) => s.heading === "The list")!;
@@ -60,7 +78,9 @@ describe("docSections", () => {
 
 describe("isBackground", () => {
   test("marks sections that give reasons or record choices, and their children", () => {
-    const background = docSections(analyzeMarkdown(SPEC)).filter(isBackground).map((s) => s.heading);
+    const background = docSections(analyzeMarkdown(SPEC))
+      .filter(isBackground)
+      .map((s) => s.heading);
     expect(background).toEqual(["Intent", "Scope", "Assumptions", "Open questions"]);
   });
 });
@@ -68,8 +88,8 @@ describe("isBackground", () => {
 describe("judgedText", () => {
   const sections = docSections(
     analyzeMarkdown(
-      "# S\n\n## Contents\n\n1. [One](#one)\n2. [Two](#two)\n\n## 2. One offline marker\n\n> Add a small marker next to anything that works offline.\n> Find something uniform.\n\n### Decisions\n\n> Priya asked for this.\n\nThe marker is the word \"Offline\" in a small capsule.\n"
-    )
+      '# S\n\n## Contents\n\n1. [One](#one)\n2. [Two](#two)\n\n## 2. One offline marker\n\n> Add a small marker next to anything that works offline.\n> Find something uniform.\n\n### Decisions\n\n> Priya asked for this.\n\nThe marker is the word "Offline" in a small capsule.\n',
+    ),
   );
   const text = (heading: string) => judgedText(sections.find((s) => s.heading === heading)!);
 
@@ -86,7 +106,11 @@ describe("judgedText", () => {
   });
 
   test("leaves quoted requests out of the requirements", () => {
-    const texts = extractRequirements(analyzeMarkdown("# S\n\n## Marker\n\n> Add a small marker next to anything that works offline.\n\nThe marker is the word Offline in a capsule.\n")).requirements.map((r) => r.text);
+    const texts = extractRequirements(
+      analyzeMarkdown(
+        "# S\n\n## Marker\n\n> Add a small marker next to anything that works offline.\n\nThe marker is the word Offline in a capsule.\n",
+      ),
+    ).requirements.map((r) => r.text);
     expect(texts).toEqual(["The marker is the word Offline in a capsule."]);
   });
 });
@@ -106,16 +130,20 @@ describe("quotedCopy", () => {
       '- A **Delete for Good** button, and an alert: "Couldn\'t reach the service." Undo is "⌘Z".',
       '- The `.badge("New")` modifier and the status “Saved just now” under the title.',
       "",
-      "> Priya: \"Add a small offline marker\"",
+      '> Priya: "Add a small offline marker"',
       "",
       "```swift",
       'Text("Not copy")',
       "```",
-    ].join("\n")
+    ].join("\n"),
   );
 
   test("takes quoted strings from behaviour sections, not code, quotes of the request or background", () => {
-    expect(quotedCopy(md).map((c) => c.text)).toEqual(["Nothing on the list yet.", "Couldn't reach the service.", "Saved just now"]);
+    expect(quotedCopy(md).map((c) => c.text)).toEqual([
+      "Nothing on the list yet.",
+      "Couldn't reach the service.",
+      "Saved just now",
+    ]);
   });
 
   test("guesses the role from the words around the string", () => {
@@ -123,19 +151,29 @@ describe("quotedCopy", () => {
   });
 
   test("takes no role from the words of another quoted string beside it", () => {
-    const two = analyzeMarkdown(["# S", "", "## The page", "", "One line in the group: `Checking the other tills for changes…` or `Can't reach the other tills, so these prices can't be changed right now.`"].join("\n"));
+    const two = analyzeMarkdown(
+      [
+        "# S",
+        "",
+        "## The page",
+        "",
+        "One line in the group: `Checking the other tills for changes…` or `Can't reach the other tills, so these prices can't be changed right now.`",
+      ].join("\n"),
+    );
     expect(quotedCopy(two).map((c) => c.role)).toEqual(["text", "error"]);
   });
 
   test("takes backticked spans that read like copy, not code", () => {
     const other = analyzeMarkdown(
-      "# S\n\n## Marker\n\n- Every tooltip ends with `Prices update every hour.` and each link row gets `Open <title> in your browser`.\n- Controls that call `requiringNetwork` wear `.badge(\"New\")`; the archive is `<support>/Archive/` and `Recipe.archive`.\n"
+      '# S\n\n## Marker\n\n- Every tooltip ends with `Prices update every hour.` and each link row gets `Open <title> in your browser`.\n- Controls that call `requiringNetwork` wear `.badge("New")`; the archive is `<support>/Archive/` and `Recipe.archive`.\n',
     );
     expect(quotedCopy(other).map((c) => c.text)).toEqual(["Prices update every hour.", "Open <title> in your browser"]);
   });
 
   test("leaves out quoted terms, headings and repeats, and reads a role named after the string", () => {
-    const other = analyzeMarkdown('# S\n\n## Archive\n\n- Words count only when "distinctive", as the "same recipe" rule says.\n- A "Delete Now" button and a "## Archived Recipes" help section.\n- Again a "Delete Now" button.\n');
+    const other = analyzeMarkdown(
+      '# S\n\n## Archive\n\n- Words count only when "distinctive", as the "same recipe" rule says.\n- A "Delete Now" button and a "## Archived Recipes" help section.\n- Again a "Delete Now" button.\n',
+    );
     expect(quotedCopy(other).map((c) => [c.text, c.role])).toEqual([["Delete Now", "button"]]);
   });
 });
@@ -158,10 +196,13 @@ describe("decisionsOf", () => {
         "### Where it goes",
         "",
         "- Menu items: New Recipe, Import Recipes and Scale.",
-      ].join("\n")
+      ].join("\n"),
     );
     const decisions = decisionsOf(md);
-    expect(decisions.map((d) => d.text)).toEqual(['**The marker is the word "Offline" in a small capsule**, placed after the title.', "**Defined once.** One view and one modifier for every offline control."]);
+    expect(decisions.map((d) => d.text)).toEqual([
+      '**The marker is the word "Offline" in a small capsule**, placed after the title.',
+      "**Defined once.** One view and one modifier for every offline control.",
+    ]);
     expect(decisions[0].section).toBe("2. One offline marker > Decisions");
     expect(decisions[0].line).toBe(7);
   });
@@ -169,7 +210,11 @@ describe("decisionsOf", () => {
 
 describe("untestable wording", () => {
   test("warns about outcomes a tester could not check", () => {
-    const issues = designLint(analyzeMarkdown("# S\n\n## Sync\n\nEdits arrive in a timely manner and conflicts are handled gracefully.\n\nThe list is fast.\n"));
+    const issues = designLint(
+      analyzeMarkdown(
+        "# S\n\n## Sync\n\nEdits arrive in a timely manner and conflicts are handled gracefully.\n\nThe list is fast.\n",
+      ),
+    );
     const found = issues.filter((i) => i.source === "lint:untestable");
     expect(found.map((i) => i.part)).toEqual(["line 5", "line 7"]);
     expect(found[0].message).toContain('"in a timely manner"');
@@ -198,7 +243,7 @@ describe("designLint", () => {
     const open = issues.find((i) => i.source === "lint:open-questions")!;
     expect(open.severity).toBe("warn");
     expect(open.message).toContain("1 open question");
-    expect(issues.find((i) => i.source === "lint:words")!.severity).toBe("info");
+    expect(issues.find((i) => i.source === "lint:words")?.severity).toBe("info");
   });
 
   test("an open questions section that says none is left passes", () => {
@@ -220,12 +265,15 @@ describe("extractRequirements", () => {
     expect(texts.some((t) => t.includes("500 items"))).toBe(false);
     expect(texts.some((t) => t.includes("Should checked items"))).toBe(false);
     expect(texts.some((t) => t.includes("templates, reminders"))).toBe(false);
-    expect(requirements.find((r) => r.text.startsWith("Ticking"))!.section).toBe("What people see > The list");
+    expect(requirements.find((r) => r.text.startsWith("Ticking"))?.section).toBe("What people see > The list");
   });
 
   test("keeps only the named sections", () => {
     const only = extractRequirements(analyzeMarkdown(SPEC), { sections: ["Saving"] });
-    expect(only.requirements.map((r) => r.text)).toEqual(["Each change is saved within one second.", "A file that cannot be read is never written over."]);
+    expect(only.requirements.map((r) => r.text)).toEqual([
+      "Each change is saved within one second.",
+      "A file that cannot be read is never written over.",
+    ]);
   });
 
   test("caps the count by taking from each section in turn", () => {
@@ -236,17 +284,25 @@ describe("extractRequirements", () => {
   });
 
   test("splits a table whose header repeats into one requirement per pair of cells", () => {
-    const text = "# S\n\n## Menu\n\n| Item | Shortcut | Item | Shortcut |\n| --- | --- | --- | --- |\n| Title | ⇧⌘T | Bold | ⌘B |\n";
-    expect(extractRequirements(analyzeMarkdown(text)).requirements.map((r) => r.text)).toEqual(["Title: ⇧⌘T", "Bold: ⌘B"]);
+    const text =
+      "# S\n\n## Menu\n\n| Item | Shortcut | Item | Shortcut |\n| --- | --- | --- | --- |\n| Title | ⇧⌘T | Bold | ⌘B |\n";
+    expect(extractRequirements(analyzeMarkdown(text)).requirements.map((r) => r.text)).toEqual([
+      "Title: ⇧⌘T",
+      "Bold: ⌘B",
+    ]);
   });
 
   test("names each cell by its column when a table has more than two", () => {
-    const text = "# S\n\n## Tokens\n\n| Token | Hex | Use |\n| --- | --- | --- |\n| `--moss` | `#3E5F2A` | Header band |\n";
-    expect(extractRequirements(analyzeMarkdown(text)).requirements.map((r) => r.text)).toEqual(["Token `--moss`; Hex `#3E5F2A`; Use Header band"]);
+    const text =
+      "# S\n\n## Tokens\n\n| Token | Hex | Use |\n| --- | --- | --- |\n| `--moss` | `#3E5F2A` | Header band |\n";
+    expect(extractRequirements(analyzeMarkdown(text)).requirements.map((r) => r.text)).toEqual([
+      "Token `--moss`; Hex `#3E5F2A`; Use Header band",
+    ]);
   });
 
   test("splits a long list item into its sentences, each keeping the item's bold lead", () => {
-    const long = "- **Undo.** The window's undo manager holds the document's steps and every command registers one named step. Each step editor has its own undo manager, separate from the window's. A remote change that rewrites characters clears the undo stack, because a range-based step would land in the wrong place.";
+    const long =
+      "- **Undo.** The window's undo manager holds the document's steps and every command registers one named step. Each step editor has its own undo manager, separate from the window's. A remote change that rewrites characters clears the undo stack, because a range-based step would land in the wrong place.";
     const texts = extractRequirements(analyzeMarkdown(`# S\n\n## Editor\n\n${long}\n`)).requirements.map((r) => r.text);
     expect(texts).toEqual([
       "Undo: The window's undo manager holds the document's steps and every command registers one named step.",
@@ -256,26 +312,39 @@ describe("extractRequirements", () => {
   });
 
   test("matches numbered sections by their number", () => {
-    const text = "# S\n\n## 1. Archive\n\nThe archive keeps recipes for 30 days.\n\n## 9. Checklist circles\n\n### Decisions\n\nThe circle sits at the typed height.\n\n## 10. Find\n\nFind looks inside notes.\n";
+    const text =
+      "# S\n\n## 1. Archive\n\nThe archive keeps recipes for 30 days.\n\n## 9. Checklist circles\n\n### Decisions\n\nThe circle sits at the typed height.\n\n## 10. Find\n\nFind looks inside notes.\n";
     const { requirements } = extractRequirements(analyzeMarkdown(text), { sections: ["9", "10"] });
-    expect(requirements.map((r) => r.text)).toEqual(["The circle sits at the typed height.", "Find looks inside notes."]);
-    expect(extractRequirements(analyzeMarkdown(text), { sections: ["1"] }).requirements.map((r) => r.text)).toEqual(["The archive keeps recipes for 30 days."]);
+    expect(requirements.map((r) => r.text)).toEqual([
+      "The circle sits at the typed height.",
+      "Find looks inside notes.",
+    ]);
+    expect(extractRequirements(analyzeMarkdown(text), { sections: ["1"] }).requirements.map((r) => r.text)).toEqual([
+      "The archive keeps recipes for 30 days.",
+    ]);
   });
 
   test("leaves out a long rejected option and what the code does today", () => {
-    const long = "- Rejected: `wifi.slash`. In Pantrybook it already means a failed sync (banners, rows, labels) and the status bar, and `icloud.slash` is the account warning, which is not offline mode. A plain word also fits the house rule of plain words. `bolt.slash` reads as a power cut.";
+    const long =
+      "- Rejected: `wifi.slash`. In Pantrybook it already means a failed sync (banners, rows, labels) and the status bar, and `icloud.slash` is the account warning, which is not offline mode. A plain word also fits the house rule of plain words. `bolt.slash` reads as a power cut.";
     const text = `# S\n\n## 2. Marker\n\n### Decisions\n\n${long}\n\n## 7. Views\n\n### What is wrong today\n\nThe six views share one segmented control.\n\n### Cause (reproduced off-screen)\n\nThe marker baseline is wrong.\n`;
     expect(extractRequirements(analyzeMarkdown(text)).requirements).toEqual([]);
   });
 
   test("leaves out an item that says what something is today rather than what to build", () => {
-    const text = "# S\n\n## 5. Borders\n\n### Decisions\n\n- **What it is:** measured on Priya's screenshot, every card has a line on two edges only.\n- **Fix by construction:** one card style draws every group.\n";
-    expect(extractRequirements(analyzeMarkdown(text)).requirements.map((r) => r.text)).toEqual(["**Fix by construction:** one card style draws every group."]);
+    const text =
+      "# S\n\n## 5. Borders\n\n### Decisions\n\n- **What it is:** measured on Priya's screenshot, every card has a line on two edges only.\n- **Fix by construction:** one card style draws every group.\n";
+    expect(extractRequirements(analyzeMarkdown(text)).requirements.map((r) => r.text)).toEqual([
+      "**Fix by construction:** one card style draws every group.",
+    ]);
   });
 
   test("leaves out the contents list and rejected options", () => {
-    const text = "# S\n\n## Contents\n\n1. [Archive (old recipes)](#1-archive)\n\n## 3. Duplicates\n\n- **A Duplicates switch** in the List view. Rejected: a sheet or an extra view (new surfaces).\n- Rejected: fuzzy title matching, which calls two different soups the same.\n";
-    expect(extractRequirements(analyzeMarkdown(text)).requirements.map((r) => r.text)).toEqual(["**A Duplicates switch** in the List view."]);
+    const text =
+      "# S\n\n## Contents\n\n1. [Archive (old recipes)](#1-archive)\n\n## 3. Duplicates\n\n- **A Duplicates switch** in the List view. Rejected: a sheet or an extra view (new surfaces).\n- Rejected: fuzzy title matching, which calls two different soups the same.\n";
+    expect(extractRequirements(analyzeMarkdown(text)).requirements.map((r) => r.text)).toEqual([
+      "**A Duplicates switch** in the List view.",
+    ]);
   });
 
   test("leaves out the questions a spike is meant to answer", () => {
@@ -291,7 +360,9 @@ describe("extractRequirements", () => {
 
 describe("condenseDoc", () => {
   test("drops code, then trims the longest sections so every heading survives", () => {
-    const md = analyzeMarkdown(`# T\n\n## Intent\n\nWhy it exists.\n\n## Big\n\n${"Many words here. ".repeat(300)}\n\n\`\`\`json\n{"a": 1}\n\`\`\`\n\n## Out of scope\n\nPrinting.\n`);
+    const md = analyzeMarkdown(
+      `# T\n\n## Intent\n\nWhy it exists.\n\n## Big\n\n${"Many words here. ".repeat(300)}\n\n\`\`\`json\n{"a": 1}\n\`\`\`\n\n## Out of scope\n\nPrinting.\n`,
+    );
     const condensed = condenseDoc(md, 1_500);
     expect(condensed.length).toBeLessThanOrEqual(1_500);
     expect(condensed).toContain("## Out of scope\n\nPrinting.");

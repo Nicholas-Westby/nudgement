@@ -1,12 +1,6 @@
 import { findSwiftTests, matching, swiftTestFacts } from "./swift-tests";
 
-/**
- * Finds the test cases in a Vitest, Jest or Playwright file, or a Swift file
- * (in swift-tests.ts), and counts what
- * code can count exactly: assertions, weak matchers, mocks, sleeps, CSS
- * selectors. Strings and comments are blanked out before searching, so text
- * that merely mentions test( is not taken for a test.
- */
+/** Mask strings and comments before structural scans so quoted tests are not counted as real tests. */
 
 export interface FoundTest {
   name: string;
@@ -37,16 +31,17 @@ export interface TestFacts {
   realClock: number;
 }
 
-// As the runners decide: Playwright and Cypress only run .test, .spec and .cy files,
-// so helpers and setup files beside them are code; Jest runs everything in __tests__.
-// Swift names no test files, so a Swift file counts only when it holds tests:
-// fakes and fixtures beside them are code.
+// Recognize common JavaScript test naming conventions and Swift files containing tests.
+// Helpers and fixtures beside test files should receive code checks instead.
 export function isTestFile(path: string, text?: string): boolean {
-  if (testLanguageOf(path) === "swift") return /(^|\/)(tests?|\w*Tests?)\/|Tests?\.swift$/.test(path) && text !== undefined && findSwiftTests(text).length > 0;
+  if (testLanguageOf(path) === "swift")
+    return (
+      /(^|\/)(tests?|\w*Tests?)\/|Tests?\.swift$/.test(path) && text !== undefined && findSwiftTests(text).length > 0
+    );
   return /[._](test|spec|cy)\.[cm]?[jt]sx?$/.test(path) || /(^|\/)__tests__\//.test(path);
 }
 
-/** Whether the file asks its runner to run its tests in order, as a story that builds on itself. */
+/** Whether the file explicitly requests ordered test execution. */
 export function declaresSerialOrder(text: string): boolean {
   return /\.describe\.configure\(\s*\{[^}]*mode:\s*["']serial["']|\.describe\.serial\s*\(/.test(text);
 }
@@ -84,7 +79,18 @@ function blank(source: string): string {
   return out.join("");
 }
 
-const NOT_TESTS = new Set(["beforeEach", "afterEach", "beforeAll", "afterAll", "step", "use", "extend", "setTimeout", "info", "configure"]);
+const NOT_TESTS = new Set([
+  "beforeEach",
+  "afterEach",
+  "beforeAll",
+  "afterAll",
+  "step",
+  "use",
+  "extend",
+  "setTimeout",
+  "info",
+  "configure",
+]);
 
 const lineAt = (source: string, offset: number) => source.slice(0, offset).split("\n").length;
 
@@ -152,14 +158,23 @@ export function testFacts(code: string, language: TestLanguage = "js"): TestFact
   const blanked = blank(code);
   return {
     // Shared helpers such as expectNotFoundPage(page), and expectTypeOf<T>(), hold their own assertions.
-    assertions: count(blanked, /\bexpect(\s*\.soft|\s*\.poll)?\s*\(|\bassert(\.\w+)?\s*\(|\b(expect|assert)[A-Z_]\w*\s*(<[^()]*>)?\s*\(/g),
+    assertions: count(
+      blanked,
+      /\bexpect(\s*\.soft|\s*\.poll)?\s*\(|\bassert(\.\w+)?\s*\(|\b(expect|assert)[A-Z_]\w*\s*(<[^()]*>)?\s*\(/g,
+    ),
     typeAssertions: count(blanked, /\bexpectTypeOf\b|\bassertType\s*(<[^()]*>)?\s*\(/g),
     weak: count(
       blanked,
-      /\.(toBeTruthy|toBeFalsy|toBeDefined|toBeInstanceOf|toMatchSnapshot|toMatchInlineSnapshot)\s*\(|\.not\.toBeNull\s*\(|\.toBeGreaterThan\s*\(\s*0\s*\)/g
+      /\.(toBeTruthy|toBeFalsy|toBeDefined|toBeInstanceOf|toMatchSnapshot|toMatchInlineSnapshot)\s*\(|\.not\.toBeNull\s*\(|\.toBeGreaterThan\s*\(\s*0\s*\)/g,
     ),
-    mocks: count(blanked, /\b(vi|jest)\.(mock|fn|spyOn|doMock)\s*\(|\.mock(Return|Resolved|Rejected|Implementation)\w*\s*\(/g),
-    callCountAssertions: count(blanked, /\.toHaveBeenCalled(Times|With)?\s*\(|\.toHaveBeenNthCalledWith\s*\(|\.toHaveBeenLastCalledWith\s*\(/g),
+    mocks: count(
+      blanked,
+      /\b(vi|jest)\.(mock|fn|spyOn|doMock)\s*\(|\.mock(Return|Resolved|Rejected|Implementation)\w*\s*\(/g,
+    ),
+    callCountAssertions: count(
+      blanked,
+      /\.toHaveBeenCalled(Times|With)?\s*\(|\.toHaveBeenNthCalledWith\s*\(|\.toHaveBeenLastCalledWith\s*\(/g,
+    ),
     sleeps: count(blanked, /\b(setTimeout|waitForTimeout|sleep)\s*\(/g),
     cssSelectors: count(code, /\b(locator|\$\$?|querySelector(All)?)\s*\(\s*['"`]\s*([.#]|xpath=|\/\/|\[class)/g),
     realClock: count(blanked, /\bnew Date\s*\(\s*\)|\bDate\.now\s*\(/g),

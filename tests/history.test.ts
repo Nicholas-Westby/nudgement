@@ -2,7 +2,14 @@ import { expect, test } from "bun:test";
 import { mkdtempSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { exactFindings, foldFinding, judgedIndexes, readHistory, type CommitResult, type HistoryCommit } from "../src/history";
+import {
+  type CommitResult,
+  exactFindings,
+  foldFinding,
+  type HistoryCommit,
+  judgedIndexes,
+  readHistory,
+} from "../src/history";
 
 const commit = (sha: string, message: string, changed = 10, parents = 1): HistoryCommit => ({
   sha: sha.padEnd(40, "0"),
@@ -11,10 +18,13 @@ const commit = (sha: string, message: string, changed = 10, parents = 1): Histor
   parents,
   diff: "",
 });
-const sources = (commits: HistoryCommit[], options = {}) => exactFindings(commits, options).issues.map((issue) => issue.source);
+const sources = (commits: HistoryCommit[], options = {}) =>
+  exactFindings(commits, options).issues.map((issue) => issue.source);
 
 test("a tidy history has no exact findings", () => {
-  expect(sources([commit("a", "feat(db): add orders table"), commit("b", "feat(orders): create an order from a recipe")])).toEqual([]);
+  expect(
+    sources([commit("a", "feat(db): add orders table"), commit("b", "feat(orders): create an order from a recipe")]),
+  ).toEqual([]);
 });
 
 test("flags leftover, vague and reverted commits", () => {
@@ -32,7 +42,10 @@ test("flags leftover, vague and reverted commits", () => {
 });
 
 test("flags merges, repeated subjects and oversized commits", () => {
-  const found = sources([commit("a", "feat: add orders", 1500), commit("b", "feat: add orders", 20), commit("c", "Merge branch 'x'", 0, 2)], { maxChangedLines: 800 });
+  const found = sources(
+    [commit("a", "feat: add orders", 1500), commit("b", "feat: add orders", 20), commit("c", "Merge branch 'x'", 0, 2)],
+    { maxChangedLines: 800 },
+  );
   expect(found).toContain("history:merge");
   expect(found).toContain("history:duplicate-subject");
   expect(found).toContain("history:large");
@@ -40,15 +53,20 @@ test("flags merges, repeated subjects and oversized commits", () => {
 });
 
 test("applies the message rules to every commit", () => {
-  const found = sources([commit("a", "feat: add orders\n\nCo-Authored-By: Bot <b@x>"), commit("b", "Added stuff.")], { forbidTrailers: true });
+  const found = sources([commit("a", "feat: add orders\n\nCo-Authored-By: Bot <b@x>"), commit("b", "Added stuff.")], {
+    forbidTrailers: true,
+  });
   expect(found).toContain("history:message-rules");
-  const { results } = exactFindings([commit("a", "feat: add orders\n\nCo-Authored-By: Bot <b@x>")], { forbidTrailers: true });
+  const { results } = exactFindings([commit("a", "feat: add orders\n\nCo-Authored-By: Bot <b@x>")], {
+    forbidTrailers: true,
+  });
   expect(results[0].issues.map((issue) => issue.source)).toContain("lint:trailers");
 });
 
 test("reads a repo's history oldest first, with changed lines per file", () => {
-  const repo = mkdtempSync(join(tmpdir(), "evaluator-history-"));
-  const git = (...args: string[]) => Bun.spawnSync(["git", "-C", repo, "-c", "user.email=t@t", "-c", "user.name=t", ...args]);
+  const repo = mkdtempSync(join(tmpdir(), "nudgement-history-"));
+  const git = (...args: string[]) =>
+    Bun.spawnSync(["git", "-C", repo, "-c", "user.email=t@t", "-c", "user.name=t", ...args]);
   git("init", "-q");
   writeFileSync(join(repo, "a.ts"), "one\ntwo\n");
   git("add", ".");

@@ -1,22 +1,15 @@
-/**
- * The TypeSafe Jev client. Every call is written to the log whether it worked
- * or not, so a strange verdict can be traced back to the exact request and
- * the probabilities that produced it.
- */
+/** Jev transport, bounded concurrency and retry handling. Requests and answers are logged for diagnosis. */
 
 import { logCall } from "./log";
 
 const JEV_URL = "https://api.typesafe.ai/v1/systemone";
 const JEV_MODEL = "jev-latest";
 
-// Across the first 1,100 calls the slowest answer took 0.8 s, even for
-// requests over 8,000 tokens. A batch that hung until a 30 s timeout then
-// answered at once on retry, so give up early and try again.
+// Retry stalled requests after eight seconds; normal responses in the baseline were much faster.
 const TIMEOUT_MS = 8_000;
 const RETRIES = 3;
 
-// One file can fan out into dozens of requests, and a range of commits into
-// hundreds. TypeSafe allows 1,200 a minute; this keeps bursts well inside that.
+// Bound concurrent requests when a file or commit range fans out. This is not a rate limiter.
 const MAX_IN_FLIGHT = 32;
 let inFlight = 0;
 const waiting: (() => void)[] = [];
@@ -65,19 +58,26 @@ export interface JevResult {
 
 function apiKey(): string {
   const key = process.env.JEV_API_KEY ?? process.env.TYPESAFE_API_KEY;
-  if (!key) throw new Error("JEV_API_KEY is not set (expected in the evaluator's .env)");
+  if (!key) throw new Error("JEV_API_KEY is not set (expected in the nudgement's .env)");
   return key.trim();
 }
 
-/**
- * One request to Jev. `label` names the request in the log, such as
- * "commit:style" or "comment:src/app.ts:42".
- */
-export function askJev(runId: string, label: string, state: unknown, questions: Record<string, Question>): Promise<JevResult> {
+/** Label requests by review target so their logged answers can be traced to a finding. */
+export function askJev(
+  runId: string,
+  label: string,
+  state: unknown,
+  questions: Record<string, Question>,
+): Promise<JevResult> {
   return slot(() => send(runId, label, state, questions));
 }
 
-async function send(runId: string, label: string, state: unknown, questions: Record<string, Question>): Promise<JevResult> {
+async function send(
+  runId: string,
+  label: string,
+  state: unknown,
+  questions: Record<string, Question>,
+): Promise<JevResult> {
   const body = { model: JEV_MODEL, state, questions };
   const started = Date.now();
   let lastError = "";
@@ -108,7 +108,15 @@ async function send(runId: string, label: string, state: unknown, questions: Rec
         inputTokens: parsed.usage?.input_tokens ?? 0,
         ms: Date.now() - started,
       };
-      logCall({ runId, label, request: body, answers: result.answers, inputTokens: result.inputTokens, ms: result.ms, attempts: attempt + 1 });
+      logCall({
+        runId,
+        label,
+        request: body,
+        answers: result.answers,
+        inputTokens: result.inputTokens,
+        ms: result.ms,
+        attempts: attempt + 1,
+      });
       return result;
     } catch (error) {
       lastError = String(error);
@@ -121,18 +129,18 @@ async function send(runId: string, label: string, state: unknown, questions: Rec
 
 export function noul(answers: Answers, key: string): number {
   const answer = answers[key];
-  if (!answer || answer.type !== "noul") throw new Error(`Jev gave no noul for ${key}`);
+  if (answer?.type !== "noul") throw new Error(`Jev gave no noul for ${key}`);
   return answer.noul;
 }
 
 export function choice(answers: Answers, key: string): ChoiceAnswer {
   const answer = answers[key];
-  if (!answer || answer.type !== "choice") throw new Error(`Jev gave no choice for ${key}`);
+  if (answer?.type !== "choice") throw new Error(`Jev gave no choice for ${key}`);
   return answer;
 }
 
 export function score(answers: Answers, key: string): ScoreAnswer {
   const answer = answers[key];
-  if (!answer || answer.type !== "score") throw new Error(`Jev gave no score for ${key}`);
+  if (answer?.type !== "score") throw new Error(`Jev gave no score for ${key}`);
   return answer;
 }

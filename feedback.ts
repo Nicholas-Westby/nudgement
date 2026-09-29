@@ -1,14 +1,6 @@
 #!/usr/bin/env bun
-/**
- * Records whether a run's findings were right, so the evaluator's mistakes in
- * real use can be counted and fixed.
- *
- *   bun feedback.ts <run-id> wrong "<which finding, and why>"
- *   bun feedback.ts <run-id> right ["<note>"]
- *
- * Name the finding by its source when you can, such as jev:sounds_human or
- * lint:header-length. `bun stats.ts` lists the feedback.
- */
+/** Record feedback: bun feedback.ts <run-id> wrong|right "reason".
+ * Name the finding's source (for example jev:sounds_human) so it can be located. */
 
 import { logFeedback } from "./src/log";
 

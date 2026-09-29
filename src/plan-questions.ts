@@ -1,10 +1,4 @@
-/**
- * The questions Jev is asked about a design spec and an implementation plan.
- * Each asks one narrow thing, so a "yes" means one thing only. The standard is
- * the superpowers brainstorming and writing-plans skills: a spec says why and
- * what, concretely enough that two engineers build the same thing; a plan's
- * task can be carried out by someone with no context, test first.
- */
+/** Design questions check decided behavior; plan questions check actionable tasks. */
 
 import type { Question } from "./jev";
 import { HUMAN_CRITERIA } from "./readme-questions";
@@ -22,7 +16,8 @@ export const DESIGN_QUESTIONS: Record<string, Question> = {
   },
   states_intent: {
     type: "noul",
-    instructions: "Does `spec` say what problem it solves, or what the people it is for want to achieve, and not only what will be built?",
+    instructions:
+      "Does `spec` say what problem it solves, or what the people it is for want to achieve, and not only what will be built?",
   },
   states_out_of_scope: {
     type: "noul",
@@ -34,12 +29,14 @@ export const SECTION_QUESTIONS: Record<string, Question> = {
   concrete: {
     type: "noul",
     instructions: {
-      question: "Does `section.text` say concretely what to build or what holds true, in terms a person could build and test against?",
+      question:
+        "Does `section.text` say concretely what to build or what holds true, in terms a person could build and test against?",
       note: "A section of background, reasons or assumptions counts as concrete when it states specific facts.",
     },
     criteria: {
       true: "It names behaviour, values, limits, messages, file or type names, or measured facts",
-      false: "It states goals or qualities (fast, intuitive, robust, handles errors gracefully) without saying what exactly happens",
+      false:
+        "It states goals or qualities (fast, intuitive, robust, handles errors gracefully) without saying what exactly happens",
     },
   },
   open_decision: {
@@ -55,11 +52,13 @@ export const SECTION_QUESTIONS: Record<string, Question> = {
   },
   untestable: {
     type: "noul",
-    instructions: "Does `section.text` state an outcome that a tester could not check as pass or fail, such as 'works well', 'feels smooth', 'is fast' or 'handles errors gracefully'?",
+    instructions:
+      "Does `section.text` state an outcome that a tester could not check as pass or fail, such as 'works well', 'feels smooth', 'is fast' or 'handles errors gracefully'?",
   },
   two_builds: {
     type: "choice",
-    instructions: "If two engineers each built what `section.text` describes, without talking to each other, how would their results compare?",
+    instructions:
+      "If two engineers each built what `section.text` describes, without talking to each other, how would their results compare?",
     criteria: {
       same: "The same in everything a user or a test would notice",
       small_differences: "Small differences in details the section rightly leaves open",
@@ -69,8 +68,7 @@ export const SECTION_QUESTIONS: Record<string, Question> = {
   },
 };
 
-// Asked of one decision at a time: over a whole section, one bare statement
-// among many well-argued ones was enough for a yes.
+// Judge decisions separately so a reason elsewhere cannot hide an unexplained choice.
 export const DECISION_QUESTIONS: Record<string, Question> = {
   why: {
     type: "choice",
@@ -81,7 +79,8 @@ export const DECISION_QUESTIONS: Record<string, Question> = {
     criteria: {
       reason: "It gives a reason for the choice",
       rejected_alternative: "It names an alternative it rules out",
-      none_needed: "It gives none and needs none: a detail, a label, a follow-on from another decision, or the obvious default",
+      none_needed:
+        "It gives none and needs none: a detail, a label, a follow-on from another decision, or the obvious default",
       none: "It gives none, though it picks between approaches a reviewer could reasonably question",
     },
   },
@@ -90,15 +89,18 @@ export const DECISION_QUESTIONS: Record<string, Question> = {
 export const TASK_QUESTIONS: Record<string, Question> = {
   self_contained: {
     type: "noul",
-    instructions: "Could a skilled engineer who has never seen this codebase carry out `task` from `task` alone, with `plan_goal` and `global_constraints`, without guessing?",
+    instructions:
+      "Could a skilled engineer who has never seen this codebase carry out `task` from `task` alone, with `plan_goal` and `global_constraints`, without guessing?",
     criteria: {
       true: "It names the files, the code or the exact behaviour to write, the tests and how to run them; what it uses from other tasks is named exactly",
-      false: "The engineer would have to invent details: which files, what the code does, what the tests check, or names from other tasks it does not give",
+      false:
+        "The engineer would have to invent details: which files, what the code does, what the tests check, or names from other tasks it does not give",
     },
   },
   several_tasks: {
     type: "noul",
-    instructions: "Does `task` bundle several unrelated pieces of work that a reviewer could accept or reject separately, rather than one deliverable with its own test cycle?",
+    instructions:
+      "Does `task` bundle several unrelated pieces of work that a reviewer could accept or reject separately, rather than one deliverable with its own test cycle?",
   },
   vague_steps: {
     type: "noul",
@@ -118,11 +120,7 @@ export const TASK_TEST_QUESTION: Record<string, Question> = {
   },
 };
 
-/**
- * Which of the few tasks picked for a requirement builds it. A choice rather
- * than yes or no: asked "would these tasks implement it", Jev said yes for a
- * task that only tested the feature end to end or mentioned it in passing.
- */
+/** Ask which task implements the requirement; yes/no questions accepted mere mentions and tests. */
 export function coverageQuestions(taskTitles: string[], hasContext: boolean): Record<string, Question> {
   return {
     implemented_by: {
@@ -148,7 +146,8 @@ export function coverageQuestions(taskTitles: string[], hasContext: boolean): Re
       ? {
           handled_elsewhere: {
             type: "noul",
-            instructions: "Does `plan_context` say that `requirement` is handled outside this plan: left out on purpose, done by another plan, or already built?",
+            instructions:
+              "Does `plan_context` say that `requirement` is handled outside this plan: left out on purpose, done by another plan, or already built?",
           } satisfies Question,
         }
       : {}),

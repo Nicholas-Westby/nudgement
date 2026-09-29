@@ -1,3 +1,16 @@
+interface SweepRow {
+  expect: {
+    problems?: string[];
+    verdict?: string;
+    kind?: string;
+    [label: string]: string[] | string | boolean | null | undefined;
+  };
+  readings: Record<string, number>;
+  units?: SweepRow[];
+  labelled?: boolean;
+  fileBloated?: boolean;
+}
+
 import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { RESULTS } from "./common";
@@ -21,10 +34,12 @@ export function sweep(file?: string) {
         .sort()
         .at(-1)!,
     );
-  const saved = JSON.parse(readFileSync(path, "utf8"));
+  const saved = JSON.parse(readFileSync(path, "utf8")) as Record<string, SweepRow[]> & {
+    designs?: { whole: SweepRow[]; sections: SweepRow[]; decisions?: SweepRow[] };
+  };
   console.log(`Readings from ${path}`);
   const cuts: string[] = [];
-  const report = (title: string, rows: any[], labels: Record<string, (row: any) => boolean | undefined>) => {
+  const report = (title: string, rows: SweepRow[], labels: Record<string, (row: SweepRow) => boolean | undefined>) => {
     const keys = [
       ...new Set(rows.flatMap((row) => Object.keys(row.readings).filter((k) => typeof row.readings[k] === "number"))),
     ].sort();
@@ -57,10 +72,10 @@ export function sweep(file?: string) {
     }
   };
   if (saved.commits) {
-    const has = (p: string) => (row: any) => row.expect.problems.includes(p);
+    const has = (p: string) => (row: SweepRow) => row.expect.problems?.includes(p);
     report("Commits", saved.commits, {
       good: (r) => r.expect.verdict === "pass",
-      human: (r) => r.expect.human,
+      human: (r) => r.expect.human as boolean | undefined,
       type: has("type"),
       inaccurate: (r) => has("subject_inaccurate")(r) || has("bullet_inaccurate")(r),
       vague: has("subject_vague"),
@@ -69,15 +84,15 @@ export function sweep(file?: string) {
   }
   if (saved.comments) {
     report("Comments", saved.comments, {
-      good: (r) => r.expect.good,
-      human: (r) => r.expect.human,
-      narrates: (r) => r.expect.narrates,
+      good: (r) => r.expect.good as boolean | undefined,
+      human: (r) => r.expect.human as boolean | undefined,
+      narrates: (r) => r.expect.narrates as boolean | undefined,
       what: (r) => r.expect.kind === "what",
       why: (r) => r.expect.kind === "why",
     });
   }
   if (saved.files) {
-    const has = (p: string) => (row: any) => row.expect.problems.includes(p);
+    const has = (p: string) => (row: SweepRow) => row.expect.problems?.includes(p);
     report("Files", saved.files, {
       bloated: (r) => r.expect.verdict === "bloated",
       lean: (r) => r.expect.verdict === "lean",
@@ -87,17 +102,17 @@ export function sweep(file?: string) {
       wrappers: has("thin_wrappers"),
       comments: has("comment_bloat"),
     });
-    const units = saved.files.flatMap((row: any) =>
-      (row.units ?? []).map((unit: any) => ({ ...unit, fileBloated: row.expect.verdict === "bloated" })),
+    const units = saved.files.flatMap((row: SweepRow) =>
+      (row.units ?? []).map((unit: SweepRow) => ({ ...unit, fileBloated: row.expect.verdict === "bloated" })),
     );
     // Labelled offenders against units of lean files; unlabelled units of bloated files are left out.
     report("Units", units, { labelled_bad: (u) => (u.labelled ? true : u.fileBloated ? undefined : false) });
   }
   if (saved.readmes) {
-    const has = (p: string) => (row: any) => row.expect.problems.includes(p);
+    const has = (p: string) => (row: SweepRow) => row.expect.problems?.includes(p);
     report("Readmes", saved.readmes, {
       good: (r) => r.expect.verdict === "pass",
-      human: (r) => r.expect.human,
+      human: (r) => r.expect.human as boolean | undefined,
       padding: has("padding"),
       structure: has("over_structured"),
       terse: has("too_terse"),
@@ -105,9 +120,9 @@ export function sweep(file?: string) {
     });
   }
   if (saved.tests) {
-    const has = (p: string) => (row: any) => row.expect.problems.includes(p);
+    const has = (p: string) => (row: SweepRow) => row.expect.problems?.includes(p);
     report("Tests", saved.tests, {
-      good: (r) => r.expect.good,
+      good: (r) => r.expect.good as boolean | undefined,
       impl: has("implementation_detail"),
       weak: has("weak_assertion"),
       mocked: has("over_mocked"),
@@ -119,48 +134,53 @@ export function sweep(file?: string) {
   }
   if (saved.contradictions)
     report("Contradictions", saved.contradictions, {
-      contradicts: (r) => (r.expect.borderline ? undefined : r.expect.contradicts),
+      contradicts: (r) => (r.expect.borderline ? undefined : (r.expect.contradicts as boolean | undefined)),
     });
   if (saved.coverage)
-    report("Coverage", saved.coverage, { covers: (r) => (r.expect.borderline ? undefined : r.expect.covers_edges) });
+    report("Coverage", saved.coverage, {
+      covers: (r) => (r.expect.borderline ? undefined : (r.expect.covers_edges as boolean | undefined)),
+    });
   if (saved.history) {
     report("History", saved.history, {
-      folds: (r) => (r.expect.borderline ? undefined : r.expect.folds),
-      folds_all: (r) => r.expect.folds,
-      mixes: (r) => (r.expect.borderline ? undefined : r.expect.mixes),
+      folds: (r) => (r.expect.borderline ? undefined : (r.expect.folds as boolean | undefined)),
+      folds_all: (r) => r.expect.folds as boolean | undefined,
+      mixes: (r) => (r.expect.borderline ? undefined : (r.expect.mixes as boolean | undefined)),
     });
   }
   if (saved.designs) {
-    const has = (p: string) => (row: any) => row.expect.problems.includes(p);
+    const has = (p: string) => (row: SweepRow) => row.expect.problems?.includes(p);
     report("Designs", saved.designs.whole, {
-      human: (r) => r.expect.human,
-      intent: (r) => r.expect.intent ?? undefined,
-      scope: (r) => r.expect.scope,
+      human: (r) => r.expect.human as boolean | undefined,
+      intent: (r) => (r.expect.intent as boolean | undefined) ?? undefined,
+      scope: (r) => r.expect.scope as boolean | undefined,
     });
     report("Design sections", saved.designs.sections, {
-      bad: (r) => r.expect.bad,
+      bad: (r) => r.expect.bad as boolean | undefined,
       vague: has("vague"),
       open: has("open_decision"),
       untestable: has("untestable"),
     });
     if (saved.designs.decisions)
-      report("Design decisions", saved.designs.decisions, { needs_reason: (r) => r.expect.needsReason });
+      report("Design decisions", saved.designs.decisions, {
+        needs_reason: (r) => r.expect.needsReason as boolean | undefined,
+      });
   }
   if (saved.plans) {
-    const has = (p: string) => (row: any) => row.expect.problems.includes(p);
+    const has = (p: string) => (row: SweepRow) => row.expect.problems?.includes(p);
     report("Plan tasks", saved.plans, {
-      bad: (r) => r.expect.bad,
+      bad: (r) => r.expect.bad as boolean | undefined,
       alone: has("not_self_contained"),
       several: has("several_tasks"),
       vague: has("vague_steps"),
       weak: has("weak_test"),
     });
   }
-  if (saved.planCoverage) report("Plan coverage", saved.planCoverage, { covered: (r) => r.expect.covered });
+  if (saved.planCoverage)
+    report("Plan coverage", saved.planCoverage, { covered: (r) => r.expect.covered as boolean | undefined });
   if (saved.copy) {
-    const has = (p: string) => (row: any) => row.expect.problems.includes(p);
+    const has = (p: string) => (row: SweepRow) => row.expect.problems?.includes(p);
     report("Copy", saved.copy, {
-      good: (r) => r.expect.good,
+      good: (r) => r.expect.good as boolean | undefined,
       jargon: has("jargon"),
       case: (r) => has("title_case")(r) || has("all_caps")(r),
       passive: has("passive"),

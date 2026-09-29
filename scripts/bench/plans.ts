@@ -14,7 +14,7 @@ export async function benchPlans() {
     case: c,
     evaluation: await evaluatePlan(benchDoc(c.file), { tag: "bench" }),
   }));
-  const rows: any[] = [];
+  const rows = [];
   const table: { expected: string[]; sources: string }[] = [];
   let verdicts = 0,
     right = 0;
@@ -71,7 +71,7 @@ export async function benchPlanCoverage() {
     case: c,
     evaluation: await evaluateCoverage(c.plans.map(benchDoc), benchDoc(c.design), { tag: "bench" }),
   }));
-  const rows: any[] = [];
+  const rows = [];
   const counts = { dropped_found: 0, dropped_missed: 0, kept_ok: 0, kept_flagged: 0, kept_unclear: 0 };
   const misses: string[] = [];
   const has = (list: string[], text: string) => list.some((part) => text.includes(part));

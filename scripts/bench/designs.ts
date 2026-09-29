@@ -3,9 +3,7 @@ import { join } from "node:path";
 import { DESIGN_THRESHOLDS, evaluateDesign } from "../../src/design-evaluate";
 import { BENCH, benchDoc, pct, pool, rounded } from "./common";
 
-// Design specs, plans and whether plans cover a spec. Sections and tasks are
-// labelled by heading prefix; anything unlabelled counts as good, and null
-// leaves it out of the scoring.
+// Unlabelled sections count as good; null explicitly excludes a section from scoring.
 type DesignCase = {
   id: string;
   file: string;
@@ -30,8 +28,8 @@ export async function benchDesigns() {
     case: c,
     evaluation: await evaluateDesign(benchDoc(c.file), { tag: "bench" }),
   }));
-  const whole: any[] = [];
-  const sections: any[] = [];
+  const whole = [];
+  const sections = [];
   let verdicts = 0,
     right = 0,
     total = 0;
@@ -69,7 +67,7 @@ export async function benchDesigns() {
       });
     }
   }
-  const decisions: any[] = [];
+  const decisions = [];
   const copyCounts = { bad_flagged: 0, bad_missed: 0, good_ok: 0, good_flagged: 0 };
   for (const { case: c, evaluation } of results) {
     for (const decision of evaluation.decisions) {
@@ -95,7 +93,7 @@ export async function benchDesigns() {
   }
   const decided = decisions.filter((d) => d.expect.needsReason).length;
   const decisionsRight = decisions.filter(
-    (d) => d.readings.needs_reason >= DESIGN_THRESHOLDS.needsReasonNote === d.expect.needsReason,
+    (d) => Number(d.readings.needs_reason) >= DESIGN_THRESHOLDS.needsReasonNote === d.expect.needsReason,
   ).length;
   console.log(
     `\nDESIGNS: verdict agrees on ${verdicts}/${results.length}; sections flagged-or-not agree on ${right}/${total} (${pct(right, total)})`,

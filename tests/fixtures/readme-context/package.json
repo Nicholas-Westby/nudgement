@@ -1,0 +1,11 @@
+{
+  "name": "nudgement",
+  "description": "Review code, commits and writing with focused Jev questions",
+  "scripts": {
+    "evaluate": "fixture",
+    "stats": "fixture",
+    "test": "fixture",
+    "typecheck": "fixture",
+    "bench": "fixture"
+  }
+}

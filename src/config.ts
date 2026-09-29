@@ -1,16 +1,4 @@
-/**
- * A project's evaluator settings in one JSON file, so a session runs one flag
- * (--config) instead of four. Paths in it are relative to the file, and ~ works.
- *
- * {
- *   "context": "spec.md",                         what the project must do
- *   "readme": { "require": ["How to run it"] },   or a path to a file of lines
- *   "commit": { "forbidTrailers": true, "maxChangedLines": 600 },
- *   "hygiene": { "forbiddenPaths": [".superpowers/"], "forbiddenWords": ["interview"] },
- *   "copy": { "app": "who reads the UI", "properNouns": ["Acme"] },
- *   "ignore": ["bench/**"]                        paths the file, comment and hygiene checks skip
- * }
- */
+/** Resolve project settings and file-backed context. See docs/configuration.md for the JSON format. */
 
 import { existsSync, readFileSync } from "node:fs";
 import { homedir } from "node:os";
@@ -44,11 +32,13 @@ export function loadConfig(path: string): ProjectConfig {
   };
 
   const config: ProjectConfig = { ...raw };
-  // Several context files, such as a spec and the project's house rules, are joined in order.
+
   if (typeof raw.context === "string") config.context = read(raw.context, "context");
-  else if (Array.isArray(raw.context)) config.context = raw.context.map((path: string) => read(path, "context")).join("\n\n---\n\n");
+  else if (Array.isArray(raw.context))
+    config.context = raw.context.map((path: string) => read(path, "context")).join("\n\n---\n\n");
   const require = raw.readme?.require;
-  if (typeof require === "string") config.readme = { ...raw.readme, require: readLines(read(require, "readme requirements")) };
+  if (typeof require === "string")
+    config.readme = { ...raw.readme, require: readLines(read(require, "readme requirements")) };
   return config;
 }
 
@@ -61,16 +51,12 @@ export function readLines(text: string): string[] {
 }
 
 export function findConfig(repo: string): string | undefined {
-  const path = join(repo, "evaluator.json");
+  const path = join(repo, "nudgement.json");
   return existsSync(path) ? path : undefined;
 }
 
-/**
- * The repo's evaluator.json. In a linked worktree, the lists in the main
- * checkout's config (names, forbidden words, ignored paths) are added in too:
- * the config is the project's, and a worktree made before a name was added
- * should not flag that name.
- */
+/** Merge shared lists from the target project's main checkout so older worktrees
+ * still recognize current product names and exclusions. */
 export function projectConfig(repo: string): ProjectConfig | undefined {
   const own = findConfig(repo);
   const checkout = mainCheckout(repo);
@@ -82,7 +68,10 @@ export function projectConfig(repo: string): ProjectConfig | undefined {
   const union = (a?: string[], b?: string[]) => (a || b ? [...new Set([...(a ?? []), ...(b ?? [])])] : undefined);
   return {
     ...config,
-    copy: config.copy || other.copy ? { ...other.copy, ...config.copy, properNouns: union(config.copy?.properNouns, other.copy?.properNouns) } : undefined,
+    copy:
+      config.copy || other.copy
+        ? { ...other.copy, ...config.copy, properNouns: union(config.copy?.properNouns, other.copy?.properNouns) }
+        : undefined,
     hygiene:
       config.hygiene || other.hygiene
         ? {

@@ -8,7 +8,9 @@ import { parseDiff } from "../src/git";
 import type { Answer, Answers } from "../src/jev";
 
 const diff = (path: string, body: string[]) =>
-  [`diff --git a/${path} b/${path}`, `--- a/${path}`, `+++ b/${path}`, `@@ -1,1 +1,${body.length} @@`, ...body].join("\n");
+  [`diff --git a/${path} b/${path}`, `--- a/${path}`, `+++ b/${path}`, `@@ -1,1 +1,${body.length} @@`, ...body].join(
+    "\n",
+  );
 
 const comments = (path: string, body: string[]) => {
   const [file] = parseDiff(diff(path, body), `${body.filter((l) => l[0] === "+").length}\t0\t${path}`);
@@ -16,7 +18,12 @@ const comments = (path: string, body: string[]) => {
 };
 
 test("groups consecutive added comment lines into one comment", () => {
-  const found = comments("a.ts", ["+// Safari drops the cookie on redirect,", "+// so set it again here.", "+setCookie();", " done();"]);
+  const found = comments("a.ts", [
+    "+// Safari drops the cookie on redirect,",
+    "+// so set it again here.",
+    "+setCookie();",
+    " done();",
+  ]);
   expect(found).toHaveLength(1);
   expect(found[0].line).toBe(1);
   expect(found[0].text).toBe("// Safari drops the cookie on redirect,\n// so set it again here.");
@@ -24,7 +31,12 @@ test("groups consecutive added comment lines into one comment", () => {
 });
 
 test("finds block comments and trailing comments", () => {
-  const found = comments("a.ts", ["+/**", "+ * Returns the name.", "+ */", "+const x = 1; // retry once, the API 502s on deploy"]);
+  const found = comments("a.ts", [
+    "+/**",
+    "+ * Returns the name.",
+    "+ */",
+    "+const x = 1; // retry once, the API 502s on deploy",
+  ]);
   expect(found.map((c) => c.trailing)).toEqual([false, true]);
   expect(found[1].codeOnLine).toBe("const x = 1;");
 });
@@ -33,7 +45,7 @@ test("ignores unchanged comments, URLs, strings and directives", () => {
   const found = comments("a.ts", [
     " // an old comment",
     "+const url = 'https://example.com';",
-    "+const s = \"a // b\";",
+    '+const s = "a // b";',
     "+// eslint-disable-next-line no-console",
     "+// @ts-expect-error",
     "+// -----",
@@ -71,15 +83,34 @@ test("finds JSX comments in TSX files", () => {
 });
 
 test("finds comments in an extensionless shell script", () => {
-  const [file] = parseDiff(diff("bootstrap", ["+#!/bin/sh", "+# Homebrew puts node on the PATH only after this shell starts.", "+eval \"$(brew shellenv)\""]), "3\t0\tbootstrap");
-  const found = findComments(file, ["#!/bin/sh", "# Homebrew puts node on the PATH only after this shell starts.", 'eval "$(brew shellenv)"']);
+  const [file] = parseDiff(
+    diff("bootstrap", [
+      "+#!/bin/sh",
+      "+# Homebrew puts node on the PATH only after this shell starts.",
+      '+eval "$(brew shellenv)"',
+    ]),
+    "3\t0\tbootstrap",
+  );
+  const found = findComments(file, [
+    "#!/bin/sh",
+    "# Homebrew puts node on the PATH only after this shell starts.",
+    'eval "$(brew shellenv)"',
+  ]);
   expect(found.map((c) => c.text)).toEqual(["# Homebrew puts node on the PATH only after this shell starts."]);
 });
 
 test("warns, never fails, when Jev reads a contradiction, more strongly when it is near sure", () => {
-  const [comment] = comments("a.ts", ["+// Can't be missing here: the order was loaded above.", "+if (!order) return notFound();"]);
+  const [comment] = comments("a.ts", [
+    "+// Can't be missing here: the order was loaded above.",
+    "+if (!order) return notFound();",
+  ]);
   const noulOf = (value: number): Answer => ({ type: "noul", noul: value });
-  const choiceOf = (value: string): Answer => ({ type: "choice", choice: value, confidence: 0.8, probabilities: { [value]: 0.8 } });
+  const choiceOf = (value: string): Answer => ({
+    type: "choice",
+    choice: value,
+    confidence: 0.8,
+    probabilities: { [value]: 0.8 },
+  });
   const answers = (contradicts: number): Answers => ({
     kind: choiceOf("why"),
     action: choiceOf("keep"),
@@ -90,21 +121,34 @@ test("warns, never fails, when Jev reads a contradiction, more strongly when it 
     worth_keeping: noulOf(0.8),
     contradicts_code: noulOf(contradicts),
   });
-  const severity = (contradicts: number) => judgeComment(comment, answers(contradicts)).issues.find((issue) => issue.source.startsWith("jev:contradicts_code"))?.severity;
+  const severity = (contradicts: number) =>
+    judgeComment(comment, answers(contradicts)).issues.find((issue) => issue.source.startsWith("jev:contradicts_code"))
+      ?.severity;
   expect(severity(0.72)).toBe("warn");
   expect(severity(0.9)).toBe("warn");
-  expect(judgeComment(comment, answers(0.9)).issues.find((issue) => issue.source.startsWith("jev:contradicts_code"))?.message).toContain("Likely");
+  expect(
+    judgeComment(comment, answers(0.9)).issues.find((issue) => issue.source.startsWith("jev:contradicts_code"))
+      ?.message,
+  ).toContain("Likely");
   expect(severity(0.3)).toBeUndefined();
 });
 
 test("ignores tool directives such as Stryker's, each on its own line", () => {
-  for (const directive of ["// Stryker restore all", "// Stryker disable next-line all: the fallback cannot be reached", "/* c8 ignore next */", "// @vitest-environment happy-dom"]) {
+  for (const directive of [
+    "// Stryker restore all",
+    "// Stryker disable next-line all: the fallback cannot be reached",
+    "/* c8 ignore next */",
+    "// @vitest-environment happy-dom",
+  ]) {
     expect(comments("a.ts", [`+${directive}`, "+const a = 1;"])).toEqual([]);
   }
 });
 
 test("suggests deleting a comment only when Jev also finds it not worth keeping", () => {
-  const [comment] = comments("a.ts", ["+// Emoji held together by a zero-width joiner and a skin tone.", '+export const THUMBS_UP = "\\u{1f44d}\\u{1f3fd}";']);
+  const [comment] = comments("a.ts", [
+    "+// Emoji held together by a zero-width joiner and a skin tone.",
+    '+export const THUMBS_UP = "\\u{1f44d}\\u{1f3fd}";',
+  ]);
   const answers = (keep: number): Answers => ({
     kind: { type: "choice", choice: "what", confidence: 0.6, probabilities: { what: 0.6 } },
     action: { type: "choice", choice: "delete", confidence: 0.7, probabilities: { delete: 0.7, keep: 0.3 } },
@@ -115,13 +159,17 @@ test("suggests deleting a comment only when Jev also finds it not worth keeping"
     worth_keeping: { type: "noul", noul: keep },
     contradicts_code: { type: "noul", noul: 0.05 },
   });
-  const suggestsDelete = (keep: number) => judgeComment(comment, answers(keep)).issues.some((issue) => issue.source.startsWith("jev:action=delete"));
+  const suggestsDelete = (keep: number) =>
+    judgeComment(comment, answers(keep)).issues.some((issue) => issue.source.startsWith("jev:action=delete"));
   expect(suggestsDelete(0.66)).toBe(false);
   expect(suggestsDelete(0.4)).toBe(true);
 });
 
 test("does not call a comment that gives the reasons a restatement of the code", () => {
-  const [comment] = comments("a.ts", ["+// Medium error correction survives a scuffed printout.", '+QRCode.toString(url, { errorCorrectionLevel: "M" });']);
+  const [comment] = comments("a.ts", [
+    "+// Medium error correction survives a scuffed printout.",
+    '+QRCode.toString(url, { errorCorrectionLevel: "M" });',
+  ]);
   const answers = (kind: string): Answers => ({
     kind: { type: "choice", choice: kind, confidence: 0.7, probabilities: { [kind]: 0.7 } },
     action: { type: "choice", choice: "keep", confidence: 0.7, probabilities: { keep: 0.7 } },
@@ -132,13 +180,16 @@ test("does not call a comment that gives the reasons a restatement of the code",
     worth_keeping: { type: "noul", noul: 0.6 },
     contradicts_code: { type: "noul", noul: 0.05 },
   });
-  const restates = (kind: string) => judgeComment(comment, answers(kind)).issues.some((issue) => issue.source.startsWith("jev:restates_code"));
+  const restates = (kind: string) =>
+    judgeComment(comment, answers(kind)).issues.some((issue) => issue.source.startsWith("jev:restates_code"));
   expect(restates("why")).toBe(false);
   expect(restates("what")).toBe(true);
 });
 
 test("ignores comment markers inside strings that span lines", () => {
-  expect(comments("a.test.ts", ["+const swift = `", "+// a Swift comment in a fixture", "+let x = 1", "+`;"])).toEqual([]);
+  expect(comments("a.test.ts", ["+const swift = `", "+// a Swift comment in a fixture", "+let x = 1", "+`;"])).toEqual(
+    [],
+  );
   expect(comments("a.py", ['+SQL = """', "+# not a comment, part of the text", '+"""'])).toEqual([]);
   expect(comments("a.sh", ["+cat > notes.md <<'EOF'", "+# A heading, not a comment", "+EOF"])).toEqual([]);
 });
@@ -149,13 +200,26 @@ test("still finds a comment after a string that spanned lines", () => {
 });
 
 test("a tagged comment that other code searches for is left alone, and an ordinary tagged one is not", () => {
-  const repo = mkdtempSync(join(tmpdir(), "evaluator-marker-"));
-  const git = (...args: string[]) => Bun.spawnSync(["git", "-C", repo, "-c", "user.email=t@t", "-c", "user.name=t", ...args]);
+  const repo = mkdtempSync(join(tmpdir(), "nudgement-marker-"));
+  const git = (...args: string[]) =>
+    Bun.spawnSync(["git", "-C", repo, "-c", "user.email=t@t", "-c", "user.name=t", ...args]);
   git("init", "-q");
   writeFileSync(join(repo, "Lint.swift"), 'if line.contains("// no-help:") { continue }\n');
   git("add", ".");
   git("commit", "-qm", "lint");
-  const found = (text: string) => ({ path: "View.swift", language: "swift", line: 3, text, wholeCommentIsNew: true, trailing: true, codeBefore: "", codeAfter: "" });
-  const kept = withoutMachineRead(repo, "HEAD", [found("// no-help: text label visible"), found("// note: the API 502s during deploys")]);
+  const found = (text: string) => ({
+    path: "View.swift",
+    language: "swift",
+    line: 3,
+    text,
+    wholeCommentIsNew: true,
+    trailing: true,
+    codeBefore: "",
+    codeAfter: "",
+  });
+  const kept = withoutMachineRead(repo, "HEAD", [
+    found("// no-help: text label visible"),
+    found("// note: the API 502s during deploys"),
+  ]);
   expect(kept.map((comment) => comment.text)).toEqual(["// note: the API 502s during deploys"]);
 });

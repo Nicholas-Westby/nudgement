@@ -84,8 +84,7 @@ export async function pool<T, R>(items: T[], size: number, work: (item: T) => Pr
 
 export const pct = (a: number, b: number) => (b ? `${Math.round((100 * a) / b)}%` : "-");
 
-// The commit and history cases name a repo kept as a git bundle in bench/repos/,
-// cloned into a temp folder the first time a run needs it.
+// Clone bundled histories on demand, keeping benchmark inputs independent of local repositories.
 let cloneRoot: string | undefined;
 
 const clones = new Map<string, string>();
@@ -107,7 +106,7 @@ export function benchRepo(name: string): string {
   return clones.get(name)!;
 }
 
-export function manifests(prefix: string): any[] {
+export function manifests<T>(prefix: string): T[] {
   return readdirSync(BENCH)
     .filter((name) => name.startsWith(prefix) && name.endsWith(".json"))
     .flatMap((name) => JSON.parse(readFileSync(join(BENCH, name), "utf8")));

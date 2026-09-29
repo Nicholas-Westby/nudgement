@@ -4,7 +4,6 @@ import { evaluateFile } from "../../src/code-evaluate";
 import { evaluateReadme } from "../../src/readme-evaluate";
 import { BENCH, type FileCase, manifests, pairTable, pct, pool, problemTable, type ReadmeCase } from "./common";
 
-// Which findings count as spotting each labelled problem in a code file.
 const FILE_PROBLEM_SOURCES: Record<string, RegExp> = {
   premature_abstraction: /premature_abstraction/,
   speculative_generality: /speculative/,
@@ -20,7 +19,6 @@ const FILE_PROBLEM_SOURCES: Record<string, RegExp> = {
   type_bloat: /type_bloat/,
 };
 
-// And in a README.
 const README_PROBLEM_SOURCES: Record<string, RegExp> = {
   ai_voice: /sounds_human|ai_filler|lint:ai-words|jev:filler/,
   marketing: /marketing/,
@@ -110,8 +108,12 @@ export async function benchReadmes() {
   const cases = manifests("readmes") as ReadmeCase[];
   const results = await pool(cases, 6, async (c) => {
     const text = readFileSync(join(BENCH, c.file), "utf8");
-    // Copied READMEs link to files in their own repos, so links are not checked here.
-    const evaluation = await evaluateReadme({ path: "README.md", text, exists: () => true }, { tag: "bench" });
+    // Freeze project metadata so edits to nudgement's package do not alter these captured requests.
+    // Copied READMEs have no source checkout here, so their links are not checked.
+    const evaluation = await evaluateReadme(
+      { path: "README.md", text, folder: join(BENCH, "..", "tests", "fixtures", "readme-context"), exists: () => true },
+      { tag: "bench" },
+    );
     return { case: c, evaluation };
   });
   let right = 0;

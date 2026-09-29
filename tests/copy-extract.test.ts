@@ -1,5 +1,5 @@
 import { expect, test } from "bun:test";
-import { judgeString, stringQuestions } from "../src/copy-evaluate";
+import { judgeString } from "../src/copy-evaluate";
 import { extractCopy } from "../src/copy-extract";
 
 const VIEW = `import type { FC } from "hono/jsx";
@@ -52,7 +52,9 @@ test("pulls each user-facing string with its role and line", () => {
 });
 
 test("leaves out strings that are only an expression, such as {dock.street}", () => {
-  expect(extractCopy("a.tsx", VIEW).some((item) => item.text === "{dock.street}" || item.text === "{bike.number}")).toBe(false);
+  expect(
+    extractCopy("a.tsx", VIEW).some((item) => item.text === "{dock.street}" || item.text === "{bike.number}"),
+  ).toBe(false);
 });
 
 test("finds user-facing messages in plain TypeScript", () => {
@@ -68,10 +70,10 @@ throw new Error("unreachable state");`;
   ]);
 });
 
-
 test("applies the exact copy rules without Jev", () => {
   const proper = new Set(["GPS", "Tour", "France"]);
-  const rules = (text: string, role: Parameters<typeof judgeString>[0]["role"]) => judgeString({ text, role, line: 1 }, undefined, proper).issues.map((issue) => issue.source);
+  const rules = (text: string, role: Parameters<typeof judgeString>[0]["role"]) =>
+    judgeString({ text, role, line: 1 }, undefined, proper).issues.map((issue) => issue.source);
   expect(rules("NAME", "label")).toEqual(["fact:all-caps"]);
   expect(rules("GPS", "label")).toEqual([]);
   expect(rules("Join This Awesome Ride!", "heading")).toEqual(["fact:title-case", "fact:exclamation"]);
@@ -87,7 +89,8 @@ test("does not count an acronym as a capitalized word", () => {
 
 test("takes Apple's title style on Mac buttons, menu items and titles, but not a mix of styles", () => {
   const proper = new Set(["Loomwise", "Mac"]);
-  const rules = (text: string, role: Parameters<typeof judgeString>[0]["role"]) => judgeString({ text, role, line: 1 }, undefined, proper, "mac").issues.map((issue) => issue.source);
+  const rules = (text: string, role: Parameters<typeof judgeString>[0]["role"]) =>
+    judgeString({ text, role, line: 1 }, undefined, proper, "mac").issues.map((issue) => issue.source);
   expect(rules("Add {count} Fabrics to Favorites", "button")).toEqual([]);
   expect(rules("Delete…", "button")).toEqual([]);
   expect(rules("Add swatch…", "button")).toEqual([]);
@@ -100,14 +103,16 @@ test("takes Apple's title style on Mac buttons, menu items and titles, but not a
 });
 
 test("calls ALL CAPS shouting, but not an acronym or a sample code in a placeholder", () => {
-  const rules = (text: string, role: Parameters<typeof judgeString>[0]["role"]) => judgeString({ text, role, line: 1 }, undefined, new Set(), "mac").issues.map((issue) => issue.source);
+  const rules = (text: string, role: Parameters<typeof judgeString>[0]["role"]) =>
+    judgeString({ text, role, line: 1 }, undefined, new Set(), "mac").issues.map((issue) => issue.source);
   expect(rules("DELETE", "button")).toEqual(["fact:all-caps"]);
   expect(rules("LOOM-…", "placeholder")).toEqual([]);
   expect(rules("URL", "label")).toEqual([]);
 });
 
 test("leaves a Mac sheet's standard buttons alone but still flags vague ones", () => {
-  const rules = (text: string) => judgeString({ text, role: "button", line: 1 }, undefined, new Set(), "mac").issues.map((issue) => issue.source);
+  const rules = (text: string) =>
+    judgeString({ text, role: "button", line: 1 }, undefined, new Set(), "mac").issues.map((issue) => issue.source);
   expect(["Cancel", "Done", "OK", "Save", "Open", "Learn More"].flatMap(rules)).toEqual([]);
   expect(rules("Submit")).toEqual(["fact:vague-action"]);
   expect(rules("Go ({count})")).toEqual(["fact:vague-action"]);
@@ -115,7 +120,8 @@ test("leaves a Mac sheet's standard buttons alone but still flags vague ones", (
 });
 
 test("flags a file path or internal file name shown to the reader", () => {
-  const rules = (text: string) => judgeString({ text, role: "text", line: 1 }, undefined, new Set()).issues.map((issue) => issue.source);
+  const rules = (text: string) =>
+    judgeString({ text, role: "text", line: 1 }, undefined, new Set()).issues.map((issue) => issue.source);
   expect(rules("Your stash is in ~/Library/Application Support/Loomwise.")).toEqual(["fact:file-path"]);
   expect(rules("Could not read /Volumes/Backup/stash.")).toEqual(["fact:file-path"]);
   expect(rules("share.json could not be read.")).toEqual(["fact:file-path"]);

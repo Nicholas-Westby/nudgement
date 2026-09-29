@@ -1,0 +1,5 @@
+{
+  "exclude_directories": ["bench", "tests/fixtures", "node_modules", "coverage", ".git"],
+  "exclude_under": 0,
+  "include_comments": false
+}

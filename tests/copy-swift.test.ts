@@ -198,7 +198,9 @@ test("reads the message of an error type as an error", () => {
         }
     }
 }`;
-  expect(pairs("RestoreError.swift", source)).toEqual([["The backup file is damaged, so nothing was restored.", "error"]]);
+  expect(pairs("RestoreError.swift", source)).toEqual([
+    ["The backup file is damaged, so nothing was restored.", "error"],
+  ]);
 });
 
 test("reads alert and dialog messages that report a failure as errors", () => {
@@ -289,5 +291,10 @@ struct LookupTool {
 });
 
 test("leaves Swift test files alone", () => {
-  expect(extractCopy("Tests/TidebookTests/ImportTests.swift", `func testImport() { XCTAssertEqual(title, "Import Shared Logbook") }`)).toEqual([]);
+  expect(
+    extractCopy(
+      "Tests/TidebookTests/ImportTests.swift",
+      `func testImport() { XCTAssertEqual(title, "Import Shared Logbook") }`,
+    ),
+  ).toEqual([]);
 });

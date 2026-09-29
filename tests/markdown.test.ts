@@ -74,7 +74,8 @@ test("slugs headings the way GitHub does", () => {
 describe("readmeLint", () => {
   const lint = (text: string, files: string[] = [], scripts?: string[]) =>
     readmeLint(analyzeMarkdown(text), { exists: (path) => files.includes(path), scripts: scripts && new Set(scripts) });
-  const rules = (text: string, files: string[] = [], scripts?: string[]) => lint(text, files, scripts).map((issue) => issue.source);
+  const rules = (text: string, files: string[] = [], scripts?: string[]) =>
+    lint(text, files, scripts).map((issue) => issue.source);
 
   test("a clean README has no findings", () => {
     expect(rules(README, ["docs/config.md", "src/cli.ts"], ["build"])).toEqual([]);
@@ -102,17 +103,22 @@ describe("readmeLint", () => {
   });
 
   test("flags a table of contents in a short README", () => {
-    const toc = "# a\n\n## Contents\n\n- [One](#one)\n- [Two](#two)\n- [Three](#three)\n\n## One\n\nx\n\n## Two\n\ny\n\n## Three\n\nz\n";
+    const toc =
+      "# a\n\n## Contents\n\n- [One](#one)\n- [Two](#two)\n- [Three](#three)\n\n## One\n\nx\n\n## Two\n\ny\n\n## Three\n\nz\n";
     expect(rules(toc)).toContain("lint:short-toc");
   });
 
   test("flags AI wording", () => {
-    expect(rules("# a\n\nA powerful, blazing-fast tool that seamlessly tracks your hives.\n")).toContain("lint:ai-words");
+    expect(rules("# a\n\nA powerful, blazing-fast tool that seamlessly tracks your hives.\n")).toContain(
+      "lint:ai-words",
+    );
   });
 });
 
 test("skips a YAML front matter block at the top", () => {
-  const md = analyzeMarkdown("---\nname: using-it\ndescription: Use when committing.\n---\n\n# Using it\n\nRun the check.\n");
+  const md = analyzeMarkdown(
+    "---\nname: using-it\ndescription: Use when committing.\n---\n\n# Using it\n\nRun the check.\n",
+  );
   expect(md.sections.map((section) => section.heading)).toEqual(["Using it"]);
   expect(md.headings.map((heading) => heading.text)).toEqual(["Using it"]);
   expect(md.facts.words).toBe(5);

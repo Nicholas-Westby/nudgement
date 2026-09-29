@@ -1,11 +1,17 @@
+type CopyCase = {
+  id: string;
+  file: string;
+  app?: string;
+  properNouns?: string[];
+  strings: { text: string; good: boolean; problems: string[] }[];
+};
+
 import { readFileSync } from "node:fs";
 import { basename, join } from "node:path";
 import { evaluateCopy } from "../../src/copy-evaluate";
 import { BENCH, pct, pool, problemTable } from "./common";
 
-// The TSX copy cases are views from a pottery studio's workshop calendar and
-// the Swift ones from Fieldmark, a Mac app for birding outings, so each is
-// judged with its own readers and names.
+// Copy judgments need the vocabulary and audience of the sample application.
 const BENCH_COPY = {
   app: "A pottery studio's workshop calendar. Organizers schedule wheel, raku and handbuilding workshops; potters scan a QR code and book a spot by name. Readers are studio staff and potters, not developers. All times are Vancouver time.",
   properNouns: [
@@ -39,7 +45,7 @@ const BENCH_COPY_MAC = {
 };
 
 export async function benchCopy() {
-  const cases = JSON.parse(readFileSync(join(BENCH, "copy.json"), "utf8")) as any[];
+  const cases = JSON.parse(readFileSync(join(BENCH, "copy.json"), "utf8")) as CopyCase[];
   const results = await pool(cases, 6, async (c) => {
     // A case from another app names its own readers and names.
     const settings = c.app
@@ -57,7 +63,7 @@ export async function benchCopy() {
   let right = 0;
   let total = 0;
   const rows: { expected: string[]; sources: string }[] = [];
-  const saved: any[] = [];
+  const saved = [];
   const misses: string[] = [];
   const byKind: Record<string, { right: number; total: number }> = {};
   for (const { case: c, evaluation } of results) {

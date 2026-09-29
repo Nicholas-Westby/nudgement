@@ -1,20 +1,9 @@
-/**
- * Observability. Two append-only JSONL files per day:
- *   logs/calls-YYYY-MM-DD.jsonl  every Jev request and its answers
- *   logs/runs-YYYY-MM-DD.jsonl   every evaluation: input, verdict, issues
- *   logs/feedback-YYYY-MM-DD.jsonl  whether a run's findings were right
- *   logs/errors-YYYY-MM-DD.jsonl    crashes, with the arguments that caused them
- *
- * The live worktree and the development checkout share one log folder (the
- * main checkout's logs/), so `bun stats.ts` sees every run regardless of which
- * copy of the evaluator produced it.
- */
+/** Daily JSONL logs retain requests and verdicts so a finding can be reproduced. */
 
 import { appendFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
-import { mainCheckout } from "./git";
 
-export const LOG_DIR = process.env.EVALUATOR_LOG_DIR ?? join(mainCheckout(import.meta.dir) ?? join(import.meta.dir, ".."), "logs");
+export const LOG_DIR = process.env.NUDGEMENT_LOG_DIR ?? join(import.meta.dir, "..", "logs");
 
 function today(): string {
   return new Date().toISOString().slice(0, 10);
@@ -23,10 +12,13 @@ function today(): string {
 function append(kind: "calls" | "runs" | "feedback" | "errors", record: object): void {
   try {
     mkdirSync(LOG_DIR, { recursive: true });
-    appendFileSync(join(LOG_DIR, `${kind}-${today()}.jsonl`), JSON.stringify({ at: new Date().toISOString(), ...record }) + "\n");
+    appendFileSync(
+      join(LOG_DIR, `${kind}-${today()}.jsonl`),
+      `${JSON.stringify({ at: new Date().toISOString(), ...record })}\n`,
+    );
   } catch (error) {
     // A broken log must not break an evaluation, but it must not be silent either.
-    console.error(`evaluator: could not write ${kind} log: ${error}`);
+    console.error(`nudgement: could not write ${kind} log: ${error}`);
   }
 }
 
@@ -34,7 +26,7 @@ export function logCall(record: object): void {
   append("calls", record);
 }
 
-// Which copy ran it: the live worktree, the main checkout, or a helper's worktree.
+// Keep the checkout path when several installations share NUDGEMENT_LOG_DIR.
 const CHECKOUT = join(import.meta.dir, "..");
 
 export function logRun(record: object): void {
@@ -56,8 +48,8 @@ export function logFeedback(record: { runId: string; verdict: string; note: stri
 
 let version: string | undefined;
 
-/** The evaluator's own commit, so a run can be tied to the version that produced it. Worked out once a process, as every check asks. */
-export function evaluatorVersion(): string {
+/** Cache the Git revision and dirty marker for identifying the code that produced a run. */
+export function nudgementVersion(): string {
   if (version) return version;
   const result = Bun.spawnSync(["git", "rev-parse", "--short", "HEAD"], { cwd: import.meta.dir });
   const sha = result.stdout.toString().trim() || "unknown";
@@ -69,5 +61,5 @@ export function evaluatorVersion(): string {
 }
 
 export function newRunId(): string {
-  return new Date().toISOString().replace(/[-:T]/g, "").slice(0, 14) + "-" + Math.random().toString(36).slice(2, 6);
+  return `${new Date().toISOString().replace(/[-:T]/g, "").slice(0, 14)}-${Math.random().toString(36).slice(2, 6)}`;
 }

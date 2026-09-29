@@ -1,9 +1,9 @@
 node_modules/
 .env
 logs/
-live/
 bench/results/
 __pycache__/
 .claude/worktrees/
 .idea
 .DS_Store
+coverage/

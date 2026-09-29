@@ -1,3 +1,5 @@
+type TestCase = { id: string; file: string; cases: { name: string; good: boolean; problems: string[] }[] };
+
 import { readFileSync } from "node:fs";
 import { basename, join } from "node:path";
 import { askJev, noul } from "../../src/jev";
@@ -5,7 +7,7 @@ import { evaluateTests, TEST_FILE_QUESTIONS, TEST_THRESHOLDS, testFileState } fr
 import { BENCH, type CoverageCase, pct, pool, problemTable } from "./common";
 
 export async function benchTests() {
-  const cases = JSON.parse(readFileSync(join(BENCH, "tests.json"), "utf8")) as any[];
+  const cases = JSON.parse(readFileSync(join(BENCH, "tests.json"), "utf8")) as TestCase[];
   const results = await pool(cases, 6, async (c) => {
     const evaluation = await evaluateTests(
       { path: basename(c.file), text: readFileSync(join(BENCH, c.file), "utf8") },
@@ -16,7 +18,7 @@ export async function benchTests() {
   let right = 0;
   let total = 0;
   const rows: { expected: string[]; sources: string }[] = [];
-  const saved: any[] = [];
+  const saved = [];
   const misses: string[] = [];
   const byLanguage: Record<string, { right: number; total: number }> = {};
   for (const { case: c, evaluation } of results) {
@@ -30,8 +32,10 @@ export async function benchTests() {
       total++;
       language.total++;
       const flagged = found.issues.some((issue) => issue.severity !== "info");
-      if (flagged !== label.good) { right++; language.right++; }
-      else
+      if (flagged !== label.good) {
+        right++;
+        language.right++;
+      } else
         misses.push(
           `  ${c.id} "${label.name.slice(0, 50)}": labelled ${label.good ? "good" : label.problems.join(",")}, got ${flagged ? found.issues.map((i) => i.source).join(" ") : "no flags"}`,
         );
@@ -66,7 +70,6 @@ export async function benchTests() {
   return saved;
 }
 
-// Whether a test file goes beyond the happy path, asked of the file as a whole.
 export async function benchCoverage() {
   const cases = JSON.parse(readFileSync(join(BENCH, "tests-coverage.json"), "utf8")) as CoverageCase[];
   const rows = await pool(cases, 12, async (c) => {

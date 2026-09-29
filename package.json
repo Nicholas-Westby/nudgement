@@ -1,5 +1,5 @@
 {
-  "name": "commit-evaluator",
+  "name": "nudgement",
   "private": true,
   "type": "module",
   "scripts": {
@@ -7,13 +7,26 @@
     "stats": "bun stats.ts",
     "test": "bun test",
     "typecheck": "tsc --noEmit -p .",
-    "bench": "bun bench.ts"
+    "bench": "bun bench.ts",
+    "lint": "biome check . --error-on-warnings",
+    "format": "biome check --write .",
+    "complexity": "bun scripts/check-complexity.ts",
+    "coverage": "bun test --coverage",
+    "fixtures:record": "bun scripts/record-jev.ts --live",
+    "check": "bun run lint && bun run typecheck && bun test"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.5.14",
     "@types/bun": "^1.4.2",
+    "fta-cli": "3.0.1",
     "typescript": "^7.0.2"
   },
   "dependencies": {
     "typescript5": "npm:typescript@^5"
+  },
+  "description": "Review code, commits and writing with focused Jev questions",
+  "license": "MIT",
+  "engines": {
+    "bun": ">=1.4.2"
   }
 }

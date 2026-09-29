@@ -1,13 +1,7 @@
-/**
- * The questions Jev is asked about a README: one request about the whole
- * document and one per section. Each question judges one thing, so the
- * answers can be weighed separately in readme-evaluate.ts.
- */
-
-import type { Question } from "./jev";
 import { REWRITE_OPTIONS } from "./code-questions";
-import { clip } from "./run";
+import type { Question } from "./jev";
 import type { MdAnalysis, MdSection } from "./markdown";
+import { clip } from "./run";
 
 const README_BUDGET = 100_000;
 
@@ -58,7 +52,8 @@ export function readmeQuestions(): Record<string, Question> {
     },
     marketing: {
       type: "noul",
-      instructions: "Does `readme` sell rather than inform, with superlatives, benefit claims, or hype such as 'blazing fast' or 'the ultimate'?",
+      instructions:
+        "Does `readme` sell rather than inform, with superlatives, benefit claims, or hype such as 'blazing fast' or 'the ultimate'?",
     },
     says_what_it_is: {
       type: "noul",
@@ -71,7 +66,8 @@ export function readmeQuestions(): Record<string, Question> {
     rewrite_length: {
       type: "choice",
       instructions: {
-        question: "If a skilled writer rewrote `readme` to tell a newcomer everything they need just as clearly, how long would the rewrite be?",
+        question:
+          "If a skilled writer rewrote `readme` to tell a newcomer everything they need just as clearly, how long would the rewrite be?",
         note: "Keep every command, option, and fact a reader needs. Cut only padding, repetition, and decoration.",
       },
       criteria: REWRITE_OPTIONS,
@@ -93,15 +89,18 @@ export function readmeQuestions(): Record<string, Question> {
     },
     redundancy: {
       type: "noul",
-      instructions: "Does `readme` say the same thing in more than one place, such as an introduction, an overview, and a features list that all repeat each other?",
+      instructions:
+        "Does `readme` say the same thing in more than one place, such as an introduction, an overview, and a features list that all repeat each other?",
     },
     disorganized: {
       type: "noul",
-      instructions: "Is `readme` hard to find things in, with important information buried, sections in an odd order, or headings that do not match what is under them?",
+      instructions:
+        "Is `readme` hard to find things in, with important information buried, sections in an odd order, or headings that do not match what is under them?",
     },
     too_terse: {
       type: "noul",
-      instructions: "Is `readme` too thin to help a newcomer, leaving out what the project is, how to run it, or what it needs?",
+      instructions:
+        "Is `readme` too thin to help a newcomer, leaving out what the project is, how to run it, or what it needs?",
     },
     overall: {
       type: "score",
@@ -155,7 +154,8 @@ export function sectionQuestions(): Record<string, Question> {
     rewrite_length: {
       type: "choice",
       instructions: {
-        question: "If a skilled writer rewrote `section.text` to say everything a reader needs just as clearly, how long would the rewrite be?",
+        question:
+          "If a skilled writer rewrote `section.text` to say everything a reader needs just as clearly, how long would the rewrite be?",
         note: "Keep every command, option, and fact. Cut only padding, repetition, and decoration.",
       },
       criteria: REWRITE_OPTIONS,
@@ -186,9 +186,7 @@ export function sectionQuestions(): Record<string, Question> {
   };
 }
 
-// Required content is asked about in a request of its own. In the same request
-// as the other questions, the list swayed them: a README that passed on its own
-// was called bloated once three requirements were added.
+// Separate requirement questions prevent the content checklist from biasing style judgments.
 export function requiredState(md: MdAnalysis, requirements: string[]) {
   const text = md.lines.join("\n");
   return {
@@ -209,6 +207,6 @@ export function requiredQuestions(requirements: string[]): Record<string, Questi
           false: "It is missing, or only mentioned in passing without the substance asked for",
         },
       },
-    ])
+    ]),
   );
 }

@@ -1,80 +1,39 @@
-/**
- * Pulls the user-facing strings out of a TSX or TypeScript file (Swift views
- * go to copy-swift.ts), using the
- * TypeScript parser so JSX is read the way the compiler reads it. Text split
- * across expressions and inline tags becomes one string with placeholders:
- * <p>{count} bikes left</p> gives "{count} bikes left". Each string gets a
- * role from where it sits (heading, button, link, label, error...), since the
- * rules for a button differ from the rules for an error.
- */
-
 import ts from "typescript5";
 import { extractSwiftCopy } from "./copy-swift";
+import {
+  ATTRIBUTES,
+  attribute,
+  COMPONENT_PROPS,
+  ERRORISH,
+  hasWords,
+  INLINE,
+  MESSAGE_KEYS,
+  NOT_COPY,
+  roleOf,
+  SENTENCE,
+  SKIP_CALLS,
+  tagName,
+  tidy,
+} from "./jsx-copy-roles";
 
-export type CopyRole = "title" | "heading" | "button" | "link" | "label" | "placeholder" | "alt" | "error" | "option" | "tooltip" | "text";
+export type CopyRole =
+  | "title"
+  | "heading"
+  | "button"
+  | "link"
+  | "label"
+  | "placeholder"
+  | "alt"
+  | "error"
+  | "option"
+  | "tooltip"
+  | "text";
 
 export interface CopyString {
   text: string;
   role: CopyRole;
   line: number;
 }
-
-// Tags whose text runs on into the surrounding sentence.
-const INLINE = new Set(["strong", "em", "b", "i", "span", "small", "code", "time", "abbr", "mark", "sub", "sup", "br", "kbd", "q", "s", "u"]);
-const ATTRIBUTES: Record<string, CopyRole> = { title: "text", placeholder: "placeholder", "aria-label": "label", alt: "alt", label: "label" };
-// Props that carry text on components such as <Field hint="..."> or <Layout title="...">.
-const COMPONENT_PROPS: Record<string, CopyRole> = {
-  title: "title",
-  heading: "heading",
-  subtitle: "text",
-  label: "label",
-  hint: "text",
-  help: "text",
-  helpText: "text",
-  description: "text",
-  caption: "text",
-  message: "text",
-  error: "error",
-  emptyText: "text",
-  placeholder: "placeholder",
-  submitLabel: "button",
-  buttonLabel: "button",
-  cta: "button",
-};
-const SENTENCE = /^\p{Lu}[^\n]*\s\S/u;
-const NOT_COPY = /^(SELECT|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP|WITH|PRAGMA|BEGIN)\b|^\w+:\/\/|^[.\/]/;
-const ERRORISH = /\b(invalid|too (long|short|many|few)|can't|cannot|must|required|not allowed|out of range|unknown|already|no longer|try again|failed)\b/i;
-const SKIP_CALLS = /^(console|logger|log|debug)\.|^(assert|expect|describe|it|test|require|import)$/;
-const MESSAGE_KEYS: Record<string, CopyRole> = { error: "error", message: "text", title: "title", heading: "heading", label: "label", description: "text", hint: "text", help: "text", placeholder: "placeholder" };
-
-function tagName(node: ts.JsxOpeningLikeElement): string {
-  return node.tagName.getText();
-}
-
-function attribute(node: ts.JsxOpeningLikeElement, name: string): string | undefined {
-  for (const property of node.attributes.properties) {
-    if (!ts.isJsxAttribute(property) || property.name.getText() !== name || !property.initializer) continue;
-    if (ts.isStringLiteral(property.initializer)) return property.initializer.text;
-    if (ts.isJsxExpression(property.initializer) && property.initializer.expression) return property.initializer.expression.getText();
-  }
-  return undefined;
-}
-
-function roleOf(opening: ts.JsxOpeningLikeElement, inherited: CopyRole): CopyRole {
-  const tag = tagName(opening).toLowerCase();
-  const className = `${attribute(opening, "class") ?? ""} ${attribute(opening, "className") ?? ""} ${attribute(opening, "id") ?? ""}`;
-  if (attribute(opening, "role") === "alert" || /\berror\b|\balert\b/i.test(className)) return "error";
-  if (tag === "title") return "title";
-  if (/^h[1-6]$/.test(tag)) return "heading";
-  if (tag === "button") return "button";
-  if (tag === "a") return "link";
-  if (["label", "legend", "th", "caption", "summary"].includes(tag)) return "label";
-  if (tag === "option") return "option";
-  return inherited === "error" ? "error" : INLINE.has(tag) ? inherited : "text";
-}
-
-const hasWords = (text: string) => /\p{L}{2,}/u.test(text.replace(/\{[^}]*\}/g, ""));
-const tidy = (text: string) => text.replace(/\s+/g, " ").trim();
 
 export function extractCopy(path: string, source: string): CopyString[] {
   if (path.endsWith(".swift")) return extractSwiftCopy(path, source);
@@ -87,8 +46,7 @@ export function extractCopy(path: string, source: string): CopyString[] {
     if (clean && hasWords(clean)) found.push({ text: clean, role, line: lineOf(node) });
   };
 
-  // One element's own text: its text and expressions, plus the text of any
-  // inline children. Block children are visited separately.
+  // Inline children share the sentence; block children need their own copy role.
   const visitElement = (element: ts.JsxElement | ts.JsxSelfClosingElement, inherited: CopyRole) => {
     const opening = ts.isJsxElement(element) ? element.openingElement : element;
     const role = roleOf(opening, inherited);
@@ -130,7 +88,10 @@ export function extractCopy(path: string, source: string): CopyString[] {
             first ??= child;
             text += `{${expression.getText(file)}}`;
           }
-        } else if ((ts.isJsxElement(child) || ts.isJsxSelfClosingElement(child)) && INLINE.has(tagName(ts.isJsxElement(child) ? child.openingElement : child).toLowerCase())) {
+        } else if (
+          (ts.isJsxElement(child) || ts.isJsxSelfClosingElement(child)) &&
+          INLINE.has(tagName(ts.isJsxElement(child) ? child.openingElement : child).toLowerCase())
+        ) {
           if (ts.isJsxElement(child)) collect(child.children);
           else text += " ";
         } else if (ts.isJsxElement(child) || ts.isJsxSelfClosingElement(child) || ts.isJsxFragment(child)) {
@@ -166,13 +127,21 @@ export function extractCopy(path: string, source: string): CopyString[] {
     if (ts.isImportDeclaration(node) || ts.isExportDeclaration(node) || ts.isTypeNode(node)) return;
     if (ts.isCallExpression(node) && SKIP_CALLS.test(node.expression.getText(file))) return;
     if (ts.isNewExpression(node) && /Error$/.test(node.expression.getText(file))) return;
-    // Strings under keys that name a message, such as { error: "..." }.
-    if (ts.isPropertyAssignment(node) && (ts.isStringLiteral(node.initializer) || ts.isNoSubstitutionTemplateLiteral(node.initializer))) {
+
+    if (
+      ts.isPropertyAssignment(node) &&
+      (ts.isStringLiteral(node.initializer) || ts.isNoSubstitutionTemplateLiteral(node.initializer))
+    ) {
       const role = MESSAGE_KEYS[node.name.getText(file).replace(/['"]/g, "")];
       if (role) return push(node.initializer.text, role, node.initializer);
     }
-    // Any other string that reads as a sentence, such as a map of form messages.
-    if ((ts.isStringLiteral(node) || ts.isNoSubstitutionTemplateLiteral(node)) && SENTENCE.test(node.text) && !NOT_COPY.test(node.text) && node.text.length <= 300) {
+    // Form-message maps may contain sentences without a recognized property name.
+    if (
+      (ts.isStringLiteral(node) || ts.isNoSubstitutionTemplateLiteral(node)) &&
+      SENTENCE.test(node.text) &&
+      !NOT_COPY.test(node.text) &&
+      node.text.length <= 300
+    ) {
       return push(node.text, ERRORISH.test(node.text) ? "error" : "text", node);
     }
     ts.forEachChild(node, visitCode);

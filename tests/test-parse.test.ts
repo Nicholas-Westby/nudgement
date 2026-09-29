@@ -34,7 +34,13 @@ test("nothing here", () => {
 
 test("finds each test with its name, modifiers, lines and describe path", () => {
   const found = findTests(SOURCE);
-  expect(found.map((t) => t.name)).toEqual(["refuses a loan once the member has five books out", "works", 'handles ${"edge"} case', "parses %i", "nothing here"]);
+  expect(found.map((t) => t.name)).toEqual([
+    "refuses a loan once the member has five books out",
+    "works",
+    'handles ${"edge"} case',
+    "parses %i",
+    "nothing here",
+  ]);
   expect(found.map((t) => t.modifiers)).toEqual([[], ["only"], ["skip"], ["each"], []]);
   expect(found[0].startLine).toBe(8);
   expect(found[0].endLine).toBe(12);
@@ -52,9 +58,13 @@ test("counts assertions, weak matchers, mocks, sleeps and selectors", () => {
   expect(testFacts(full.code)).toMatchObject({ assertions: 2, weak: 0 });
   expect(testFacts(works.code)).toMatchObject({ assertions: 1, weak: 1 });
   expect(testFacts(nothing.code)).toMatchObject({ assertions: 0, sleeps: 1 });
-  const playwright = 'await page.locator(".btn-primary").click();\nawait page.waitForTimeout(500);\nawait expect(page.getByText("Renewed")).toBeVisible();';
+  const playwright =
+    'await page.locator(".btn-primary").click();\nawait page.waitForTimeout(500);\nawait expect(page.getByText("Renewed")).toBeVisible();';
   expect(testFacts(playwright)).toMatchObject({ assertions: 1, sleeps: 1, cssSelectors: 1 });
-  expect(testFacts("vi.spyOn(repo, 'insert');\nexpect(repo.insert).toHaveBeenCalledTimes(1);")).toMatchObject({ mocks: 1, callCountAssertions: 1 });
+  expect(testFacts("vi.spyOn(repo, 'insert');\nexpect(repo.insert).toHaveBeenCalledTimes(1);")).toMatchObject({
+    mocks: 1,
+    callCountAssertions: 1,
+  });
 });
 
 test("counts toBeUndefined as an exact assertion, not a weak one", () => {
@@ -76,7 +86,9 @@ test("treats helpers and setup files beside end-to-end tests as code, not tests"
 });
 
 test("counts a call to a helper named expect... or assert... as an assertion", () => {
-  expect(testFacts("await expectNotFoundPage(page, await page.goto(`/shelves/${shelf}`));")).toMatchObject({ assertions: 1 });
+  expect(testFacts("await expectNotFoundPage(page, await page.goto(`/shelves/${shelf}`));")).toMatchObject({
+    assertions: 1,
+  });
   expect(testFacts("assertValidLoan(loan);")).toMatchObject({ assertions: 1 });
   expect(testFacts("const expected = 3;\nexpectation(x);")).toMatchObject({ assertions: 0 });
 });
@@ -84,7 +96,10 @@ test("counts a call to a helper named expect... or assert... as an assertion", (
 test("names the framework from the file's own imports, not from imports quoted in a fixture", () => {
   const quoting = 'import { expect, test } from "bun:test";\nconst SOURCE = `import { it } from "vitest";`;\n';
   expect(testFileState("a.test.ts", quoting).framework).toBe("bun");
-  expect(testFileState("e.spec.ts", 'import type { Page } from "@playwright/test";\nimport { test } from "./fixtures";\n').framework).toBe("playwright");
+  expect(
+    testFileState("e.spec.ts", 'import type { Page } from "@playwright/test";\nimport { test } from "./fixtures";\n')
+      .framework,
+  ).toBe("playwright");
 });
 
 test("spots a file that runs its tests in order on purpose", () => {
@@ -94,10 +109,14 @@ test("spots a file that runs its tests in order on purpose", () => {
 });
 
 test("counts type-level assertions with type arguments, such as expectTypeOf<T>()", () => {
-  expect(testFacts("expectTypeOf<Pick<LoanPolicy, keyof LoanPolicy>>().not.toExtend<LoanPolicy>();")).toMatchObject({ assertions: 1 });
+  expect(testFacts("expectTypeOf<Pick<LoanPolicy, keyof LoanPolicy>>().not.toExtend<LoanPolicy>();")).toMatchObject({
+    assertions: 1,
+  });
   expect(testFacts("assertType<string>(name);")).toMatchObject({ assertions: 1 });
 });
 
 test("counts expect.soft() split across lines by a formatter", () => {
-  expect(testFacts("expect\n  .soft(\n    score,\n    `scores: ${scores}`,\n  )\n  .toBeGreaterThanOrEqual(0.9);")).toMatchObject({ assertions: 1 });
+  expect(
+    testFacts("expect\n  .soft(\n    score,\n    `scores: ${scores}`,\n  )\n  .toBeGreaterThanOrEqual(0.9);"),
+  ).toMatchObject({ assertions: 1 });
 });

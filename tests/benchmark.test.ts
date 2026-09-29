@@ -13,5 +13,8 @@ test("reproduces every recorded benchmark result from the original code", async 
     const { at: _before, ...expected } = baseline;
     const { at: _after, ...actual } = result;
     expect(actual).toEqual(expected);
-  } finally { replay.restore(); output.mockRestore(); }
+  } finally {
+    replay.restore();
+    output.mockRestore();
+  }
 }, 60_000);

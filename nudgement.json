@@ -1,5 +1,5 @@
 {
-  "ignore": ["bench/**"],
+  "ignore": ["bench/**", "tests/fixtures/**", "docs/verification/**"],
   "hygiene": {
     "ignore": ["tests/hygiene.test.ts", "src/hygiene.ts"]
   }

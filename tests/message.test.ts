@@ -6,7 +6,7 @@ const rules = (message: string) => lint(parseMessage(message)).map((issue) => is
 describe("parseMessage", () => {
   test("splits header, bullets and trailers", () => {
     const parsed = parseMessage(
-      "fix(hero): add video option\n\n- Include AB test\n- Render image to canvas\n\nSee: https://x.test/1\nCo-Authored-By: Bot <b@x>"
+      "fix(hero): add video option\n\n- Include AB test\n- Render image to canvas\n\nSee: https://x.test/1\nCo-Authored-By: Bot <b@x>",
     );
     expect(parsed.type).toBe("fix");
     expect(parsed.scope).toBe("hero");
@@ -35,7 +35,9 @@ describe("lint", () => {
     expect(rules("Added stuff")).toContain("lint:format");
     expect(rules("feature: add x")).toContain("lint:type-known");
     expect(rules(`feat: ${"a".repeat(70)}`)).toContain("lint:header-length");
-    expect(lint(parseMessage(`feat: ${"a".repeat(70)}`)).find((issue) => issue.source === "lint:header-length")?.message).toContain("Cut at least 4.");
+    expect(
+      lint(parseMessage(`feat: ${"a".repeat(70)}`)).find((issue) => issue.source === "lint:header-length")?.message,
+    ).toContain("Cut at least 4.");
     expect(rules("feat: add x.")).toContain("lint:subject-period");
     expect(rules("feat: Add x")).toContain("lint:subject-case");
     expect(rules("feat: added x")).toContain("lint:subject-imperative");
@@ -71,7 +73,8 @@ describe("lint", () => {
 });
 
 describe("lint with repo rules", () => {
-  const withRules = (message: string, rules: Parameters<typeof lint>[1]) => lint(parseMessage(message), rules).map((issue) => issue.source);
+  const withRules = (message: string, rules: Parameters<typeof lint>[1]) =>
+    lint(parseMessage(message), rules).map((issue) => issue.source);
 
   test("forbids trailers when the repo has none", () => {
     const message = "feat: add x\n\nCo-Authored-By: Bot <b@x>";
@@ -80,7 +83,11 @@ describe("lint with repo rules", () => {
   });
 
   test("forbids words anywhere in the message, as whole words", () => {
-    expect(withRules("feat: add the interview notes", { forbiddenWords: ["interview"] })).toContain("lint:forbidden-word");
-    expect(withRules("feat: add interviewer tools", { forbiddenWords: ["interview"] })).not.toContain("lint:forbidden-word");
+    expect(withRules("feat: add the interview notes", { forbiddenWords: ["interview"] })).toContain(
+      "lint:forbidden-word",
+    );
+    expect(withRules("feat: add interviewer tools", { forbiddenWords: ["interview"] })).not.toContain(
+      "lint:forbidden-word",
+    );
   });
 });

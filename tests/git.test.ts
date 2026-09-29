@@ -5,8 +5,9 @@ import { join } from "node:path";
 import { linesToReview, parseDiff, readStaged, usesScope, withoutMovedLines } from "../src/git";
 
 test("with amend, staged changes are read together with the commit they fold into", () => {
-  const repo = mkdtempSync(join(tmpdir(), "evaluator-amend-"));
-  const git = (...args: string[]) => Bun.spawnSync(["git", "-C", repo, "-c", "user.email=t@t", "-c", "user.name=t", ...args]);
+  const repo = mkdtempSync(join(tmpdir(), "nudgement-amend-"));
+  const git = (...args: string[]) =>
+    Bun.spawnSync(["git", "-C", repo, "-c", "user.email=t@t", "-c", "user.name=t", ...args]);
   git("init", "-q");
   writeFileSync(join(repo, "a.ts"), "export const a = 1;\n");
   git("add", ".");
@@ -15,13 +16,21 @@ test("with amend, staged changes are read together with the commit they fold int
   git("add", ".");
 
   expect(readStaged(repo, "feat: add a and b").files.map((file) => file.path)).toEqual(["b.ts"]);
-  expect(readStaged(repo, "feat: add a and b", { amend: true }).files.map((file) => file.path).sort()).toEqual(["a.ts", "b.ts"]);
+  expect(
+    readStaged(repo, "feat: add a and b", { amend: true })
+      .files.map((file) => file.path)
+      .sort(),
+  ).toEqual(["a.ts", "b.ts"]);
 
   // Amending a commit that has a parent compares against that parent.
   git("commit", "-qm", "feat: add b");
   writeFileSync(join(repo, "c.ts"), "export const c = 3;\n");
   git("add", ".");
-  expect(readStaged(repo, "feat: add b and c", { amend: true }).files.map((file) => file.path).sort()).toEqual(["b.ts", "c.ts"]);
+  expect(
+    readStaged(repo, "feat: add b and c", { amend: true })
+      .files.map((file) => file.path)
+      .sort(),
+  ).toEqual(["b.ts", "c.ts"]);
 });
 
 test("lines to review leave out lockfiles, ignored paths and files that were only deleted from", () => {
@@ -60,10 +69,15 @@ test("lines moved from one file to another count as context, not as written", ()
 });
 
 test("a scope earlier commits to the same files use is the house scope for them", () => {
-  const repo = mkdtempSync(join(tmpdir(), "evaluator-scope-"));
-  const git = (...args: string[]) => Bun.spawnSync(["git", "-C", repo, "-c", "user.email=t@t", "-c", "user.name=t", ...args]);
+  const repo = mkdtempSync(join(tmpdir(), "nudgement-scope-"));
+  const git = (...args: string[]) =>
+    Bun.spawnSync(["git", "-C", repo, "-c", "user.email=t@t", "-c", "user.name=t", ...args]);
   git("init", "-q");
-  for (const [text, message] of [["a", "docs(profiling): start the doc"], ["b", "docs(profiling): add a run"], ["c", "docs: tidy"]]) {
+  for (const [text, message] of [
+    ["a", "docs(profiling): start the doc"],
+    ["b", "docs(profiling): add a run"],
+    ["c", "docs: tidy"],
+  ]) {
     writeFileSync(join(repo, "profiling.md"), text);
     git("add", ".");
     git("commit", "-qm", message);

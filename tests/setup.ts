@@ -9,7 +9,9 @@ process.env.NUDGEMENT_LOG_DIR = logDir;
 process.env.EVALUATOR_LOG_DIR = logDir;
 const replay = installReplay("baseline");
 afterAll(() => {
-  try { replay.assertComplete(); } finally {
+  try {
+    replay.assertComplete();
+  } finally {
     replay.restore();
     rmSync(logDir, { recursive: true, force: true });
   }

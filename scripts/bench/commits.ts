@@ -24,7 +24,6 @@ import {
   pool,
 } from "./common";
 
-// Which nudgement findings count as spotting each labelled problem.
 const PROBLEM_SOURCES: Record<string, RegExp> = {
   type: /type_fits|lint:type/,
   scope: /scope_fits|lint:scope/,
@@ -157,7 +156,7 @@ export async function benchHistory() {
   return rows;
 }
 
-// Whether a comment says something the code beside it contradicts. Above the error cut, the commit fails.
+// Contradiction probabilities measure the model; production contradiction findings only warn.
 export async function benchContradictions() {
   const cases = JSON.parse(readFileSync(join(BENCH, "contradictions.json"), "utf8")) as ContradictionCase[];
   const rows = await pool(cases, 16, async (c) => {

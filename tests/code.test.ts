@@ -3,9 +3,9 @@ import { mkdtempSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { analyzeCode, countUsage, isBloatCandidate, isGenerated, usesInFile } from "../src/code";
-import { CODE_THRESHOLDS, judgeFile, verdictFromUnits, type FileEvaluation } from "../src/code-evaluate";
-import { formatFileReport } from "../src/report";
+import { CODE_THRESHOLDS, type FileEvaluation, judgeFile, verdictFromUnits } from "../src/code-evaluate";
 import type { Answer, Answers } from "../src/jev";
+import { formatFileReport } from "../src/report";
 
 const TS = `import { a } from "./a";
 import b from "./b";
@@ -90,7 +90,14 @@ test("splits a large class into its members", () => {
   const body = Array.from({ length: 5 }, (_, i) => `  method${i}() {\n    return ${i};\n  }\n`).join("\n");
   const source = `export class Big {\n  private count = 0;\n\n${body}}\n`;
   const { units } = analyzeCode("big.ts", source, { splitLines: 10 })!;
-  expect(units.map((unit) => unit.name)).toEqual(["Big", "Big.method0", "Big.method1", "Big.method2", "Big.method3", "Big.method4"]);
+  expect(units.map((unit) => unit.name)).toEqual([
+    "Big",
+    "Big.method0",
+    "Big.method1",
+    "Big.method2",
+    "Big.method3",
+    "Big.method4",
+  ]);
   expect(units[1].startLine).toBe(4);
   expect(units[1].endLine).toBe(6);
 });
@@ -162,7 +169,8 @@ describe("analyzeCode metrics", () => {
   });
 
   test("finds repeated blocks of four or more lines", () => {
-    const block = "  const total = items.reduce((sum, item) => sum + item.price, 0);\n  const tax = total * rate;\n  const shipping = total > 100 ? 0 : 10;\n  return total + tax + shipping;\n";
+    const block =
+      "  const total = items.reduce((sum, item) => sum + item.price, 0);\n  const tax = total * rate;\n  const shipping = total > 100 ? 0 : 10;\n  return total + tax + shipping;\n";
     const source = `function a(items, rate) {\n${block}}\n\nfunction b(items, rate) {\n${block}}\n`;
     const { metrics } = analyzeCode("a.js", source)!;
     expect(metrics.repeatedLines).toBe(8);
@@ -170,15 +178,17 @@ describe("analyzeCode metrics", () => {
   });
 
   test("does not count fields that two type declarations share as repeated code", () => {
-    const fields = "  readonly name: StationName;\n  readonly sensorId: string;\n  readonly unit: string;\n  readonly installedAt: Temporal.Instant;\n  readonly range: Range;\n";
+    const fields =
+      "  readonly name: StationName;\n  readonly sensorId: string;\n  readonly unit: string;\n  readonly installedAt: Temporal.Instant;\n  readonly range: Range;\n";
     const source = `export type NewStation = {\n${fields}  readonly interval: Duration;\n};\n\nexport type ActiveStation = {\n  readonly id: StationId;\n${fields}  readonly lastSeenAt: Temporal.Instant;\n};\n`;
-    expect(analyzeCode("station.ts", source)!.metrics.repeatedLines).toBe(0);
+    expect(analyzeCode("station.ts", source)?.metrics.repeatedLines).toBe(0);
   });
 
   test("still counts an object mapping written out twice as repeated code", () => {
-    const mapping = "    name: row.name,\n    sensorId: row.sensor_id,\n    unit: row.unit,\n    installedAt: toInstant(row.installed_at),\n    range: toRange(row.range),\n";
+    const mapping =
+      "    name: row.name,\n    sensorId: row.sensor_id,\n    unit: row.unit,\n    installedAt: toInstant(row.installed_at),\n    range: toRange(row.range),\n";
     const source = `function a(row) {\n  return {\n${mapping}  };\n}\n\nfunction b(row) {\n  return {\n${mapping}    id: row.id,\n  };\n}\n`;
-    expect(analyzeCode("rows.ts", source)!.metrics.repeatedLines).toBe(10);
+    expect(analyzeCode("rows.ts", source)?.metrics.repeatedLines).toBe(10);
   });
 
   test("counts try blocks and log calls", () => {
@@ -199,7 +209,7 @@ test("returns nothing for files that are not code", () => {
 });
 
 test("counts the other files in a repo that use each name", async () => {
-  const repo = mkdtempSync(join(tmpdir(), "evaluator-usage-"));
+  const repo = mkdtempSync(join(tmpdir(), "nudgement-usage-"));
   const run = (...args: string[]) => Bun.spawnSync(["git", "-C", repo, ...args]);
   run("init", "-q");
   writeFileSync(join(repo, "lib.ts"), "export function helper() {}\nexport function unused() {}\n");
@@ -216,7 +226,11 @@ test("counts the other files in a repo that use each name", async () => {
 });
 
 test("splits a large Swift enum used as a namespace", () => {
-  const body = Array.from({ length: 3 }, (_, i) => `    static func step${i}(_ value: Int) -> Int {\n        let doubled = value * 2\n        return doubled + ${i}\n    }\n`).join("\n");
+  const body = Array.from(
+    { length: 3 },
+    (_, i) =>
+      `    static func step${i}(_ value: Int) -> Int {\n        let doubled = value * 2\n        return doubled + ${i}\n    }\n`,
+  ).join("\n");
   const source = `public enum Steps {\n${body}}\n`;
   const { units } = analyzeCode("Steps.swift", source, { splitLines: 8 })!;
   expect(units.map((unit) => unit.name)).toEqual(["Steps.step0", "Steps.step1", "Steps.step2"]);
@@ -265,13 +279,27 @@ test("only programming-language files get the bloat check", () => {
   expect(isBloatCandidate("src/app.tsx")).toBe(true);
   expect(isBloatCandidate("scripts/bootstrap.sh")).toBe(true);
   expect(isBloatCandidate("src/config.ts")).toBe(true);
-  for (const path of ["wrangler.jsonc", "package.json", ".gitignore", "migrations/0001.sql", "src/styles.css", "config.yaml", "Cargo.toml", "vitest.config.ts", "playwright.config.mjs", "web/vite.config.js", ".eslintrc.cjs", "stryker.conf.js"]) {
+  for (const path of [
+    "wrangler.jsonc",
+    "package.json",
+    ".gitignore",
+    "migrations/0001.sql",
+    "src/styles.css",
+    "config.yaml",
+    "Cargo.toml",
+    "vitest.config.ts",
+    "playwright.config.mjs",
+    "web/vite.config.js",
+    ".eslintrc.cjs",
+    "stryker.conf.js",
+  ]) {
     expect(isBloatCandidate(path)).toBe(false);
   }
 });
 
 test("treats an extensionless script with a shebang as code", () => {
-  const script = "#!/bin/sh\nset -eu\n\n# Homebrew puts node on the PATH only after this shell starts.\neval \"$(/opt/homebrew/bin/brew shellenv)\"\nnpm ci\n";
+  const script =
+    '#!/bin/sh\nset -eu\n\n# Homebrew puts node on the PATH only after this shell starts.\neval "$(/opt/homebrew/bin/brew shellenv)"\nnpm ci\n';
   expect(isBloatCandidate("bootstrap", script)).toBe(true);
   expect(isBloatCandidate("bootstrap")).toBe(false);
   expect(analyzeCode("bootstrap", script)?.language).toBe("sh");
@@ -279,7 +307,12 @@ test("treats an extensionless script with a shebang as code", () => {
 
 describe("judgeFile", () => {
   const noulOf = (value: number): Answer => ({ type: "noul", noul: value });
-  const choiceOf = (value: string): Answer => ({ type: "choice", choice: value, confidence: 0.6, probabilities: { [value]: 0.6 } });
+  const choiceOf = (value: string): Answer => ({
+    type: "choice",
+    choice: value,
+    confidence: 0.6,
+    probabilities: { [value]: 0.6 },
+  });
   const leanFile = (overrides: Answers): Answers => ({
     ...Object.fromEntries(Object.keys(CODE_THRESHOLDS.patterns).map((key) => [key, noulOf(0.1)])),
     overbuilt: { type: "score", score: 0.3, confidence: 0.8, probabilities: {} },
@@ -295,7 +328,12 @@ describe("judgeFile", () => {
   const parts = (answers: Answers) => judgeFile(answers, {}).issues.map((issue) => issue.part);
 
   test("never fails a file under 30 lines of code as bloated, only warns", () => {
-    const bloated = leanFile({ overbuilt: { type: "score", score: 2.4, confidence: 0.8, probabilities: {} }, simpler_exists: noulOf(0.7), ceremony: noulOf(0.7), reviewer_simplify: noulOf(0.7) });
+    const bloated = leanFile({
+      overbuilt: { type: "score", score: 2.4, confidence: 0.8, probabilities: {} },
+      simpler_exists: noulOf(0.7),
+      ceremony: noulOf(0.7),
+      reviewer_simplify: noulOf(0.7),
+    });
     expect(judgeFile(bloated, {}, 80).verdict).toBe("bloated");
     const small = judgeFile(bloated, {}, 20);
     expect(small.verdict).toBe("ok");
@@ -305,7 +343,9 @@ describe("judgeFile", () => {
   test("shows a strong pattern on a lean file only when Jev also calls it the biggest problem", () => {
     expect(judgeFile(leanFile({ thin_wrappers: noulOf(0.9) }), {}).verdict).toBe("lean");
     expect(parts(leanFile({ thin_wrappers: noulOf(0.9) }))).not.toContain("thin wrappers");
-    expect(parts(leanFile({ thin_wrappers: noulOf(0.9), biggest_problem: choiceOf("thin_wrappers") }))).toContain("thin wrappers");
+    expect(parts(leanFile({ thin_wrappers: noulOf(0.9), biggest_problem: choiceOf("thin_wrappers") }))).toContain(
+      "thin wrappers",
+    );
   });
 });
 
@@ -317,9 +357,27 @@ test("reports how many changed functions were flagged when only those were judge
     path: "src/store.ts",
     verdict: "ok",
     leanness: 0,
-    metrics: analyzeCode("src/store.ts", TS)!.metrics,
+    metrics: analyzeCode("src/store.ts", TS)?.metrics,
     issues: [],
-    units: [{ name: "load", kind: "function", startLine: 5, endLine: 11, codeLines: 6, otherFiles: 1, issues: [{ severity: "warn", part: "load", message: "More machinery than its job needs.", source: "jev:overbuilt=1.56/3" }], readings: {} }],
+    units: [
+      {
+        name: "load",
+        kind: "function",
+        startLine: 5,
+        endLine: 11,
+        codeLines: 6,
+        otherFiles: 1,
+        issues: [
+          {
+            severity: "warn",
+            part: "load",
+            message: "More machinery than its job needs.",
+            source: "jev:overbuilt=1.56/3",
+          },
+        ],
+        readings: {},
+      },
+    ],
     unitsNotJudged: 0,
     readings: {},
     jev: { requests: 1, failed: 0, inputTokens: 0, ms: 0 },
@@ -331,7 +389,9 @@ test("reports how many changed functions were flagged when only those were judge
 });
 
 test("reads Swift properties with a setter access level or an attribute as their own members", () => {
-  const filler = Array.from({ length: 6 }, (_, i) => `    func step${i}() -> Int {\n        return ${i}\n    }`).join("\n");
+  const filler = Array.from({ length: 6 }, (_, i) => `    func step${i}() -> Int {\n        return ${i}\n    }`).join(
+    "\n",
+  );
   const source = `public final class Engine {
     public internal(set) var transfers = 0
     /// The loop, kept so a test can await it.
