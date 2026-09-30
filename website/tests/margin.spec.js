@@ -79,6 +79,70 @@ test("a nudge lingers, fades, and repeats when the reader returns", async ({ pag
   await expect(page.locator("#examples-title")).toHaveClass(/is-nudging/);
 });
 
+test("touch hover does not suppress a scroll nudge", async ({ page, isMobile }) => {
+  test.skip(!isMobile, "Requires a touch screen");
+  await page.goto("/");
+  const heading = page.getByRole("heading", { name: "Four things worth catching." });
+  // Start 160px below the reading line, beyond the 110px cue band, so the tap cannot cue it.
+  await page.evaluate(() => {
+    const heading = document.querySelector("#examples-title");
+    window.scrollTo({
+      top: heading.getBoundingClientRect().top + scrollY - innerHeight / 3 - 160,
+      behavior: "instant",
+    });
+  });
+  await heading.tap();
+  await expect(heading).not.toHaveClass(/is-nudging/);
+  await readExamples(page);
+  expect(await heading.evaluate((node) => node.matches(":hover"))).toBe(true);
+  await expect(heading).toHaveClass(/is-nudging/);
+  // Require a visible arrow and most of the 8px displacement, with rendering tolerance.
+  await expect
+    .poll(() => page.locator(".nudge-arrow").evaluate((node) => Number(getComputedStyle(node).opacity)))
+    .toBeGreaterThan(0.4);
+  await expect.poll(() => heading.evaluate((node) => parseFloat(getComputedStyle(node).translate))).toBeGreaterThan(6);
+});
+
+test("a viewport height change keeps the active nudge visible and attached", async ({ page }) => {
+  await startNudge(page);
+  const heading = page.getByRole("heading", { name: "Four things worth catching." });
+  const arrow = page.locator(".arrow-stem");
+  const before = await arrow.getAttribute("d");
+  const viewport = page.viewportSize();
+  // Mobile browser bars can change the available height as scrolling settles.
+  await page.setViewportSize({ ...viewport, height: viewport.height - 100 });
+  await expect(arrow).not.toHaveAttribute("d", before);
+  await expect(heading).toHaveClass(/is-nudging/);
+  await expect
+    .poll(() => page.locator(".nudge-arrow").evaluate((node) => Number(getComputedStyle(node).opacity)))
+    .toBeGreaterThan(0.4);
+  await expect(heading).not.toHaveClass(/is-nudging/);
+});
+
+test("mouse hover and keyboard focus still suppress nudges", async ({ page, isMobile }) => {
+  test.skip(isMobile, "Requires a mouse pointer");
+  await page.clock.install();
+  await page.goto("/");
+  await readExamples(page);
+  const heading = page.getByRole("heading", { name: "Four things worth catching." });
+  await heading.hover();
+  await page.clock.runFor(READING_PAUSE_MS);
+  await expect(heading).not.toHaveClass(/is-nudging/);
+  await page.mouse.move(0, 0);
+  // Make the heading focusable to check focus suppression independently of hover.
+  await heading.evaluate((node) => {
+    node.tabIndex = -1;
+    node.focus({ preventScroll: true });
+  });
+  await page.evaluate(() => window.scrollBy({ top: 4, behavior: "instant" }));
+  await page.clock.runFor(READING_PAUSE_MS);
+  await expect(heading).not.toHaveClass(/is-nudging/);
+  await heading.evaluate((node) => node.blur());
+  await page.evaluate(() => window.scrollBy({ top: 4, behavior: "instant" }));
+  await page.clock.runFor(READING_PAUSE_MS);
+  await expect(heading).toHaveClass(/is-nudging/);
+});
+
 test("the pencil points into the page and its arrow follows a scrolling target", async ({ page }) => {
   await startNudge(page);
   const tip = await page.locator(".pencil-tip").boundingBox();

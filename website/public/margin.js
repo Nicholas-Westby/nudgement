@@ -53,6 +53,7 @@ export function initMargin() {
   const toggle = document.querySelector(".motion-toggle");
   const targets = [...document.querySelectorAll("[data-nudge]")];
   const motion = matchMedia("(prefers-reduced-motion: reduce)");
+  const hover = matchMedia("(hover: hover)");
   const cued = new Set();
   document.documentElement.style.setProperty("--nudge-duration", `${CUE_DURATION_MS}ms`);
   let paused = false;
@@ -93,7 +94,9 @@ export function initMargin() {
         else pointArrow(pencil, arrow, box);
       }
       const inBand = Math.abs(box.top - y) < READING_BAND_PX && box.top > TOP_SAFE_PX && box.bottom < innerHeight;
-      if (showCue && !active && !cued.has(target) && inBand && !target.matches(":hover, :focus-within")) {
+      // Touch browsers can leave :hover latched after a tap, even while scrolling.
+      const interacting = target.matches(":focus-within") || (hover.matches && target.matches(":hover"));
+      if (showCue && !active && !cued.has(target) && inBand && !interacting) {
         cue(target, box);
       }
     }
@@ -134,10 +137,8 @@ export function initMargin() {
     },
     { passive: true },
   );
-  window.addEventListener("resize", () => {
-    clearCue();
-    schedule();
-  });
+  // Keep cues attached when mobile browser bars resize the viewport during a scroll.
+  window.addEventListener("resize", schedule);
   document.addEventListener("visibilitychange", syncMotion);
   motion.addEventListener("change", syncMotion);
   // Example selection can change document height without a window resize.
